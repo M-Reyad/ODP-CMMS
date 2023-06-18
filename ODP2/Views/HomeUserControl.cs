@@ -9,11 +9,11 @@ using System.Windows.Media;
 
 namespace ODP2.Views
 {
-    public partial class HomeUserControl : UserControl
+    public partial class KPIsReports : UserControl
     {
 
         public Home home;
-        public HomeUserControl()
+        public KPIsReports()
         {
             InitializeComponent();
 
@@ -23,19 +23,6 @@ namespace ODP2.Views
 
         private void HomeUserControl_Load(object sender, EventArgs e)
         {
-            //Customizing User Panel
-            userNameLabel.Text = home.user.userName;
-            userTitleLabel.Text = home.user.userTitle;
-            userIDNumber.Text = home.user.userIDNumber.ToString();
-            try
-            { 
-                userPicture.Image = Image.FromStream(new MemoryStream(home.user.userImage));
-            }
-            catch(Exception ex)
-            {
-                //MessageBox.Show("Cann't Load User Image " + ex);
-
-            }
 
             //Customizing Charts
             //-1- Work Orders Types
@@ -134,36 +121,7 @@ namespace ODP2.Views
             }
 
         }
-        private void logOutButton_Click(object sender, EventArgs e)
-        {
-            home.Close();
-            Login newLoginPage = new Login();
-            newLoginPage.Show();
-            home.dbContext.Dispose();
 
-
-        }
-
-        private void changePasswordButton_Click(object sender, EventArgs e)
-        {
-            ChangePassword changePasswordPage = new ChangePassword();
-            changePasswordPage.userID = home.user.userID;
-            changePasswordPage.Show();
-        }
-
-
-        private void changeUserPicture(object sender, EventArgs e)
-        {
-            OpenFileDialog attachPicture = new OpenFileDialog();
-            if (attachPicture.ShowDialog() == DialogResult.OK)
-            {
-                userPicture.Image = Image.FromFile(attachPicture.FileName);
-                home.dbContext.users.Where(user => user.userID == home.user.userID).First().userImage = (byte[])new ImageConverter().ConvertTo(userPicture.Image, typeof(byte[]));
-                home.dbContext.SaveChanges();
-                MessageBox.Show("Image Saved Successfully", "Saved");
-
-            }
-        }
 
 
     }

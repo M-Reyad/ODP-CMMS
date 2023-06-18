@@ -1,6 +1,6 @@
 ﻿namespace ODP2.Views
 {
-    partial class HomeUserControl
+    partial class KPIsReports
     {
         /// <summary> 
         /// Required designer variable.
@@ -72,27 +72,17 @@
             this.budgetControl = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.assetsReliability = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.PMKPIsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.userPanel = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.userIDNumber = new System.Windows.Forms.Label();
-            this.userTitleLabel = new System.Windows.Forms.Label();
-            this.userNameLabel = new System.Windows.Forms.Label();
-            this.changePasswordButton = new System.Windows.Forms.Button();
-            this.logOutButton = new System.Windows.Forms.Button();
-            this.userPicture = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.mttr = new LiveCharts.WinForms.SolidGauge();
             this.solidGauge1 = new LiveCharts.WinForms.SolidGauge();
             this.workOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.workDoneTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.mttr = new LiveCharts.WinForms.SolidGauge();
             ((System.ComponentModel.ISupportInitialize)(this.workDoneTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersTyper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maintenanceCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.budgetControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetsReliability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PMKPIsChart)).BeginInit();
-            this.userPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workDoneTypeBindingSource)).BeginInit();
@@ -333,98 +323,6 @@
             this.PMKPIsChart.Titles.Add(title11);
             this.PMKPIsChart.Titles.Add(title12);
             // 
-            // userPanel
-            // 
-            this.userPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.userPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.userPanel.Controls.Add(this.label10);
-            this.userPanel.Controls.Add(this.userIDNumber);
-            this.userPanel.Controls.Add(this.userTitleLabel);
-            this.userPanel.Controls.Add(this.userNameLabel);
-            this.userPanel.Controls.Add(this.changePasswordButton);
-            this.userPanel.Controls.Add(this.logOutButton);
-            this.userPanel.Controls.Add(this.userPicture);
-            this.userPanel.Location = new System.Drawing.Point(636, 353);
-            this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(268, 146);
-            this.userPanel.TabIndex = 4;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(120, 9);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(66, 15);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "User Panel";
-            // 
-            // userIDNumber
-            // 
-            this.userIDNumber.AutoSize = true;
-            this.userIDNumber.Font = new System.Drawing.Font("Segoe UI", 7F);
-            this.userIDNumber.Location = new System.Drawing.Point(79, 82);
-            this.userIDNumber.Name = "userIDNumber";
-            this.userIDNumber.Size = new System.Drawing.Size(43, 12);
-            this.userIDNumber.TabIndex = 4;
-            this.userIDNumber.Text = "(User ID)";
-            // 
-            // userTitleLabel
-            // 
-            this.userTitleLabel.AutoSize = true;
-            this.userTitleLabel.Font = new System.Drawing.Font("Segoe UI", 7F);
-            this.userTitleLabel.Location = new System.Drawing.Point(78, 58);
-            this.userTitleLabel.Name = "userTitleLabel";
-            this.userTitleLabel.Size = new System.Drawing.Size(44, 12);
-            this.userTitleLabel.TabIndex = 4;
-            this.userTitleLabel.Text = "User Title";
-            // 
-            // userNameLabel
-            // 
-            this.userNameLabel.AutoSize = true;
-            this.userNameLabel.Location = new System.Drawing.Point(77, 34);
-            this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(60, 13);
-            this.userNameLabel.TabIndex = 4;
-            this.userNameLabel.Text = "User Name";
-            // 
-            // changePasswordButton
-            // 
-            this.changePasswordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.changePasswordButton.Location = new System.Drawing.Point(132, 118);
-            this.changePasswordButton.Name = "changePasswordButton";
-            this.changePasswordButton.Size = new System.Drawing.Size(131, 23);
-            this.changePasswordButton.TabIndex = 0;
-            this.changePasswordButton.Text = "Change Password";
-            this.changePasswordButton.UseVisualStyleBackColor = true;
-            this.changePasswordButton.Click += new System.EventHandler(this.changePasswordButton_Click);
-            // 
-            // logOutButton
-            // 
-            this.logOutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.logOutButton.Location = new System.Drawing.Point(3, 118);
-            this.logOutButton.Name = "logOutButton";
-            this.logOutButton.Size = new System.Drawing.Size(83, 23);
-            this.logOutButton.TabIndex = 0;
-            this.logOutButton.Text = "Log Out";
-            this.logOutButton.UseVisualStyleBackColor = true;
-            this.logOutButton.Click += new System.EventHandler(this.logOutButton_Click);
-            // 
-            // userPicture
-            // 
-            this.userPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.userPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.userPicture.Location = new System.Drawing.Point(9, 34);
-            this.userPicture.Name = "userPicture";
-            this.userPicture.Size = new System.Drawing.Size(63, 60);
-            this.userPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.userPicture.TabIndex = 1;
-            this.userPicture.TabStop = false;
-            this.userPicture.DoubleClick += new System.EventHandler(this.changeUserPicture);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -432,7 +330,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.24242F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.45455F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.30303F));
-            this.tableLayoutPanel1.Controls.Add(this.userPanel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.PMKPIsChart, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.assetsReliability, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.budgetControl, 1, 1);
@@ -452,17 +349,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(907, 502);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
-            // mttr
-            // 
-            this.mttr.BackColor = System.Drawing.Color.DarkGray;
-            this.mttr.BackColorTransparent = true;
-            this.mttr.ForeColor = System.Drawing.Color.LightGray;
-            this.mttr.Location = new System.Drawing.Point(3, 353);
-            this.mttr.Name = "mttr";
-            this.mttr.Size = new System.Drawing.Size(213, 142);
-            this.mttr.TabIndex = 12;
-            this.mttr.Text = "MTTR (min)";
-            // 
             // solidGauge1
             // 
             this.solidGauge1.Location = new System.Drawing.Point(3, 153);
@@ -479,7 +365,18 @@
             // 
             this.workDoneTypeBindingSource.DataSource = typeof(ODP2.Models.workDoneType);
             // 
-            // HomeUserControl
+            // mttr
+            // 
+            this.mttr.BackColor = System.Drawing.Color.DarkGray;
+            this.mttr.BackColorTransparent = true;
+            this.mttr.ForeColor = System.Drawing.Color.LightGray;
+            this.mttr.Location = new System.Drawing.Point(3, 353);
+            this.mttr.Name = "mttr";
+            this.mttr.Size = new System.Drawing.Size(213, 142);
+            this.mttr.TabIndex = 12;
+            this.mttr.Text = "MTTR (min)";
+            // 
+            // KPIsReports
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -487,7 +384,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "HomeUserControl";
+            this.Name = "KPIsReports";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(917, 512);
             this.Load += new System.EventHandler(this.HomeUserControl_Load);
@@ -497,9 +394,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.budgetControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetsReliability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PMKPIsChart)).EndInit();
-            this.userPanel.ResumeLayout(false);
-            this.userPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userPicture)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workDoneTypeBindingSource)).EndInit();
@@ -516,16 +410,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart budgetControl;
         private System.Windows.Forms.DataVisualization.Charting.Chart assetsReliability;
         private System.Windows.Forms.DataVisualization.Charting.Chart PMKPIsChart;
-        private System.Windows.Forms.Panel userPanel;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label userIDNumber;
-        private System.Windows.Forms.Label userTitleLabel;
-        private System.Windows.Forms.Label userNameLabel;
-        private System.Windows.Forms.Button changePasswordButton;
-        private System.Windows.Forms.Button logOutButton;
-        private System.Windows.Forms.PictureBox userPicture;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private LiveCharts.WinForms.SolidGauge mttr;
         private LiveCharts.WinForms.SolidGauge solidGauge1;
+        private LiveCharts.WinForms.SolidGauge mttr;
     }
 }

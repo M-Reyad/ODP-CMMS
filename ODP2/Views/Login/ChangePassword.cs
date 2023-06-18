@@ -12,7 +12,6 @@ namespace ODP2.Views
     public partial class ChangePassword : Form
     {
         public ODPEntities dbContext = new ODPEntities();
-        private string emailAddress = "";
         public string userID = "";
         public ChangePassword()
         {

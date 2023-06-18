@@ -199,7 +199,6 @@
         private System.Windows.Forms.BindingSource equipmentFamilyBindingSource;
         private System.Windows.Forms.BindingSource pmTemplateBindingSource;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.DataGridViewButtonColumn pmAttachmentDataGridViewImageColumn;
         private System.Windows.Forms.Button newPMTemplate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn equipmentFamily;

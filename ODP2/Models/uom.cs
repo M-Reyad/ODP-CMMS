@@ -12,6 +12,21 @@ namespace ODP2.Models
     using System;
     using System.Collections.Generic;
     
+<<<<<<< HEAD:ODP2/Models/equipmentStatu.cs
+    public partial class equipmentStatu
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public equipmentStatu()
+        {
+            this.equipments = new HashSet<equipment>();
+        }
+    
+        public string equipmentStatusID { get; set; }
+        public string equipmentStatusDirective { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<equipment> equipments { get; set; }
+=======
     public partial class uom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,5 +40,6 @@ namespace ODP2.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sparePart> spareParts { get; set; }
+>>>>>>> References are cleaned with all Conflicts Solved:ODP2/Models/uom.cs
     }
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using ODP2.Models;
 using ODP2.Views;
@@ -20,22 +23,43 @@ namespace ODP2
 
         private void Home_Load(object sender, EventArgs e)
         {
+            //Customizing User Panel
+            userNameLabel.Text = user.userName;
+            userTitleLabel.Text = user.userTitle;
+            userIDNumber.Text = user.userIDNumber.ToString();
+            try
+            {
+                userPicture.Image = Image.FromStream(new MemoryStream(user.userImage));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cann't Load User Image " + ex);
 
+            }
 
             //Customizing Tabs according to Privillages
             if (user.userLevel.Trim() != "Head")
             {
+                //Head Only 
+                reportsTab.Enabled = false;
+                
+                //Stores Users Only 
                 if (user.userSection.Trim() != "Stores")
                 {
                     StoresTab.Enabled = false;
 
                 }
-                else if (user.userSection.Trim() != "Maintenance" && user.userSection.Trim() != "Planning")
+
+                //Maintenance and Planning Only
+                else if (user.userSection.Trim() == "Stores")
                 {
                     WorkOrderManagementTab.Enabled = false;
                     AssetsManagementTab.Enabled = false;
+                    reportsTab.Enabled = false;
 
                 }
+
+                //Planning Users Only
                 else if (user.userSection.Trim() != "Planning")
                 {
                     AssetsManagementTab.Enabled = false;
@@ -43,23 +67,42 @@ namespace ODP2
 
             }
 
-            else
-            {
+        }
 
-            }
-            homeButton_Click(this, e);
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            Close();
+            Login newLoginPage = new Login();
+            newLoginPage.Show();
+            dbContext.Dispose();
 
 
         }
 
+        private void changePasswordButton_Click(object sender, EventArgs e)
+        {
+            ChangePassword changePasswordPage = new ChangePassword();
+            changePasswordPage.userID = user.userID;
+            changePasswordPage.Show();
+        }
+
+
+        private void changeUserPicture(object sender, EventArgs e)
+        {
+            OpenFileDialog attachPicture = new OpenFileDialog();
+            if (attachPicture.ShowDialog() == DialogResult.OK)
+            {
+                userPicture.Image = Image.FromFile(attachPicture.FileName);
+                dbContext.users.Where(user => user.userID == user.userID).First().userImage = (byte[])new ImageConverter().ConvertTo(userPicture.Image, typeof(byte[]));
+                dbContext.SaveChanges();
+                MessageBox.Show("Image Saved Successfully", "Saved");
+
+            }
+        }
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-            HomeUserControl homeUserControl = new HomeUserControl();
-            homeUserControl.home = this;
-            homeUserControl.Size = homeMainPanel.Size;
-            homeMainPanel.Controls.Clear();
-            homeMainPanel.Controls.Add(homeUserControl);
+
 
         }
 
@@ -179,6 +222,15 @@ namespace ODP2
                 workOrderStatusID.Focus();
             }
             */
+        }
+
+        private void kPIsReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KPIsReports newKPIsReports = new KPIsReports();
+            newKPIsReports.home = this;
+            newKPIsReports.Size = homeMainPanel.Size;
+            homeMainPanel.Controls.Clear();
+            homeMainPanel.Controls.Add(newKPIsReports);
         }
     }
 }

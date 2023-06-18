@@ -270,7 +270,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView issueGridView;
         private System.Windows.Forms.BindingSource issueBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sparePartDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button issueButton;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.CheckBox dateCheckBox;

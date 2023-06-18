@@ -445,7 +445,7 @@ namespace ODP2
         private Label label5;
         private CheckBox dateCheckBox;
         private ToolStripMenuItem openWorkOrderToolStripMenuItem;
-        private DataGridViewTextBoxColumn WorkOrder;
+       // private DataGridViewTextBoxColumn WorkOrder;
         private DataGridViewTextBoxColumn workOrderTypeIDDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn workOrderTypeIDDataGridViewTextBoxColumn2;
         private BindingSource workOrderTypeBindingSource;

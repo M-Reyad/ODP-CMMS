@@ -924,9 +924,8 @@ namespace ODP2.Views
         private DataGridViewTextBoxColumn toTimeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn workOrder1DataGridViewTextBoxColumn;
         private BindingSource breakDownBindingSource;
-        private DataGridViewTextBoxColumn sparePartDataGridViewTextBoxColumn;
+       
         private BindingSource issueBindingSource;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private Panel panel1;
         private ComboBox workOrderStatusID;
         private TextBox equipmentDirectiveTextBox;
