@@ -98,6 +98,14 @@
           <Property Name="issueDate" Type="date" />
           <Property Name="partPrice" Type="money" />
           <Property Name="totalPrice" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="requestDate" Type="date" />
+          <Property Name="issueState" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="issueStatus">
+          <Key>
+            <PropertyRef Name="issueStatus" />
+          </Key>
+          <Property Name="issueStatus" Type="nchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -137,6 +145,8 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="partStockQty" Type="int" Nullable="false" />
           <Property Name="compatableEquipmentFamilyID" Type="nchar" MaxLength="5" />
           <Property Name="supplierID" Type="nchar" MaxLength="10" />
+          <Property Name="reservedStock" Type="int" />
+          <Property Name="availableStock" Type="int" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -305,6 +315,18 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_issue_issueStatus">
+          <End Role="issueStatus" Type="Self.issueStatus" Multiplicity="0..1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issueStatus">
+              <PropertyRef Name="issueStatus" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="issueState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_issue_sparePart">
           <End Role="sparePart" Type="Self.sparePart" Multiplicity="1" />
           <End Role="issue" Type="Self.issue" Multiplicity="*" />
@@ -436,6 +458,7 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySet Name="equipmentStatus" EntityType="Self.equipmentStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fuelingWorkOrder" EntityType="Self.fuelingWorkOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="issue" EntityType="Self.issue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="issueStatus" EntityType="Self.issueStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pmTemplates" EntityType="Self.pmTemplates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sparePart" EntityType="Self.sparePart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -485,6 +508,10 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <AssociationSet Name="FK_fuelingWorkOrder_equipment" Association="Self.FK_fuelingWorkOrder_equipment">
             <End Role="equipment" EntitySet="equipment" />
             <End Role="fuelingWorkOrder" EntitySet="fuelingWorkOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_issue_issueStatus" Association="Self.FK_issue_issueStatus">
+            <End Role="issueStatus" EntitySet="issueStatus" />
+            <End Role="issue" EntitySet="issue" />
           </AssociationSet>
           <AssociationSet Name="FK_issue_sparePart" Association="Self.FK_issue_sparePart">
             <End Role="sparePart" EntitySet="sparePart" />
@@ -641,6 +668,9 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="sparePart" Relationship="Self.FK_issue_sparePart" FromRole="issue" ToRole="sparePart" />
           <NavigationProperty Name="workOrder1" Relationship="Self.FK_issue_workOrder" FromRole="issue" ToRole="workOrder" />
+          <Property Name="requestDate" Type="DateTime" Precision="0" />
+          <Property Name="issueState" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="issueStatu" Relationship="ODPModel.FK_issue_issueStatus" FromRole="issue" ToRole="issueStatu" />
         </EntityType>
         <EntityType Name="sparePart">
           <Key>
@@ -654,6 +684,8 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="compatableEquipmentFamilyID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <Property Name="supplierID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="issues" Relationship="Self.FK_issue_sparePart" FromRole="sparePart" ToRole="issue" />
+          <Property Name="reservedStock" Type="Int32" />
+          <Property Name="availableStock" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1051,6 +1083,11 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             <End Role="equipmentFamily" EntitySet="equipmentFamilies" />
             <End Role="pmTemplate" EntitySet="pmTemplates" />
           </AssociationSet>
+          <EntitySet Name="issueStatus" EntityType="ODPModel.issueStatu" />
+          <AssociationSet Name="FK_issue_issueStatus" Association="ODPModel.FK_issue_issueStatus">
+            <End Role="issueStatu" EntitySet="issueStatus" />
+            <End Role="issue" EntitySet="issues" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="pmTemplate">
           <Key>
@@ -1072,6 +1109,25 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             </Principal>
             <Dependent Role="pmTemplate">
               <PropertyRef Name="equipmentFamily" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="issueStatu">
+          <Key>
+            <PropertyRef Name="issueStatus" />
+          </Key>
+          <Property Name="issueStatus" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="issues" Relationship="ODPModel.FK_issue_issueStatus" FromRole="issueStatu" ToRole="issue" />
+        </EntityType>
+        <Association Name="FK_issue_issueStatus">
+          <End Type="ODPModel.issueStatu" Role="issueStatu" Multiplicity="0..1" />
+          <End Type="ODPModel.issue" Role="issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issueStatu">
+              <PropertyRef Name="issueStatus" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="issueState" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1175,6 +1231,8 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySetMapping Name="issues">
             <EntityTypeMapping TypeName="ODPModel.issue">
               <MappingFragment StoreEntitySet="issue">
+                <ScalarProperty Name="issueState" ColumnName="issueState" />
+                <ScalarProperty Name="requestDate" ColumnName="requestDate" />
                 <ScalarProperty Name="issueID" ColumnName="issueID" />
                 <ScalarProperty Name="workOrder" ColumnName="workOrder" />
                 <ScalarProperty Name="qty" ColumnName="qty" />
@@ -1188,6 +1246,8 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySetMapping Name="spareParts">
             <EntityTypeMapping TypeName="ODPModel.sparePart">
               <MappingFragment StoreEntitySet="sparePart">
+                <ScalarProperty Name="availableStock" ColumnName="availableStock" />
+                <ScalarProperty Name="reservedStock" ColumnName="reservedStock" />
                 <ScalarProperty Name="partCode" ColumnName="partCode" />
                 <ScalarProperty Name="manufacturerPN" ColumnName="manufacturerPN" />
                 <ScalarProperty Name="partDirective" ColumnName="partDirective" />
@@ -1311,6 +1371,13 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
                 <ScalarProperty Name="pmDirective" ColumnName="pmDirective" />
                 <ScalarProperty Name="equipmentFamily" ColumnName="equipmentFamily" />
                 <ScalarProperty Name="pmSN" ColumnName="pmSN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issueStatus">
+            <EntityTypeMapping TypeName="ODPModel.issueStatu">
+              <MappingFragment StoreEntitySet="issueStatus">
+                <ScalarProperty Name="issueStatus" ColumnName="issueStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

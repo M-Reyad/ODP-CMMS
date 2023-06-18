@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows.Shapes;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace ODP2.Views
 {
@@ -42,8 +43,10 @@ namespace ODP2.Views
             workOrderBindingSource.DataSource = workOrder;
 
             //Issue List
-            var issueList = home.dbContext.issues.Where(issue => issue.workOrder1.workOrderID == workOrder.workOrderID)
-                .Join(home.dbContext.spareParts,
+            var issueList = 
+                home.dbContext.issues.Where(issue => issue.workOrder1.workOrderID == workOrder.workOrderID)
+                .Join
+                (home.dbContext.spareParts,
                 issue => issue.sparePartCode,
                 part => part.partCode,
                 (issue, part) => new {
@@ -53,8 +56,28 @@ namespace ODP2.Views
                     part.partDirective,
                     part.partPrice,
                     issue.totalPrice,
-                    issue.issueDate }).ToList();
+                    issue.issueDate,
+                    issue.issueState,
+                    issue.requestDate
+                })
+                .ToList();
             issueBindingSource.DataSource = issueList;
+            foreach(DataGridViewRow issue in materialsGridView.Rows)
+            {
+                if ((string) issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
+                {
+                    issue.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else if ((int)issue.Cells["qty"].Value < 0)
+                {
+                    issue.DefaultCellStyle.BackColor = Color.Red;
+                }
+            }
+
+
+            var totalCost = issueList.Sum(issue => issue.totalPrice);
+            totalCostTextbox.Text = totalCost.ToString();
+
 
             //BDN List
             var bdnList = home.dbContext.breakDowns.Where(bdn => bdn.workOrder == workOrder.workOrderID).ToList();
@@ -469,6 +492,82 @@ namespace ODP2.Views
         private void workOrderNotes_TextChanged(object sender, EventArgs e)
         {
             saveButton.Enabled = true;
+        }
+
+        private void partCodeTextBox_Validated(object sender, EventArgs e)
+        {
+            if (partCodeTextBox.Text != "")
+            {
+                if (home.dbContext.spareParts.Where(sp => sp.partCode == partCodeTextBox.Text).Count() != 0)
+                {
+                    partDirectiveTextBox.Text = home.dbContext.spareParts.Where(sp => sp.partCode == partCodeTextBox.Text).First().partDirective.Trim();
+                    requestButton.Enabled = true;
+                    quantityTextBox.Focus();
+
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter a valid Part Code", "Invaild Part Code");
+                }
+
+            }
+            
+        }
+        private void requestButton_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(quantityTextBox.Text, out _) && quantityTextBox.Text != "")
+            {
+
+                try
+                {
+                    issue newIssueRequest = new issue();
+                    newIssueRequest.requestDate = DateTime.Today;
+                    newIssueRequest.sparePartCode = partCodeTextBox.Text;
+                    var availableQty = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssueRequest.sparePartCode).First().availableStock;
+                    if (newIssueRequest.qty > availableQty)
+                    {
+                        DialogResult issueAvQtyOnly = MessageBox.Show("Available Stock is less than the requested Quantity! /n" +
+                            "Only " + availableQty + " will be requested", "Un-sufficient Quantity");
+                        if (issueAvQtyOnly == DialogResult.Yes)
+                        {
+                            newIssueRequest.qty = (int)availableQty;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else if (availableQty == 0)
+                    {
+                        MessageBox.Show("Zero Stock Quantity", "Zero Stock");
+                        return;
+                    }
+                    else
+                    {
+                        newIssueRequest.qty = Convert.ToInt32(quantityTextBox.Text);
+                    }
+                    newIssueRequest.workOrder = workOrder.workOrderID;
+                    newIssueRequest.partPrice = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssueRequest.sparePartCode).First().partPrice;
+                    newIssueRequest.issueState = "Requested";
+                    home.dbContext.issues.Add(newIssueRequest);
+                    home.dbContext.SaveChanges();
+                    MessageBox.Show("Successfully requested " + newIssueRequest.qty + " * " + newIssueRequest.sparePartCode);
+                    this.Close();
+                    WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                    newWorkOrder.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Adding Issue" + ex, "Error");
+                }
+
+                
+            }
+            else
+            {
+                MessageBox.Show("Please Enter a valid Quantity", "Invalid Quantity");
+            }
+
         }
 
 

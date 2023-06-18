@@ -47,5 +47,6 @@ namespace ODP2.Models
         public virtual DbSet<workOrderType> workOrderTypes { get; set; }
         public virtual DbSet<partCode> partCodes { get; set; }
         public virtual DbSet<pmTemplate> pmTemplates { get; set; }
+        public virtual DbSet<issueStatu> issueStatus { get; set; }
     }
 }

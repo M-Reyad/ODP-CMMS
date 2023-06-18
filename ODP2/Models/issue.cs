@@ -21,8 +21,11 @@ namespace ODP2.Models
         public Nullable<System.DateTime> issueDate { get; set; }
         public Nullable<decimal> partPrice { get; set; }
         public Nullable<decimal> totalPrice { get; set; }
+        public Nullable<System.DateTime> requestDate { get; set; }
+        public string issueState { get; set; }
     
         public virtual sparePart sparePart { get; set; }
         public virtual workOrder workOrder1 { get; set; }
+        public virtual issueStatu issueStatu { get; set; }
     }
 }

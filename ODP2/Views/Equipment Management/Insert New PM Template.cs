@@ -92,6 +92,7 @@ namespace ODP2.Views.Equipment_Management
                                 home.dbContext.SaveChanges();
                                 MessageBox.Show("Saved Successfully!");
                                 this.Close();
+                                //(PMAttachments) sender.
 
                             }
                             catch (Exception ex)

@@ -44,6 +44,8 @@
         <AssociationConnector Association="ODPModel.FK_workOrder_workOrderType" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ODPModel.pmTemplate" Width="2.25" PointX="0.75" PointY="0.625" />
         <AssociationConnector Association="ODPModel.FK_pmTemplates_equipmentFamily" />
+        <EntityTypeShape EntityType="ODPModel.issueStatu" Width="1.5" PointX="15" PointY="4.25" />
+        <AssociationConnector Association="ODPModel.FK_issue_issueStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

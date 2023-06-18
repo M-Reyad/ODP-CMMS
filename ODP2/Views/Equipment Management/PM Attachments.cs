@@ -57,6 +57,7 @@ namespace ODP2.Views
                             home.dbContext.SaveChanges();
                             MessageBox.Show("Saved Successfully");
                             saveButton.Enabled = false;
+                            pmTemplateBindingSource.ResetBindings(true);
                             attachmentsDataGrid.Refresh();
                         }
                     }
