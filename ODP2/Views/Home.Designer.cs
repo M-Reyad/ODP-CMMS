@@ -41,7 +41,6 @@ namespace ODP2
             this.inventorySpareParts = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.maintenanceMaterialInquiry = new System.Windows.Forms.ToolStripMenuItem();
-            this.equipmentsStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.breakDowns = new System.Windows.Forms.ToolStripMenuItem();
             this.pmGeneration = new System.Windows.Forms.ToolStripMenuItem();
             this.homeToolBar = new System.Windows.Forms.ToolStrip();
@@ -59,17 +58,18 @@ namespace ODP2
             this.fuelStationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.AssetsManagementTab = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.assetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.pMAttachmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.equipmentRunningHoursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.reportsTab = new System.Windows.Forms.ToolStripDropDownButton();
             this.kPIsReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.oPEXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.homeMainPanel = new System.Windows.Forms.Panel();
             this.userPanel = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.userIDNumber = new System.Windows.Forms.Label();
@@ -78,11 +78,11 @@ namespace ODP2
             this.changePasswordButton = new System.Windows.Forms.Button();
             this.logOutButton = new System.Windows.Forms.Button();
             this.userPicture = new System.Windows.Forms.PictureBox();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.homeMainPanel = new System.Windows.Forms.Panel();
             this.homeToolBar.SuspendLayout();
-            this.homeMainPanel.SuspendLayout();
             this.userPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
+            this.homeMainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // WorkOrderManagementTab
@@ -141,7 +141,7 @@ namespace ODP2
             this.SparePartsTab.Image = global::ODP2.Properties.Resources._1153743_200;
             this.SparePartsTab.Name = "SparePartsTab";
             this.SparePartsTab.Size = new System.Drawing.Size(150, 50);
-            this.SparePartsTab.Text = "Spare Parts";
+            this.SparePartsTab.Text = "Inventory Spare Parts";
             this.SparePartsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // inventorySpareParts
@@ -163,17 +163,11 @@ namespace ODP2
             this.maintenanceMaterialInquiry.Text = "Maintenance Material Inquiry";
             this.maintenanceMaterialInquiry.Click += new System.EventHandler(this.maintenanceMaterialInquiry_Click);
             // 
-            // equipmentsStatus
-            // 
-            this.equipmentsStatus.Name = "equipmentsStatus";
-            this.equipmentsStatus.Size = new System.Drawing.Size(215, 22);
-            this.equipmentsStatus.Text = "Equipment Status";
-            // 
             // breakDowns
             // 
             this.breakDowns.Name = "breakDowns";
             this.breakDowns.Size = new System.Drawing.Size(215, 22);
-            this.breakDowns.Text = "Break Downs";
+            this.breakDowns.Text = "BreakDown Registeration";
             this.breakDowns.Click += new System.EventHandler(this.breakDowns_Click);
             // 
             // pmGeneration
@@ -260,7 +254,7 @@ namespace ODP2
             this.StoresTab.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StoresTab.Name = "StoresTab";
             this.StoresTab.Size = new System.Drawing.Size(150, 50);
-            this.StoresTab.Text = "Store Management";
+            this.StoresTab.Text = "Stores Management";
             this.StoresTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.StoresTab.ToolTipText = "Stores Management";
             // 
@@ -305,25 +299,27 @@ namespace ODP2
             // 
             this.AssetsManagementTab.AutoSize = false;
             this.AssetsManagementTab.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.equipmentsStatus,
-            this.toolStripSeparator4,
-            this.breakDowns,
+            this.assetsToolStripMenuItem,
             this.toolStripSeparator5,
             this.pmGeneration,
             this.toolStripSeparator14,
             this.pMAttachmentsToolStripMenuItem,
             this.toolStripSeparator3,
-            this.equipmentRunningHoursToolStripMenuItem});
+            this.equipmentRunningHoursToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.breakDowns});
             this.AssetsManagementTab.Image = global::ODP2.Properties.Resources._961_9617299_container_handler_reach_stacker_icon_png;
             this.AssetsManagementTab.Name = "AssetsManagementTab";
             this.AssetsManagementTab.Size = new System.Drawing.Size(150, 50);
-            this.AssetsManagementTab.Text = "Asset Management";
+            this.AssetsManagementTab.Text = "Assets Management";
             this.AssetsManagementTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // toolStripSeparator4
+            // assetsToolStripMenuItem
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(212, 6);
+            this.assetsToolStripMenuItem.Name = "assetsToolStripMenuItem";
+            this.assetsToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.assetsToolStripMenuItem.Text = "Assets Information";
+            this.assetsToolStripMenuItem.Click += new System.EventHandler(this.assetsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -354,6 +350,11 @@ namespace ODP2
             this.equipmentRunningHoursToolStripMenuItem.Text = "Equipment Running Hours";
             this.equipmentRunningHoursToolStripMenuItem.Click += new System.EventHandler(this.equipmentRunningHoursToolStripMenuItem_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(212, 6);
+            // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
@@ -371,37 +372,27 @@ namespace ODP2
             this.reportsTab.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.reportsTab.Name = "reportsTab";
             this.reportsTab.Size = new System.Drawing.Size(150, 50);
-            this.reportsTab.Text = "Reports and Budget";
+            this.reportsTab.Text = "Budget and Reports";
             this.reportsTab.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // kPIsReportToolStripMenuItem
             // 
             this.kPIsReportToolStripMenuItem.Name = "kPIsReportToolStripMenuItem";
-            this.kPIsReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kPIsReportToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.kPIsReportToolStripMenuItem.Text = "KPIs Report";
             this.kPIsReportToolStripMenuItem.Click += new System.EventHandler(this.kPIsReportToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(131, 6);
             // 
             // oPEXToolStripMenuItem
             // 
             this.oPEXToolStripMenuItem.Name = "oPEXToolStripMenuItem";
-            this.oPEXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oPEXToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.oPEXToolStripMenuItem.Text = "OPEX";
-            // 
-            // homeMainPanel
-            // 
-            this.homeMainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.homeMainPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.homeMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("homeMainPanel.BackgroundImage")));
-            this.homeMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.homeMainPanel.Controls.Add(this.userPanel);
-            this.homeMainPanel.Location = new System.Drawing.Point(158, 12);
-            this.homeMainPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.homeMainPanel.Name = "homeMainPanel";
-            this.homeMainPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.homeMainPanel.Size = new System.Drawing.Size(542, 397);
-            this.homeMainPanel.TabIndex = 3;
+            this.oPEXToolStripMenuItem.Click += new System.EventHandler(this.oPEXToolStripMenuItem_Click);
             // 
             // userPanel
             // 
@@ -415,9 +406,9 @@ namespace ODP2
             this.userPanel.Controls.Add(this.changePasswordButton);
             this.userPanel.Controls.Add(this.logOutButton);
             this.userPanel.Controls.Add(this.userPicture);
-            this.userPanel.Location = new System.Drawing.Point(345, 262);
+            this.userPanel.Location = new System.Drawing.Point(308, 262);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(197, 135);
+            this.userPanel.Size = new System.Drawing.Size(234, 135);
             this.userPanel.TabIndex = 5;
             // 
             // label10
@@ -427,7 +418,7 @@ namespace ODP2
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(49, 9);
+            this.label10.Location = new System.Drawing.Point(86, 9);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(66, 15);
             this.label10.TabIndex = 5;
@@ -465,22 +456,26 @@ namespace ODP2
             // changePasswordButton
             // 
             this.changePasswordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.changePasswordButton.Location = new System.Drawing.Point(81, 107);
+            this.changePasswordButton.CausesValidation = false;
+            this.changePasswordButton.Location = new System.Drawing.Point(118, 107);
             this.changePasswordButton.Name = "changePasswordButton";
             this.changePasswordButton.Size = new System.Drawing.Size(111, 23);
             this.changePasswordButton.TabIndex = 0;
             this.changePasswordButton.Text = "Change Password";
             this.changePasswordButton.UseVisualStyleBackColor = true;
+            this.changePasswordButton.Click += new System.EventHandler(this.changePasswordButton_Click);
             // 
             // logOutButton
             // 
             this.logOutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.logOutButton.CausesValidation = false;
             this.logOutButton.Location = new System.Drawing.Point(3, 107);
             this.logOutButton.Name = "logOutButton";
             this.logOutButton.Size = new System.Drawing.Size(69, 23);
             this.logOutButton.TabIndex = 0;
             this.logOutButton.Text = "Log Out";
             this.logOutButton.UseVisualStyleBackColor = true;
+            this.logOutButton.Click += new System.EventHandler(this.logOutButton_Click);
             // 
             // userPicture
             // 
@@ -493,15 +488,27 @@ namespace ODP2
             this.userPicture.TabIndex = 1;
             this.userPicture.TabStop = false;
             // 
-            // toolStripSeparator15
+            // homeMainPanel
             // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(177, 6);
+            this.homeMainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.homeMainPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.homeMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("homeMainPanel.BackgroundImage")));
+            this.homeMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.homeMainPanel.Controls.Add(this.userPanel);
+            this.homeMainPanel.Location = new System.Drawing.Point(158, 12);
+            this.homeMainPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.homeMainPanel.Name = "homeMainPanel";
+            this.homeMainPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.homeMainPanel.Size = new System.Drawing.Size(542, 397);
+            this.homeMainPanel.TabIndex = 3;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(712, 421);
@@ -518,10 +525,10 @@ namespace ODP2
             this.Load += new System.EventHandler(this.Home_Load);
             this.homeToolBar.ResumeLayout(false);
             this.homeToolBar.PerformLayout();
-            this.homeMainPanel.ResumeLayout(false);
             this.userPanel.ResumeLayout(false);
             this.userPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).EndInit();
+            this.homeMainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -544,7 +551,6 @@ namespace ODP2
         private ToolStripMenuItem closedWorkOrders;
         private ToolStripMenuItem createWorkOrder;
         private ToolStripDropDownButton SparePartsTab;
-        private ToolStripMenuItem equipmentsStatus;
         private ToolStripMenuItem breakDowns;
         private ToolStripMenuItem pmGeneration;
         private ToolStripSeparator toolStripSeparator6;
@@ -559,10 +565,16 @@ namespace ODP2
         private ToolStripMenuItem equipmentRunningHoursToolStripMenuItem;
         private ToolStripButton homeButton;
         private ToolStripSeparator toolStripSeparator12;
-        private Panel homeMainPanel;
         private ToolStripMenuItem fuelStationToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator14;
         private ToolStripMenuItem pMAttachmentsToolStripMenuItem;
+        private ToolStripDropDownButton reportsTab;
+        private ToolStripSeparator toolStripSeparator13;
+        private ToolStripMenuItem kPIsReportToolStripMenuItem;
+        private ToolStripMenuItem oPEXToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator15;
+        //private ToolStripMenuItem equipmentsStatus;
+        private ToolStripMenuItem assetsToolStripMenuItem;
         private Panel userPanel;
         private Label label10;
         private Label userIDNumber;
@@ -571,10 +583,6 @@ namespace ODP2
         private Button changePasswordButton;
         private Button logOutButton;
         private PictureBox userPicture;
-        private ToolStripDropDownButton reportsTab;
-        private ToolStripSeparator toolStripSeparator13;
-        private ToolStripMenuItem kPIsReportToolStripMenuItem;
-        private ToolStripMenuItem oPEXToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator15;
+        private Panel homeMainPanel;
     }
 }

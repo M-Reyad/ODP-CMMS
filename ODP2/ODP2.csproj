@@ -187,6 +187,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ODPModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ODPModel_SW.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ODPModel_SW.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ODPModel_SW.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ODPModel_SW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ODPModel_SW.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ODP_ONHAND_QTY.cs">
+      <DependentUpon>ODPModel_SW.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pmTemplate.cs">
       <DependentUpon>ODPModel.tt</DependentUpon>
     </Compile>
@@ -263,11 +281,17 @@
     <Compile Include="Views\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomeUserControl.cs">
+    <Compile Include="Views\Inventory Spare Parts Management\Maintenance Material Inquiry.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\HomeUserControl.Designer.cs">
-      <DependentUpon>HomeUserControl.cs</DependentUpon>
+    <Compile Include="Views\Inventory Spare Parts Management\Maintenance Material Inquiry.Designer.cs">
+      <DependentUpon>Maintenance Material Inquiry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KPIs Reports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\KPIs Reports.Designer.cs">
+      <DependentUpon>KPIs Reports.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Inventory Spare Parts Management\Inventory Spare Parts.cs">
       <SubType>UserControl</SubType>
@@ -359,8 +383,11 @@
     <EmbeddedResource Include="Views\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\HomeUserControl.resx">
-      <DependentUpon>HomeUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Inventory Spare Parts Management\Maintenance Material Inquiry.resx">
+      <DependentUpon>Maintenance Material Inquiry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\KPIs Reports.resx">
+      <DependentUpon>KPIs Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventory Spare Parts Management\Inventory Spare Parts.resx">
       <DependentUpon>Inventory Spare Parts.cs</DependentUpon>
@@ -401,6 +428,13 @@
     </None>
     <None Include="Models\ODPModel.edmx.diagram">
       <DependentUpon>ODPModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Models\ODPModel_SW.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ODPModel_SW.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\ODPModel_SW.edmx.diagram">
+      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
     </None>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
@@ -451,6 +485,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ODPModel.edmx</DependentUpon>
       <LastGenOutput>ODPModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ODPModel_SW.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
+      <LastGenOutput>ODPModel_SW.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ODPModel_SW.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
+      <LastGenOutput>ODPModel_SW.cs</LastGenOutput>
     </Content>
     <Content Include="Resources\1153743-200.png" />
     <Content Include="Resources\259-2599623_spare-parts-icon-png-transparent-png.png" />

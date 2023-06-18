@@ -19,7 +19,6 @@ namespace ODP2.Views
 
         private void PMAttachments_Load(object sender, System.EventArgs e)
         {
-
             var equipmentFamilyList = home.dbContext.equipmentFamilies.ToList();
             equipmentFamilyBindingSource.DataSource = equipmentFamilyList;
             equipmentFamilyDirective.Text = "";
@@ -29,47 +28,23 @@ namespace ODP2.Views
         private void equipmentFamilyBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             string selectedFamilyEquipment = equipmentFamilyBox.GetItemText(equipmentFamilyBox.SelectedItem);
-            pmTemplateBindingSource.DataSource = home.dbContext.pmTemplates.Where(pmTemp => pmTemp.equipmentFamily.Trim() == selectedFamilyEquipment).ToList();
-            attachmentsDataGrid.Refresh();
             equipmentFamilyDirective.Text = home.dbContext.equipmentFamilies.Where(eq => eq.equipmentFamilyCode.Trim() == selectedFamilyEquipment).First().equipmentTypeDirective.Trim();
+            pmTemplateBindingSource.DataSource = home.dbContext.pmTemplates.Where(pmTemp => pmTemp.equipmentFamily.Trim() == selectedFamilyEquipment).ToList();
+            //attachmentsDataGrid.Refresh();
+            
         }
 
         private void saveButton_Click(object sender, System.EventArgs e)
         {
             try
             {
-
-                foreach (DataGridViewRow row in attachmentsDataGrid.Rows)
-                {
-                    pmTemplate newTemp = new pmTemplate();
-                    newTemp.equipmentFamily = row.Cells["equipmentFamily"].FormattedValue.ToString();
-                    newTemp.pmDirective = row.Cells["pmDirective"].FormattedValue.ToString();
-                    newTemp.pmAttachment = null;
-                    foreach (pmTemplate PMTemp in home.dbContext.pmTemplates.Where(pm => pm.equipmentFamily.Trim() == newTemp.equipmentFamily).ToList())
-                    {
-                        if (PMTemp.pmDirective == newTemp.pmDirective)
-                        {
-                            MessageBox.Show("PM Already Registered Before, Edit the record Instead");
-                        }
-                        else
-                        {
-                            home.dbContext.pmTemplates.AddOrUpdate(newTemp);
-                            home.dbContext.SaveChanges();
-                            MessageBox.Show("Saved Successfully");
-                            saveButton.Enabled = false;
-                            pmTemplateBindingSource.ResetBindings(true);
-                            attachmentsDataGrid.Refresh();
-                        }
-                    }
-
-                }
-
-
-
+                home.dbContext.SaveChanges();
+                MessageBox.Show("Saved Successfully");
+                saveButton.Enabled = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Adding Template " + ex);
+                MessageBox.Show("Error Saving Templates " + ex);
             }
 
         }
@@ -86,17 +61,12 @@ namespace ODP2.Views
             }
         }
 
-        private void attachmentsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            saveButton.Enabled = true;
-        }
-
         private void newPMTemplate_Click(object sender, EventArgs e)
         {
 
             if (Application.OpenForms.OfType<InsertNewPMTemp>().Count() != 0)
             {
-                Application.OpenForms.OfType<InsertNewPMTemp>().ToList()[0].Show();
+                Application.OpenForms.OfType<InsertNewPMTemp>().ToList()[0].Focus();
             }
             else
             {
@@ -104,6 +74,11 @@ namespace ODP2.Views
                 newPMInsert.home = home;
                 newPMInsert.Show();
             }
+        }
+
+        private void attachmentsDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            saveButton.Enabled = true;
         }
     }
 }

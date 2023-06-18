@@ -37,8 +37,6 @@ namespace ODP2.Views
             this.workOrderTextBox = new System.Windows.Forms.TextBox();
             this.workOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.saveButton = new System.Windows.Forms.Button();
-            this.equipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -77,6 +75,7 @@ namespace ODP2.Views
             this.workDoneType = new System.Windows.Forms.ComboBox();
             this.workDoneTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pmCheclistButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.workOrderStatusID = new System.Windows.Forms.ComboBox();
@@ -108,8 +107,6 @@ namespace ODP2.Views
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.registerationDatePicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.workOrderTabs.SuspendLayout();
             this.materialsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.materialsGridView)).BeginInit();
@@ -149,21 +146,13 @@ namespace ODP2.Views
             // saveButton
             // 
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(506, 9);
+            this.saveButton.Location = new System.Drawing.Point(656, 9);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(122, 21);
             this.saveButton.TabIndex = 2;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // equipmentBindingSource
-            // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
-            // 
-            // userBindingSource
-            // 
-            this.userBindingSource.DataSource = typeof(ODP2.Models.user);
             // 
             // label12
             // 
@@ -420,7 +409,7 @@ namespace ODP2.Views
             this.bdnTab.Location = new System.Drawing.Point(4, 22);
             this.bdnTab.Name = "bdnTab";
             this.bdnTab.Padding = new System.Windows.Forms.Padding(3);
-            this.bdnTab.Size = new System.Drawing.Size(703, 420);
+            this.bdnTab.Size = new System.Drawing.Size(764, 427);
             this.bdnTab.TabIndex = 1;
             this.bdnTab.Text = "BDN";
             // 
@@ -444,7 +433,7 @@ namespace ODP2.Views
             this.bdnGridView.Name = "bdnGridView";
             this.bdnGridView.ReadOnly = true;
             this.bdnGridView.RowTemplate.Height = 25;
-            this.bdnGridView.Size = new System.Drawing.Size(697, 344);
+            this.bdnGridView.Size = new System.Drawing.Size(753, 391);
             this.bdnGridView.TabIndex = 4;
             // 
             // id
@@ -499,11 +488,12 @@ namespace ODP2.Views
             this.stepsAndNotesTab.Controls.Add(this.workOrderNotes);
             this.stepsAndNotesTab.Controls.Add(this.workDoneType);
             this.stepsAndNotesTab.Controls.Add(this.pmCheclistButton);
+            this.stepsAndNotesTab.Controls.Add(this.label6);
             this.stepsAndNotesTab.Controls.Add(this.label3);
             this.stepsAndNotesTab.Location = new System.Drawing.Point(4, 22);
             this.stepsAndNotesTab.Name = "stepsAndNotesTab";
             this.stepsAndNotesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.stepsAndNotesTab.Size = new System.Drawing.Size(703, 420);
+            this.stepsAndNotesTab.Size = new System.Drawing.Size(764, 427);
             this.stepsAndNotesTab.TabIndex = 2;
             this.stepsAndNotesTab.Text = "Notes";
             // 
@@ -516,7 +506,7 @@ namespace ODP2.Views
             this.workOrderNotes.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderNotes", true));
             this.workOrderNotes.Location = new System.Drawing.Point(5, 38);
             this.workOrderNotes.Name = "workOrderNotes";
-            this.workOrderNotes.Size = new System.Drawing.Size(695, 352);
+            this.workOrderNotes.Size = new System.Drawing.Size(751, 383);
             this.workOrderNotes.TabIndex = 0;
             this.workOrderNotes.Text = "Write Here all the Notes you need";
             this.workOrderNotes.TextChanged += new System.EventHandler(this.workOrderNotes_TextChanged);
@@ -539,7 +529,7 @@ namespace ODP2.Views
             // pmCheclistButton
             // 
             this.pmCheclistButton.Image = ((System.Drawing.Image)(resources.GetObject("pmCheclistButton.Image")));
-            this.pmCheclistButton.Location = new System.Drawing.Point(575, 5);
+            this.pmCheclistButton.Location = new System.Drawing.Point(634, 5);
             this.pmCheclistButton.Name = "pmCheclistButton";
             this.pmCheclistButton.Size = new System.Drawing.Size(122, 27);
             this.pmCheclistButton.TabIndex = 2;
@@ -547,6 +537,16 @@ namespace ODP2.Views
             this.pmCheclistButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.pmCheclistButton.UseVisualStyleBackColor = true;
             this.pmCheclistButton.Click += new System.EventHandler(this.pmChecklist_Button);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workDoneType1.workDoneTypeDirective", true));
+            this.label6.Location = new System.Drawing.Point(179, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "--\r\n";
             // 
             // label3
             // 
@@ -610,7 +610,7 @@ namespace ODP2.Views
             // 
             // equipmentDirectiveTextBox
             // 
-            this.equipmentDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.equipmentBindingSource, "equipmentDirective", true));
+            this.equipmentDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "equipment.equipmentDirective", true));
             this.equipmentDirectiveTextBox.Enabled = false;
             this.equipmentDirectiveTextBox.Location = new System.Drawing.Point(167, 13);
             this.equipmentDirectiveTextBox.Name = "equipmentDirectiveTextBox";
@@ -623,12 +623,13 @@ namespace ODP2.Views
             this.workOrderDirective.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderDirective", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
             this.workOrderDirective.Location = new System.Drawing.Point(68, 116);
             this.workOrderDirective.Name = "workOrderDirective";
-            this.workOrderDirective.Size = new System.Drawing.Size(326, 20);
+            this.workOrderDirective.Size = new System.Drawing.Size(339, 20);
             this.workOrderDirective.TabIndex = 20;
+            this.workOrderDirective.TextChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // creatorIDTextBox
             // 
-            this.creatorIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "userIDNumber", true));
+            this.creatorIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "user.userIDNumber", true));
             this.creatorIDTextBox.Enabled = false;
             this.creatorIDTextBox.Location = new System.Drawing.Point(68, 63);
             this.creatorIDTextBox.Name = "creatorIDTextBox";
@@ -638,21 +639,22 @@ namespace ODP2.Views
             // 
             // creatorNameTextBox
             // 
-            this.creatorNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "userName", true));
+            this.creatorNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "user.userName", true));
             this.creatorNameTextBox.Enabled = false;
             this.creatorNameTextBox.Location = new System.Drawing.Point(167, 63);
             this.creatorNameTextBox.Name = "creatorNameTextBox";
             this.creatorNameTextBox.ReadOnly = true;
-            this.creatorNameTextBox.Size = new System.Drawing.Size(143, 20);
+            this.creatorNameTextBox.Size = new System.Drawing.Size(240, 20);
             this.creatorNameTextBox.TabIndex = 16;
             // 
             // workTypeDirectiveTextBox
             // 
+            this.workTypeDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderType.workOrderTypeDirective", true));
             this.workTypeDirectiveTextBox.Enabled = false;
             this.workTypeDirectiveTextBox.Location = new System.Drawing.Point(167, 38);
             this.workTypeDirectiveTextBox.Name = "workTypeDirectiveTextBox";
             this.workTypeDirectiveTextBox.ReadOnly = true;
-            this.workTypeDirectiveTextBox.Size = new System.Drawing.Size(143, 20);
+            this.workTypeDirectiveTextBox.Size = new System.Drawing.Size(240, 20);
             this.workTypeDirectiveTextBox.TabIndex = 25;
             // 
             // workTypeTextBox
@@ -708,6 +710,7 @@ namespace ODP2.Views
             this.registerationDate.Name = "registerationDate";
             this.registerationDate.Size = new System.Drawing.Size(122, 20);
             this.registerationDate.TabIndex = 17;
+            this.registerationDate.TextChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // equipmentHR
             // 
@@ -721,7 +724,7 @@ namespace ODP2.Views
             // 
             // equipmentIDTextBox
             // 
-            this.equipmentIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderEquipmentID", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
+            this.equipmentIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "equipment.equipmentID", true));
             this.equipmentIDTextBox.Enabled = false;
             this.equipmentIDTextBox.Location = new System.Drawing.Point(68, 13);
             this.equipmentIDTextBox.Name = "equipmentIDTextBox";
@@ -819,7 +822,7 @@ namespace ODP2.Views
             this.finishDatePicker.Size = new System.Drawing.Size(150, 20);
             this.finishDatePicker.TabIndex = 26;
             this.finishDatePicker.Visible = false;
-            this.finishDatePicker.ValueChanged += new System.EventHandler(this.datePickerValidated);
+            this.finishDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // doneDatePicker
             // 
@@ -830,7 +833,7 @@ namespace ODP2.Views
             this.doneDatePicker.Size = new System.Drawing.Size(150, 20);
             this.doneDatePicker.TabIndex = 26;
             this.doneDatePicker.Visible = false;
-            this.doneDatePicker.ValueChanged += new System.EventHandler(this.datePickerValidated);
+            this.doneDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // startDatePicker
             // 
@@ -841,7 +844,7 @@ namespace ODP2.Views
             this.startDatePicker.Size = new System.Drawing.Size(150, 20);
             this.startDatePicker.TabIndex = 26;
             this.startDatePicker.Visible = false;
-            this.startDatePicker.ValueChanged += new System.EventHandler(this.datePickerValidated);
+            this.startDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // registerationDatePicker
             // 
@@ -852,7 +855,7 @@ namespace ODP2.Views
             this.registerationDatePicker.Size = new System.Drawing.Size(149, 20);
             this.registerationDatePicker.TabIndex = 26;
             this.registerationDatePicker.Visible = false;
-            this.registerationDatePicker.ValueChanged += new System.EventHandler(this.datePickerValidated);
+            this.registerationDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // WorkOrder
             // 
@@ -873,8 +876,6 @@ namespace ODP2.Views
             this.Text = "Work Order #";
             this.Load += new System.EventHandler(this.WorkOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.workOrderTabs.ResumeLayout(false);
             this.materialsTab.ResumeLayout(false);
             this.materialsTab.PerformLayout();
@@ -915,8 +916,6 @@ namespace ODP2.Views
         private Label label3;
         private BindingSource workDoneTypeBindingSource;
         private BindingSource workOrderBindingSource;
-        private BindingSource equipmentBindingSource;
-        private BindingSource userBindingSource;
         private DataGridView materialsGridView;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn bdnReasonDataGridViewTextBoxColumn;
@@ -973,5 +972,6 @@ namespace ODP2.Views
         private DataGridViewTextBoxColumn partPriceDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn totalPriceDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn issueDateDataGridViewTextBoxColumn;
+        private Label label6;
     }
 }

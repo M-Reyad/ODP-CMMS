@@ -34,7 +34,7 @@
             this.equipmentFamily = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pmDirective = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pmAttachment = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.insertNewAttach = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.changeAttachment = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pmTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.equipmentFamilyBox = new System.Windows.Forms.ComboBox();
             this.equipmentFamilyBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -60,14 +60,14 @@
             this.equipmentFamily,
             this.pmDirective,
             this.pmAttachment,
-            this.insertNewAttach});
+            this.changeAttachment});
             this.attachmentsDataGrid.DataSource = this.pmTemplateBindingSource;
             this.attachmentsDataGrid.Location = new System.Drawing.Point(6, 30);
             this.attachmentsDataGrid.Name = "attachmentsDataGrid";
             this.attachmentsDataGrid.RowHeadersVisible = false;
             this.attachmentsDataGrid.Size = new System.Drawing.Size(731, 399);
             this.attachmentsDataGrid.TabIndex = 0;
-            this.attachmentsDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.attachmentsDataGrid_RowsAdded);
+            this.attachmentsDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.attachmentsDataGrid_CellEndEdit);
             // 
             // selectColumn
             // 
@@ -101,13 +101,13 @@
             this.pmAttachment.Name = "pmAttachment";
             this.pmAttachment.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // insertNewAttach
+            // changeAttachment
             // 
-            this.insertNewAttach.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.insertNewAttach.HeaderText = "Insert New Attach";
-            this.insertNewAttach.Name = "insertNewAttach";
-            this.insertNewAttach.Text = "...";
-            this.insertNewAttach.Width = 88;
+            this.changeAttachment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.changeAttachment.HeaderText = "Insert New Attach";
+            this.changeAttachment.Name = "changeAttachment";
+            this.changeAttachment.Text = "...";
+            this.changeAttachment.Width = 88;
             // 
             // pmTemplateBindingSource
             // 
@@ -160,6 +160,7 @@
             // 
             // newPMTemplate
             // 
+            this.newPMTemplate.CausesValidation = false;
             this.newPMTemplate.Location = new System.Drawing.Point(542, 3);
             this.newPMTemplate.Name = "newPMTemplate";
             this.newPMTemplate.Size = new System.Drawing.Size(103, 23);
@@ -172,6 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.newPMTemplate);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.equipmentFamilyDirective);
@@ -204,6 +206,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn equipmentFamily;
         private System.Windows.Forms.DataGridViewTextBoxColumn pmDirective;
         private System.Windows.Forms.DataGridViewLinkColumn pmAttachment;
-        private System.Windows.Forms.DataGridViewButtonColumn insertNewAttach;
+        private System.Windows.Forms.DataGridViewButtonColumn changeAttachment;
     }
 }

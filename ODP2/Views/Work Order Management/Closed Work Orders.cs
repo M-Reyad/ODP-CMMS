@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data;
 using ODP2.Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ODP2
 {
@@ -37,12 +38,13 @@ namespace ODP2
 
         private void equipmentBox_LostFocus(object sender, EventArgs e)
         {
-            var equipmentList = home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text);
+            var equipmentList = new List<equipment>();
             if (equipmentBox.Text != "")
             {
-                if (equipmentList.Count() != 0)
+                if (home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text).Count() != 0)
                 {
-                    equipmentBindingSource.DataSource = equipmentList.First();
+                    equipmentList = home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text).ToList();
+                    equipmentDirective.Text = equipmentList.First().equipmentDirective.Trim();
                 }
                 else
                 {

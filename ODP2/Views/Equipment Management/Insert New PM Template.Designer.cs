@@ -162,6 +162,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InsertNewPMTemp";
             this.Text = "Insert New PM Template";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InsertNewPMTemp_FormClosed);
             this.Load += new System.EventHandler(this.InsertNewPMTemp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.equipmentFamilyBindingSource)).EndInit();
             this.ResumeLayout(false);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using ODP2.Models;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ODP2.Views
@@ -6,31 +7,25 @@ namespace ODP2.Views
     public partial class SparePart : Form
     {
         public Home home;
-        public SparePart()
+        public sparePart selectedSparePart;
+        public SparePart(Home home, string sparePart)
         {
-            InitializeComponent();
-        }
-
-        private void partCodeTextBox_Validated(object sender, System.EventArgs e)
-        {
-            if (partCodeTextBox.Text != "")
+            this.home = home;
+            MessageBox.Show(sparePart);
+            if (home.dbContext.spareParts.Where(sp => sp.partCode.Trim() == sparePart).Count() != 1)
             {
-
-
-                if (home.dbContext.spareParts.Where(part => part.partCode == partCodeTextBox.Text).Count() == 1)
-                {
-                    sparePartBindingSource.DataSource = home.dbContext.spareParts.Where(part => part.partCode == partCodeTextBox.Text).First();
-                }
-                else
-                {
-                    MessageBox.Show("Error Part Code, Please Enter a Valid Code", "Error");
-                    partCodeTextBox.Focus();
-                }
+                MessageBox.Show("Error Finding Spare Part " + sparePart, "Error");
             }
             else
             {
-                sparePartBindingSource.Clear();
+                selectedSparePart = home.dbContext.spareParts.Where(sp => sp.partCode.Trim() == sparePart).First();
             }
+            InitializeComponent();
+        }
+
+        private void SparePart_Load(object sender, System.EventArgs e)
+        {
+            sparePartBindingSource.DataSource = selectedSparePart;
         }
     }
 }

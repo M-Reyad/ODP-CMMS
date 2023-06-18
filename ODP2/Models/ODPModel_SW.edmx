@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ODPModel_SW.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'APPS.ODP_ONHAND_QTY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ODP_ONHAND_QTY">
+          <Key>
+            <PropertyRef Name="INVENTORY_ITEM_ID" />
+            <PropertyRef Name="ORGANIZATION_ID" />
+            <PropertyRef Name="LAST_UPDATE_DATE" />
+            <PropertyRef Name="LAST_UPDATED_BY" />
+            <PropertyRef Name="CREATION_DATE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="PRIMARY_TRANSACTION_QUANTITY" />
+            <PropertyRef Name="SUBINVENTORY_CODE" />
+            <PropertyRef Name="ONHAND_QUANTITIES_ID" />
+            <PropertyRef Name="ORGANIZATION_TYPE" />
+            <PropertyRef Name="OWNING_ORGANIZATION_ID" />
+            <PropertyRef Name="OWNING_TP_TYPE" />
+            <PropertyRef Name="PLANNING_ORGANIZATION_ID" />
+            <PropertyRef Name="PLANNING_TP_TYPE" />
+            <PropertyRef Name="TRANSACTION_UOM_CODE" />
+            <PropertyRef Name="TRANSACTION_QUANTITY" />
+            <PropertyRef Name="IS_CONSIGNED" />
+          </Key>
+          <Property Name="INVENTORY_ITEM_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORGANIZATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DATE_RECEIVED" Type="date" />
+          <Property Name="LAST_UPDATE_DATE" Type="date" Nullable="false" />
+          <Property Name="LAST_UPDATED_BY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CREATION_DATE" Type="date" Nullable="false" />
+          <Property Name="CREATED_BY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LAST_UPDATE_LOGIN" Type="number" Precision="38" Scale="0" />
+          <Property Name="PRIMARY_TRANSACTION_QUANTITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUBINVENTORY_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="REVISION" Type="varchar2" MaxLength="3" />
+          <Property Name="LOCATOR_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="CREATE_TRANSACTION_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="UPDATE_TRANSACTION_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="LOT_NUMBER" Type="varchar2" MaxLength="80" />
+          <Property Name="ORIG_DATE_RECEIVED" Type="date" />
+          <Property Name="COST_GROUP_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="CONTAINERIZED_FLAG" Type="number" Precision="38" Scale="0" />
+          <Property Name="PROJECT_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="TASK_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ONHAND_QUANTITIES_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORGANIZATION_TYPE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="OWNING_ORGANIZATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="OWNING_TP_TYPE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PLANNING_ORGANIZATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PLANNING_TP_TYPE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TRANSACTION_UOM_CODE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="TRANSACTION_QUANTITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SECONDARY_UOM_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="SECONDARY_TRANSACTION_QUANTITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="IS_CONSIGNED" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LPN_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="STATUS_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="MCC_CODE" Type="varchar2" MaxLength="30" />
+        </EntityType>
+        <EntityContainer Name="ODPModel_SWStoreContainer">
+          <EntitySet Name="ODP_ONHAND_QTY" EntityType="Self.ODP_ONHAND_QTY" store:Type="Views" store:Schema="APPS">
+            <DefiningQuery>SELECT 
+"ODP_ONHAND_QTY"."INVENTORY_ITEM_ID" AS "INVENTORY_ITEM_ID", 
+"ODP_ONHAND_QTY"."ORGANIZATION_ID" AS "ORGANIZATION_ID", 
+"ODP_ONHAND_QTY"."DATE_RECEIVED" AS "DATE_RECEIVED", 
+"ODP_ONHAND_QTY"."LAST_UPDATE_DATE" AS "LAST_UPDATE_DATE", 
+"ODP_ONHAND_QTY"."LAST_UPDATED_BY" AS "LAST_UPDATED_BY", 
+"ODP_ONHAND_QTY"."CREATION_DATE" AS "CREATION_DATE", 
+"ODP_ONHAND_QTY"."CREATED_BY" AS "CREATED_BY", 
+"ODP_ONHAND_QTY"."LAST_UPDATE_LOGIN" AS "LAST_UPDATE_LOGIN", 
+"ODP_ONHAND_QTY"."PRIMARY_TRANSACTION_QUANTITY" AS "PRIMARY_TRANSACTION_QUANTITY", 
+"ODP_ONHAND_QTY"."SUBINVENTORY_CODE" AS "SUBINVENTORY_CODE", 
+"ODP_ONHAND_QTY"."REVISION" AS "REVISION", 
+"ODP_ONHAND_QTY"."LOCATOR_ID" AS "LOCATOR_ID", 
+"ODP_ONHAND_QTY"."CREATE_TRANSACTION_ID" AS "CREATE_TRANSACTION_ID", 
+"ODP_ONHAND_QTY"."UPDATE_TRANSACTION_ID" AS "UPDATE_TRANSACTION_ID", 
+"ODP_ONHAND_QTY"."LOT_NUMBER" AS "LOT_NUMBER", 
+"ODP_ONHAND_QTY"."ORIG_DATE_RECEIVED" AS "ORIG_DATE_RECEIVED", 
+"ODP_ONHAND_QTY"."COST_GROUP_ID" AS "COST_GROUP_ID", 
+"ODP_ONHAND_QTY"."CONTAINERIZED_FLAG" AS "CONTAINERIZED_FLAG", 
+"ODP_ONHAND_QTY"."PROJECT_ID" AS "PROJECT_ID", 
+"ODP_ONHAND_QTY"."TASK_ID" AS "TASK_ID", 
+"ODP_ONHAND_QTY"."ONHAND_QUANTITIES_ID" AS "ONHAND_QUANTITIES_ID", 
+"ODP_ONHAND_QTY"."ORGANIZATION_TYPE" AS "ORGANIZATION_TYPE", 
+"ODP_ONHAND_QTY"."OWNING_ORGANIZATION_ID" AS "OWNING_ORGANIZATION_ID", 
+"ODP_ONHAND_QTY"."OWNING_TP_TYPE" AS "OWNING_TP_TYPE", 
+"ODP_ONHAND_QTY"."PLANNING_ORGANIZATION_ID" AS "PLANNING_ORGANIZATION_ID", 
+"ODP_ONHAND_QTY"."PLANNING_TP_TYPE" AS "PLANNING_TP_TYPE", 
+"ODP_ONHAND_QTY"."TRANSACTION_UOM_CODE" AS "TRANSACTION_UOM_CODE", 
+"ODP_ONHAND_QTY"."TRANSACTION_QUANTITY" AS "TRANSACTION_QUANTITY", 
+"ODP_ONHAND_QTY"."SECONDARY_UOM_CODE" AS "SECONDARY_UOM_CODE", 
+"ODP_ONHAND_QTY"."SECONDARY_TRANSACTION_QUANTITY" AS "SECONDARY_TRANSACTION_QUANTITY", 
+"ODP_ONHAND_QTY"."IS_CONSIGNED" AS "IS_CONSIGNED", 
+"ODP_ONHAND_QTY"."LPN_ID" AS "LPN_ID", 
+"ODP_ONHAND_QTY"."STATUS_ID" AS "STATUS_ID", 
+"ODP_ONHAND_QTY"."MCC_CODE" AS "MCC_CODE"
+FROM "APPS"."ODP_ONHAND_QTY" "ODP_ONHAND_QTY"</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ODPModel_SW" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ODP_ONHAND_QTY">
+          <Key>
+            <PropertyRef Name="INVENTORY_ITEM_ID" />
+            <PropertyRef Name="ORGANIZATION_ID" />
+            <PropertyRef Name="LAST_UPDATE_DATE" />
+            <PropertyRef Name="LAST_UPDATED_BY" />
+            <PropertyRef Name="CREATION_DATE" />
+            <PropertyRef Name="CREATED_BY" />
+            <PropertyRef Name="PRIMARY_TRANSACTION_QUANTITY" />
+            <PropertyRef Name="SUBINVENTORY_CODE" />
+            <PropertyRef Name="ONHAND_QUANTITIES_ID" />
+            <PropertyRef Name="ORGANIZATION_TYPE" />
+            <PropertyRef Name="OWNING_ORGANIZATION_ID" />
+            <PropertyRef Name="OWNING_TP_TYPE" />
+            <PropertyRef Name="PLANNING_ORGANIZATION_ID" />
+            <PropertyRef Name="PLANNING_TP_TYPE" />
+            <PropertyRef Name="TRANSACTION_UOM_CODE" />
+            <PropertyRef Name="TRANSACTION_QUANTITY" />
+            <PropertyRef Name="IS_CONSIGNED" />
+          </Key>
+          <Property Name="INVENTORY_ITEM_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORGANIZATION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DATE_RECEIVED" Type="DateTime" />
+          <Property Name="LAST_UPDATE_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="LAST_UPDATED_BY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CREATION_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="CREATED_BY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LAST_UPDATE_LOGIN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PRIMARY_TRANSACTION_QUANTITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUBINVENTORY_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REVISION" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LOCATOR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CREATE_TRANSACTION_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="UPDATE_TRANSACTION_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LOT_NUMBER" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ORIG_DATE_RECEIVED" Type="DateTime" />
+          <Property Name="COST_GROUP_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CONTAINERIZED_FLAG" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PROJECT_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TASK_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ONHAND_QUANTITIES_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORGANIZATION_TYPE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="OWNING_ORGANIZATION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="OWNING_TP_TYPE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PLANNING_ORGANIZATION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PLANNING_TP_TYPE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TRANSACTION_UOM_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TRANSACTION_QUANTITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SECONDARY_UOM_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="SECONDARY_TRANSACTION_QUANTITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IS_CONSIGNED" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LPN_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="STATUS_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MCC_CODE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="ODPEntities_SW" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ODP_ONHAND_QTY" EntityType="Self.ODP_ONHAND_QTY" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ODPModel_SWStoreContainer" CdmEntityContainer="ODPEntities_SW">
+          <EntitySetMapping Name="ODP_ONHAND_QTY">
+            <EntityTypeMapping TypeName="ODPModel_SW.ODP_ONHAND_QTY">
+              <MappingFragment StoreEntitySet="ODP_ONHAND_QTY">
+                <ScalarProperty Name="INVENTORY_ITEM_ID" ColumnName="INVENTORY_ITEM_ID" />
+                <ScalarProperty Name="ORGANIZATION_ID" ColumnName="ORGANIZATION_ID" />
+                <ScalarProperty Name="DATE_RECEIVED" ColumnName="DATE_RECEIVED" />
+                <ScalarProperty Name="LAST_UPDATE_DATE" ColumnName="LAST_UPDATE_DATE" />
+                <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+                <ScalarProperty Name="CREATION_DATE" ColumnName="CREATION_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="LAST_UPDATE_LOGIN" ColumnName="LAST_UPDATE_LOGIN" />
+                <ScalarProperty Name="PRIMARY_TRANSACTION_QUANTITY" ColumnName="PRIMARY_TRANSACTION_QUANTITY" />
+                <ScalarProperty Name="SUBINVENTORY_CODE" ColumnName="SUBINVENTORY_CODE" />
+                <ScalarProperty Name="REVISION" ColumnName="REVISION" />
+                <ScalarProperty Name="LOCATOR_ID" ColumnName="LOCATOR_ID" />
+                <ScalarProperty Name="CREATE_TRANSACTION_ID" ColumnName="CREATE_TRANSACTION_ID" />
+                <ScalarProperty Name="UPDATE_TRANSACTION_ID" ColumnName="UPDATE_TRANSACTION_ID" />
+                <ScalarProperty Name="LOT_NUMBER" ColumnName="LOT_NUMBER" />
+                <ScalarProperty Name="ORIG_DATE_RECEIVED" ColumnName="ORIG_DATE_RECEIVED" />
+                <ScalarProperty Name="COST_GROUP_ID" ColumnName="COST_GROUP_ID" />
+                <ScalarProperty Name="CONTAINERIZED_FLAG" ColumnName="CONTAINERIZED_FLAG" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="TASK_ID" ColumnName="TASK_ID" />
+                <ScalarProperty Name="ONHAND_QUANTITIES_ID" ColumnName="ONHAND_QUANTITIES_ID" />
+                <ScalarProperty Name="ORGANIZATION_TYPE" ColumnName="ORGANIZATION_TYPE" />
+                <ScalarProperty Name="OWNING_ORGANIZATION_ID" ColumnName="OWNING_ORGANIZATION_ID" />
+                <ScalarProperty Name="OWNING_TP_TYPE" ColumnName="OWNING_TP_TYPE" />
+                <ScalarProperty Name="PLANNING_ORGANIZATION_ID" ColumnName="PLANNING_ORGANIZATION_ID" />
+                <ScalarProperty Name="PLANNING_TP_TYPE" ColumnName="PLANNING_TP_TYPE" />
+                <ScalarProperty Name="TRANSACTION_UOM_CODE" ColumnName="TRANSACTION_UOM_CODE" />
+                <ScalarProperty Name="TRANSACTION_QUANTITY" ColumnName="TRANSACTION_QUANTITY" />
+                <ScalarProperty Name="SECONDARY_UOM_CODE" ColumnName="SECONDARY_UOM_CODE" />
+                <ScalarProperty Name="SECONDARY_TRANSACTION_QUANTITY" ColumnName="SECONDARY_TRANSACTION_QUANTITY" />
+                <ScalarProperty Name="IS_CONSIGNED" ColumnName="IS_CONSIGNED" />
+                <ScalarProperty Name="LPN_ID" ColumnName="LPN_ID" />
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+                <ScalarProperty Name="MCC_CODE" ColumnName="MCC_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

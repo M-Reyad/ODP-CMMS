@@ -14,6 +14,7 @@ namespace ODP2
     public partial class Home : Form
     {
         public ODPEntities dbContext;
+        public ODPEntities_SW dbContext_SW;
         public user user = new user();
 
         public Home()
@@ -69,15 +70,7 @@ namespace ODP2
 
         }
 
-        private void logOutButton_Click(object sender, EventArgs e)
-        {
-            Close();
-            Login newLoginPage = new Login();
-            newLoginPage.Show();
-            dbContext.Dispose();
 
-
-        }
 
         private void changePasswordButton_Click(object sender, EventArgs e)
         {
@@ -102,8 +95,9 @@ namespace ODP2
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-
-
+            homeMainPanel.Controls.Clear();
+            homeMainPanel.Controls.Add(userPanel);
+            //userPanel.Show();
         }
 
 
@@ -180,14 +174,13 @@ namespace ODP2
             homeMainPanel.Controls.Add(newIssue);
         }
 
-        private void createNewSparePartToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void maintenanceMaterialInquiry_Click(object sender, EventArgs e)
         {
-
+            homeMainPanel.Controls.Clear();
+            MaintenanceMaterialInquiry newMaintenanceMaterialInquiry = new MaintenanceMaterialInquiry();
+            newMaintenanceMaterialInquiry.home = this;
+            newMaintenanceMaterialInquiry.Size = homeMainPanel.Size;
+            homeMainPanel.Controls.Add(newMaintenanceMaterialInquiry);
         }
 
         private void pmGeneration_Click(object sender, EventArgs e)
@@ -208,21 +201,7 @@ namespace ODP2
             homeMainPanel.Controls.Add(attachNewPM);
         }
 
-        private void Home_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /*
-            DialogResult closingHome = MessageBox.Show("You are closing the Home Page without Signing Out" +
-                        "Would you like to Sign Out firstly?", "Exit", MessageBoxButtons.YesNo);
-            if (closingHome == DialogResult.Yes)
-            {
-                
-            }
-            else
-            {
-                workOrderStatusID.Focus();
-            }
-            */
-        }
+        
 
         private void kPIsReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -231,6 +210,43 @@ namespace ODP2
             newKPIsReports.Size = homeMainPanel.Size;
             homeMainPanel.Controls.Clear();
             homeMainPanel.Controls.Add(newKPIsReports);
+        }
+
+        private void assetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void oPEXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            Login newLoginPage = new Login();
+            newLoginPage.Show();
+        }
+
+        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            DialogResult closingHome = MessageBox.Show("You are closing the Home Page without Signing Out" +
+                        " Would you like to Sign Out firstly?", "Exit", MessageBoxButtons.YesNoCancel);
+            if (closingHome == DialogResult.Yes)
+            {
+                logOutButton_Click(sender, e);
+            }
+            else if (closingHome == DialogResult.Cancel)
+            {
+
+            }
+            else
+            {
+                Dispose();
+            }
+
         }
     }
 }

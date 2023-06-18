@@ -28,7 +28,8 @@ namespace ODP2
 
             workOrderTypeBindingSource.DataSource = home.dbContext.workOrderTypes.ToList();
             workOrderStatuBindingSource.DataSource = home.dbContext.workOrderStatus.ToList();
-            //workStatusBox.Items.Add(new workOrderStatu() { workOrderStatusID = "" });
+            workStatusBox.Items.Remove((new workOrderStatu() { workOrderStatusID = "Cancelled" }));
+            
             workTypeBox.Text = "";
             workStatusBox.Text = "";
             workTypeDirective.Text = "";
@@ -40,12 +41,13 @@ namespace ODP2
 
         private void equipmentBox_LostFocus(object sender, EventArgs e)
         {
-            var equipmentList = home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text);
+            var equipmentList = new List<equipment>();
             if (equipmentBox.Text != "")
             {
-                if (equipmentList.Count() != 0)
+                if (home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text).Count() != 0)
                 {
-                    equipmentBindingSource.DataSource = equipmentList.First();
+                    equipmentList = home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text).ToList();
+                    equipmentDirective.Text = equipmentList.First().equipmentDirective.Trim();
                 }
                 else
                 {
@@ -136,7 +138,6 @@ namespace ODP2
             DialogResult openWorkOrderQuesion = MessageBox.Show("Open WorkOrder #" + selectedWorkOrder , "Open Work Order", MessageBoxButtons.YesNo);
             if (openWorkOrderQuesion == DialogResult.Yes)
             {
-
 
                 if (Application.OpenForms.OfType<WorkOrder>().Count() != 0)
                 {

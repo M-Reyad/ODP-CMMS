@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparePart));
             this.partCodeTextBox = new System.Windows.Forms.TextBox();
+            this.sparePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -53,19 +54,26 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.sparePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.uOM1 = new System.Windows.Forms.Label();
+            this.uOM = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // partCodeTextBox
             // 
+            this.partCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "partCode", true));
             this.partCodeTextBox.Location = new System.Drawing.Point(110, 7);
             this.partCodeTextBox.Name = "partCodeTextBox";
             this.partCodeTextBox.ReadOnly = true;
             this.partCodeTextBox.Size = new System.Drawing.Size(164, 20);
             this.partCodeTextBox.TabIndex = 17;
-            this.partCodeTextBox.Validated += new System.EventHandler(this.partCodeTextBox_Validated);
+            // 
+            // sparePartBindingSource
+            // 
+            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.sparePart);
             // 
             // label1
             // 
@@ -78,7 +86,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(110, 204);
+            this.textBox9.Location = new System.Drawing.Point(110, 230);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(164, 20);
@@ -87,7 +95,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 207);
+            this.label10.Location = new System.Drawing.Point(4, 233);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(100, 13);
             this.label10.TabIndex = 20;
@@ -96,7 +104,7 @@
             // textBox8
             // 
             this.textBox8.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "supplierID", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
-            this.textBox8.Location = new System.Drawing.Point(110, 178);
+            this.textBox8.Location = new System.Drawing.Point(110, 204);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(164, 20);
@@ -105,7 +113,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(31, 181);
+            this.label9.Location = new System.Drawing.Point(31, 207);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 21;
@@ -114,7 +122,7 @@
             // textBox6
             // 
             this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "partPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "C2"));
-            this.textBox6.Location = new System.Drawing.Point(110, 100);
+            this.textBox6.Location = new System.Drawing.Point(110, 126);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(88, 20);
@@ -123,7 +131,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(73, 103);
+            this.label7.Location = new System.Drawing.Point(73, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(31, 13);
             this.label7.TabIndex = 22;
@@ -131,7 +139,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(289, 126);
+            this.textBox5.Location = new System.Drawing.Point(314, 152);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(99, 20);
@@ -139,7 +147,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(289, 100);
+            this.textBox4.Location = new System.Drawing.Point(314, 126);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(99, 20);
@@ -147,7 +155,8 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(289, 74);
+            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "compatableEquipmentFamilyID", true));
+            this.textBox3.Location = new System.Drawing.Point(314, 100);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(99, 20);
@@ -156,7 +165,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(242, 129);
+            this.label6.Location = new System.Drawing.Point(267, 155);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 26;
@@ -165,7 +174,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(222, 103);
+            this.label5.Location = new System.Drawing.Point(247, 129);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 13);
             this.label5.TabIndex = 27;
@@ -174,7 +183,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(229, 77);
+            this.label4.Location = new System.Drawing.Point(254, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 28;
@@ -186,12 +195,12 @@
             this.textBox2.Location = new System.Drawing.Point(110, 48);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(278, 20);
+            this.textBox2.Size = new System.Drawing.Size(303, 20);
             this.textBox2.TabIndex = 35;
             // 
             // textBox7
             // 
-            this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "partStockQty", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "N0"));
+            this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "partStockQty", true));
             this.textBox7.Location = new System.Drawing.Point(110, 74);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
@@ -201,7 +210,7 @@
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "manufacturerPN", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
-            this.textBox1.Location = new System.Drawing.Point(110, 152);
+            this.textBox1.Location = new System.Drawing.Point(110, 178);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(164, 20);
@@ -223,12 +232,12 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(81, 13);
             this.label8.TabIndex = 33;
-            this.label8.Text = "Available Stock";
+            this.label8.Text = "On-Hand Stock";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 155);
+            this.label2.Location = new System.Drawing.Point(11, 181);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 34;
@@ -237,7 +246,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(73, 129);
+            this.label11.Location = new System.Drawing.Point(73, 155);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 13);
             this.label11.TabIndex = 22;
@@ -245,7 +254,7 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(110, 126);
+            this.textBox10.Location = new System.Drawing.Point(110, 152);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(88, 20);
@@ -253,24 +262,60 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(394, 34);
+            this.pictureBox1.Location = new System.Drawing.Point(419, 48);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(257, 190);
+            this.pictureBox1.Size = new System.Drawing.Size(238, 216);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // sparePartBindingSource
+            // label12
             // 
-            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.sparePart);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(23, 103);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 13);
+            this.label12.TabIndex = 33;
+            this.label12.Text = "Available Stock";
+            // 
+            // textBox11
+            // 
+            this.textBox11.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "availableStock", true));
+            this.textBox11.Location = new System.Drawing.Point(110, 100);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
+            this.textBox11.Size = new System.Drawing.Size(88, 20);
+            this.textBox11.TabIndex = 36;
+            // 
+            // uOM1
+            // 
+            this.uOM1.AutoSize = true;
+            this.uOM1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "uom", true));
+            this.uOM1.Location = new System.Drawing.Point(204, 77);
+            this.uOM1.Name = "uOM1";
+            this.uOM1.Size = new System.Drawing.Size(13, 13);
+            this.uOM1.TabIndex = 28;
+            this.uOM1.Text = "--";
+            // 
+            // uOM
+            // 
+            this.uOM.AutoSize = true;
+            this.uOM.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sparePartBindingSource, "uom", true));
+            this.uOM.Location = new System.Drawing.Point(204, 103);
+            this.uOM.Name = "uOM";
+            this.uOM.Size = new System.Drawing.Size(13, 13);
+            this.uOM.TabIndex = 28;
+            this.uOM.Text = "--";
             // 
             // SparePart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 240);
+            this.ClientSize = new System.Drawing.Size(677, 276);
             this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox11);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label2);
@@ -279,6 +324,8 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.uOM);
+            this.Controls.Add(this.uOM1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.label10);
@@ -294,8 +341,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SparePart";
             this.Text = "Spare Part";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.SparePart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,5 +374,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.BindingSource sparePartBindingSource;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label uOM1;
+        private System.Windows.Forms.Label uOM;
     }
 }

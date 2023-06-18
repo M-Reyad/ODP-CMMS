@@ -34,11 +34,11 @@
             this.dueDatePicker = new System.Windows.Forms.DateTimePicker();
             this.label25 = new System.Windows.Forms.Label();
             this.pmRegisterationGridView = new System.Windows.Forms.DataGridView();
+            this.equipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.calculateButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dueHRTextbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.equipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.generate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.equipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.equipmentHR = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,10 +113,16 @@
             this.pmRegisterationGridView.DataSource = this.equipmentBindingSource;
             this.pmRegisterationGridView.Location = new System.Drawing.Point(8, 95);
             this.pmRegisterationGridView.Name = "pmRegisterationGridView";
+            this.pmRegisterationGridView.ReadOnly = true;
+            this.pmRegisterationGridView.RowHeadersVisible = false;
             this.pmRegisterationGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.pmRegisterationGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.pmRegisterationGridView.Size = new System.Drawing.Size(808, 326);
             this.pmRegisterationGridView.TabIndex = 93;
+            // 
+            // equipmentBindingSource
+            // 
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
             // 
             // calculateButton
             // 
@@ -158,17 +164,14 @@
             this.label2.TabIndex = 28;
             this.label2.Text = "HR";
             // 
-            // equipmentBindingSource
-            // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
-            // 
             // generate
             // 
             this.generate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.generate.FalseValue = "0";
+            this.generate.FalseValue = "";
             this.generate.HeaderText = "Generate";
             this.generate.Name = "generate";
-            this.generate.TrueValue = "1";
+            this.generate.ReadOnly = true;
+            this.generate.TrueValue = "true";
             this.generate.Width = 57;
             // 
             // equipmentID
