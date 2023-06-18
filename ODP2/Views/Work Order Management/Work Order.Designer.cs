@@ -52,6 +52,16 @@ namespace ODP2.Views
             this.partCodeTextBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.materialsGridView = new System.Windows.Forms.DataGridView();
+            this.issueIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sparePartCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sparePart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issueState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.requestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.partPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issueDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.issueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.bdnTab = new System.Windows.Forms.TabPage();
@@ -97,15 +107,6 @@ namespace ODP2.Views
             this.doneDatePicker = new System.Windows.Forms.DateTimePicker();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.registerationDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.issueIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sparePartCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sparePart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.requestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.partPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
@@ -167,7 +168,7 @@ namespace ODP2.Views
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(570, 11);
+            this.label12.Location = new System.Drawing.Point(631, 11);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(55, 13);
             this.label12.TabIndex = 0;
@@ -210,7 +211,7 @@ namespace ODP2.Views
             this.workOrderTabs.Location = new System.Drawing.Point(10, 192);
             this.workOrderTabs.Name = "workOrderTabs";
             this.workOrderTabs.SelectedIndex = 0;
-            this.workOrderTabs.Size = new System.Drawing.Size(711, 446);
+            this.workOrderTabs.Size = new System.Drawing.Size(772, 453);
             this.workOrderTabs.TabIndex = 6;
             // 
             // materialsTab
@@ -228,7 +229,7 @@ namespace ODP2.Views
             this.materialsTab.Location = new System.Drawing.Point(4, 22);
             this.materialsTab.Name = "materialsTab";
             this.materialsTab.Padding = new System.Windows.Forms.Padding(5);
-            this.materialsTab.Size = new System.Drawing.Size(703, 420);
+            this.materialsTab.Size = new System.Drawing.Size(764, 427);
             this.materialsTab.TabIndex = 0;
             this.materialsTab.Text = "Materials";
             // 
@@ -253,7 +254,7 @@ namespace ODP2.Views
             // 
             // totalCostTextbox
             // 
-            this.totalCostTextbox.Location = new System.Drawing.Point(631, 8);
+            this.totalCostTextbox.Location = new System.Drawing.Point(692, 8);
             this.totalCostTextbox.Name = "totalCostTextbox";
             this.totalCostTextbox.ReadOnly = true;
             this.totalCostTextbox.Size = new System.Drawing.Size(64, 20);
@@ -292,6 +293,7 @@ namespace ODP2.Views
             this.materialsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.issueIDDataGridViewTextBoxColumn,
             this.qty,
+            this.uom,
             this.sparePartCodeDataGridViewTextBoxColumn,
             this.sparePart,
             this.issueState,
@@ -304,8 +306,97 @@ namespace ODP2.Views
             this.materialsGridView.Name = "materialsGridView";
             this.materialsGridView.ReadOnly = true;
             this.materialsGridView.RowHeadersVisible = false;
-            this.materialsGridView.Size = new System.Drawing.Size(689, 351);
+            this.materialsGridView.Size = new System.Drawing.Size(748, 351);
             this.materialsGridView.TabIndex = 1;
+            // 
+            // issueIDDataGridViewTextBoxColumn
+            // 
+            this.issueIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.issueIDDataGridViewTextBoxColumn.DataPropertyName = "issueID";
+            this.issueIDDataGridViewTextBoxColumn.HeaderText = "Issue#";
+            this.issueIDDataGridViewTextBoxColumn.Name = "issueIDDataGridViewTextBoxColumn";
+            this.issueIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.issueIDDataGridViewTextBoxColumn.Width = 64;
+            // 
+            // qty
+            // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.qty.DataPropertyName = "qty";
+            this.qty.HeaderText = "Qty";
+            this.qty.Name = "qty";
+            this.qty.ReadOnly = true;
+            this.qty.Width = 48;
+            // 
+            // uom
+            // 
+            this.uom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.uom.DataPropertyName = "uom";
+            this.uom.HeaderText = "UoM";
+            this.uom.Name = "uom";
+            this.uom.ReadOnly = true;
+            this.uom.Width = 55;
+            // 
+            // sparePartCodeDataGridViewTextBoxColumn
+            // 
+            this.sparePartCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sparePartCodeDataGridViewTextBoxColumn.DataPropertyName = "sparePartCode";
+            this.sparePartCodeDataGridViewTextBoxColumn.HeaderText = "Spare Part Code";
+            this.sparePartCodeDataGridViewTextBoxColumn.Name = "sparePartCodeDataGridViewTextBoxColumn";
+            this.sparePartCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sparePartCodeDataGridViewTextBoxColumn.Width = 79;
+            // 
+            // sparePart
+            // 
+            this.sparePart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sparePart.DataPropertyName = "partDirective";
+            this.sparePart.HeaderText = "Part Description";
+            this.sparePart.Name = "sparePart";
+            this.sparePart.ReadOnly = true;
+            // 
+            // issueState
+            // 
+            this.issueState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.issueState.DataPropertyName = "issueState";
+            this.issueState.HeaderText = "Status";
+            this.issueState.Name = "issueState";
+            this.issueState.ReadOnly = true;
+            this.issueState.Width = 62;
+            // 
+            // requestDate
+            // 
+            this.requestDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.requestDate.DataPropertyName = "requestDate";
+            this.requestDate.HeaderText = "Request Date";
+            this.requestDate.Name = "requestDate";
+            this.requestDate.ReadOnly = true;
+            this.requestDate.Width = 90;
+            // 
+            // partPriceDataGridViewTextBoxColumn
+            // 
+            this.partPriceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.partPriceDataGridViewTextBoxColumn.DataPropertyName = "partPrice";
+            this.partPriceDataGridViewTextBoxColumn.HeaderText = "Part Price";
+            this.partPriceDataGridViewTextBoxColumn.Name = "partPriceDataGridViewTextBoxColumn";
+            this.partPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.partPriceDataGridViewTextBoxColumn.Width = 72;
+            // 
+            // totalPriceDataGridViewTextBoxColumn
+            // 
+            this.totalPriceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.totalPriceDataGridViewTextBoxColumn.DataPropertyName = "totalPrice";
+            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "Total Price";
+            this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
+            this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalPriceDataGridViewTextBoxColumn.Width = 77;
+            // 
+            // issueDateDataGridViewTextBoxColumn
+            // 
+            this.issueDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.issueDateDataGridViewTextBoxColumn.DataPropertyName = "issueDate";
+            this.issueDateDataGridViewTextBoxColumn.HeaderText = "Issue Date";
+            this.issueDateDataGridViewTextBoxColumn.Name = "issueDateDataGridViewTextBoxColumn";
+            this.issueDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.issueDateDataGridViewTextBoxColumn.Width = 77;
             // 
             // issueBindingSource
             // 
@@ -498,7 +589,7 @@ namespace ODP2.Views
             this.panel1.Controls.Add(this.registerationDatePicker);
             this.panel1.Location = new System.Drawing.Point(10, 36);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(710, 150);
+            this.panel1.Size = new System.Drawing.Size(768, 150);
             this.panel1.TabIndex = 7;
             // 
             // workOrderStatusID
@@ -586,7 +677,7 @@ namespace ODP2.Views
             // workOrderFinishDate
             // 
             this.workOrderFinishDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderFinishDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.workOrderFinishDate.Location = new System.Drawing.Point(535, 119);
+            this.workOrderFinishDate.Location = new System.Drawing.Point(609, 118);
             this.workOrderFinishDate.Name = "workOrderFinishDate";
             this.workOrderFinishDate.ReadOnly = true;
             this.workOrderFinishDate.Size = new System.Drawing.Size(122, 20);
@@ -595,7 +686,7 @@ namespace ODP2.Views
             // workDoneDate
             // 
             this.workDoneDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workDoneDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.workDoneDate.Location = new System.Drawing.Point(535, 91);
+            this.workDoneDate.Location = new System.Drawing.Point(609, 90);
             this.workDoneDate.Name = "workDoneDate";
             this.workDoneDate.ReadOnly = true;
             this.workDoneDate.Size = new System.Drawing.Size(122, 20);
@@ -604,7 +695,7 @@ namespace ODP2.Views
             // workStartDate
             // 
             this.workStartDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workStartDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.workStartDate.Location = new System.Drawing.Point(535, 65);
+            this.workStartDate.Location = new System.Drawing.Point(609, 64);
             this.workStartDate.Name = "workStartDate";
             this.workStartDate.ReadOnly = true;
             this.workStartDate.Size = new System.Drawing.Size(122, 20);
@@ -613,7 +704,7 @@ namespace ODP2.Views
             // registerationDate
             // 
             this.registerationDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderRegisterationDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.registerationDate.Location = new System.Drawing.Point(535, 39);
+            this.registerationDate.Location = new System.Drawing.Point(609, 38);
             this.registerationDate.Name = "registerationDate";
             this.registerationDate.Size = new System.Drawing.Size(122, 20);
             this.registerationDate.TabIndex = 17;
@@ -622,7 +713,7 @@ namespace ODP2.Views
             // 
             this.equipmentHR.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "equipmentRH", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "N2"));
             this.equipmentHR.Enabled = false;
-            this.equipmentHR.Location = new System.Drawing.Point(536, 13);
+            this.equipmentHR.Location = new System.Drawing.Point(610, 12);
             this.equipmentHR.Name = "equipmentHR";
             this.equipmentHR.ReadOnly = true;
             this.equipmentHR.Size = new System.Drawing.Size(122, 20);
@@ -641,7 +732,7 @@ namespace ODP2.Views
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(434, 45);
+            this.label16.Location = new System.Drawing.Point(508, 44);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(95, 13);
             this.label16.TabIndex = 11;
@@ -650,7 +741,7 @@ namespace ODP2.Views
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(469, 122);
+            this.label11.Location = new System.Drawing.Point(543, 121);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(60, 13);
             this.label11.TabIndex = 10;
@@ -659,7 +750,7 @@ namespace ODP2.Views
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(441, 95);
+            this.label10.Location = new System.Drawing.Point(515, 94);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(88, 13);
             this.label10.TabIndex = 9;
@@ -668,7 +759,7 @@ namespace ODP2.Views
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(475, 71);
+            this.label8.Location = new System.Drawing.Point(549, 70);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 8;
@@ -695,7 +786,7 @@ namespace ODP2.Views
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(453, 16);
+            this.label9.Location = new System.Drawing.Point(527, 15);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 13);
             this.label9.TabIndex = 5;
@@ -723,7 +814,7 @@ namespace ODP2.Views
             // 
             this.finishDatePicker.CustomFormat = "yyyy/MM/dd hh:mm";
             this.finishDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDatePicker.Location = new System.Drawing.Point(535, 119);
+            this.finishDatePicker.Location = new System.Drawing.Point(609, 118);
             this.finishDatePicker.Name = "finishDatePicker";
             this.finishDatePicker.Size = new System.Drawing.Size(150, 20);
             this.finishDatePicker.TabIndex = 26;
@@ -734,7 +825,7 @@ namespace ODP2.Views
             // 
             this.doneDatePicker.CustomFormat = "yyyy/MM/dd hh:mm";
             this.doneDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.doneDatePicker.Location = new System.Drawing.Point(535, 91);
+            this.doneDatePicker.Location = new System.Drawing.Point(609, 90);
             this.doneDatePicker.Name = "doneDatePicker";
             this.doneDatePicker.Size = new System.Drawing.Size(150, 20);
             this.doneDatePicker.TabIndex = 26;
@@ -745,7 +836,7 @@ namespace ODP2.Views
             // 
             this.startDatePicker.CustomFormat = "yyyy/MM/dd hh:mm";
             this.startDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDatePicker.Location = new System.Drawing.Point(535, 65);
+            this.startDatePicker.Location = new System.Drawing.Point(609, 64);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(150, 20);
             this.startDatePicker.TabIndex = 26;
@@ -756,92 +847,12 @@ namespace ODP2.Views
             // 
             this.registerationDatePicker.CustomFormat = "yyyy/MM/dd hh:mm";
             this.registerationDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.registerationDatePicker.Location = new System.Drawing.Point(536, 39);
+            this.registerationDatePicker.Location = new System.Drawing.Point(610, 38);
             this.registerationDatePicker.Name = "registerationDatePicker";
             this.registerationDatePicker.Size = new System.Drawing.Size(149, 20);
             this.registerationDatePicker.TabIndex = 26;
             this.registerationDatePicker.Visible = false;
             this.registerationDatePicker.ValueChanged += new System.EventHandler(this.datePickerValidated);
-            // 
-            // issueIDDataGridViewTextBoxColumn
-            // 
-            this.issueIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.issueIDDataGridViewTextBoxColumn.DataPropertyName = "issueID";
-            this.issueIDDataGridViewTextBoxColumn.HeaderText = "Issue#";
-            this.issueIDDataGridViewTextBoxColumn.Name = "issueIDDataGridViewTextBoxColumn";
-            this.issueIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.issueIDDataGridViewTextBoxColumn.Width = 64;
-            // 
-            // qty
-            // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.qty.DataPropertyName = "qty";
-            this.qty.HeaderText = "Qty";
-            this.qty.Name = "qty";
-            this.qty.ReadOnly = true;
-            this.qty.Width = 48;
-            // 
-            // sparePartCodeDataGridViewTextBoxColumn
-            // 
-            this.sparePartCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sparePartCodeDataGridViewTextBoxColumn.DataPropertyName = "sparePartCode";
-            this.sparePartCodeDataGridViewTextBoxColumn.HeaderText = "Spare Part Code";
-            this.sparePartCodeDataGridViewTextBoxColumn.Name = "sparePartCodeDataGridViewTextBoxColumn";
-            this.sparePartCodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sparePartCodeDataGridViewTextBoxColumn.Width = 79;
-            // 
-            // sparePart
-            // 
-            this.sparePart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.sparePart.DataPropertyName = "partDirective";
-            this.sparePart.HeaderText = "Part Description";
-            this.sparePart.Name = "sparePart";
-            this.sparePart.ReadOnly = true;
-            // 
-            // issueState
-            // 
-            this.issueState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.issueState.DataPropertyName = "issueState";
-            this.issueState.HeaderText = "Status";
-            this.issueState.Name = "issueState";
-            this.issueState.ReadOnly = true;
-            this.issueState.Width = 62;
-            // 
-            // requestDate
-            // 
-            this.requestDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.requestDate.DataPropertyName = "requestDate";
-            this.requestDate.HeaderText = "Request Date";
-            this.requestDate.Name = "requestDate";
-            this.requestDate.ReadOnly = true;
-            this.requestDate.Width = 90;
-            // 
-            // partPriceDataGridViewTextBoxColumn
-            // 
-            this.partPriceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.partPriceDataGridViewTextBoxColumn.DataPropertyName = "partPrice";
-            this.partPriceDataGridViewTextBoxColumn.HeaderText = "Part Price";
-            this.partPriceDataGridViewTextBoxColumn.Name = "partPriceDataGridViewTextBoxColumn";
-            this.partPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.partPriceDataGridViewTextBoxColumn.Width = 72;
-            // 
-            // totalPriceDataGridViewTextBoxColumn
-            // 
-            this.totalPriceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.totalPriceDataGridViewTextBoxColumn.DataPropertyName = "totalPrice";
-            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "Total Price";
-            this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
-            this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalPriceDataGridViewTextBoxColumn.Width = 77;
-            // 
-            // issueDateDataGridViewTextBoxColumn
-            // 
-            this.issueDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.issueDateDataGridViewTextBoxColumn.DataPropertyName = "issueDate";
-            this.issueDateDataGridViewTextBoxColumn.HeaderText = "Issue Date";
-            this.issueDateDataGridViewTextBoxColumn.Name = "issueDateDataGridViewTextBoxColumn";
-            this.issueDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.issueDateDataGridViewTextBoxColumn.Width = 77;
             // 
             // WorkOrder
             // 
@@ -849,7 +860,7 @@ namespace ODP2.Views
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(732, 649);
+            this.ClientSize = new System.Drawing.Size(793, 656);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.workOrderTabs);
             this.Controls.Add(this.saveButton);
@@ -955,6 +966,7 @@ namespace ODP2.Views
         private TextBox totalCostTextbox;
         private DataGridViewTextBoxColumn issueIDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn qty;
+        private DataGridViewTextBoxColumn uom;
         private DataGridViewTextBoxColumn sparePartCodeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn sparePart;
         private DataGridViewTextBoxColumn issueState;

@@ -249,30 +249,30 @@ namespace ODP2
             // issuePartsToolStripMenuItem
             // 
             this.issuePartsToolStripMenuItem.Name = "issuePartsToolStripMenuItem";
-            this.issuePartsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.issuePartsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.issuePartsToolStripMenuItem.Text = "Issue Parts";
             this.issuePartsToolStripMenuItem.Click += new System.EventHandler(this.issuePartsToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(156, 6);
             // 
             // financeTransferToolStripMenuItem
             // 
             this.financeTransferToolStripMenuItem.Name = "financeTransferToolStripMenuItem";
-            this.financeTransferToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.financeTransferToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.financeTransferToolStripMenuItem.Text = "Finance Transfer";
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(156, 6);
             // 
             // fuelStationToolStripMenuItem
             // 
             this.fuelStationToolStripMenuItem.Name = "fuelStationToolStripMenuItem";
-            this.fuelStationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fuelStationToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.fuelStationToolStripMenuItem.Text = "Fuel Station";
             this.fuelStationToolStripMenuItem.Click += new System.EventHandler(this.fuelStationToolStripMenuItem_Click);
             // 
@@ -367,6 +367,7 @@ namespace ODP2
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "ODP Engineering";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Home_FormClosing);
             this.Load += new System.EventHandler(this.Home_Load);
             this.homeToolBar.ResumeLayout(false);
             this.homeToolBar.PerformLayout();

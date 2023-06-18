@@ -164,5 +164,21 @@ namespace ODP2
             attachNewPM.Size = homeMainPanel.Size;
             homeMainPanel.Controls.Add(attachNewPM);
         }
+
+        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            /*
+            DialogResult closingHome = MessageBox.Show("You are closing the Home Page without Signing Out" +
+                        "Would you like to Sign Out firstly?", "Exit", MessageBoxButtons.YesNo);
+            if (closingHome == DialogResult.Yes)
+            {
+                
+            }
+            else
+            {
+                workOrderStatusID.Focus();
+            }
+            */
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace ODP2.Views
                 (issue, part) => new {
                     issue.issueID,
                     issue.qty,
+                    part.uom,
                     issue.sparePartCode,
                     part.partDirective,
                     part.partPrice,
@@ -59,6 +60,7 @@ namespace ODP2.Views
                     issue.issueDate,
                     issue.issueState,
                     issue.requestDate
+                    
                 })
                 .ToList();
             issueBindingSource.DataSource = issueList;
@@ -265,7 +267,7 @@ namespace ODP2.Views
             else if (workOrderStatusID.SelectedItem == home.dbContext.workOrderStatus.Where(status => status.workOrderStatusID.Trim() == "Cancelled").First())
             {
 
-                if(home.dbContext.issues.Where(issueList => issueList.workOrder == workOrder.workOrderID).Count() != 0)
+                if(home.dbContext.issues.Where(issueList => issueList.workOrder == workOrder.workOrderID).Count() == 0)
                 
                 {
                     DialogResult cancelWorkOrder = MessageBox.Show("You are about to Cancel the work Order." +
@@ -515,7 +517,8 @@ namespace ODP2.Views
         }
         private void requestButton_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(quantityTextBox.Text, out _) && quantityTextBox.Text != "")
+            int requestedQty;
+            if (int.TryParse(quantityTextBox.Text, out requestedQty) && quantityTextBox.Text != "")
             {
 
                 try
@@ -524,7 +527,7 @@ namespace ODP2.Views
                     newIssueRequest.requestDate = DateTime.Today;
                     newIssueRequest.sparePartCode = partCodeTextBox.Text;
                     var availableQty = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssueRequest.sparePartCode).First().availableStock;
-                    if (newIssueRequest.qty > availableQty)
+                    if (requestedQty > availableQty)
                     {
                         DialogResult issueAvQtyOnly = MessageBox.Show("Available Stock is less than the requested Quantity! /n" +
                             "Only " + availableQty + " will be requested", "Un-sufficient Quantity");
@@ -542,13 +545,22 @@ namespace ODP2.Views
                         MessageBox.Show("Zero Stock Quantity", "Zero Stock");
                         return;
                     }
+                    else if (requestedQty < 0 )
+                    {
+                        MessageBox.Show("Please Enter a Positive Quantity", "Wrong Data");
+                        quantityTextBox.Focus();
+                        return;
+                    }
                     else
                     {
-                        newIssueRequest.qty = Convert.ToInt32(quantityTextBox.Text);
+                        newIssueRequest.qty = requestedQty;
                     }
                     newIssueRequest.workOrder = workOrder.workOrderID;
                     newIssueRequest.partPrice = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssueRequest.sparePartCode).First().partPrice;
                     newIssueRequest.issueState = "Requested";
+                    var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == newIssueRequest.sparePartCode).First();
+                    sparePart.reservedStock += newIssueRequest.qty;
+                    home.dbContext.spareParts.AddOrUpdate(sparePart);
                     home.dbContext.issues.Add(newIssueRequest);
                     home.dbContext.SaveChanges();
                     MessageBox.Show("Successfully requested " + newIssueRequest.qty + " * " + newIssueRequest.sparePartCode);

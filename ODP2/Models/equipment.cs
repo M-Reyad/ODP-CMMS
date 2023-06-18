@@ -17,7 +17,6 @@ namespace ODP2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public equipment()
         {
-            this.components = new HashSet<component>();
             this.fuelingWorkOrders = new HashSet<fuelingWorkOrder>();
             this.workOrders = new HashSet<workOrder>();
         }
@@ -31,8 +30,6 @@ namespace ODP2.Models
         public string equipmentFamilyID { get; set; }
         public string equipmentDirective { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<component> components { get; set; }
         public virtual equipmentFamily equipmentFamily { get; set; }
         public virtual equipmentStatu equipmentStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

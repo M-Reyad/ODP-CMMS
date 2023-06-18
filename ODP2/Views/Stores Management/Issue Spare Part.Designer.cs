@@ -36,6 +36,7 @@
             this.issueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.workOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sparePartCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partDirective = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.issueState = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +83,7 @@
             this.issueID,
             this.workOrder,
             this.qty,
+            this.uom,
             this.sparePartCode,
             this.partDirective,
             this.issueState,
@@ -92,6 +94,7 @@
             this.issueGridView.Name = "issueGridView";
             this.issueGridView.ReadOnly = true;
             this.issueGridView.RowHeadersVisible = false;
+            this.issueGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.issueGridView.Size = new System.Drawing.Size(652, 295);
             this.issueGridView.TabIndex = 20;
             this.issueGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.issueGridView_CellContentClick);
@@ -132,6 +135,13 @@
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
             this.qty.Width = 48;
+            // 
+            // uom
+            // 
+            this.uom.DataPropertyName = "uom";
+            this.uom.HeaderText = "UoM";
+            this.uom.Name = "uom";
+            this.uom.ReadOnly = true;
             // 
             // sparePartCode
             // 
@@ -270,6 +280,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn issueID;
         private System.Windows.Forms.DataGridViewTextBoxColumn workOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn uom;
         private System.Windows.Forms.DataGridViewTextBoxColumn sparePartCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn partDirective;
         private System.Windows.Forms.DataGridViewTextBoxColumn issueState;

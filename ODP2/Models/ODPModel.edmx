@@ -5,13 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ODPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="assembly">
-          <Key>
-            <PropertyRef Name="systemID" />
-          </Key>
-          <Property Name="systemID" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="systemDescription" Type="nchar" MaxLength="10" />
-        </EntityType>
         <EntityType Name="breakDown">
           <Key>
             <PropertyRef Name="id" />
@@ -22,32 +15,6 @@
           <Property Name="toTime" Type="time" Precision="4" Nullable="false" />
           <Property Name="workOrder" Type="int" />
           <Property Name="bdnReason" Type="nchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="component">
-          <Key>
-            <PropertyRef Name="componentID" />
-          </Key>
-          <Property Name="componentSN" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="componentFamilyID" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="componentID" Type="nvarchar" MaxLength="25" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="componentManufacturer" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="componentHR" Type="int" />
-          <Property Name="componentStatusID" Type="nchar" MaxLength="4" Nullable="false" />
-          <Property Name="attachedEquipID" Type="nchar" MaxLength="8" Nullable="false" />
-        </EntityType>
-        <EntityType Name="componentFamilyIDDirective">
-          <Key>
-            <PropertyRef Name="componentFamilyID" />
-          </Key>
-          <Property Name="componentFamilyID" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="componentFamilyIDDirective" Type="nchar" MaxLength="15" Nullable="false" />
-        </EntityType>
-        <EntityType Name="componentStatus">
-          <Key>
-            <PropertyRef Name="componentStatusID" />
-          </Key>
-          <Property Name="componentStatusID" Type="nchar" MaxLength="4" Nullable="false" />
-          <Property Name="componentStatusDirective" Type="nchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="equipment">
           <Key>
@@ -107,23 +74,6 @@
           </Key>
           <Property Name="issueStatus" Type="nchar" MaxLength="15" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="partCode">
-          <Key>
-            <PropertyRef Name="equipmentFamilyCode" />
-            <PropertyRef Name="location" />
-            <PropertyRef Name="partNo" />
-            <PropertyRef Name="sparePartCode" />
-          </Key>
-          <Property Name="equipmentFamilyCode" Type="nchar" MaxLength="3" Nullable="false" />
-          <Property Name="location" Type="nchar" MaxLength="1" Nullable="false" />
-          <Property Name="component" Type="nchar" MaxLength="2" />
-          <Property Name="assembly" Type="nchar" MaxLength="2" />
-          <Property Name="partID" Type="nchar" MaxLength="2" />
-          <Property Name="partNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sparePartCode" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" Nullable="false" />
-        </EntityType>
         <EntityType Name="pmTemplates">
           <Key>
             <PropertyRef Name="pmSN" />
@@ -147,6 +97,7 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="supplierID" Type="nchar" MaxLength="10" />
           <Property Name="reservedStock" Type="int" />
           <Property Name="availableStock" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="uom" Type="nchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -158,12 +109,12 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="systemIDDirective">
+        <EntityType Name="uom">
           <Key>
-            <PropertyRef Name="systemID" />
+            <PropertyRef Name="uomID" />
           </Key>
-          <Property Name="systemID" Type="nchar" MaxLength="4" Nullable="false" />
-          <Property Name="systemIDDirective" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="uomID" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="uomDescription" Type="nchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -240,42 +191,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             </Principal>
             <Dependent Role="breakDown">
               <PropertyRef Name="workOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_component_componentFamilyIDDirective">
-          <End Role="componentFamilyIDDirective" Type="Self.componentFamilyIDDirective" Multiplicity="1" />
-          <End Role="component" Type="Self.component" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="componentFamilyIDDirective">
-              <PropertyRef Name="componentFamilyID" />
-            </Principal>
-            <Dependent Role="component">
-              <PropertyRef Name="componentFamilyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_component_componentStatus">
-          <End Role="componentStatus" Type="Self.componentStatus" Multiplicity="1" />
-          <End Role="component" Type="Self.component" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="componentStatus">
-              <PropertyRef Name="componentStatusID" />
-            </Principal>
-            <Dependent Role="component">
-              <PropertyRef Name="componentStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_component_equipment">
-          <End Role="equipment" Type="Self.equipment" Multiplicity="1" />
-          <End Role="component" Type="Self.component" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="equipment">
-              <PropertyRef Name="equipmentID" />
-            </Principal>
-            <Dependent Role="component">
-              <PropertyRef Name="attachedEquipID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -360,6 +275,18 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             </Principal>
             <Dependent Role="pmTemplates">
               <PropertyRef Name="equipmentFamily" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sparePart_uom">
+          <End Role="uom" Type="Self.uom" Multiplicity="0..1" />
+          <End Role="sparePart" Type="Self.sparePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="uomID" />
+            </Principal>
+            <Dependent Role="sparePart">
+              <PropertyRef Name="uom" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -448,11 +375,7 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ODPModelStoreContainer">
-          <EntitySet Name="assembly" EntityType="Self.assembly" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="breakDown" EntityType="Self.breakDown" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="component" EntityType="Self.component" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="componentFamilyIDDirective" EntityType="Self.componentFamilyIDDirective" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="componentStatus" EntityType="Self.componentStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="equipment" EntityType="Self.equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="equipmentFamily" EntityType="Self.equipmentFamily" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="equipmentStatus" EntityType="Self.equipmentStatus" Schema="dbo" store:Type="Tables" />
@@ -462,7 +385,7 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySet Name="pmTemplates" EntityType="Self.pmTemplates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sparePart" EntityType="Self.sparePart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="systemIDDirective" EntityType="Self.systemIDDirective" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uom" EntityType="Self.uom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userLevel" EntityType="Self.userLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userSection" EntityType="Self.userSection" Schema="dbo" store:Type="Tables" />
@@ -470,32 +393,9 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySet Name="workOrder" EntityType="Self.workOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workOrderStatus" EntityType="Self.workOrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workOrderType" EntityType="Self.workOrderType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="partCode" EntityType="Self.partCode" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [partCode].[equipmentFamilyCode] AS [equipmentFamilyCode], 
-    [partCode].[location] AS [location], 
-    [partCode].[component] AS [component], 
-    [partCode].[assembly] AS [assembly], 
-    [partCode].[partID] AS [partID], 
-    [partCode].[partNo] AS [partNo], 
-    [partCode].[sparePartCode] AS [sparePartCode]
-    FROM [dbo].[partCode] AS [partCode]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_breakDown_workOrder" Association="Self.FK_breakDown_workOrder">
             <End Role="workOrder" EntitySet="workOrder" />
             <End Role="breakDown" EntitySet="breakDown" />
-          </AssociationSet>
-          <AssociationSet Name="FK_component_componentFamilyIDDirective" Association="Self.FK_component_componentFamilyIDDirective">
-            <End Role="componentFamilyIDDirective" EntitySet="componentFamilyIDDirective" />
-            <End Role="component" EntitySet="component" />
-          </AssociationSet>
-          <AssociationSet Name="FK_component_componentStatus" Association="Self.FK_component_componentStatus">
-            <End Role="componentStatus" EntitySet="componentStatus" />
-            <End Role="component" EntitySet="component" />
-          </AssociationSet>
-          <AssociationSet Name="FK_component_equipment" Association="Self.FK_component_equipment">
-            <End Role="equipment" EntitySet="equipment" />
-            <End Role="component" EntitySet="component" />
           </AssociationSet>
           <AssociationSet Name="FK_equipment_equipmentFamily" Association="Self.FK_equipment_equipmentFamily">
             <End Role="equipmentFamily" EntitySet="equipmentFamily" />
@@ -524,6 +424,10 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <AssociationSet Name="FK_pmTemplates_equipmentFamily" Association="Self.FK_pmTemplates_equipmentFamily">
             <End Role="equipmentFamily" EntitySet="equipmentFamily" />
             <End Role="pmTemplates" EntitySet="pmTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sparePart_uom" Association="Self.FK_sparePart_uom">
+            <End Role="uom" EntitySet="uom" />
+            <End Role="sparePart" EntitySet="sparePart" />
           </AssociationSet>
           <AssociationSet Name="FK_user_userLevel" Association="Self.FK_user_userLevel">
             <End Role="userLevel" EntitySet="userLevel" />
@@ -558,13 +462,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ODPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="assembly">
-          <Key>
-            <PropertyRef Name="systemID" />
-          </Key>
-          <Property Name="systemID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="systemDescription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="breakDown">
           <Key>
             <PropertyRef Name="id" />
@@ -576,37 +473,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="workOrder" Type="Int32" />
           <Property Name="bdnReason" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="workOrder1" Relationship="Self.FK_breakDown_workOrder" FromRole="breakDown" ToRole="workOrder" />
-        </EntityType>
-        <EntityType Name="component">
-          <Key>
-            <PropertyRef Name="componentID" />
-          </Key>
-          <Property Name="componentSN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="componentFamilyID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="componentID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="componentManufacturer" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="componentHR" Type="Int32" />
-          <Property Name="componentStatusID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="attachedEquipID" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="componentFamilyIDDirective" Relationship="Self.FK_component_componentFamilyIDDirective" FromRole="component" ToRole="componentFamilyIDDirective" />
-          <NavigationProperty Name="componentStatu" Relationship="Self.FK_component_componentStatus" FromRole="component" ToRole="componentStatus" />
-          <NavigationProperty Name="equipment" Relationship="Self.FK_component_equipment" FromRole="component" ToRole="equipment" />
-        </EntityType>
-        <EntityType Name="componentFamilyIDDirective">
-          <Key>
-            <PropertyRef Name="componentFamilyID" />
-          </Key>
-          <Property Name="componentFamilyID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="componentFamilyIDDirective1" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="components" Relationship="Self.FK_component_componentFamilyIDDirective" FromRole="componentFamilyIDDirective" ToRole="component" />
-        </EntityType>
-        <EntityType Name="componentStatu">
-          <Key>
-            <PropertyRef Name="componentStatusID" />
-          </Key>
-          <Property Name="componentStatusID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="componentStatusDirective" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="components" Relationship="Self.FK_component_componentStatus" FromRole="componentStatus" ToRole="component" />
         </EntityType>
         <EntityType Name="equipment">
           <Key>
@@ -620,7 +486,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="manufacturer" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="equipmentFamilyID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="equipmentDirective" Type="String" MaxLength="72" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="components" Relationship="Self.FK_component_equipment" FromRole="equipment" ToRole="component" />
           <NavigationProperty Name="equipmentFamily" Relationship="Self.FK_equipment_equipmentFamily" FromRole="equipment" ToRole="equipmentFamily" />
           <NavigationProperty Name="equipmentStatu" Relationship="Self.FK_equipment_equipmentStatus" FromRole="equipment" ToRole="equipmentStatus" />
           <NavigationProperty Name="fuelingWorkOrders" Relationship="Self.FK_fuelingWorkOrder_equipment" FromRole="equipment" ToRole="fuelingWorkOrder" />
@@ -686,6 +551,8 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <NavigationProperty Name="issues" Relationship="Self.FK_issue_sparePart" FromRole="sparePart" ToRole="issue" />
           <Property Name="reservedStock" Type="Int32" />
           <Property Name="availableStock" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="uom" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="uom1" Relationship="ODPModel.FK_sparePart_uom" FromRole="sparePart" ToRole="uom" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -696,13 +563,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="systemIDDirective">
-          <Key>
-            <PropertyRef Name="systemID" />
-          </Key>
-          <Property Name="systemID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="systemIDDirective1" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -785,21 +645,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <Property Name="workOrderTypeID" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="workOrders" Relationship="Self.FK_workOrder_workOrderType" FromRole="workOrderType" ToRole="workOrder" />
         </EntityType>
-        <EntityType Name="partCode">
-          <Key>
-            <PropertyRef Name="equipmentFamilyCode" />
-            <PropertyRef Name="location" />
-            <PropertyRef Name="partNo" />
-            <PropertyRef Name="sparePartCode" />
-          </Key>
-          <Property Name="equipmentFamilyCode" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="location" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="component" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="assembly" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="partID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="partNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sparePartCode" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-        </EntityType>
         <Association Name="FK_breakDown_workOrder">
           <End Role="workOrder" Type="Self.workOrder" Multiplicity="0..1" />
           <End Role="breakDown" Type="Self.breakDown" Multiplicity="*" />
@@ -809,42 +654,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             </Principal>
             <Dependent Role="breakDown">
               <PropertyRef Name="workOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_component_componentFamilyIDDirective">
-          <End Role="componentFamilyIDDirective" Type="Self.componentFamilyIDDirective" Multiplicity="1" />
-          <End Role="component" Type="Self.component" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="componentFamilyIDDirective">
-              <PropertyRef Name="componentFamilyID" />
-            </Principal>
-            <Dependent Role="component">
-              <PropertyRef Name="componentFamilyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_component_componentStatus">
-          <End Role="componentStatus" Type="Self.componentStatu" Multiplicity="1" />
-          <End Role="component" Type="Self.component" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="componentStatus">
-              <PropertyRef Name="componentStatusID" />
-            </Principal>
-            <Dependent Role="component">
-              <PropertyRef Name="componentStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_component_equipment">
-          <End Role="equipment" Type="Self.equipment" Multiplicity="1" />
-          <End Role="component" Type="Self.component" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="equipment">
-              <PropertyRef Name="equipmentID" />
-            </Principal>
-            <Dependent Role="component">
-              <PropertyRef Name="attachedEquipID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -993,11 +802,7 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ODPEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="assemblies" EntityType="Self.assembly" />
           <EntitySet Name="breakDowns" EntityType="Self.breakDown" />
-          <EntitySet Name="components" EntityType="Self.component" />
-          <EntitySet Name="componentFamilyIDDirectives" EntityType="Self.componentFamilyIDDirective" />
-          <EntitySet Name="componentStatus" EntityType="Self.componentStatu" />
           <EntitySet Name="equipments" EntityType="Self.equipment" />
           <EntitySet Name="equipmentFamilies" EntityType="Self.equipmentFamily" />
           <EntitySet Name="equipmentStatus" EntityType="Self.equipmentStatu" />
@@ -1005,7 +810,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySet Name="issues" EntityType="Self.issue" />
           <EntitySet Name="spareParts" EntityType="Self.sparePart" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="systemIDDirectives" EntityType="Self.systemIDDirective" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="userLevels" EntityType="Self.userLevel" />
           <EntitySet Name="userSections" EntityType="Self.userSection" />
@@ -1013,22 +817,9 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySet Name="workOrders" EntityType="Self.workOrder" />
           <EntitySet Name="workOrderStatus" EntityType="Self.workOrderStatu" />
           <EntitySet Name="workOrderTypes" EntityType="Self.workOrderType" />
-          <EntitySet Name="partCodes" EntityType="Self.partCode" />
           <AssociationSet Name="FK_breakDown_workOrder" Association="Self.FK_breakDown_workOrder">
             <End Role="workOrder" EntitySet="workOrders" />
             <End Role="breakDown" EntitySet="breakDowns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_component_componentFamilyIDDirective" Association="Self.FK_component_componentFamilyIDDirective">
-            <End Role="componentFamilyIDDirective" EntitySet="componentFamilyIDDirectives" />
-            <End Role="component" EntitySet="components" />
-          </AssociationSet>
-          <AssociationSet Name="FK_component_componentStatus" Association="Self.FK_component_componentStatus">
-            <End Role="componentStatus" EntitySet="componentStatus" />
-            <End Role="component" EntitySet="components" />
-          </AssociationSet>
-          <AssociationSet Name="FK_component_equipment" Association="Self.FK_component_equipment">
-            <End Role="equipment" EntitySet="equipments" />
-            <End Role="component" EntitySet="components" />
           </AssociationSet>
           <AssociationSet Name="FK_equipment_equipmentFamily" Association="Self.FK_equipment_equipmentFamily">
             <End Role="equipmentFamily" EntitySet="equipmentFamilies" />
@@ -1088,6 +879,11 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             <End Role="issueStatu" EntitySet="issueStatus" />
             <End Role="issue" EntitySet="issues" />
           </AssociationSet>
+          <EntitySet Name="uoms" EntityType="ODPModel.uom" />
+          <AssociationSet Name="FK_sparePart_uom" Association="ODPModel.FK_sparePart_uom">
+            <End Role="uom" EntitySet="uoms" />
+            <End Role="sparePart" EntitySet="spareParts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="pmTemplate">
           <Key>
@@ -1131,20 +927,32 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="uom">
+          <Key>
+            <PropertyRef Name="uomID" />
+          </Key>
+          <Property Name="uomID" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="uomDescription" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="spareParts" Relationship="ODPModel.FK_sparePart_uom" FromRole="uom" ToRole="sparePart" />
+        </EntityType>
+        <Association Name="FK_sparePart_uom">
+          <End Type="ODPModel.uom" Role="uom" Multiplicity="0..1" />
+          <End Type="ODPModel.sparePart" Role="sparePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="uomID" />
+            </Principal>
+            <Dependent Role="sparePart">
+              <PropertyRef Name="uom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ODPModelStoreContainer" CdmEntityContainer="ODPEntities">
-          <EntitySetMapping Name="assemblies">
-            <EntityTypeMapping TypeName="ODPModel.assembly">
-              <MappingFragment StoreEntitySet="assembly">
-                <ScalarProperty Name="systemID" ColumnName="systemID" />
-                <ScalarProperty Name="systemDescription" ColumnName="systemDescription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="breakDowns">
             <EntityTypeMapping TypeName="ODPModel.breakDown">
               <MappingFragment StoreEntitySet="breakDown">
@@ -1154,35 +962,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
                 <ScalarProperty Name="toTime" ColumnName="toTime" />
                 <ScalarProperty Name="workOrder" ColumnName="workOrder" />
                 <ScalarProperty Name="bdnReason" ColumnName="bdnReason" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="components">
-            <EntityTypeMapping TypeName="ODPModel.component">
-              <MappingFragment StoreEntitySet="component">
-                <ScalarProperty Name="componentSN" ColumnName="componentSN" />
-                <ScalarProperty Name="componentFamilyID" ColumnName="componentFamilyID" />
-                <ScalarProperty Name="componentID" ColumnName="componentID" />
-                <ScalarProperty Name="componentManufacturer" ColumnName="componentManufacturer" />
-                <ScalarProperty Name="componentHR" ColumnName="componentHR" />
-                <ScalarProperty Name="componentStatusID" ColumnName="componentStatusID" />
-                <ScalarProperty Name="attachedEquipID" ColumnName="attachedEquipID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="componentFamilyIDDirectives">
-            <EntityTypeMapping TypeName="ODPModel.componentFamilyIDDirective">
-              <MappingFragment StoreEntitySet="componentFamilyIDDirective">
-                <ScalarProperty Name="componentFamilyID" ColumnName="componentFamilyID" />
-                <ScalarProperty Name="componentFamilyIDDirective1" ColumnName="componentFamilyIDDirective" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="componentStatus">
-            <EntityTypeMapping TypeName="ODPModel.componentStatu">
-              <MappingFragment StoreEntitySet="componentStatus">
-                <ScalarProperty Name="componentStatusID" ColumnName="componentStatusID" />
-                <ScalarProperty Name="componentStatusDirective" ColumnName="componentStatusDirective" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1246,6 +1025,7 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
           <EntitySetMapping Name="spareParts">
             <EntityTypeMapping TypeName="ODPModel.sparePart">
               <MappingFragment StoreEntitySet="sparePart">
+                <ScalarProperty Name="uom" ColumnName="uom" />
                 <ScalarProperty Name="availableStock" ColumnName="availableStock" />
                 <ScalarProperty Name="reservedStock" ColumnName="reservedStock" />
                 <ScalarProperty Name="partCode" ColumnName="partCode" />
@@ -1266,14 +1046,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="systemIDDirectives">
-            <EntityTypeMapping TypeName="ODPModel.systemIDDirective">
-              <MappingFragment StoreEntitySet="systemIDDirective">
-                <ScalarProperty Name="systemID" ColumnName="systemID" />
-                <ScalarProperty Name="systemIDDirective1" ColumnName="systemIDDirective" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1350,19 +1122,6 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="partCodes">
-            <EntityTypeMapping TypeName="ODPModel.partCode">
-              <MappingFragment StoreEntitySet="partCode">
-                <ScalarProperty Name="equipmentFamilyCode" ColumnName="equipmentFamilyCode" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="component" ColumnName="component" />
-                <ScalarProperty Name="assembly" ColumnName="assembly" />
-                <ScalarProperty Name="partID" ColumnName="partID" />
-                <ScalarProperty Name="partNo" ColumnName="partNo" />
-                <ScalarProperty Name="sparePartCode" ColumnName="sparePartCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="pmTemplates">
             <EntityTypeMapping TypeName="ODPModel.pmTemplate">
               <MappingFragment StoreEntitySet="pmTemplates">
@@ -1378,6 +1137,14 @@ warning 6002: The table/view 'ODP.dbo.partCode' does not have a primary key defi
             <EntityTypeMapping TypeName="ODPModel.issueStatu">
               <MappingFragment StoreEntitySet="issueStatus">
                 <ScalarProperty Name="issueStatus" ColumnName="issueStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uoms">
+            <EntityTypeMapping TypeName="ODPModel.uom">
+              <MappingFragment StoreEntitySet="uom">
+                <ScalarProperty Name="uomDescription" ColumnName="uomDescription" />
+                <ScalarProperty Name="uomID" ColumnName="uomID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

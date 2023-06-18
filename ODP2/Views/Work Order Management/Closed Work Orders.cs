@@ -80,7 +80,7 @@ namespace ODP2
         }
         private void searchButton_Click(object sender, EventArgs e)
         {
-            var workOrders = home.dbContext.workOrders.Where(workOrder => workOrder.workOrderStatusID == "Finished");
+            var workOrders = home.dbContext.workOrders.Where(workOrder => workOrder.workOrderStatusID == "Finished" ||  workOrder.workOrderStatusID == "Cancelled");
 
             if (workOrderBox.Text != "")
             {

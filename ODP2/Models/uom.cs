@@ -12,18 +12,18 @@ namespace ODP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class componentFamilyIDDirective
+    public partial class uom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public componentFamilyIDDirective()
+        public uom()
         {
-            this.components = new HashSet<component>();
+            this.spareParts = new HashSet<sparePart>();
         }
     
-        public string componentFamilyID { get; set; }
-        public string componentFamilyIDDirective1 { get; set; }
+        public string uomID { get; set; }
+        public string uomDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<component> components { get; set; }
+        public virtual ICollection<sparePart> spareParts { get; set; }
     }
 }

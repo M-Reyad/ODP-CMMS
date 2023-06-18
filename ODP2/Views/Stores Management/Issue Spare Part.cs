@@ -1,6 +1,7 @@
 ﻿using ODP2.Models;
 using System;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -58,6 +59,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                         issue.issueID,
                         issue.workOrder,
                         issue.qty,
+                        sp.uom,
                         issue.sparePartCode,
                         sp.partDirective,
                         sp.partPrice,
@@ -159,6 +161,10 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                     {
                         issueLineToBeIssued.issueDate = DateTime.Today;
                         issueLineToBeIssued.issueState = "Issued";
+                        var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == issueLineToBeIssued.sparePartCode).First();
+                        sparePart.reservedStock -= issueLineToBeIssued.qty;
+                        sparePart.partStockQty -= issueLineToBeIssued.qty;
+                        home.dbContext.spareParts.AddOrUpdate(sparePart);
                         home.dbContext.SaveChanges();
                         MessageBox.Show("Successfully Issued Line #" + issueLineToBeIssued.issueID);
 
@@ -192,14 +198,15 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                         newIssue.qty = ((int) issue.Cells["qty"].Value)* -1;
                         newIssue.workOrder = (int) issue.Cells["workOrder"].Value;
                         newIssue.partPrice = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssue.sparePartCode).First().partPrice;
-                        newIssue.issueState = "Issued";
+                        newIssue.issueState = "Unissued";
                         newIssue.requestDate = DateTime.Today;
                         home.dbContext.issues.Add(newIssue);
-                        
+                        var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == newIssue.sparePartCode).First();
+                        sparePart.partStockQty -= newIssue.qty;
+                        home.dbContext.spareParts.AddOrUpdate(sparePart);
                         home.dbContext.SaveChanges();
                         MessageBox.Show("Successfully Un-Issued " + newIssue.qty + " * " + newIssue.sparePartCode);
-                        issueBindingSource.ResetBindings(false);
-                        issueGridView.Refresh();
+
                     }
                     catch(Exception ex)
                     {
@@ -208,7 +215,9 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                     
                 }
             }
-            
+            issueBindingSource.ResetBindings(false);
+            issueGridView.Refresh();
+
         }
 
         private void issueGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

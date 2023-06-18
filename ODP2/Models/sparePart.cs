@@ -29,8 +29,10 @@ namespace ODP2.Models
         public string supplierID { get; set; }
         public Nullable<int> reservedStock { get; set; }
         public Nullable<int> availableStock { get; set; }
+        public string uom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<issue> issues { get; set; }
+        public virtual uom uom1 { get; set; }
     }
 }
