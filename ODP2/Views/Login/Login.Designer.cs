@@ -149,7 +149,7 @@ namespace ODP2
             this.newAccountButton.TabIndex = 4;
             this.newAccountButton.Text = "New Account";
             this.newAccountButton.UseVisualStyleBackColor = true;
-            this.newAccountButton.Click += new System.EventHandler(this.changePasswordButtonPressed);
+            this.newAccountButton.Click += new System.EventHandler(this.newAccountButton_Click);
             // 
             // Login
             // 

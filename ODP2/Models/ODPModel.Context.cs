@@ -26,13 +26,20 @@ namespace ODP2.Models
         }
     
         public virtual DbSet<breakDown> breakDowns { get; set; }
+        public virtual DbSet<component> components { get; set; }
+        public virtual DbSet<componentStatu> componentStatus { get; set; }
         public virtual DbSet<equipment> equipments { get; set; }
         public virtual DbSet<equipmentFamily> equipmentFamilies { get; set; }
         public virtual DbSet<equipmentStatu> equipmentStatus { get; set; }
+        public virtual DbSet<equipmentType> equipmentTypes { get; set; }
         public virtual DbSet<fuelingWorkOrder> fuelingWorkOrders { get; set; }
         public virtual DbSet<issue> issues { get; set; }
+        public virtual DbSet<issueStatu> issueStatus { get; set; }
+        public virtual DbSet<pmTemplate> pmTemplates { get; set; }
         public virtual DbSet<sparePart> spareParts { get; set; }
+        public virtual DbSet<storeReturn> storeReturns { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<uom> uoms { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<userLevel> userLevels { get; set; }
         public virtual DbSet<userSection> userSections { get; set; }
@@ -40,8 +47,5 @@ namespace ODP2.Models
         public virtual DbSet<workOrder> workOrders { get; set; }
         public virtual DbSet<workOrderStatu> workOrderStatus { get; set; }
         public virtual DbSet<workOrderType> workOrderTypes { get; set; }
-        public virtual DbSet<pmTemplate> pmTemplates { get; set; }
-        public virtual DbSet<issueStatu> issueStatus { get; set; }
-        public virtual DbSet<uom> uoms { get; set; }
     }
 }

@@ -151,27 +151,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\breakDown.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\equipment.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\equipmentFamily.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\equipmentStatu.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\fuelingWorkOrder.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\issue.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\issueStatu.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ODPModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,59 +166,47 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ODPModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ODPModel_SW.Context.cs">
+    <Compile Include="Models\ODPModel_ORACLE.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ODPModel_SW.Context.tt</DependentUpon>
+      <DependentUpon>ODPModel_ORACLE.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ODPModel_SW.cs">
+    <Compile Include="Models\ODPModel_ORACLE.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ODPModel_SW.tt</DependentUpon>
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ODPModel_SW.Designer.cs">
+    <Compile Include="Models\ODPModel_ORACLE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
+      <DependentUpon>ODPModel_ORACLE.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ODP_ONHAND_QTY.cs">
-      <DependentUpon>ODPModel_SW.tt</DependentUpon>
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\pmTemplate.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sparePart.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
+    <Compile Include="Models\ODP_USER.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\uom.cs">
       <DependentUpon>ODPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>ODPModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\userLevel.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\userSection.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\workDoneType.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\workOrder.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\workOrderStatu.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\workOrderType.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Equipment Management\AddNewEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Equipment Management\AddNewEquipment.Designer.cs">
+      <DependentUpon>AddNewEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Equipment Management\Assets Information.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Equipment Management\Assets Information.Designer.cs">
+      <DependentUpon>Assets Information.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Equipment Management\BreakDownRegisteration.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,10 +254,10 @@
     <Compile Include="Views\Inventory Spare Parts Management\Maintenance Material Inquiry.Designer.cs">
       <DependentUpon>Maintenance Material Inquiry.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\KPIs Reports.cs">
+    <Compile Include="Views\Budget And Reports\KPIs Reports.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\KPIs Reports.Designer.cs">
+    <Compile Include="Views\Budget And Reports\KPIs Reports.Designer.cs">
       <DependentUpon>KPIs Reports.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Inventory Spare Parts Management\Inventory Spare Parts.cs">
@@ -298,6 +265,18 @@
     </Compile>
     <Compile Include="Views\Inventory Spare Parts Management\Inventory Spare Parts.Designer.cs">
       <DependentUpon>Inventory Spare Parts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventory Spare Parts Management\Reserved Quantites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventory Spare Parts Management\Reserved Quantites.Designer.cs">
+      <DependentUpon>Reserved Quantites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\NewUserRegisteration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Login\NewUserRegisteration.Designer.cs">
+      <DependentUpon>NewUserRegisteration.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Stores Management\Issue Spare Part.cs">
       <SubType>UserControl</SubType>
@@ -363,6 +342,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\Equipment Management\AddNewEquipment.resx">
+      <DependentUpon>AddNewEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Equipment Management\Assets Information.resx">
+      <DependentUpon>Assets Information.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Equipment Management\BreakDownRegisteration.resx">
       <DependentUpon>BreakDownRegisteration.cs</DependentUpon>
     </EmbeddedResource>
@@ -386,11 +371,17 @@
     <EmbeddedResource Include="Views\Inventory Spare Parts Management\Maintenance Material Inquiry.resx">
       <DependentUpon>Maintenance Material Inquiry.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\KPIs Reports.resx">
+    <EmbeddedResource Include="Views\Budget And Reports\KPIs Reports.resx">
       <DependentUpon>KPIs Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventory Spare Parts Management\Inventory Spare Parts.resx">
       <DependentUpon>Inventory Spare Parts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventory Spare Parts Management\Reserved Quantites.resx">
+      <DependentUpon>Reserved Quantites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Login\NewUserRegisteration.resx">
+      <DependentUpon>NewUserRegisteration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Stores Management\Issue Spare Part.resx">
       <DependentUpon>Issue Spare Part.cs</DependentUpon>
@@ -419,22 +410,22 @@
     <EmbeddedResource Include="Views\Work Order Management\Work Order.resx">
       <DependentUpon>Work Order.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <EntityDeploy Include="Models\ODPModel_ORACLE.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ODPModel_ORACLE.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <EntityDeploy Include="Models\ODPModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ODPModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
     <None Include="Models\ODPModel.edmx.diagram">
       <DependentUpon>ODPModel.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Models\ODPModel_SW.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ODPModel_SW.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\ODPModel_SW.edmx.diagram">
-      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
+    <None Include="Models\ODPModel_ORACLE.edmx.diagram">
+      <DependentUpon>ODPModel_ORACLE.edmx</DependentUpon>
     </None>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
@@ -461,6 +452,8 @@
     <None Include="Properties\DataSources\ODP2.Models.pmTemplate.datasource" />
     <None Include="Properties\DataSources\ODP2.Models.sparePart.datasource" />
     <None Include="Properties\DataSources\ODP2.Models.systemIDDirective.datasource" />
+    <None Include="Properties\DataSources\ODP2.Models.userLevel.datasource" />
+    <None Include="Properties\DataSources\ODP2.Models.userSection.datasource" />
     <None Include="Properties\DataSources\ODP2.Views.WorkOrder.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -486,15 +479,15 @@
       <DependentUpon>ODPModel.edmx</DependentUpon>
       <LastGenOutput>ODPModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ODPModel_SW.Context.tt">
+    <Content Include="Models\ODPModel_ORACLE.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
-      <LastGenOutput>ODPModel_SW.Context.cs</LastGenOutput>
+      <DependentUpon>ODPModel_ORACLE.edmx</DependentUpon>
+      <LastGenOutput>ODPModel_ORACLE.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ODPModel_SW.tt">
+    <Content Include="Models\ODPModel_ORACLE.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ODPModel_SW.edmx</DependentUpon>
-      <LastGenOutput>ODPModel_SW.cs</LastGenOutput>
+      <DependentUpon>ODPModel_ORACLE.edmx</DependentUpon>
+      <LastGenOutput>ODPModel_ORACLE.cs</LastGenOutput>
     </Content>
     <Content Include="Resources\1153743-200.png" />
     <Content Include="Resources\259-2599623_spare-parts-icon-png-transparent-png.png" />

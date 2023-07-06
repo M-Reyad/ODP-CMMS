@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 using LiveCharts.Wpf;
+using LiveCharts;
 
 namespace ODP2.Views
 {
@@ -33,12 +34,16 @@ namespace ODP2.Views
 
         private void KPISelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            kpiChart.Dispose();
+            foreach(System.Windows.Forms.DataVisualization.Charting.Series series in kpiChart.Series)
+            {
+                series.Dispose();
+            }
+            
 
             if (KPISelector.GetItemText(KPISelector.SelectedItem) == "Preventive Maintenance")
             {
                 var series = new System.Windows.Forms.DataVisualization.Charting.Series();
-                series.ChartType = SeriesChartType.Pie;
+                series.ChartType = SeriesChartType.Bar;
                 var pmWOs = home.dbContext.workOrders.Where(workOrder => workOrder.workOrderTypeID == "PM").ToList();
                 series.Name = "PM Adherence";
                 series.Points.AddXY("Q-1", 100 * 5 / pmWOs.Count());
@@ -50,8 +55,9 @@ namespace ODP2.Views
             }
             else if (KPISelector.GetItemText(KPISelector.SelectedItem) == "WorkOrder Types")
             {
-                var series = kpiChart.Series[0];
-                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+                var series = new System.Windows.Forms.DataVisualization.Charting.Series();
+
+                series.ChartType = SeriesChartType.Pie;
                 foreach (var type in home.dbContext.workOrderTypes)
                 {
 
@@ -60,11 +66,13 @@ namespace ODP2.Views
                         series.Points.AddXY(type.workOrderTypeID, home.dbContext.workOrders.Where(workOrder => workOrder.workOrderTypeID == type.workOrderTypeID).Count());
                     }
                 }
+
+                kpiChart.Series.Add(series);
             }
             else if (KPISelector.GetItemText(KPISelector.SelectedItem) == "Work Done Types")
             {
-                var series = kpiChart.Series[0];
-                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+                var series = new System.Windows.Forms.DataVisualization.Charting.Series();
+                series.ChartType = SeriesChartType.Pie;
                 foreach (var doneType in home.dbContext.workDoneTypes)
                 {
                     if (home.dbContext.workOrders.Where(workOrder => workOrder.workDoneType == doneType.workDoneTypeID).Count() != 0)
@@ -76,26 +84,11 @@ namespace ODP2.Views
             }
             else if (KPISelector.GetItemText(KPISelector.SelectedItem) == "Asset Reliability")
             {
-                var newSeries1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries1);
-                var newSeries2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries2);
+                var seriesAV = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(seriesAV);
+                var seriesBDN = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(seriesBDN);
 
-
-                var seriesAV = kpiChart.Series[0];
-                var seriesBDN = kpiChart.Series[1];
-
-                /*
-                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-
-                int MTTR = 18;
-                series.From = 0;
-                series.To = 20;
-                series.ForeColor = System.Drawing.Color.Transparent;
-                series.BackColor = System.Drawing.Color.Transparent;
-                series.Value = MTTR;
-                series.Text = "MTTR(min)";
-                */
                 seriesBDN.Points.AddXY("Q-1", 100 - 85);
                 seriesAV.Points.AddXY("Q-1", 85);
                 seriesBDN.Points.AddXY("Q-2", 100 - 90);
@@ -119,19 +112,14 @@ namespace ODP2.Views
             else if (KPISelector.GetItemText(KPISelector.SelectedItem) == "Budget Control")
             {
 
-                var newSeries1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries1);
-                var newSeries2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries2);
-                var newSeries3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries3);
-                var newSeries4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries4);
-
-                var seriesCons = kpiChart.Series[0];
-                var seriesPlanndCons = kpiChart.Series[1];
-                var seriesOPEX = kpiChart.Series[2];
-                var seriesPlanndOPEX = kpiChart.Series[3];
+                var seriesCons = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(seriesCons);
+                var seriesPlanndCons = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(seriesPlanndCons);
+                var seriesOPEX = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(seriesOPEX);
+                var seriesPlanndOPEX = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(seriesPlanndOPEX);
 
                 seriesCons.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 seriesPlanndCons.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -155,13 +143,11 @@ namespace ODP2.Views
 
             else if (KPISelector.GetItemText(KPISelector.SelectedItem) == "Maintenance Cost")
             {
-                var newSeries1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries1);
-                var newSeries2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-                kpiChart.Series.Add(newSeries2);
+                var lubCost = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(lubCost);
+                var SPCost = new System.Windows.Forms.DataVisualization.Charting.Series();
+                kpiChart.Series.Add(SPCost);
 
-                var lubCost = kpiChart.Series[0];
-                var SPCost = kpiChart.Series[1];
                 lubCost.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedArea;
                 SPCost.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedArea;
 

@@ -12,15 +12,16 @@ namespace ODP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class breakDown
+    public partial class ODP_USER
     {
-        public int id { get; set; }
-        public string equipmentID { get; set; }
-        public System.TimeSpan fromTime { get; set; }
-        public System.TimeSpan toTime { get; set; }
-        public Nullable<int> workOrder { get; set; }
-        public string bdnReason { get; set; }
-    
-        public virtual workOrder workOrder1 { get; set; }
+        public string USERNAME { get; set; }
+        public string USERID { get; set; }
+        public string USERPASSWORD { get; set; }
+        public string USERTITLE { get; set; }
+        public byte[] USERIMAGE { get; set; }
+        public string USEREMAIL { get; set; }
+        public int USERIDNUMBER { get; set; }
+        public string USERLEVEL { get; set; }
+        public string USERSECTION { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using ODP2.Views;
 using System.Drawing;
 using ODP2.Models;
 using System.Linq;
+using ODP2.Views.Login;
 //using Microsoft.Data.SqlClient;
 
 namespace ODP2
@@ -98,7 +99,14 @@ namespace ODP2
         {
             var changePasswordForm = new ChangePassword();
             changePasswordForm.dbContext = dbContext;
-            changePasswordForm.ShowDialog();
+            changePasswordForm.Show();
+        }
+
+        private void newAccountButton_Click(object sender, EventArgs e)
+        {
+            var newUser = new NewUserRegisteration();
+            newUser.dbContext = dbContext;
+            newUser.Show();
         }
     }
 

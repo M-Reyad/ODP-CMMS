@@ -41,6 +41,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.partCodeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.sparePartcontextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.reservedWorkOrders = new System.Windows.Forms.ToolStripMenuItem();
             this.partCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.onHandStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +52,7 @@
             this.sparePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.sparePartGridView)).BeginInit();
             this.panel1.SuspendLayout();
+            this.sparePartcontextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,8 +83,10 @@
             this.manufacturerPN,
             this.partPrice,
             this.compatableEquipmentFamilyID});
+            this.sparePartGridView.ContextMenuStrip = this.sparePartcontextMenuStrip;
             this.sparePartGridView.DataSource = this.sparePartBindingSource;
             this.sparePartGridView.Location = new System.Drawing.Point(8, 133);
+            this.sparePartGridView.MultiSelect = false;
             this.sparePartGridView.Name = "sparePartGridView";
             this.sparePartGridView.ReadOnly = true;
             this.sparePartGridView.RowHeadersVisible = false;
@@ -179,6 +184,21 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Part Code";
             // 
+            // sparePartcontextMenuStrip
+            // 
+            this.sparePartcontextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reservedWorkOrders});
+            this.sparePartcontextMenuStrip.Name = "sparePartcontextMenuStrip";
+            this.sparePartcontextMenuStrip.Size = new System.Drawing.Size(223, 48);
+            this.sparePartcontextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.sparePartcontextMenuStrip_Opening);
+            // 
+            // reservedWorkOrders
+            // 
+            this.reservedWorkOrders.Name = "reservedWorkOrders";
+            this.reservedWorkOrders.Size = new System.Drawing.Size(222, 22);
+            this.reservedWorkOrders.Text = "Show Reserved Work Orders";
+            this.reservedWorkOrders.Click += new System.EventHandler(this.reservedWorkOrders_Click);
+            // 
             // partCode
             // 
             this.partCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -245,6 +265,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sparePartGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.sparePartcontextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -269,5 +290,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn manufacturerPN;
         private System.Windows.Forms.DataGridViewTextBoxColumn partPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn compatableEquipmentFamilyID;
+        private System.Windows.Forms.ContextMenuStrip sparePartcontextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem reservedWorkOrders;
     }
 }

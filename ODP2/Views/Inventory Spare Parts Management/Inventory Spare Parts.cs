@@ -38,7 +38,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 }
                 else
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partCode == partCodeTextBox.Text).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partCode.Trim() == partCodeTextBox.Text).ToList();
                 }
                 
             }
@@ -52,7 +52,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 }
                 else
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partDirective == partDescriptionTextBox.Text).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partDirective.Trim() == partDescriptionTextBox.Text).ToList();
                 }
             }
 
@@ -65,7 +65,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 }
                 else
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.manufacturerPN == manPNTextBox.Text).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.manufacturerPN.Trim() == manPNTextBox.Text).ToList();
                 }
             }
             if (inventoryPartsList.Count() != 0)
@@ -107,5 +107,28 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 selectedSparePart.Show();
             }
         }
+        #region See Reserved Quantities
+        private void sparePartcontextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            if (sparePartGridView.SelectedRows.Count > 0)
+            {
+                if ((int)sparePartGridView.SelectedRows[0].Cells["reservedStock"].Value == 0)
+                {
+                    sparePartcontextMenuStrip.Items["reservedWorkOrders"].Enabled = false;
+                }
+            }
+        
+        }
+
+        private void reservedWorkOrders_Click(object sender, EventArgs e)
+        {
+
+            ReservedQuantites showReservedQuantitiesView = new ReservedQuantites();
+            showReservedQuantitiesView.home = home;
+            showReservedQuantitiesView.selectedSparePartCode = sparePartGridView.SelectedRows[0].Cells["partCode"].Value.ToString().Trim();
+            showReservedQuantitiesView.Show();
+        
+        }
+        #endregion
     }
 }

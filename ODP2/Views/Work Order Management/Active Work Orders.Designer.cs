@@ -66,12 +66,19 @@ namespace ODP2
             this.openWorkOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workOrderTypeIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.workOrderTypeIDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.workOrderMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.workRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.workStartedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.workDoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.workFinishedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.activeWorkOrdersGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderStatuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderTypeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).BeginInit();
+            this.workOrderMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // equipmentBox
@@ -405,6 +412,48 @@ namespace ODP2
             this.workOrderTypeIDDataGridViewTextBoxColumn2.Name = "workOrderTypeIDDataGridViewTextBoxColumn2";
             this.workOrderTypeIDDataGridViewTextBoxColumn2.Width = 895;
             // 
+            // workOrderMenuStrip
+            // 
+            this.workOrderMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusToolStripMenuItem});
+            this.workOrderMenuStrip.Name = "workOrderMenuStrip";
+            this.workOrderMenuStrip.Size = new System.Drawing.Size(107, 26);
+            // 
+            // statusToolStripMenuItem
+            // 
+            this.statusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.workRequestToolStripMenuItem,
+            this.workStartedToolStripMenuItem,
+            this.workDoneToolStripMenuItem,
+            this.workFinishedToolStripMenuItem});
+            this.statusToolStripMenuItem.Name = "statusToolStripMenuItem";
+            this.statusToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.statusToolStripMenuItem.Text = "Status";
+            // 
+            // workRequestToolStripMenuItem
+            // 
+            this.workRequestToolStripMenuItem.Name = "workRequestToolStripMenuItem";
+            this.workRequestToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.workRequestToolStripMenuItem.Text = "Work Request";
+            // 
+            // workStartedToolStripMenuItem
+            // 
+            this.workStartedToolStripMenuItem.Name = "workStartedToolStripMenuItem";
+            this.workStartedToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.workStartedToolStripMenuItem.Text = "Work Started";
+            // 
+            // workDoneToolStripMenuItem
+            // 
+            this.workDoneToolStripMenuItem.Name = "workDoneToolStripMenuItem";
+            this.workDoneToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.workDoneToolStripMenuItem.Text = "Work Done";
+            // 
+            // workFinishedToolStripMenuItem
+            // 
+            this.workFinishedToolStripMenuItem.Name = "workFinishedToolStripMenuItem";
+            this.workFinishedToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.workFinishedToolStripMenuItem.Text = "Work Finished";
+            // 
             // ActiveWorkOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -423,6 +472,7 @@ namespace ODP2
             ((System.ComponentModel.ISupportInitialize)(this.workOrderStatuBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderTypeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).EndInit();
+            this.workOrderMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -464,5 +514,11 @@ namespace ODP2
         private ComboBox workStatusBox;
         private Label label3;
         private BindingSource workOrderStatuBindingSource;
+        private ContextMenuStrip workOrderMenuStrip;
+        private ToolStripMenuItem statusToolStripMenuItem;
+        private ToolStripMenuItem workRequestToolStripMenuItem;
+        private ToolStripMenuItem workStartedToolStripMenuItem;
+        private ToolStripMenuItem workDoneToolStripMenuItem;
+        private ToolStripMenuItem workFinishedToolStripMenuItem;
     }
 }

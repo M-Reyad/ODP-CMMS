@@ -214,7 +214,11 @@ namespace ODP2
 
         private void assetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AssetsInformation newAssetsView = new AssetsInformation();
+            newAssetsView.home = this;
+            newAssetsView.Size = homeMainPanel.Size;
+            homeMainPanel.Controls.Clear();
+            homeMainPanel.Controls.Add(newAssetsView);
         }
 
         private void oPEXToolStripMenuItem_Click(object sender, EventArgs e)
