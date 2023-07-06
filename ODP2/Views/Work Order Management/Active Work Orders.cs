@@ -26,9 +26,9 @@ namespace ODP2
             fromDatePicker.Enabled = false;
            
 
-            workOrderTypeBindingSource.DataSource = home.dbContext.workOrderTypes.ToList();
-            workOrderStatuBindingSource.DataSource = home.dbContext.workOrderStatus.ToList();
-            workStatusBox.Items.Remove((new workOrderStatu() { workOrderStatusID = "Cancelled" }));
+            workOrderTypeBindingSource.DataSource = home.dbContext.WORKORDERTYPES.ToList();
+            workOrderStatuBindingSource.DataSource = home.dbContext.WORKORDERSTATUS.ToList();
+            workStatusBox.Items.Remove((new WORKORDERSTATU() { WORKORDERSTATUSID = "Cancelled" }));
             
             workTypeBox.Text = "";
             workStatusBox.Text = "";
@@ -41,13 +41,13 @@ namespace ODP2
 
         private void equipmentBox_LostFocus(object sender, EventArgs e)
         {
-            var equipmentList = new List<equipment>();
+            var equipmentList = new List<EQUIPMENT>();
             if (equipmentBox.Text != "")
             {
-                if (home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text).Count() != 0)
+                if (home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentBox.Text).Count() != 0)
                 {
-                    equipmentList = home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentBox.Text).ToList();
-                    equipmentDirective.Text = equipmentList.First().equipmentDirective.Trim();
+                    equipmentList = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentBox.Text).ToList();
+                    equipmentDirective.Text = equipmentList.First().EQUIPMENTDIRECTIVE.Trim();
                 }
                 else
                 {
@@ -76,23 +76,23 @@ namespace ODP2
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            var workOrders = home.dbContext.workOrders.Where(workOrder => workOrder.workOrderStatusID != "Finished");
-            workOrders = workOrders.Where(workOrder => workOrder.workOrderStatusID != "Cancelled");
+            var workOrders = home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKORDERSTATUSID != "Finished");
+            workOrders = workOrders.Where(workOrder => workOrder.WORKORDERSTATUSID != "Cancelled");
 
             if (workOrderBox.Text != "")
             {
                 int workOrderNumber = Convert.ToInt32(workOrderBox.Text);
-                workOrders = workOrders.Where(workOrder => workOrder.workOrderID == workOrderNumber);
+                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERID == workOrderNumber);
             }
 
             if (equipmentBox.Text != "")
             {
-                workOrders = workOrders.Where(workOrder => workOrder.workOrderEquipmentID == equipmentBox.Text);
+                workOrders = workOrders.Where(workOrder => workOrder.WORKORDEREQUIPMENTID == equipmentBox.Text);
             }
 
             if (workStatusBox.Text != "")
             {
-                workOrders = workOrders.Where(workOrder => workOrder.workOrderStatusID == workStatusBox.Text);
+                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERSTATUSID == workStatusBox.Text);
             }
 
             if (directiveTextBox.Text != "")
@@ -100,27 +100,27 @@ namespace ODP2
                 if (directiveTextBox.Text.Contains("%"))
                 {
                     string directive = directiveTextBox.Text.Trim('%');
-                    workOrders = workOrders.Where(workOrder => workOrder.workOrderDirective.Contains(directive));
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERDIRECTIVE.Contains(directive));
                 }
                 else
                 {
-                    workOrders = workOrders.Where(workOrder => workOrder.workOrderDirective == directiveTextBox.Text);
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERDIRECTIVE == directiveTextBox.Text);
                 }
                 
             }
 
             if (dateCheckBox.Checked == true)
             {
-                workOrders = workOrders.Where(workOrder => workOrder.workOrderRegisterationDate >= fromDatePicker.Value.Date);
+                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERREGISTERATIONDATE >= fromDatePicker.Value.Date);
             }
             if (workTypeBox.Text != "")
             {
-                workOrders = workOrders.Where(workOrder => workOrder.workOrderTypeID == workTypeBox.Text);
+                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERTYPEID == workTypeBox.Text);
             }
 
             if (workOrders.Count() > 0)
             {
-                workOrderBindingSource.DataSource = workOrders.OrderByDescending(wo => wo.workOrderID).ToList();
+                workOrderBindingSource.DataSource = workOrders.OrderByDescending(wo => wo.WORKORDERID).ToList();
                 activeWorkOrdersGrid.Refresh();
             }
             else
@@ -143,7 +143,7 @@ namespace ODP2
                 {
                     foreach (WorkOrder openedWorkOrder in Application.OpenForms.OfType<WorkOrder>().ToList())
                     {
-                        if (openedWorkOrder.workOrder.workOrderID == selectedWorkOrder)
+                        if (openedWorkOrder.workOrder.WORKORDERID == selectedWorkOrder)
                         {
                             openedWorkOrder.Focus();
                         }

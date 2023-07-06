@@ -75,7 +75,7 @@
             // 
             // equipmentFamilyBindingSource
             // 
-            this.equipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.equipmentFamily);
+            this.equipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENTFAMILY);
             // 
             // pmDirective
             // 

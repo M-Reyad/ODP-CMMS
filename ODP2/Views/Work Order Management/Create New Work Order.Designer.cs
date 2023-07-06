@@ -86,7 +86,7 @@ namespace ODP2.Views
             // 
             // workOrderBindingSource
             // 
-            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.workOrder);
+            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.WORKORDER);
             // 
             // newWorkOrderButton
             // 
@@ -137,7 +137,7 @@ namespace ODP2.Views
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // label3
             // 
@@ -197,7 +197,7 @@ namespace ODP2.Views
             // 
             // userBindingSource
             // 
-            this.userBindingSource.DataSource = typeof(ODP2.Models.user);
+            this.userBindingSource.DataSource = typeof(ODP2.Models.ODP_USER);
             // 
             // workTypeTextBox
             // 
@@ -212,7 +212,7 @@ namespace ODP2.Views
             // 
             // workOrderTypeBindingSource
             // 
-            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.workOrderType);
+            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.WORKORDERTYPE);
             // 
             // label13
             // 

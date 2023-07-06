@@ -19,7 +19,7 @@ namespace ODP2.Views
 
         private void PMAttachments_Load(object sender, System.EventArgs e)
         {
-            var equipmentFamilyList = home.dbContext.equipmentFamilies.ToList();
+            var equipmentFamilyList = home.dbContext.EQUIPMENTFAMILIES.ToList();
             equipmentFamilyBindingSource.DataSource = equipmentFamilyList;
             equipmentFamilyDirective.Text = "";
             equipmentFamilyBox_SelectedIndexChanged(sender, e);
@@ -28,8 +28,8 @@ namespace ODP2.Views
         private void equipmentFamilyBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             string selectedFamilyEquipment = equipmentFamilyBox.GetItemText(equipmentFamilyBox.SelectedItem);
-            equipmentFamilyDirective.Text = home.dbContext.equipmentFamilies.Where(eq => eq.equipmentFamilyCode.Trim() == selectedFamilyEquipment).First().equipmentTypeDirective.Trim();
-            pmTemplateBindingSource.DataSource = home.dbContext.pmTemplates.Where(pmTemp => pmTemp.equipmentFamily.Trim() == selectedFamilyEquipment).ToList();
+            equipmentFamilyDirective.Text = home.dbContext.EQUIPMENTFAMILIES.Where(eq => eq.EQUIPMENTFAMILYCODE.Trim() == selectedFamilyEquipment).First().EQUIPMENTTYPEDIRECTIVE.Trim();
+            pmTemplateBindingSource.DataSource = home.dbContext.PMTEMPLATES.Where(pmTemp => pmTemp.EQUIPMENTFAMILY.Trim() == selectedFamilyEquipment).ToList();
             //attachmentsDataGrid.Refresh();
             
         }

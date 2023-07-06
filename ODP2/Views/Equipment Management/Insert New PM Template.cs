@@ -25,13 +25,13 @@ namespace ODP2.Views.Equipment_Management
 
         private void InsertNewPMTemp_Load(object sender, EventArgs e)
         {
-            equipmentFamilyBindingSource.DataSource = home.dbContext.equipmentFamilies.ToList();
+            equipmentFamilyBindingSource.DataSource = home.dbContext.EQUIPMENTFAMILIES.ToList();
             equipmentFamiliesBox_SelectedIndexChanged(sender, e);
         }
         private void equipmentFamiliesBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFamily = equipmentFamiliesBox.GetItemText(equipmentFamiliesBox.SelectedItem).Trim();
-            equipmentFamilyDirective.Text = home.dbContext.equipmentFamilies.Where(eq => eq.equipmentFamilyCode.Trim() == selectedFamily).First().equipmentTypeDirective.Trim();
+            equipmentFamilyDirective.Text = home.dbContext.EQUIPMENTFAMILIES.Where(eq => eq.EQUIPMENTFAMILYCODE.Trim() == selectedFamily).First().EQUIPMENTTYPEDIRECTIVE.Trim();
         }
 
         private void browseButton_Click(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace ODP2.Views.Equipment_Management
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            pmTemplate newPMTemplate = new pmTemplate();
+            PMTEMPLATE newPMTemplate = new PMTEMPLATE();
 
 
             if (pmDirective.Text == "")
@@ -70,11 +70,11 @@ namespace ODP2.Views.Equipment_Management
             }
             else
             {
-                if (home.dbContext.pmTemplates.Where(pm => pm.equipmentFamily == selectedFamily).Count() != 0)
+                if (home.dbContext.PMTEMPLATES.Where(pm => pm.EQUIPMENTFAMILY == selectedFamily).Count() != 0)
                 {
-                    foreach (pmTemplate pm in home.dbContext.pmTemplates.Where(pm => pm.equipmentFamily == selectedFamily))
+                    foreach (PMTEMPLATE pm in home.dbContext.PMTEMPLATES.Where(pm => pm.EQUIPMENTFAMILY == selectedFamily))
                     {
-                        if (pm.pmDirective == pmDirective.Text)
+                        if (pm.PMDIRECTIVE == pmDirective.Text)
                         {
                             MessageBox.Show("This PM is registered Before, Kindly insert a different PM Directive");
                             pmDirective.Focus();
@@ -82,23 +82,23 @@ namespace ODP2.Views.Equipment_Management
                         }
                         else
                         {
-                            if (pm.Equals(home.dbContext.pmTemplates.Where(pmTemp => pmTemp.equipmentFamily == selectedFamily).ToList().Last()))
+                            if (pm.Equals(home.dbContext.PMTEMPLATES.Where(pmTemp => pmTemp.EQUIPMENTFAMILY == selectedFamily).ToList().Last()))
                             {
-                                newPMTemplate.equipmentFamily = selectedFamily;
-                                newPMTemplate.pmDirective = pmDirective.Text;
-                                newPMTemplate.pmAttachment = newPMAttachment;
+                                newPMTemplate.EQUIPMENTFAMILY = selectedFamily;
+                                newPMTemplate.PMDIRECTIVE = pmDirective.Text;
+                                newPMTemplate.PMATTACHMENT = newPMAttachment;
                             }
 
                         }
 
                     }
-                    if (newPMTemplate.pmDirective != null)
+                    if (newPMTemplate.PMDIRECTIVE != null)
                     {
                         try
                         {
 
 
-                            home.dbContext.pmTemplates.AddOrUpdate(newPMTemplate);
+                            home.dbContext.PMTEMPLATES.AddOrUpdate(newPMTemplate);
                             home.dbContext.SaveChanges();
                             MessageBox.Show("Saved Successfully!");
                             this.Close();
@@ -116,10 +116,10 @@ namespace ODP2.Views.Equipment_Management
                     {
 
 
-                        newPMTemplate.equipmentFamily = selectedFamily;
-                        newPMTemplate.pmDirective = pmDirective.Text;
-                        newPMTemplate.pmAttachment = newPMAttachment;
-                        home.dbContext.pmTemplates.AddOrUpdate(newPMTemplate);
+                        newPMTemplate.EQUIPMENTFAMILY = selectedFamily;
+                        newPMTemplate.PMDIRECTIVE = pmDirective.Text;
+                        newPMTemplate.PMATTACHMENT = newPMAttachment;
+                        home.dbContext.PMTEMPLATES.AddOrUpdate(newPMTemplate);
                         home.dbContext.SaveChanges();
                         MessageBox.Show("Saved Successfully!");
                         this.Close();

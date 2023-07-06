@@ -151,20 +151,35 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ODPModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ODPModel.Context.tt</DependentUpon>
+    <Compile Include="Models\BREAKDOWN.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ODPModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ODPModel.tt</DependentUpon>
+    <Compile Include="Models\COMPONENT.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ODPModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ODPModel.edmx</DependentUpon>
+    <Compile Include="Models\COMPONENTSTATU.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQUIPMENT.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQUIPMENTFAMILY.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQUIPMENTSTATU.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQUIPMENTTYPE.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FUELINGWORKORDER.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ISSUE.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ISSUESTATU.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ODPModel_ORACLE.Context.cs">
       <AutoGen>True</AutoGen>
@@ -187,11 +202,35 @@
     <Compile Include="Models\ODP_USER.cs">
       <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
+    <Compile Include="Models\PMTEMPLATE.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\user.cs">
-      <DependentUpon>ODPModel.tt</DependentUpon>
+    <Compile Include="Models\SPAREPART.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\STORERETURN.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UOM.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USERLEVEL.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USERSECTION.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WORKDONETYPE.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WORKORDER.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WORKORDERSTATU.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WORKORDERTYPE.cs">
+      <DependentUpon>ODPModel_ORACLE.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -417,13 +456,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ODPModel_ORACLE.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="Models\ODPModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ODPModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\ODPModel.edmx.diagram">
-      <DependentUpon>ODPModel.edmx</DependentUpon>
-    </None>
     <None Include="Models\ODPModel_ORACLE.edmx.diagram">
       <DependentUpon>ODPModel_ORACLE.edmx</DependentUpon>
     </None>
@@ -469,16 +501,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\ODPModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ODPModel.edmx</DependentUpon>
-      <LastGenOutput>ODPModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ODPModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ODPModel.edmx</DependentUpon>
-      <LastGenOutput>ODPModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\ODPModel_ORACLE.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ODPModel_ORACLE.edmx</DependentUpon>

@@ -15,7 +15,7 @@ namespace ODP2.Views.Equipment_Management
 
         private void AssetsInformation_Load(object sender, EventArgs e)
         {
-            equipmentBindingSource.DataSource = home.dbContext.equipments.ToList();
+            equipmentBindingSource.DataSource = home.dbContext.EQUIPMENTS.ToList();
             //equipmentComboBox.DataSource = home.dbContext.equipments.ToList();
         }
 

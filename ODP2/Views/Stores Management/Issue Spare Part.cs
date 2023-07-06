@@ -34,14 +34,14 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 if (int.TryParse(workOrderTextBox.Text, out workOrder) != false)
                 {
 
-                    if (home.dbContext.workOrders.Where(wo => wo.workOrderID == workOrder).Count() != 1)
+                    if (home.dbContext.WORKORDERS.Where(wo => wo.WORKORDERID == workOrder).Count() != 1)
                     {
                         MessageBox.Show("Cannot Find WorkOrder #" + workOrder + " Please Enter a valid WO#", "Error");
                         workOrderTextBox.Focus();
                     }
                     else
                     {
-                        if (home.dbContext.workOrders.Where(wo => wo.workOrderID == workOrder).First().workOrderStatusID.Trim() == "Finished")
+                        if (home.dbContext.WORKORDERS.Where(wo => wo.WORKORDERID == workOrder).First().WORKORDERSTATUSID.Trim() == "Finished")
                         {
                             MessageBox.Show("WorkOrder #" + workOrder + " is Finished, Please enter an Active WO#", "Error");
                             workOrderTextBox.Focus();
@@ -50,23 +50,23 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                         else
                         {
 
-                            issueBindingSource.DataSource = home.dbContext.issues.Where(issue => issue.workOrder1.workOrderID == workOrder)
-                    .Join(home.dbContext.spareParts,
-                    issue => issue.sparePartCode,
-                    sp => sp.partCode,
+                            issueBindingSource.DataSource = home.dbContext.ISSUES.Where(issue => issue.WORKORDER == workOrder)
+                    .Join(home.dbContext.SPAREPARTS,
+                    issue => issue.SPAREPARTCODE,
+                    sp => sp.PARTCODE,
                     (issue, sp) => new
                     {
-                        issue.issueID,
-                        issue.workOrder,
-                        issue.qty,
-                        sp.uom,
-                        issue.sparePartCode,
-                        sp.partDirective,
-                        sp.partPrice,
-                        issue.totalPrice,
-                        issue.issueDate,
-                        issue.issueState,
-                        issue.requestDate
+                        issue.ISSUEID,
+                        issue.WORKORDER,
+                        issue.QTY,
+                        sp.UOM,
+                        issue.SPAREPARTCODE,
+                        sp.PARTDIRECTIVE,
+                        sp.PARTPRICE,
+                        issue.TOTALPRICE,
+                        issue.ISSUEDATE,
+                        issue.ISSUESTATE,
+                        issue.REQUESTDATE
 
                     }).ToList();
                             foreach (DataGridViewRow issue in issueGridView.Rows)
@@ -114,22 +114,22 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
 
         private void dateTimePicker_Validated(object sender, EventArgs e)
         {
-            issueBindingSource.DataSource = home.dbContext.issues.Where(issue => issue.issueDate == dateTimePicker.Value.Date)
-                .Join(home.dbContext.spareParts,
-                issue => issue.sparePartCode,
-                sp => sp.partCode,
+            issueBindingSource.DataSource = home.dbContext.ISSUES.Where(issue => issue.ISSUEDATE == dateTimePicker.Value.Date)
+                .Join(home.dbContext.SPAREPARTS,
+                issue => issue.SPAREPARTCODE,
+                sp => sp.PARTCODE,
                 (issue, sp) => new
                 {
-                    issue.issueID,
-                    issue.workOrder,
-                    issue.qty,
-                    issue.sparePartCode,
-                    sp.partDirective,
-                    sp.partPrice,
-                    issue.totalPrice,
-                    issue.issueDate,
-                    issue.issueState,
-                    issue.requestDate
+                    issue.ISSUEID,
+                    issue.WORKORDER,
+                    issue.QTY,
+                    issue.SPAREPARTCODE,
+                    sp.PARTDIRECTIVE,
+                    sp.PARTPRICE,
+                    issue.TOTALPRICE,
+                    issue.ISSUEDATE,
+                    issue.ISSUESTATE,
+                    issue.REQUESTDATE
 
                 }).ToList();
             foreach (DataGridViewRow issue in issueGridView.Rows)
@@ -156,17 +156,17 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 if (rowCheckBox == "true")
                 {
                     var issueID = (int)issue.Cells["issueID"].Value;
-                    issue issueLineToBeIssued = home.dbContext.issues.Where(iss => iss.issueID == issueID).First();
+                    ISSUE issueLineToBeIssued = home.dbContext.ISSUES.Where(iss => iss.ISSUEID == issueID).First();
                     try
                     {
-                        issueLineToBeIssued.issueDate = DateTime.Today;
-                        issueLineToBeIssued.issueState = "Issued";
-                        var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == issueLineToBeIssued.sparePartCode).First();
-                        sparePart.reservedStock -= issueLineToBeIssued.qty;
-                        sparePart.partStockQty -= issueLineToBeIssued.qty;
-                        home.dbContext.spareParts.AddOrUpdate(sparePart);
+                        issueLineToBeIssued.ISSUEDATE = DateTime.Today;
+                        issueLineToBeIssued.ISSUESTATE = "Issued";
+                        var sparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == issueLineToBeIssued.SPAREPARTCODE).First();
+                        sparePart.RESERVEDSTOCK -= issueLineToBeIssued.QTY;
+                        sparePart.PARTSTOCKQTY -= issueLineToBeIssued.QTY;
+                        home.dbContext.SPAREPARTS.AddOrUpdate(sparePart);
                         home.dbContext.SaveChanges();
-                        MessageBox.Show("Successfully Issued Line #" + issueLineToBeIssued.issueID);
+                        MessageBox.Show("Successfully Issued Line #" + issueLineToBeIssued.ISSUEID);
 
                     }
                     catch (Exception ex)
@@ -192,20 +192,20 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                     try
                     {
 
-                        var newIssue = new issue();
-                        newIssue.issueDate = DateTime.Today;
-                        newIssue.sparePartCode = (string) issue.Cells["sparePartCode"].Value;
-                        newIssue.qty = ((int) issue.Cells["qty"].Value)* -1;
-                        newIssue.workOrder = (int) issue.Cells["workOrder"].Value;
-                        newIssue.partPrice = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssue.sparePartCode).First().partPrice;
-                        newIssue.issueState = "Unissued";
-                        newIssue.requestDate = DateTime.Today;
-                        home.dbContext.issues.Add(newIssue);
-                        var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == newIssue.sparePartCode).First();
-                        sparePart.partStockQty -= newIssue.qty;
-                        home.dbContext.spareParts.AddOrUpdate(sparePart);
+                        var newIssue = new ISSUE();
+                        newIssue.ISSUEDATE = DateTime.Today;
+                        newIssue.SPAREPARTCODE = (string) issue.Cells["sparePartCode"].Value;
+                        newIssue.QTY = ((int) issue.Cells["qty"].Value)* -1;
+                        newIssue.WORKORDER = (int) issue.Cells["workOrder"].Value;
+                        newIssue.PARTPRICE = home.dbContext.SPAREPARTS.Where(part => part.PARTCODE.Trim() == newIssue.SPAREPARTCODE).First().PARTPRICE;
+                        newIssue.ISSUESTATE = "Unissued";
+                        newIssue.REQUESTDATE = DateTime.Today;
+                        home.dbContext.ISSUES.Add(newIssue);
+                        var sparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == newIssue.SPAREPARTCODE).First();
+                        sparePart.PARTSTOCKQTY -= newIssue.QTY;
+                        home.dbContext.SPAREPARTS.AddOrUpdate(sparePart);
                         home.dbContext.SaveChanges();
-                        MessageBox.Show("Successfully Un-Issued " + newIssue.qty + " * " + newIssue.sparePartCode);
+                        MessageBox.Show("Successfully Un-Issued " + newIssue.QTY + " * " + newIssue.SPAREPARTCODE);
 
                     }
                     catch(Exception ex)

@@ -16,14 +16,14 @@ namespace ODP2.Views
 {
     public partial class WorkOrder : Form
     {
-        public workOrder workOrder = new workOrder();
+        public WORKORDER workOrder = new WORKORDER();
         public Home home = new Home();
         public string status;
 
         public WorkOrder(int workOrderNumber, Home home)
         {
             this.home = home;
-            var availableWorkOrders = home.dbContext.workOrders.Where(workOrder => workOrder.workOrderID == workOrderNumber);
+            var availableWorkOrders = home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKORDERID == workOrderNumber);
             if (availableWorkOrders.Count() != 1)
             {
                 MessageBox.Show("Error Loading WorkOrder!", "Error Loading");
@@ -40,29 +40,29 @@ namespace ODP2.Views
 
         private void WorkOrder_Load(object sender, EventArgs e)
         {
-            status = workOrder.workOrderStatusID;
+            status = workOrder.WORKORDERSTATUSID;
             workOrderBindingSource.DataSource = workOrder;
-            Text += workOrder.workOrderID.ToString();
+            Text += workOrder.WORKORDERID.ToString();
 
             //Issue List
             var issueList =
-                home.dbContext.issues.Where(issue => issue.workOrder1.workOrderID == workOrder.workOrderID)
+                home.dbContext.ISSUES.Where(issue => issue.WORKORDER1.WORKORDERID == workOrder.WORKORDERID)
                 .Join
-                (home.dbContext.spareParts,
-                issue => issue.sparePartCode,
-                part => part.partCode,
+                (home.dbContext.SPAREPARTS,
+                issue => issue.SPAREPARTCODE,
+                part => part.PARTCODE,
                 (issue, part) => new
                 {
-                    issue.issueID,
-                    issue.qty,
-                    part.uom,
-                    issue.sparePartCode,
-                    part.partDirective,
-                    part.partPrice,
-                    issue.totalPrice,
-                    issue.issueDate,
-                    issue.issueState,
-                    issue.requestDate
+                    issue.ISSUEID,
+                    issue.QTY,
+                    part.UOM,
+                    issue.SPAREPARTCODE,
+                    part.PARTDIRECTIVE,
+                    part.PARTPRICE,
+                    issue.TOTALPRICE,
+                    issue.ISSUEDATE,
+                    issue.ISSUESTATE,
+                    issue.REQUESTDATE
 
                 })
                 .ToList();
@@ -78,23 +78,23 @@ namespace ODP2.Views
                     issue.DefaultCellStyle.BackColor = Color.Red;
                 }
             }
-            var totalCost = issueList.Sum(issue => issue.totalPrice);
+            var totalCost = issueList.Sum(issue => issue.TOTALPRICE);
             totalCostTextbox.Text = totalCost.ToString();
 
 
             //BDN List
-            var bdnList = home.dbContext.breakDowns.Where(bdn => bdn.workOrder == workOrder.workOrderID).ToList();
+            var bdnList = home.dbContext.BREAKDOWNS.Where(bdn => bdn.WORKORDER == workOrder.WORKORDERID).ToList();
             breakDownBindingSource.DataSource = bdnList;
 
             //Work Status and Work Done Type Customization//
-            workDoneTypeBindingSource.DataSource = home.dbContext.workDoneTypes.ToList();
-            if (workOrder.workDoneType == null)
+            workDoneTypeBindingSource.DataSource = home.dbContext.WORKDONETYPES.ToList();
+            if (workOrder.WORKDONETYPE == null)
             {
                 workDoneType.Enabled = false;
             }
             else
             {
-                workDoneType.SelectedItem = workOrder.workDoneType1;
+                workDoneType.SelectedItem = workOrder.WORKDONETYPE1;
 
             }
 
@@ -102,7 +102,7 @@ namespace ODP2.Views
             //Work Order Status//
             saveButton.Enabled = false;
             //Cancelled Work Orders Can't be Re-Opened Again//
-            if (workOrder.workOrderStatusID.Trim() == "Cancelled")
+            if (workOrder.WORKORDERSTATUSID.Trim() == "Cancelled")
             {
                 workOrderDirective.Enabled = false;
             }
@@ -110,9 +110,9 @@ namespace ODP2.Views
             {
 
                 //Ordinary Users Privilages//
-                if (home.user.userLevel.Trim() != "Head")
+                if (home.user.USERLEVEL.Trim() != "Head")
                 {
-                    if (workOrder.workOrderStatusID.Trim() == "Work Done" || workOrder.workOrderStatusID.Trim() == "Finished")
+                    if (workOrder.WORKORDERSTATUSID.Trim() == "Work Done" || workOrder.WORKORDERSTATUSID.Trim() == "Finished")
                     {
                         workOrderNotes.ReadOnly = true;
                         workDoneType.Enabled = false;
@@ -135,9 +135,9 @@ namespace ODP2.Views
         {
             if (partCodeTextBox.Text != "")
             {
-                if (home.dbContext.spareParts.Where(sp => sp.partCode == partCodeTextBox.Text).Count() != 0)
+                if (home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == partCodeTextBox.Text).Count() != 0)
                 {
-                    partDirectiveTextBox.Text = home.dbContext.spareParts.Where(sp => sp.partCode == partCodeTextBox.Text).First().partDirective.Trim();
+                    partDirectiveTextBox.Text = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == partCodeTextBox.Text).First().PARTDIRECTIVE.Trim();
                     requestButton.Enabled = true;
                     quantityTextBox.Focus();
 
@@ -159,17 +159,17 @@ namespace ODP2.Views
 
                 try
                 {
-                    issue newIssueRequest = new issue();
-                    newIssueRequest.requestDate = DateTime.Today;
-                    newIssueRequest.sparePartCode = partCodeTextBox.Text;
-                    var availableQty = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssueRequest.sparePartCode).First().availableStock;
+                    ISSUE newIssueRequest = new ISSUE();
+                    newIssueRequest.REQUESTDATE = DateTime.Today;
+                    newIssueRequest.SPAREPARTCODE = partCodeTextBox.Text;
+                    var availableQty = home.dbContext.SPAREPARTS.Where(part => part.PARTCODE.Trim() == newIssueRequest.SPAREPARTCODE).First().AVAILABLESTOCK;
                     if (requestedQty > availableQty)
                     {
                         DialogResult issueAvQtyOnly = MessageBox.Show("Available Stock is less than the requested Quantity! /n" +
                             "Only " + availableQty + " will be requested", "Un-sufficient Quantity");
                         if (issueAvQtyOnly == DialogResult.Yes)
                         {
-                            newIssueRequest.qty = (int)availableQty;
+                            newIssueRequest.QTY = (int)availableQty;
                         }
                         else
                         {
@@ -189,19 +189,19 @@ namespace ODP2.Views
                     }
                     else
                     {
-                        newIssueRequest.qty = requestedQty;
+                        newIssueRequest.QTY = requestedQty;
                     }
-                    newIssueRequest.workOrder = workOrder.workOrderID;
-                    newIssueRequest.partPrice = home.dbContext.spareParts.Where(part => part.partCode.Trim() == newIssueRequest.sparePartCode).First().partPrice;
-                    newIssueRequest.issueState = "Requested";
-                    var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == newIssueRequest.sparePartCode).First();
-                    sparePart.reservedStock += newIssueRequest.qty;
-                    home.dbContext.spareParts.AddOrUpdate(sparePart);
-                    home.dbContext.issues.Add(newIssueRequest);
+                    newIssueRequest.WORKORDER = workOrder.WORKORDERID;
+                    newIssueRequest.PARTPRICE = home.dbContext.SPAREPARTS.Where(part => part.PARTCODE.Trim() == newIssueRequest.SPAREPARTCODE).First().PARTPRICE;
+                    newIssueRequest.ISSUESTATE = "Requested";
+                    var sparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == newIssueRequest.SPAREPARTCODE).First();
+                    sparePart.RESERVEDSTOCK += newIssueRequest.QTY;
+                    home.dbContext.SPAREPARTS.AddOrUpdate(sparePart);
+                    home.dbContext.ISSUES.Add(newIssueRequest);
                     home.dbContext.SaveChanges();
-                    MessageBox.Show("Successfully requested " + newIssueRequest.qty + " * " + newIssueRequest.sparePartCode);
+                    MessageBox.Show("Successfully requested " + newIssueRequest.QTY + " * " + newIssueRequest.SPAREPARTCODE);
                     this.Close();
-                    WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                    WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                     newWorkOrder.Show();
                 }
                 catch (Exception ex)
@@ -241,11 +241,11 @@ namespace ODP2.Views
                 try
                 {
                     int issueNumber = (int)materialsGridView.SelectedRows[0].Cells["issueID"].Value;
-                    var releasedIssue = home.dbContext.issues.Where(iss => iss.issueID == issueNumber).First();
-                    var sparePart = home.dbContext.spareParts.Where(sp => sp.partCode == releasedIssue.sparePartCode).First();
-                    sparePart.reservedStock -= releasedIssue.qty;
-                    home.dbContext.spareParts.AddOrUpdate(sparePart);
-                    home.dbContext.issues.Remove(releasedIssue);
+                    var releasedIssue = home.dbContext.ISSUES.Where(iss => iss.ISSUEID == issueNumber).First();
+                    var sparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == releasedIssue.SPAREPARTCODE).First();
+                    sparePart.RESERVEDSTOCK -= releasedIssue.QTY;
+                    home.dbContext.SPAREPARTS.AddOrUpdate(sparePart);
+                    home.dbContext.ISSUES.Remove(releasedIssue);
                     home.dbContext.SaveChanges();
                     MessageBox.Show("Released Successfully");
                 }
@@ -299,14 +299,14 @@ namespace ODP2.Views
                     {
                         try
                         {
-                            workOrder.workStartDate = Convert.ToDateTime(workStartDate.Text);
+                            workOrder.WORKSTARTDATE = Convert.ToDateTime(workStartDate.Text);
                             startDatePicker.Hide();
                             workStartDate.Show();
-                            home.dbContext.workOrders.AddOrUpdate(workOrder);
+                            home.dbContext.WORKORDERS.AddOrUpdate(workOrder);
                             home.dbContext.SaveChanges();
                             MessageBox.Show("Saved Successfully", "Saved");
                             this.Close();
-                            WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                            WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                             newWorkOrder.Show();
 
                             saveButton.Enabled = false;
@@ -346,9 +346,9 @@ namespace ODP2.Views
                         {
                             try
                             {
-                                workOrder.workStartDate = Convert.ToDateTime(workStartDate.Text);
+                                workOrder.WORKSTARTDATE = Convert.ToDateTime(workStartDate.Text);
 
-                                workOrder.workDoneDate = Convert.ToDateTime(workDoneDate.Text);
+                                workOrder.WORKDONEDATE = Convert.ToDateTime(workDoneDate.Text);
                                 MessageBox.Show(workDoneDate.Text);
                                 startDatePicker.Hide();
                                 workStartDate.Show();
@@ -356,12 +356,12 @@ namespace ODP2.Views
                                 workDoneDate.Show();
                                 workDoneType.Enabled = false;
                                 workOrderNotes.Enabled = false;
-                                workOrder.workDoneType1 = (workDoneType)workDoneType.SelectedItem;
-                                home.dbContext.workOrders.AddOrUpdate(workOrder);
+                                workOrder.WORKDONETYPE1 = (WORKDONETYPE)workDoneType.SelectedItem;
+                                home.dbContext.WORKORDERS.AddOrUpdate(workOrder);
                                 home.dbContext.SaveChanges();
                                 MessageBox.Show("Saved Successfully", "Saved");
                                 this.Close();
-                                WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                                WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                                 newWorkOrder.Show();
                             }
                             catch (Exception ex)
@@ -386,16 +386,16 @@ namespace ODP2.Views
                     {
                         try
                         {
-                            workOrder.workStartDate = Convert.ToDateTime(workStartDate.Text);
-                            workOrder.workDoneDate = Convert.ToDateTime(workDoneDate.Text);
-                            workOrder.workOrderFinishDate = Convert.ToDateTime(workOrderFinishDate.Text);
+                            workOrder.WORKSTARTDATE = Convert.ToDateTime(workStartDate.Text);
+                            workOrder.WORKDONEDATE = Convert.ToDateTime(workDoneDate.Text);
+                            workOrder.WORKORDERFINISHDATE = Convert.ToDateTime(workOrderFinishDate.Text);
                             workDoneType.Enabled = false;
                             workOrderNotes.Enabled = false;
-                            home.dbContext.workOrders.AddOrUpdate(workOrder);
+                            home.dbContext.WORKORDERS.AddOrUpdate(workOrder);
                             home.dbContext.SaveChanges();
                             MessageBox.Show("Saved Successfully", "Saved");
                             this.Close();
-                            WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                            WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                             newWorkOrder.Show();
                         }
                         catch (Exception ex)
@@ -415,15 +415,15 @@ namespace ODP2.Views
                 {
                     try
                     {
-                        workOrder.workStartDate = null;
-                        workOrder.workDoneDate = null;
-                        workOrder.workOrderFinishDate = null;
-                        workOrder.workDoneType = null;
-                        home.dbContext.workOrders.AddOrUpdate(workOrder);
+                        workOrder.WORKSTARTDATE = null;
+                        workOrder.WORKDONEDATE = null;
+                        workOrder.WORKORDERFINISHDATE = null;
+                        workOrder.WORKDONETYPE = null;
+                        home.dbContext.WORKORDERS.AddOrUpdate(workOrder);
                         home.dbContext.SaveChanges();
-                        MessageBox.Show("Work Order #" + workOrder.workOrderID + " is Cancelled");
+                        MessageBox.Show("Work Order #" + workOrder.WORKORDERID + " is Cancelled");
                         this.Close();
-                        WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                        WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                         newWorkOrder.Show();
                     }
                     catch (Exception ex)
@@ -436,15 +436,15 @@ namespace ODP2.Views
                 {
                     try
                     {
-                        workOrder.workStartDate = null;
-                        workOrder.workDoneDate = null;
-                        workOrder.workOrderFinishDate = null;
-                        workOrder.workDoneType = null;
-                        home.dbContext.workOrders.AddOrUpdate(workOrder);
+                        workOrder.WORKSTARTDATE = null;
+                        workOrder.WORKDONEDATE = null;
+                        workOrder.WORKORDERFINISHDATE = null;
+                        workOrder.WORKDONETYPE = null;
+                        home.dbContext.WORKORDERS.AddOrUpdate(workOrder);
                         home.dbContext.SaveChanges();
-                        MessageBox.Show("Work Order #" + workOrder.workOrderID + " is re-Opened");
+                        MessageBox.Show("Work Order #" + workOrder.WORKORDERID + " is re-Opened");
                         this.Close();
-                        WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                        WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                         newWorkOrder.Show();
 
                     }
@@ -465,7 +465,7 @@ namespace ODP2.Views
                     home.dbContext.SaveChanges();
                     MessageBox.Show("Saved Successfully", "Saving");
                     this.Close();
-                    WorkOrder newWorkOrder = new WorkOrder(workOrder.workOrderID, home);
+                    WorkOrder newWorkOrder = new WorkOrder(workOrder.WORKORDERID, home);
                     newWorkOrder.Show();
                 }
                 catch (Exception ex)
@@ -527,7 +527,7 @@ namespace ODP2.Views
                         {
                             if (issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
                             {
-                                MessageBox.Show("Can't Finish WorkOrder #" + workOrder.workOrderID + ", Some Materials are Still Reserved", "Reserved Materials");
+                                MessageBox.Show("Can't Finish WorkOrder #" + workOrder.WORKORDERID + ", Some Materials are Still Reserved", "Reserved Materials");
                                 statusBox.Text = status;
                                 break;
                             
@@ -585,7 +585,7 @@ namespace ODP2.Views
                 }
                 else if (statusBox.Text == "Cancelled")
                 {
-                    if (home.dbContext.issues.Where(issueList => issueList.workOrder == workOrder.workOrderID).Count() == 0)
+                    if (home.dbContext.ISSUES.Where(issueList => issueList.WORKORDER == workOrder.WORKORDERID).Count() == 0)
                     {
                         DialogResult cancelWorkOrder = MessageBox.Show(" You are about to Cancel the work Order." +
         "Are you sure to Cancel the Work Order?", "Cancelled Work Order", MessageBoxButtons.YesNo);
@@ -602,7 +602,7 @@ namespace ODP2.Views
 
                     else
                     {
-                        MessageBox.Show("Can't Cancel Work Order #" + workOrder.workOrderID + " , some materials are issued on.");
+                        MessageBox.Show("Can't Cancel Work Order #" + workOrder.WORKORDERID + " , some materials are issued on.");
                         statusBox.Text = status;
                     }
                 }
@@ -611,7 +611,7 @@ namespace ODP2.Views
 
         private void statusContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (workOrder.workOrderStatusID.Trim() == "Cancelled")
+            if (workOrder.WORKORDERSTATUSID.Trim() == "Cancelled")
             {
                 statusContextMenuStrip.Items["workRequest"].Enabled = false;
                 statusContextMenuStrip.Items["workStarted"].Enabled = false;
@@ -623,17 +623,17 @@ namespace ODP2.Views
             {
 
                 //Ordinary Users Privilages//
-                if (home.user.userLevel.Trim() != "Head")
+                if (home.user.USERLEVEL.Trim() != "Head")
                 {
                     statusContextMenuStrip.Items["finished"].Enabled = false;
                     statusContextMenuStrip.Items["workRequest"].Enabled = false;
-                    if (workOrder.workOrderStatusID.Trim() == "Work Done" || workOrder.workOrderStatusID.Trim() == "Finished")
+                    if (workOrder.WORKORDERSTATUSID.Trim() == "Work Done" || workOrder.WORKORDERSTATUSID.Trim() == "Finished")
                     {
                         statusContextMenuStrip.Items["workStarted"].Enabled = false;
                         statusContextMenuStrip.Items["workDone"].Enabled = false;
                         statusContextMenuStrip.Items["cancelled"].Enabled = false;
                     }
-                    else if (workOrder.workOrderStatusID.Trim() == "Work Started")
+                    else if (workOrder.WORKORDERSTATUSID.Trim() == "Work Started")
                     {
                         statusContextMenuStrip.Items["workStarted"].Enabled = false;
                     }
@@ -641,16 +641,16 @@ namespace ODP2.Views
                 //Super User Privilages//
                 else
                 {
-                    if (workOrder.workOrderStatusID.Trim() == "Work Request")
+                    if (workOrder.WORKORDERSTATUSID.Trim() == "Work Request")
                     {
                         statusContextMenuStrip.Items["workRequest"].Enabled = false;
                     }
-                    else if (workOrder.workOrderStatusID.Trim() == "Work Started" || workOrder.workOrderStatusID.Trim() == "Work Done")
+                    else if (workOrder.WORKORDERSTATUSID.Trim() == "Work Started" || workOrder.WORKORDERSTATUSID.Trim() == "Work Done")
                     {
                         statusContextMenuStrip.Items["workStarted"].Enabled = false;
                         statusContextMenuStrip.Items["workDone"].Enabled = false;
                     }
-                    else if (workOrder.workOrderStatusID.Trim() == "Finished")
+                    else if (workOrder.WORKORDERSTATUSID.Trim() == "Finished")
                     {
                         statusContextMenuStrip.Items["workStarted"].Enabled = false;
                         statusContextMenuStrip.Items["workDone"].Enabled = false;
@@ -676,14 +676,14 @@ namespace ODP2.Views
         #region Attachments
         private void pmChecklist_Button(object sender, EventArgs e)
         {
-            string filePath = @"D:\" + workOrder.workOrderEquipmentID.Trim() + " - WO#" + workOrder.workOrderID + " - " + workOrder.workOrderDirective + " Attachment.pdf";
+            string filePath = @"D:\" + workOrder.WORKORDEREQUIPMENTID.Trim() + " - WO#" + workOrder.WORKORDERID + " - " + workOrder.WORKORDERDIRECTIVE + " Attachment.pdf";
 
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
             var fileWriter = new BinaryWriter(File.OpenWrite(filePath));
-            var data = (byte[])workOrder.workOrderAttach;
+            var data = (byte[])workOrder.WORKORDERATTACH;
 
             if (data == null)
             {

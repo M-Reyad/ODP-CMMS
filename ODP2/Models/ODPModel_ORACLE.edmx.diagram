@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c95443e72e74cf0863ff74699f32640" Name="Diagram1" ZoomLevel="69">
+      <Diagram DiagramId="2c95443e72e74cf0863ff74699f32640" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="Model_ORACLE.BREAKDOWN" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.COMPONENT" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.COMPONENTSTATU" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -15,18 +15,42 @@
         <EntityTypeShape EntityType="Model_ORACLE.FUELINGWORKORDER" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.ISSUE" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.ISSUESTATU" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_ORACLE.ODP_USER" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_ORACLE.ODP_USER" Width="1.75" PointX="13.5" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.PMTEMPLATE" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.SPAREPART" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.STORERETURN" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.UOM" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_ORACLE.USERLEVEL" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_ORACLE.USERSECTION" Width="1.5" PointX="10.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_ORACLE.USERLEVEL" Width="1.5" PointX="11.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_ORACLE.USERSECTION" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.WORKDONETYPE" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_ORACLE.WORKORDER" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_ORACLE.WORKORDER" Width="2" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.WORKORDERSTATU" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_ORACLE.WORKORDERTYPE" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_ORACLE.WORKORDERTYPE" Width="1.5" PointX="10.75" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_ORACLE.ODP_ONHAND_QTY" Width="1.5" PointX="5.375" PointY="11.75" />
+        <AssociationConnector Association="Model_ORACLE.FK_BREAKDOWN_WORKORDER" />
+        <AssociationConnector Association="Model_ORACLE.FK_COMPONENT_COMPONENTSTATUS" />
+        <AssociationConnector Association="Model_ORACLE.FK_COMPONENT_SPAREPART" />
+        <AssociationConnector Association="Model_ORACLE.FK_EQUIPMENT_COMPONENT" />
+        <AssociationConnector Association="Model_ORACLE.FK_EQUIPMENT_COMPONENT1" />
+        <AssociationConnector Association="Model_ORACLE.FK_EQUIPMENT_COMPONENT2" />
+        <AssociationConnector Association="Model_ORACLE.FK_EQUIPMENT_COMPONENT3" />
+        <AssociationConnector Association="Model_ORACLE.FK_STORERETURN_COMPONENT" />
+        <AssociationConnector Association="Model_ORACLE.FK_EQUIPMENT_EQUIPMENTFAMILY" />
+        <AssociationConnector Association="Model_ORACLE.FK_EQUIPMENT_EQUIPMENTSTATUS" />
+        <AssociationConnector Association="Model_ORACLE.FK_FUELINGWORKORDER_EQUIPMENT" />
+        <AssociationConnector Association="Model_ORACLE.FK_WORKORDER_EQUIPMENT" />
+        <AssociationConnector Association="Model_ORACLE.FK_PMTEMPLATES_EQUIPMENTFAMILY" />
+        <AssociationConnector Association="Model_ORACLE.FK_ISSUE_ISSUESTATUS" />
+        <AssociationConnector Association="Model_ORACLE.FK_ISSUE_SPAREPART" />
+        <AssociationConnector Association="Model_ORACLE.FK_ISSUE_WORKORDER" />
+        <AssociationConnector Association="Model_ORACLE.FK_USER_USERLEVEL" />
+        <AssociationConnector Association="Model_ORACLE.FK_USER_USERSECTION" />
+        <AssociationConnector Association="Model_ORACLE.FK_WORKORDER_USER" />
+        <AssociationConnector Association="Model_ORACLE.FK_SPAREPART_UOM" />
+        <AssociationConnector Association="Model_ORACLE.FK_STORERETURN_WORKORDER" />
+        <AssociationConnector Association="Model_ORACLE.FK_WORKORDER_WORKDONETYPES" />
+        <AssociationConnector Association="Model_ORACLE.FK_WORKORDER_WORKORDERSTATUS" />
+        <AssociationConnector Association="Model_ORACLE.FK_WORKORDER_WORKORDERTYPE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

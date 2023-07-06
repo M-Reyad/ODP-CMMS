@@ -13,7 +13,7 @@ namespace ODP2.Views.Login
 {
     public partial class NewUserRegisteration : Form
     {
-        public ODPEntities dbContext = new ODPEntities();
+        public ODPEntities_ORACLE dbContext = new ODPEntities_ORACLE();
         public NewUserRegisteration()
         {
             InitializeComponent();
@@ -35,9 +35,9 @@ namespace ODP2.Views.Login
                     passwordTextBox.Enabled = true;
                     rePasswordTextBox.Enabled = true;
                     sectionComboBox.Enabled = true;
-                    userSectionBindingSource.DataSource = dbContext.userSections.ToList();
+                    userSectionBindingSource.DataSource = dbContext.USERSECTIONS.ToList();
                     levelComboBox.Enabled = true;
-                    userLevelBindingSource.DataSource = dbContext.userLevels.ToList();
+                    userLevelBindingSource.DataSource = dbContext.USERLEVELS.ToList();
                     confirmButton.Enabled = true;
                 }
             } 
@@ -60,15 +60,15 @@ namespace ODP2.Views.Login
                         {
                             if (rePasswordTextBox.Text != "" && passwordTextBox.Text == rePasswordTextBox.Text)
                             {
-                                var newUser = new user();
-                                newUser.userID = userIDTextBox.Text;
-                                newUser.userEmail = userEmailAddress.Text;
-                                newUser.userIDNumber = int.Parse(userCodeTextBox.Text);
-                                newUser.userLevel1 = (userLevel) levelComboBox.SelectedItem;
-                                newUser.userSection1 = (userSection) sectionComboBox.SelectedItem;
+                                var newUser = new ODP_USER();
+                                newUser.USERID = userIDTextBox.Text;
+                                newUser.USEREMAIL = userEmailAddress.Text;
+                                newUser.USERIDNUMBER = int.Parse(userCodeTextBox.Text);
+                                newUser.USERLEVEL1 = (USERLEVEL) levelComboBox.SelectedItem;
+                                newUser.USERSECTION1 = (USERSECTION) sectionComboBox.SelectedItem;
                                 try
                                 {
-                                    dbContext.users.Add(newUser);
+                                    dbContext.ODP_USERS.Add(newUser);
                                     dbContext.SaveChanges();
                                 } 
                                 catch (Exception ex)

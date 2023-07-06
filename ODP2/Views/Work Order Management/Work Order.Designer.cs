@@ -153,7 +153,7 @@ namespace ODP2.Views
             // 
             // workOrderBindingSource
             // 
-            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.workOrder);
+            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.WORKORDER);
             // 
             // saveButton
             // 
@@ -422,7 +422,7 @@ namespace ODP2.Views
             // 
             // issueBindingSource
             // 
-            this.issueBindingSource.DataSource = typeof(ODP2.Models.issue);
+            this.issueBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
             // 
             // label15
             // 
@@ -513,7 +513,7 @@ namespace ODP2.Views
             // 
             // breakDownBindingSource
             // 
-            this.breakDownBindingSource.DataSource = typeof(ODP2.Models.breakDown);
+            this.breakDownBindingSource.DataSource = typeof(ODP2.Models.BREAKDOWN);
             // 
             // stepsAndNotesTab
             // 
@@ -557,7 +557,7 @@ namespace ODP2.Views
             // 
             // workDoneTypeBindingSource
             // 
-            this.workDoneTypeBindingSource.DataSource = typeof(ODP2.Models.workDoneType);
+            this.workDoneTypeBindingSource.DataSource = typeof(ODP2.Models.WORKDONETYPE);
             // 
             // pmCheclistButton
             // 
@@ -636,7 +636,7 @@ namespace ODP2.Views
             // 
             // workOrderStatuBindingSource
             // 
-            this.workOrderStatuBindingSource.DataSource = typeof(ODP2.Models.workOrderStatu);
+            this.workOrderStatuBindingSource.DataSource = typeof(ODP2.Models.WORKORDERSTATU);
             // 
             // equipmentDirectiveTextBox
             // 

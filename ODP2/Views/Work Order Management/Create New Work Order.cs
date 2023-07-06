@@ -7,7 +7,7 @@ namespace ODP2.Views
 {
     public partial class CreateNewWorkOrder : Form
     {
-        private workOrder newWorkOrder = new workOrder();
+        private WORKORDER newWorkOrder = new WORKORDER();
         public Home home = new Home();
 
         public CreateNewWorkOrder()
@@ -17,12 +17,12 @@ namespace ODP2.Views
 
         private void CreateNewWorkOrder_Load(object sender, EventArgs e)
         {
-            userBindingSource.DataSource = home.dbContext.users.Where(user => user.userID == home.user.userID).First();
-            if (home.user.userLevel.Trim() == "Head")
+            userBindingSource.DataSource = home.dbContext.ODP_USERS.Where(user => user.USERID == home.user.USERID).First();
+            if (home.user.USERLEVEL.Trim() == "Head")
             {
                 creatorIDTextBox.ReadOnly = false;
             }
-            var workOrderTypesList = home.dbContext.workOrderTypes.ToList();            
+            var workOrderTypesList = home.dbContext.WORKORDERTYPES.ToList();            
             //workOrderTypesList.RemoveAll(type => type.workOrderTypeID.Trim() == "PM");
             workOrderTypeBindingSource.DataSource = workOrderTypesList.ToList();
 
@@ -62,22 +62,22 @@ namespace ODP2.Views
             {
                 try
                 {
-                    newWorkOrder.user = (user)userBindingSource.DataSource;
-                    newWorkOrder.workOrderDirective = workOrderDirective.Text;
-                    newWorkOrder.equipment = (equipment)equipmentBindingSource.DataSource;
-                    newWorkOrder.equipmentRH = Convert.ToInt32(equipmentWHR.Text);
-                    newWorkOrder.workOrderRegisterationDate = regsiterationDatePicker.Value;
-                    newWorkOrder.workOrderType = (workOrderType)workTypeTextBox.SelectedItem;
-                    newWorkOrder.workOrderStatu = home.dbContext.workOrderStatus.Where(status => status.workOrderStatusID == "Work Request").First();
-                    home.dbContext.workOrders.Add(newWorkOrder);
+                    newWorkOrder.ODP_USER = (ODP_USER) userBindingSource.DataSource;
+                    newWorkOrder.WORKORDERDIRECTIVE = workOrderDirective.Text;
+                    newWorkOrder.EQUIPMENT = (EQUIPMENT) equipmentBindingSource.DataSource;
+                    newWorkOrder.EQUIPMENTRH = Convert.ToInt32(equipmentWHR.Text);
+                    newWorkOrder.WORKORDERREGISTERATIONDATE = regsiterationDatePicker.Value;
+                    newWorkOrder.WORKORDERTYPE = (WORKORDERTYPE)workTypeTextBox.SelectedItem;
+                    newWorkOrder.WORKORDERSTATU = home.dbContext.WORKORDERSTATUS.Where(status => status.WORKORDERSTATUSID == "Work Request").First();
+                    home.dbContext.WORKORDERS.Add(newWorkOrder);
                     home.dbContext.SaveChanges();
                     workOrderBindingSource.DataSource = newWorkOrder;
-                    DialogResult openWorkOrderQuesion = MessageBox.Show("Work Order " + newWorkOrder.workOrderID + " Created Successfully, " +
+                    DialogResult openWorkOrderQuesion = MessageBox.Show("Work Order " + newWorkOrder.WORKORDERID + " Created Successfully, " +
                         "Open the Work Order?", "Saved", MessageBoxButtons.YesNo);
 
                     if (openWorkOrderQuesion == DialogResult.Yes)
                     {
-                        WorkOrder workOrder = new WorkOrder(newWorkOrder.workOrderID, home);
+                        WorkOrder workOrder = new WorkOrder(newWorkOrder.WORKORDERID, home);
                         workOrder.Show();
                         this.Close();
 
@@ -97,7 +97,7 @@ namespace ODP2.Views
         {
             if (sender == creatorIDTextBox)
             {
-                if (home.dbContext.users.Where(user => user.userIDNumber == Convert.ToInt32(creatorIDTextBox.Text)).Count() != 1 && creatorIDTextBox.Text != "")
+                if (home.dbContext.ODP_USERS.Where(user => user.USERIDNUMBER == Convert.ToInt32(creatorIDTextBox.Text)).Count() != 1 && creatorIDTextBox.Text != "")
                 {
                     MessageBox.Show("Error User ID, Please Enter a Valid ID", "Error Inputs");
                     
@@ -108,13 +108,13 @@ namespace ODP2.Views
                 }
                 else
                 {
-                    userBindingSource.DataSource = home.dbContext.users.Where(user => user.userID == home.user.userID).First();
+                    userBindingSource.DataSource = home.dbContext.ODP_USERS.Where(user => user.USERID == home.user.USERID).First();
                 }
             }
 
             else if (sender == equipmentTextBox)
             {
-                if (home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentTextBox.Text).Count() != 1 && equipmentTextBox.Text != "")
+                if (home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentTextBox.Text).Count() != 1 && equipmentTextBox.Text != "")
                 {
                     MessageBox.Show("Error Equipment ID, Please Enter a Valid ID", "Error Inputs");
                     equipmentTextBox.Focus();
@@ -126,7 +126,7 @@ namespace ODP2.Views
                 }
                 else
                 {
-                    equipmentBindingSource.DataSource = home.dbContext.equipments.Where(equipment => equipment.equipmentID == equipmentTextBox.Text).First();
+                    equipmentBindingSource.DataSource = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentTextBox.Text).First();
 
                 }
             }

@@ -7,18 +7,18 @@ namespace ODP2.Views
     public partial class SparePart : Form
     {
         public Home home;
-        public sparePart selectedSparePart;
+        public SPAREPART selectedSparePart;
         public SparePart(Home home, string sparePart)
         {
             this.home = home;
             MessageBox.Show(sparePart);
-            if (home.dbContext.spareParts.Where(sp => sp.partCode.Trim() == sparePart).Count() != 1)
+            if (home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == sparePart).Count() != 1)
             {
                 MessageBox.Show("Error Finding Spare Part " + sparePart, "Error");
             }
             else
             {
-                selectedSparePart = home.dbContext.spareParts.Where(sp => sp.partCode.Trim() == sparePart).First();
+                selectedSparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == sparePart).First();
             }
             InitializeComponent();
         }

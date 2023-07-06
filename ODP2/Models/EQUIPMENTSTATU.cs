@@ -12,27 +12,18 @@ namespace ODP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class EQUIPMENTSTATU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public EQUIPMENTSTATU()
         {
-            this.workOrders = new HashSet<workOrder>();
+            this.EQUIPMENTs = new HashSet<EQUIPMENT>();
         }
     
-        public string userName { get; set; }
-        public string userID { get; set; }
-        public string userPassword { get; set; }
-        public string userTitle { get; set; }
-        public byte[] userImage { get; set; }
-        public string userEmail { get; set; }
-        public int userIDNumber { get; set; }
-        public string userLevel { get; set; }
-        public string userSection { get; set; }
+        public string EQUIPMENTSTATUSID { get; set; }
+        public string EQUIPMENTSTATUSDIRECTIVE { get; set; }
     
-        public virtual userLevel userLevel1 { get; set; }
-        public virtual userSection userSection1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<workOrder> workOrders { get; set; }
+        public virtual ICollection<EQUIPMENT> EQUIPMENTs { get; set; }
     }
 }

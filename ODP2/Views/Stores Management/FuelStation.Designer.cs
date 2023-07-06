@@ -428,15 +428,15 @@
             // 
             // fuelingWorkOrderBindingSource
             // 
-            this.fuelingWorkOrderBindingSource.DataSource = typeof(ODP2.Models.fuelingWorkOrder);
+            this.fuelingWorkOrderBindingSource.DataSource = typeof(ODP2.Models.FUELINGWORKORDER);
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // equipmentBindingSource1
             // 
-            this.equipmentBindingSource1.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource1.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // FuelStation
             // 

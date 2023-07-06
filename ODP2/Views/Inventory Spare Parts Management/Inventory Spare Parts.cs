@@ -23,7 +23,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
         {
 
 
-            var inventoryPartsList = home.dbContext.spareParts.ToList();
+            var inventoryPartsList = home.dbContext.SPAREPARTS.ToList();
             //MessageBox.Show(home.dbContext_SW.ODP_ONHAND_QTY.ToList().Count().ToString());
             //MessageBox.Show(home.dbContext_SW.ODP_ONHAND_QTY.ToList().ToString());
             //var inventoryQuantities = home.dbContext_SW.ODP_ONHAND_QTY.ToList();
@@ -34,11 +34,11 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             {
                 if (partCodeTextBox.Text.Contains("%"))
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partCode.Contains(partCodeTextBox.Text.Trim('%'))).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.PARTCODE.Contains(partCodeTextBox.Text.Trim('%'))).ToList();
                 }
                 else
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partCode.Trim() == partCodeTextBox.Text).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.PARTCODE.Trim() == partCodeTextBox.Text).ToList();
                 }
                 
             }
@@ -48,11 +48,11 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             {
                 if (partDescriptionTextBox.Text.Contains("%"))
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partDirective.Contains(partDescriptionTextBox.Text.Trim('%'))).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.PARTDIRECTIVE.Contains(partDescriptionTextBox.Text.Trim('%'))).ToList();
                 }
                 else
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.partDirective.Trim() == partDescriptionTextBox.Text).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.PARTDIRECTIVE.Trim() == partDescriptionTextBox.Text).ToList();
                 }
             }
 
@@ -61,11 +61,11 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             {
                 if (manPNTextBox.Text.Contains("%"))
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.manufacturerPN.Contains(manPNTextBox.Text.Trim('%'))).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.MANUFACTURERPN.Contains(manPNTextBox.Text.Trim('%'))).ToList();
                 }
                 else
                 {
-                    inventoryPartsList = inventoryPartsList.Where(sp => sp.manufacturerPN.Trim() == manPNTextBox.Text).ToList();
+                    inventoryPartsList = inventoryPartsList.Where(sp => sp.MANUFACTURERPN.Trim() == manPNTextBox.Text).ToList();
                 }
             }
             if (inventoryPartsList.Count() != 0)
@@ -90,7 +90,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             {
                 foreach (SparePart openedSparePart in Application.OpenForms.OfType<SparePart>().ToList())
                 {
-                    if (openedSparePart.selectedSparePart.partCode == selectedPartCode)
+                    if (openedSparePart.selectedSparePart.PARTCODE == selectedPartCode)
                     {
                         openedSparePart.Focus();
                     }

@@ -111,7 +111,7 @@
             // 
             // pmTemplateBindingSource
             // 
-            this.pmTemplateBindingSource.DataSource = typeof(ODP2.Models.pmTemplate);
+            this.pmTemplateBindingSource.DataSource = typeof(ODP2.Models.PMTEMPLATE);
             // 
             // equipmentFamilyBox
             // 
@@ -128,7 +128,7 @@
             // 
             // equipmentFamilyBindingSource
             // 
-            this.equipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.equipmentFamily);
+            this.equipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENTFAMILY);
             // 
             // label1
             // 

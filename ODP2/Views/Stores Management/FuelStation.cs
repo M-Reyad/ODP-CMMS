@@ -20,12 +20,12 @@ namespace ODP2.Views.Stores_Management
         private void FuelStation_Load(object sender, EventArgs e)
         {
             //Customizing Fuel Station Panel // Later will be customized only for Stores
-            equipmentIDIssue.DataSource = home.dbContext.equipments.ToList();
-            equipmentIDReport.DataSource = home.dbContext.equipments.ToList();
-            var fuelStation = home.dbContext.spareParts.Where(item => item.partCode == "CONS-FU");
-            fuelStockLevel.Value = (int)(100 * ((double)fuelStation.First().partStockQty / 21878));
+            equipmentIDIssue.DataSource = home.dbContext.EQUIPMENTS.ToList();
+            equipmentIDReport.DataSource = home.dbContext.EQUIPMENTS.ToList();
+            var fuelStation = home.dbContext.SPAREPARTS.Where(item => item.PARTCODE == "CONS-FU");
+            fuelStockLevel.Value = (int)(100 * ((double)fuelStation.First().PARTSTOCKQTY / 21878));
             fuelStockPercentage.Text = fuelStockLevel.Value + " %";
-            fuelStockQty.Text = (fuelStation.First().partStockQty).ToString() + " litres";
+            fuelStockQty.Text = (fuelStation.First().PARTSTOCKQTY).ToString() + " litres";
         }
 
 
@@ -46,21 +46,21 @@ namespace ODP2.Views.Stores_Management
             }
             else
             {
-                fuelingWorkOrder fuelingOrder = new fuelingWorkOrder();
-                fuelingOrder.equipmentID = equipmentIDIssue.Text;
-                fuelingOrder.fuelQty = Convert.ToInt32(fuelQtyTextbox.Text);
-                fuelingOrder.equipmentReading = Convert.ToInt32(equipmentReadingTextbox.Text);
-                fuelingOrder.fuelingDate = fuelIssueDatePicker.Value;
+                FUELINGWORKORDER fuelingOrder = new FUELINGWORKORDER();
+                fuelingOrder.EQUIPMENTID = equipmentIDIssue.Text;
+                fuelingOrder.FUELQTY = Convert.ToInt32(fuelQtyTextbox.Text);
+                fuelingOrder.EQUIPMENTREADING = Convert.ToInt32(equipmentReadingTextbox.Text);
+                fuelingOrder.FUELINGDATE = fuelIssueDatePicker.Value;
                
 
-                home.dbContext.fuelingWorkOrders.Add(fuelingOrder);
-                home.dbContext.spareParts.Where(stock => stock.partCode == "CONS-FU").First().partStockQty -= fuelingOrder.fuelQty;
+                home.dbContext.FUELINGWORKORDERS.Add(fuelingOrder);
+                home.dbContext.SPAREPARTS.Where(stock => stock.PARTCODE == "CONS-FU").First().PARTSTOCKQTY -= fuelingOrder.FUELQTY;
 
 
-                MessageBox.Show("Fueling Order " + fuelingOrder.fuelingWorkOrder1 + " is registered Successfully, updated Fuel Qty is ");
+                MessageBox.Show("Fueling Order " + fuelingOrder.FUELINGWORKORDER1 + " is registered Successfully, updated Fuel Qty is ");
                 home.dbContext.SaveChanges();
-                var fuelStation = home.dbContext.spareParts.Where(item => item.partCode == "CONS-FU");
-                fuelStockLevel.Value = (int)(100 * ((double)fuelStation.First().partStockQty / 21878));
+                var fuelStation = home.dbContext.SPAREPARTS.Where(item => item.PARTCODE == "CONS-FU");
+                fuelStockLevel.Value = (int)(100 * ((double)fuelStation.First().PARTSTOCKQTY / 21878));
 
             }
 
@@ -78,18 +78,18 @@ namespace ODP2.Views.Stores_Management
             }
             else
             {
-                fuelingWorkOrder fuelingOrder = new fuelingWorkOrder();
-                fuelingOrder.fuelQty = Convert.ToInt32(recievedFuelQty.Text);
-                fuelingOrder.fuelingDate = fuelRecievedDatePicker.Value;
-                fuelingOrder.equipmentID = "EHA01";
+                FUELINGWORKORDER fuelingOrder = new FUELINGWORKORDER();
+                fuelingOrder.FUELQTY = Convert.ToInt32(recievedFuelQty.Text);
+                fuelingOrder.FUELINGDATE = fuelRecievedDatePicker.Value;
+                fuelingOrder.EQUIPMENTID = "EHA01";
 
-                home.dbContext.fuelingWorkOrders.Add(fuelingOrder);
-                home.dbContext.spareParts.Where(stock => stock.partCode == "CONS-FU").First().partStockQty += fuelingOrder.fuelQty;
+                home.dbContext.FUELINGWORKORDERS.Add(fuelingOrder);
+                home.dbContext.SPAREPARTS.Where(stock => stock.PARTCODE == "CONS-FU").First().PARTSTOCKQTY += fuelingOrder.FUELQTY;
 
                 MessageBox.Show("Fueling Order " + fuelingOrder + " is registered Successfully, updated Fuel Qty is ");
                 home.dbContext.SaveChanges();
-                var fuelStation = home.dbContext.spareParts.Where(item => item.partCode == "CONS-FU");
-                fuelStockLevel.Value = (int)(100 * ((double)fuelStation.First().partStockQty / 21878));
+                var fuelStation = home.dbContext.SPAREPARTS.Where(item => item.PARTCODE == "CONS-FU");
+                fuelStockLevel.Value = (int)(100 * ((double)fuelStation.First().PARTSTOCKQTY / 21878));
             }
 
 
@@ -97,7 +97,7 @@ namespace ODP2.Views.Stores_Management
         private void fuelLevelChanged(object sender, EventArgs e)
         {
             fuelStockPercentage.Text = fuelStockLevel.Value + " %";
-            fuelStockQty.Text = (home.dbContext.spareParts.Where(item => item.partCode == "CONS-FU").First().partStockQty).ToString() + " litres";
+            fuelStockQty.Text = (home.dbContext.SPAREPARTS.Where(item => item.PARTCODE == "CONS-FU").First().PARTSTOCKQTY).ToString() + " litres";
         }
 
         private void equipmentID_SelectionChangeCommitted(object sender, EventArgs e)
@@ -105,11 +105,11 @@ namespace ODP2.Views.Stores_Management
             var senderCombo = (ComboBox)sender;
             if (senderCombo == equipmentIDIssue)
             {
-                equipmentBindingSource.DataSource = home.dbContext.equipments.Where(equipment => equipment.equipmentID == senderCombo.Text).First();
+                equipmentBindingSource.DataSource = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == senderCombo.Text).First();
             }
             else if (senderCombo == equipmentIDReport)
             {
-                equipmentBindingSource1.DataSource = home.dbContext.equipments.Where(equipment => equipment.equipmentID == senderCombo.Text).First();
+                equipmentBindingSource1.DataSource = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == senderCombo.Text).First();
             }
             
         }

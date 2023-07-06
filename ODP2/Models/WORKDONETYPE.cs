@@ -12,26 +12,17 @@ namespace ODP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ODP_USER
+    public partial class WORKDONETYPE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ODP_USER()
+        public WORKDONETYPE()
         {
             this.WORKORDERs = new HashSet<WORKORDER>();
         }
     
-        public string USERNAME { get; set; }
-        public string USERID { get; set; }
-        public string USERPASSWORD { get; set; }
-        public string USERTITLE { get; set; }
-        public byte[] USERIMAGE { get; set; }
-        public string USEREMAIL { get; set; }
-        public int USERIDNUMBER { get; set; }
-        public string USERLEVEL { get; set; }
-        public string USERSECTION { get; set; }
+        public string WORKDONETYPEID { get; set; }
+        public string WORKDONETYPEDIRECTIVE { get; set; }
     
-        public virtual USERLEVEL USERLEVEL1 { get; set; }
-        public virtual USERSECTION USERSECTION1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WORKORDER> WORKORDERs { get; set; }
     }

@@ -173,7 +173,7 @@ namespace ODP2.Views.Login
             // 
             // userSectionBindingSource
             // 
-            this.userSectionBindingSource.DataSource = typeof(ODP2.Models.userSection);
+            this.userSectionBindingSource.DataSource = typeof(ODP2.Models.USERSECTION);
             // 
             // label7
             // 
@@ -197,7 +197,7 @@ namespace ODP2.Views.Login
             // 
             // userLevelBindingSource
             // 
-            this.userLevelBindingSource.DataSource = typeof(ODP2.Models.userLevel);
+            this.userLevelBindingSource.DataSource = typeof(ODP2.Models.USERLEVEL);
             // 
             // proceedButton
             // 

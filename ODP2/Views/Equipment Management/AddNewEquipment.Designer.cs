@@ -95,7 +95,7 @@
             // 
             // equipmentFamilyBindingSource
             // 
-            this.equipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.equipmentFamily);
+            this.equipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENTFAMILY);
             // 
             // newEquipmentIDTextBox
             // 
@@ -159,7 +159,7 @@
             // 
             // selectedEquipmentFamilyBindingSource
             // 
-            this.selectedEquipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.equipmentFamily);
+            this.selectedEquipmentFamilyBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENTFAMILY);
             // 
             // dateTimePicker1
             // 
@@ -407,7 +407,7 @@
             // 
             // selectedEquipmentBindingSource
             // 
-            this.selectedEquipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.selectedEquipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // AddNewEquipment
             // 

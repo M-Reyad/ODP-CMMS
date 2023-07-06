@@ -188,7 +188,7 @@
             // 
             // issueBindingSource
             // 
-            this.issueBindingSource.DataSource = typeof(ODP2.Models.issue);
+            this.issueBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
             // 
             // issueButton
             // 

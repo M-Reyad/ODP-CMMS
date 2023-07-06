@@ -14,14 +14,14 @@ namespace ODP2
     public partial class Login : Form
     {
 
-        public ODPEntities dbContext = new ODPEntities();
+        public ODPEntities_ORACLE dbContext = new ODPEntities_ORACLE();
         public Login()
         {
             InitializeComponent();
             
             try
             {
-                dbContext.users.ToList();
+                dbContext.ODP_USERS.ToList();
                 connectionLabel.Text = "Database Connected Successfully";
                 connectionColorLabel.BackColor = Color.Green;
             }
@@ -39,6 +39,7 @@ namespace ODP2
             rememberMe.Checked = Properties.Settings.Default.rememberMe;
             userNameTextBox.Text = Properties.Settings.Default.userName;
             passwordTextBox.Text = Properties.Settings.Default.password;
+            
         }
 
         private void loginButtonPressed(object sender, EventArgs e)
@@ -55,7 +56,7 @@ namespace ODP2
             }
             else
             {
-                var loginValidationTable = dbContext.users.Where(user => user.userID == userNameTextBox.Text);
+                var loginValidationTable = dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userNameTextBox.Text);
                 if (loginValidationTable.Count() != 1)
                 {
                     MessageBox.Show("Wrong User ID or Password", "Error Login");
@@ -64,7 +65,7 @@ namespace ODP2
                 {
                     //Check if Password is Correct
                     var user = loginValidationTable.First();
-                    if (user.userPassword.Trim() == passwordTextBox.Text)
+                    if (user.USERPASSWORD.Trim() == passwordTextBox.Text)
                     {
                         var homeForm = new Home();
                         homeForm.user = user;

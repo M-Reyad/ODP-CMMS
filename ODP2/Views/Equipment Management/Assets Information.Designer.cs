@@ -66,7 +66,7 @@
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // equipmentDirectiveTextBox
             // 

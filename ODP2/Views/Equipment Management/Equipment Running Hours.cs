@@ -22,12 +22,12 @@ namespace ODP2.Views
                 {
                     if (textBox == lastRegisterationDateTextbox)
                     {
-                        textBox.Text = home.dbContext.equipments.First().equipmentHRDate.ToString();
+                        textBox.Text = home.dbContext.EQUIPMENTS.First().EQUIPMENTHRDATE.ToString();
 
                     }
                     else
                     {
-                        textBox.Text = home.dbContext.equipments.Where(equipment => equipment.equipmentID == textBox.Name.Remove(textBox.Name.Length - 3)).First().equipmentHR.ToString();
+                        textBox.Text = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == textBox.Name.Remove(textBox.Name.Length - 3)).First().EQUIPMENTHR.ToString();
                     }
 
                 }
@@ -53,8 +53,8 @@ namespace ODP2.Views
                     }
                     else
                     {
-                        home.dbContext.equipments.Where(equipment => equipment.equipmentID == textBox.Name.Remove(textBox.Name.Length - 3)).First().equipmentHR = Convert.ToInt32(textBox.Text);
-                        home.dbContext.equipments.Where(equipment => equipment.equipmentID == textBox.Name.Remove(textBox.Name.Length - 3)).First().equipmentHRDate = newDatePicker.Value.Date;
+                        home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == textBox.Name.Remove(textBox.Name.Length - 3)).First().EQUIPMENTHR = Convert.ToInt32(textBox.Text);
+                        home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == textBox.Name.Remove(textBox.Name.Length - 3)).First().EQUIPMENTHRDATE = newDatePicker.Value.Date;
                         home.dbContext.SaveChanges();
 
                     }

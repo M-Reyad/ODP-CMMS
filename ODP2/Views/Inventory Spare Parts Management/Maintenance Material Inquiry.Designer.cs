@@ -160,7 +160,7 @@
             // 
             // issueBindingSource
             // 
-            this.issueBindingSource.DataSource = typeof(ODP2.Models.issue);
+            this.issueBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
             // 
             // searchButton
             // 
@@ -183,7 +183,7 @@
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // label1
             // 
@@ -287,7 +287,7 @@
             // 
             // sparePartBindingSource
             // 
-            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.sparePart);
+            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.SPAREPART);
             // 
             // partCode
             // 

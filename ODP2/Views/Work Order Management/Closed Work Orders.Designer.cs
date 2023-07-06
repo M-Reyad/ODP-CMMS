@@ -269,7 +269,7 @@ namespace ODP2
             // 
             // workOrderBindingSource
             // 
-            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.workOrder);
+            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.WORKORDER);
             // 
             // fromDatePicker
             // 
@@ -343,7 +343,7 @@ namespace ODP2
             // 
             // workOrderTypeBindingSource
             // 
-            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.workOrderType);
+            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.WORKORDERTYPE);
             // 
             // workTypeDirective
             // 
@@ -365,7 +365,7 @@ namespace ODP2
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // toDatePicker
             // 

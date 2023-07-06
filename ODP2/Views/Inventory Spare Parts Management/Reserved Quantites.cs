@@ -14,7 +14,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
     public partial class ReservedQuantites : Form
     {
         public string selectedSparePartCode;
-        private sparePart selectedSparePart;
+        private SPAREPART selectedSparePart;
         public Home home;
 
         public ReservedQuantites()
@@ -25,26 +25,26 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
         private void ReservedQuantites_Load(object sender, EventArgs e)
         {
             Text += " - " + selectedSparePartCode;
-            if (home.dbContext.spareParts.Where(sp => sp.partCode.Trim() == selectedSparePartCode).Count() != 1)
+            if (home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == selectedSparePartCode).Count() != 1)
             {
                 MessageBox.Show("Error Finding Spare Part " + selectedSparePartCode, "Error");
             }
             else
             {
-                selectedSparePart = home.dbContext.spareParts.Where(sp => sp.partCode.Trim() == selectedSparePartCode).First();
-                var reservedList = home.dbContext.issues.Where(iss => iss.sparePartCode == selectedSparePartCode && iss.issueState.Trim() == "Requested").ToList();
-                var reservedQtyWorkOrders = reservedList.Join(home.dbContext.workOrders,
-                    iss => iss.workOrder,
-                    wo => wo.workOrderID, 
+                selectedSparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == selectedSparePartCode).First();
+                var reservedList = home.dbContext.ISSUES.Where(iss => iss.SPAREPARTCODE == selectedSparePartCode && iss.ISSUESTATE.Trim() == "Requested").ToList();
+                var reservedQtyWorkOrders = reservedList.Join(home.dbContext.WORKORDERS,
+                    iss => iss.WORKORDER,
+                    wo => wo.WORKORDERID, 
                     (iss,wo) => new
                     {
-                        iss.issueID,
-                        wo.workOrderID,
-                        wo.workOrderEquipmentID,
-                        wo.workOrderDirective,
-                        iss.sparePartCode,
-                        iss.qty,
-                        iss.requestDate
+                        iss.ISSUEID,
+                        wo.WORKORDERID,
+                        wo.WORKORDEREQUIPMENTID,
+                        wo.WORKORDERDIRECTIVE,
+                        iss.SPAREPARTCODE,
+                        iss.QTY,
+                        iss.REQUESTDATE
                     }
                     );
 
@@ -64,7 +64,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 {
                     foreach (WorkOrder openedWorkOrder in Application.OpenForms.OfType<WorkOrder>().ToList())
                     {
-                        if (openedWorkOrder.workOrder.workOrderID == selectedWorkOrder)
+                        if (openedWorkOrder.workOrder.WORKORDERID == selectedWorkOrder)
                         {
                             openedWorkOrder.Focus();
                         }

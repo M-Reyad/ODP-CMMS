@@ -81,7 +81,7 @@
             // 
             // issueBindingSource
             // 
-            this.issueBindingSource.DataSource = typeof(ODP2.Models.issue);
+            this.issueBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
             // 
             // issueIDDataGridViewTextBoxColumn
             // 
@@ -165,9 +165,6 @@
 
         private System.Windows.Forms.DataGridView ReservedIssuesGridView;
         private System.Windows.Forms.BindingSource issueBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn workOrderEquipmentID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sparePart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn workOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn issueID;
         private System.Windows.Forms.DataGridViewTextBoxColumn issueIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn workOrderID;

@@ -11,7 +11,7 @@ namespace ODP2.Views
 {
     public partial class ChangePassword : Form
     {
-        public ODPEntities dbContext = new ODPEntities();
+        public ODPEntities_ORACLE dbContext = new ODPEntities_ORACLE();
         public string userID = "";
         public ChangePassword()
         {
@@ -31,7 +31,7 @@ namespace ODP2.Views
         private void proceedButton_Click(object sender, EventArgs e)
         {
             userIDTextbox.ReadOnly = true;
-            if (dbContext.users.Where(user => user.userID.Trim() == userIDTextbox.Text).Count() != 1)
+            if (dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userIDTextbox.Text).Count() != 1)
             {
                 MessageBox.Show("No Such Recorded User Name, Re-enter your ID");
                 userIDTextbox.ReadOnly = false;
@@ -51,7 +51,7 @@ namespace ODP2.Views
         private void confirmEmailButton_Click(object sender, EventArgs e)
         {
 
-            if (dbContext.users.Where(user => user.userID.Trim() == userIDTextbox.Text).First().userEmail.Trim() == emailTextbox.Text)
+            if (dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userIDTextbox.Text).First().USEREMAIL.Trim() == emailTextbox.Text)
 
             {
                 newPasswordLabel.Visible = true;
@@ -74,7 +74,7 @@ namespace ODP2.Views
             {
                 try
                 {
-                    dbContext.users.Where(user => user.userID.Trim() == userIDTextbox.Text).First().userPassword = newpasswordTextbox.Text;
+                    dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userIDTextbox.Text).First().USERPASSWORD = newpasswordTextbox.Text;
                     dbContext.SaveChanges();
 
                     MessageBox.Show("Password Updated Successfully", "Successful Password Change");

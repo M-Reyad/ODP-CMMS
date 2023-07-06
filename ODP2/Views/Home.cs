@@ -13,9 +13,9 @@ namespace ODP2
 {
     public partial class Home : Form
     {
-        public ODPEntities dbContext;
-        public ODPEntities_SW dbContext_SW;
-        public user user = new user();
+        public ODPEntities_ORACLE dbContext;
+        //public ODPEntites dbContext_SW;
+        public ODP_USER user = new ODP_USER();
 
         public Home()
         {
@@ -25,12 +25,12 @@ namespace ODP2
         private void Home_Load(object sender, EventArgs e)
         {
             //Customizing User Panel
-            userNameLabel.Text = user.userName;
-            userTitleLabel.Text = user.userTitle;
-            userIDNumber.Text = user.userIDNumber.ToString();
+            userNameLabel.Text = user.USERNAME;
+            userTitleLabel.Text = user.USERTITLE;
+            userIDNumber.Text = user.USERIDNUMBER.ToString();
             try
             {
-                userPicture.Image = Image.FromStream(new MemoryStream(user.userImage));
+                userPicture.Image = Image.FromStream(new MemoryStream(user.USERIMAGE));
             }
             catch (Exception ex)
             {
@@ -39,20 +39,20 @@ namespace ODP2
             }
 
             //Customizing Tabs according to Privillages
-            if (user.userLevel.Trim() != "Head")
+            if (user.USERLEVEL.Trim() != "Head")
             {
                 //Head Only 
                 reportsTab.Enabled = false;
                 
                 //Stores Users Only 
-                if (user.userSection.Trim() != "Stores")
+                if (user.USERSECTION.Trim() != "Stores")
                 {
                     StoresTab.Enabled = false;
 
                 }
 
                 //Maintenance and Planning Only
-                else if (user.userSection.Trim() == "Stores")
+                else if (user.USERSECTION.Trim() == "Stores")
                 {
                     WorkOrderManagementTab.Enabled = false;
                     AssetsManagementTab.Enabled = false;
@@ -61,7 +61,7 @@ namespace ODP2
                 }
 
                 //Planning Users Only
-                else if (user.userSection.Trim() != "Planning")
+                else if (user.USERSECTION.Trim() != "Planning")
                 {
                     AssetsManagementTab.Enabled = false;
                 }
@@ -75,7 +75,7 @@ namespace ODP2
         private void changePasswordButton_Click(object sender, EventArgs e)
         {
             ChangePassword changePasswordPage = new ChangePassword();
-            changePasswordPage.userID = user.userID;
+            changePasswordPage.userID = user.USERID;
             changePasswordPage.Show();
         }
 
@@ -86,7 +86,7 @@ namespace ODP2
             if (attachPicture.ShowDialog() == DialogResult.OK)
             {
                 userPicture.Image = Image.FromFile(attachPicture.FileName);
-                dbContext.users.Where(user => user.userID == user.userID).First().userImage = (byte[])new ImageConverter().ConvertTo(userPicture.Image, typeof(byte[]));
+                dbContext.ODP_USERS.Where(user => user.USERID == user.USERID).First().USERIMAGE = (byte[])new ImageConverter().ConvertTo(userPicture.Image, typeof(byte[]));
                 dbContext.SaveChanges();
                 MessageBox.Show("Image Saved Successfully", "Saved");
 
