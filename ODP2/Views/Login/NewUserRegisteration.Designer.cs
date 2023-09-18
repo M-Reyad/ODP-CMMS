@@ -52,6 +52,8 @@ namespace ODP2.Views.Login
             this.proceedButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.userIDTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.titleComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.userSectionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userLevelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -74,8 +76,9 @@ namespace ODP2.Views.Login
             // 
             // confirmButton
             // 
+            this.confirmButton.CausesValidation = false;
             this.confirmButton.Enabled = false;
-            this.confirmButton.Location = new System.Drawing.Point(151, 218);
+            this.confirmButton.Location = new System.Drawing.Point(151, 245);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(120, 23);
             this.confirmButton.TabIndex = 2;
@@ -131,6 +134,7 @@ namespace ODP2.Views.Login
             this.passwordTextBox.Enabled = false;
             this.passwordTextBox.Location = new System.Drawing.Point(105, 112);
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(166, 20);
             this.passwordTextBox.TabIndex = 1;
             // 
@@ -148,13 +152,14 @@ namespace ODP2.Views.Login
             this.rePasswordTextBox.Enabled = false;
             this.rePasswordTextBox.Location = new System.Drawing.Point(105, 138);
             this.rePasswordTextBox.Name = "rePasswordTextBox";
+            this.rePasswordTextBox.PasswordChar = '*';
             this.rePasswordTextBox.Size = new System.Drawing.Size(166, 20);
             this.rePasswordTextBox.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(56, 167);
+            this.label6.Location = new System.Drawing.Point(56, 194);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 0;
@@ -163,10 +168,11 @@ namespace ODP2.Views.Login
             // sectionComboBox
             // 
             this.sectionComboBox.DataSource = this.userSectionBindingSource;
+            this.sectionComboBox.DisplayMember = "USERSECTION1";
             this.sectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sectionComboBox.Enabled = false;
             this.sectionComboBox.FormattingEnabled = true;
-            this.sectionComboBox.Location = new System.Drawing.Point(105, 164);
+            this.sectionComboBox.Location = new System.Drawing.Point(105, 191);
             this.sectionComboBox.Name = "sectionComboBox";
             this.sectionComboBox.Size = new System.Drawing.Size(121, 21);
             this.sectionComboBox.TabIndex = 3;
@@ -178,19 +184,20 @@ namespace ODP2.Views.Login
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(66, 194);
+            this.label7.Location = new System.Drawing.Point(18, 221);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.Size = new System.Drawing.Size(81, 13);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Level";
+            this.label7.Text = "Privilages Level";
             // 
             // levelComboBox
             // 
             this.levelComboBox.DataSource = this.userLevelBindingSource;
+            this.levelComboBox.DisplayMember = "USERLEVEL1";
             this.levelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.levelComboBox.Enabled = false;
             this.levelComboBox.FormattingEnabled = true;
-            this.levelComboBox.Location = new System.Drawing.Point(105, 191);
+            this.levelComboBox.Location = new System.Drawing.Point(105, 218);
             this.levelComboBox.Name = "levelComboBox";
             this.levelComboBox.Size = new System.Drawing.Size(121, 21);
             this.levelComboBox.TabIndex = 3;
@@ -226,15 +233,43 @@ namespace ODP2.Views.Login
             this.userIDTextBox.Size = new System.Drawing.Size(121, 20);
             this.userIDTextBox.TabIndex = 1;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(72, 167);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Title";
+            // 
+            // titleComboBox
+            // 
+            this.titleComboBox.DisplayMember = "USERSECTION1";
+            this.titleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.titleComboBox.Enabled = false;
+            this.titleComboBox.FormattingEnabled = true;
+            this.titleComboBox.Items.AddRange(new object[] {
+            "Mechanical Engineer",
+            "Electrical Engineer",
+            "Store Keeper",
+            "Section Head"});
+            this.titleComboBox.Location = new System.Drawing.Point(105, 164);
+            this.titleComboBox.Name = "titleComboBox";
+            this.titleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.titleComboBox.TabIndex = 3;
+            // 
             // NewUserRegisteration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 249);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(421, 278);
             this.Controls.Add(this.levelComboBox);
+            this.Controls.Add(this.titleComboBox);
             this.Controls.Add(this.sectionComboBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.proceedButton);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.rePasswordTextBox);
@@ -281,5 +316,7 @@ namespace ODP2.Views.Login
         private TextBox userIDTextBox;
         private BindingSource userSectionBindingSource;
         private BindingSource userLevelBindingSource;
+        private Label label9;
+        private ComboBox titleComboBox;
     }
 }

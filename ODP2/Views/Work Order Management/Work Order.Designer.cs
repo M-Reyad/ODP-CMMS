@@ -32,10 +32,25 @@ namespace ODP2.Views
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkOrder));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.materialsGridView = new System.Windows.Forms.DataGridView();
+            this.issueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.partCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.requestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.partPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ISSUESTATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.requesterID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issuerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UOM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iSSUEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.workOrderTextBox = new System.Windows.Forms.TextBox();
-            this.workOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.wORKORDERBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.saveButton = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -50,37 +65,30 @@ namespace ODP2.Views
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.partCodeTextBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.materialsGridView = new System.Windows.Forms.DataGridView();
-            this.issueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sparePartCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sparePart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.requestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.partPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label15 = new System.Windows.Forms.Label();
-            this.bdnTab = new System.Windows.Forms.TabPage();
-            this.bdnGridView = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bdnReasonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrder1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.breakDownBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stepsAndNotesTab = new System.Windows.Forms.TabPage();
             this.workOrderNotes = new System.Windows.Forms.RichTextBox();
             this.workDoneType = new System.Windows.Forms.ComboBox();
-            this.workDoneTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.wORKDONETYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pmCheclistButton = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.workDoneTypeDirectiveLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.bdnTab = new System.Windows.Forms.TabPage();
+            this.BDNReasonTextBox = new System.Windows.Forms.TextBox();
+            this.bdnToDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.bdnFromDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.endBDNbutton = new System.Windows.Forms.Button();
+            this.startBDNButton = new System.Windows.Forms.Button();
+            this.bdnGridView = new System.Windows.Forms.DataGridView();
+            this.BREAKDOWNID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BDNReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BDNFROMTIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BDNTOTIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BDNTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bREAKDOWNBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.returnTab = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.workOrderStatuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.equipmentDirectiveTextBox = new System.Windows.Forms.TextBox();
             this.workOrderDirective = new System.Windows.Forms.TextBox();
             this.statusBox = new System.Windows.Forms.TextBox();
@@ -94,6 +102,7 @@ namespace ODP2.Views
             this.finished = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.cancelled = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.creatorIDTextBox = new System.Windows.Forms.TextBox();
             this.creatorNameTextBox = new System.Windows.Forms.TextBox();
             this.workTypeDirectiveTextBox = new System.Windows.Forms.TextBox();
@@ -118,20 +127,165 @@ namespace ODP2.Views
             this.doneDatePicker = new System.Windows.Forms.DateTimePicker();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.registerationDatePicker = new System.Windows.Forms.DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).BeginInit();
+            this.warrantyTab = new System.Windows.Forms.TabPage();
+            ((System.ComponentModel.ISupportInitialize)(this.materialsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iSSUEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wORKORDERBindingSource)).BeginInit();
             this.workOrderTabs.SuspendLayout();
             this.materialsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.materialsGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.issueBindingSource)).BeginInit();
+            this.stepsAndNotesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.wORKDONETYPEBindingSource)).BeginInit();
             this.bdnTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bdnGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breakDownBindingSource)).BeginInit();
-            this.stepsAndNotesTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.workDoneTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bREAKDOWNBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.workOrderStatuBindingSource)).BeginInit();
             this.statusContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // materialsGridView
+            // 
+            this.materialsGridView.AllowUserToAddRows = false;
+            this.materialsGridView.AllowUserToDeleteRows = false;
+            this.materialsGridView.AllowUserToOrderColumns = true;
+            this.materialsGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialsGridView.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Lucida Sans", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.materialsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.materialsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.materialsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.issueID,
+            this.qty,
+            this.partCode,
+            this.requestDate,
+            this.partPrice,
+            this.totalPrice,
+            this.ISSUESTATE,
+            this.requesterID,
+            this.issuerID,
+            this.issueDate,
+            this.UOM});
+            this.materialsGridView.DataSource = this.iSSUEBindingSource;
+            this.materialsGridView.Location = new System.Drawing.Point(8, 63);
+            this.materialsGridView.MultiSelect = false;
+            this.materialsGridView.Name = "materialsGridView";
+            this.materialsGridView.ReadOnly = true;
+            this.materialsGridView.RowHeadersVisible = false;
+            this.materialsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.materialsGridView.Size = new System.Drawing.Size(893, 351);
+            this.materialsGridView.TabIndex = 1;
+            this.materialsGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.materialsGridView_CellFormatting);
+            this.materialsGridView.SelectionChanged += new System.EventHandler(this.materialsGridView_SelectionChanged);
+            // 
+            // issueID
+            // 
+            this.issueID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.issueID.DataPropertyName = "ISSUEID";
+            this.issueID.HeaderText = "Issue #";
+            this.issueID.Name = "issueID";
+            this.issueID.ReadOnly = true;
+            this.issueID.Width = 60;
+            // 
+            // qty
+            // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.qty.DataPropertyName = "QTY";
+            this.qty.HeaderText = "QTY";
+            this.qty.Name = "qty";
+            this.qty.ReadOnly = true;
+            this.qty.Width = 56;
+            // 
+            // partCode
+            // 
+            this.partCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.partCode.DataPropertyName = "SPAREPARTCODE";
+            this.partCode.HeaderText = "Part Code";
+            this.partCode.Name = "partCode";
+            this.partCode.ReadOnly = true;
+            // 
+            // requestDate
+            // 
+            this.requestDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.requestDate.DataPropertyName = "REQUESTDATE";
+            this.requestDate.HeaderText = "Request Date";
+            this.requestDate.Name = "requestDate";
+            this.requestDate.ReadOnly = true;
+            this.requestDate.Width = 103;
+            // 
+            // partPrice
+            // 
+            this.partPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.partPrice.DataPropertyName = "PARTPRICE";
+            this.partPrice.HeaderText = "Part Price";
+            this.partPrice.Name = "partPrice";
+            this.partPrice.ReadOnly = true;
+            this.partPrice.Width = 80;
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.totalPrice.DataPropertyName = "TOTALPRICE";
+            this.totalPrice.HeaderText = "Total Price";
+            this.totalPrice.Name = "totalPrice";
+            this.totalPrice.ReadOnly = true;
+            this.totalPrice.Width = 88;
+            // 
+            // ISSUESTATE
+            // 
+            this.ISSUESTATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ISSUESTATE.DataPropertyName = "ISSUESTATE";
+            this.ISSUESTATE.HeaderText = "Status";
+            this.ISSUESTATE.Name = "ISSUESTATE";
+            this.ISSUESTATE.ReadOnly = true;
+            this.ISSUESTATE.Width = 69;
+            // 
+            // requesterID
+            // 
+            this.requesterID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.requesterID.DataPropertyName = "requester";
+            this.requesterID.HeaderText = "Requester";
+            this.requesterID.Name = "requesterID";
+            this.requesterID.ReadOnly = true;
+            this.requesterID.Width = 91;
+            // 
+            // issuerID
+            // 
+            this.issuerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.issuerID.DataPropertyName = "issuer";
+            this.issuerID.HeaderText = "Issuer";
+            this.issuerID.Name = "issuerID";
+            this.issuerID.ReadOnly = true;
+            this.issuerID.Width = 65;
+            // 
+            // issueDate
+            // 
+            this.issueDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.issueDate.DataPropertyName = "ISSUEDATE";
+            this.issueDate.HeaderText = "Issue Date";
+            this.issueDate.Name = "issueDate";
+            this.issueDate.ReadOnly = true;
+            this.issueDate.Width = 60;
+            // 
+            // UOM
+            // 
+            this.UOM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.UOM.DataPropertyName = "UOM";
+            this.UOM.HeaderText = "UoM";
+            this.UOM.Name = "UOM";
+            this.UOM.ReadOnly = true;
+            this.UOM.Width = 57;
+            // 
+            // iSSUEBindingSource
+            // 
+            this.iSSUEBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
             // 
             // label1
             // 
@@ -144,22 +298,22 @@ namespace ODP2.Views
             // 
             // workOrderTextBox
             // 
-            this.workOrderTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, "----", "N0"));
+            this.workOrderTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERID", true));
             this.workOrderTextBox.Location = new System.Drawing.Point(79, 10);
             this.workOrderTextBox.Name = "workOrderTextBox";
             this.workOrderTextBox.ReadOnly = true;
             this.workOrderTextBox.Size = new System.Drawing.Size(94, 20);
             this.workOrderTextBox.TabIndex = 2;
             // 
-            // workOrderBindingSource
+            // wORKORDERBindingSource
             // 
-            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.WORKORDER);
+            this.wORKORDERBindingSource.DataSource = typeof(ODP2.Models.WORKORDER);
             // 
             // saveButton
             // 
             this.saveButton.CausesValidation = false;
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(656, 9);
+            this.saveButton.Location = new System.Drawing.Point(786, 10);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(122, 21);
             this.saveButton.TabIndex = 2;
@@ -170,7 +324,7 @@ namespace ODP2.Views
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(631, 11);
+            this.label12.Location = new System.Drawing.Point(741, 39);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(55, 13);
             this.label12.TabIndex = 0;
@@ -188,15 +342,15 @@ namespace ODP2.Views
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(21, 8);
+            this.label17.Location = new System.Drawing.Point(709, 66);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 13);
+            this.label17.Size = new System.Drawing.Size(88, 13);
             this.label17.TabIndex = 0;
-            this.label17.Text = "BDN Hours";
+            this.label17.Text = "Total Down Time";
             // 
             // bdnHoursTextbox
             // 
-            this.bdnHoursTextbox.Location = new System.Drawing.Point(117, 5);
+            this.bdnHoursTextbox.Location = new System.Drawing.Point(803, 63);
             this.bdnHoursTextbox.Name = "bdnHoursTextbox";
             this.bdnHoursTextbox.ReadOnly = true;
             this.bdnHoursTextbox.Size = new System.Drawing.Size(100, 20);
@@ -208,14 +362,15 @@ namespace ODP2.Views
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.workOrderTabs.Controls.Add(this.materialsTab);
-            this.workOrderTabs.Controls.Add(this.bdnTab);
             this.workOrderTabs.Controls.Add(this.stepsAndNotesTab);
+            this.workOrderTabs.Controls.Add(this.bdnTab);
+            this.workOrderTabs.Controls.Add(this.warrantyTab);
             this.workOrderTabs.Controls.Add(this.returnTab);
             this.workOrderTabs.Location = new System.Drawing.Point(10, 192);
             this.workOrderTabs.Name = "workOrderTabs";
             this.workOrderTabs.SelectedIndex = 0;
-            this.workOrderTabs.Size = new System.Drawing.Size(772, 453);
-            this.workOrderTabs.TabIndex = 6;
+            this.workOrderTabs.Size = new System.Drawing.Size(917, 453);
+            this.workOrderTabs.TabIndex = 3;
             // 
             // materialsTab
             // 
@@ -233,7 +388,7 @@ namespace ODP2.Views
             this.materialsTab.Location = new System.Drawing.Point(4, 22);
             this.materialsTab.Name = "materialsTab";
             this.materialsTab.Padding = new System.Windows.Forms.Padding(5);
-            this.materialsTab.Size = new System.Drawing.Size(764, 427);
+            this.materialsTab.Size = new System.Drawing.Size(909, 427);
             this.materialsTab.TabIndex = 0;
             this.materialsTab.Text = "Materials";
             // 
@@ -269,10 +424,10 @@ namespace ODP2.Views
             // 
             // totalCostTextbox
             // 
-            this.totalCostTextbox.Location = new System.Drawing.Point(692, 8);
+            this.totalCostTextbox.Location = new System.Drawing.Point(802, 36);
             this.totalCostTextbox.Name = "totalCostTextbox";
             this.totalCostTextbox.ReadOnly = true;
-            this.totalCostTextbox.Size = new System.Drawing.Size(64, 20);
+            this.totalCostTextbox.Size = new System.Drawing.Size(92, 20);
             this.totalCostTextbox.TabIndex = 2;
             // 
             // quantityTextBox
@@ -287,7 +442,7 @@ namespace ODP2.Views
             this.partCodeTextBox.Location = new System.Drawing.Point(65, 8);
             this.partCodeTextBox.Name = "partCodeTextBox";
             this.partCodeTextBox.Size = new System.Drawing.Size(159, 20);
-            this.partCodeTextBox.TabIndex = 2;
+            this.partCodeTextBox.TabIndex = 1;
             this.partCodeTextBox.Validated += new System.EventHandler(this.partCodeTextBox_Validated);
             // 
             // label18
@@ -299,131 +454,6 @@ namespace ODP2.Views
             this.label18.TabIndex = 0;
             this.label18.Text = "Quantity";
             // 
-            // materialsGridView
-            // 
-            this.materialsGridView.AllowUserToAddRows = false;
-            this.materialsGridView.AllowUserToDeleteRows = false;
-            this.materialsGridView.AllowUserToOrderColumns = true;
-            this.materialsGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialsGridView.AutoGenerateColumns = false;
-            this.materialsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.materialsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.issueID,
-            this.qty,
-            this.uom,
-            this.sparePartCodeDataGridViewTextBoxColumn,
-            this.sparePart,
-            this.issueState,
-            this.requestDate,
-            this.partPriceDataGridViewTextBoxColumn,
-            this.totalPriceDataGridViewTextBoxColumn,
-            this.issueDateDataGridViewTextBoxColumn});
-            this.materialsGridView.DataSource = this.issueBindingSource;
-            this.materialsGridView.Location = new System.Drawing.Point(8, 63);
-            this.materialsGridView.MultiSelect = false;
-            this.materialsGridView.Name = "materialsGridView";
-            this.materialsGridView.ReadOnly = true;
-            this.materialsGridView.RowHeadersVisible = false;
-            this.materialsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.materialsGridView.Size = new System.Drawing.Size(748, 351);
-            this.materialsGridView.TabIndex = 1;
-            this.materialsGridView.SelectionChanged += new System.EventHandler(this.materialsGridView_SelectionChanged);
-            // 
-            // issueID
-            // 
-            this.issueID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.issueID.DataPropertyName = "issueID";
-            this.issueID.HeaderText = "Issue#";
-            this.issueID.Name = "issueID";
-            this.issueID.ReadOnly = true;
-            this.issueID.Width = 64;
-            // 
-            // qty
-            // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.qty.DataPropertyName = "qty";
-            this.qty.HeaderText = "Qty";
-            this.qty.Name = "qty";
-            this.qty.ReadOnly = true;
-            this.qty.Width = 48;
-            // 
-            // uom
-            // 
-            this.uom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.uom.DataPropertyName = "uom";
-            this.uom.HeaderText = "UoM";
-            this.uom.Name = "uom";
-            this.uom.ReadOnly = true;
-            this.uom.Width = 55;
-            // 
-            // sparePartCodeDataGridViewTextBoxColumn
-            // 
-            this.sparePartCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sparePartCodeDataGridViewTextBoxColumn.DataPropertyName = "sparePartCode";
-            this.sparePartCodeDataGridViewTextBoxColumn.HeaderText = "Spare Part Code";
-            this.sparePartCodeDataGridViewTextBoxColumn.Name = "sparePartCodeDataGridViewTextBoxColumn";
-            this.sparePartCodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sparePartCodeDataGridViewTextBoxColumn.Width = 79;
-            // 
-            // sparePart
-            // 
-            this.sparePart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.sparePart.DataPropertyName = "partDirective";
-            this.sparePart.HeaderText = "Part Description";
-            this.sparePart.Name = "sparePart";
-            this.sparePart.ReadOnly = true;
-            // 
-            // issueState
-            // 
-            this.issueState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.issueState.DataPropertyName = "issueState";
-            this.issueState.HeaderText = "Status";
-            this.issueState.Name = "issueState";
-            this.issueState.ReadOnly = true;
-            this.issueState.Width = 62;
-            // 
-            // requestDate
-            // 
-            this.requestDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.requestDate.DataPropertyName = "requestDate";
-            this.requestDate.HeaderText = "Request Date";
-            this.requestDate.Name = "requestDate";
-            this.requestDate.ReadOnly = true;
-            this.requestDate.Width = 90;
-            // 
-            // partPriceDataGridViewTextBoxColumn
-            // 
-            this.partPriceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.partPriceDataGridViewTextBoxColumn.DataPropertyName = "partPrice";
-            this.partPriceDataGridViewTextBoxColumn.HeaderText = "Part Price";
-            this.partPriceDataGridViewTextBoxColumn.Name = "partPriceDataGridViewTextBoxColumn";
-            this.partPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.partPriceDataGridViewTextBoxColumn.Width = 72;
-            // 
-            // totalPriceDataGridViewTextBoxColumn
-            // 
-            this.totalPriceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.totalPriceDataGridViewTextBoxColumn.DataPropertyName = "totalPrice";
-            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "Total Price";
-            this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
-            this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalPriceDataGridViewTextBoxColumn.Width = 77;
-            // 
-            // issueDateDataGridViewTextBoxColumn
-            // 
-            this.issueDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.issueDateDataGridViewTextBoxColumn.DataPropertyName = "issueDate";
-            this.issueDateDataGridViewTextBoxColumn.HeaderText = "Issue Date";
-            this.issueDateDataGridViewTextBoxColumn.Name = "issueDateDataGridViewTextBoxColumn";
-            this.issueDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.issueDateDataGridViewTextBoxColumn.Width = 77;
-            // 
-            // issueBindingSource
-            // 
-            this.issueBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -433,18 +463,149 @@ namespace ODP2.Views
             this.label15.TabIndex = 0;
             this.label15.Text = "Part Code";
             // 
+            // stepsAndNotesTab
+            // 
+            this.stepsAndNotesTab.BackColor = System.Drawing.Color.Transparent;
+            this.stepsAndNotesTab.Controls.Add(this.workOrderNotes);
+            this.stepsAndNotesTab.Controls.Add(this.workDoneType);
+            this.stepsAndNotesTab.Controls.Add(this.pmCheclistButton);
+            this.stepsAndNotesTab.Controls.Add(this.workDoneTypeDirectiveLabel);
+            this.stepsAndNotesTab.Controls.Add(this.label3);
+            this.stepsAndNotesTab.Location = new System.Drawing.Point(4, 22);
+            this.stepsAndNotesTab.Name = "stepsAndNotesTab";
+            this.stepsAndNotesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.stepsAndNotesTab.Size = new System.Drawing.Size(909, 427);
+            this.stepsAndNotesTab.TabIndex = 2;
+            this.stepsAndNotesTab.Text = "Work Done";
+            // 
+            // workOrderNotes
+            // 
+            this.workOrderNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.workOrderNotes.BulletIndent = 3;
+            this.workOrderNotes.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERNOTES", true));
+            this.workOrderNotes.Location = new System.Drawing.Point(5, 38);
+            this.workOrderNotes.Name = "workOrderNotes";
+            this.workOrderNotes.Size = new System.Drawing.Size(898, 383);
+            this.workOrderNotes.TabIndex = 10;
+            this.workOrderNotes.Text = "Write Here all the Notes you need";
+            this.workOrderNotes.TextChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            // 
+            // workDoneType
+            // 
+            this.workDoneType.DataSource = this.wORKDONETYPEBindingSource;
+            this.workDoneType.DisplayMember = "WORKDONETYPEID";
+            this.workDoneType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.workDoneType.FormattingEnabled = true;
+            this.workDoneType.Location = new System.Drawing.Point(100, 11);
+            this.workDoneType.Name = "workDoneType";
+            this.workDoneType.Size = new System.Drawing.Size(100, 21);
+            this.workDoneType.TabIndex = 5;
+            this.workDoneType.SelectedIndexChanged += new System.EventHandler(this.workDoneType_SelectedIndexChanged);
+            // 
+            // wORKDONETYPEBindingSource
+            // 
+            this.wORKDONETYPEBindingSource.DataSource = typeof(ODP2.Models.WORKDONETYPE);
+            // 
+            // pmCheclistButton
+            // 
+            this.pmCheclistButton.Image = ((System.Drawing.Image)(resources.GetObject("pmCheclistButton.Image")));
+            this.pmCheclistButton.Location = new System.Drawing.Point(781, 5);
+            this.pmCheclistButton.Name = "pmCheclistButton";
+            this.pmCheclistButton.Size = new System.Drawing.Size(122, 27);
+            this.pmCheclistButton.TabIndex = 2;
+            this.pmCheclistButton.Text = "Attachment";
+            this.pmCheclistButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.pmCheclistButton.UseVisualStyleBackColor = true;
+            this.pmCheclistButton.Click += new System.EventHandler(this.pmChecklist_Button);
+            // 
+            // workDoneTypeDirectiveLabel
+            // 
+            this.workDoneTypeDirectiveLabel.AutoSize = true;
+            this.workDoneTypeDirectiveLabel.Location = new System.Drawing.Point(206, 14);
+            this.workDoneTypeDirectiveLabel.Name = "workDoneTypeDirectiveLabel";
+            this.workDoneTypeDirectiveLabel.Size = new System.Drawing.Size(13, 13);
+            this.workDoneTypeDirectiveLabel.TabIndex = 0;
+            this.workDoneTypeDirectiveLabel.Text = "--\r\n";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Performed Action";
+            // 
             // bdnTab
             // 
             this.bdnTab.BackColor = System.Drawing.Color.Transparent;
+            this.bdnTab.Controls.Add(this.BDNReasonTextBox);
+            this.bdnTab.Controls.Add(this.bdnToDateTimePicker);
+            this.bdnTab.Controls.Add(this.bdnFromDateTimePicker);
+            this.bdnTab.Controls.Add(this.endBDNbutton);
+            this.bdnTab.Controls.Add(this.startBDNButton);
             this.bdnTab.Controls.Add(this.bdnGridView);
             this.bdnTab.Controls.Add(this.bdnHoursTextbox);
+            this.bdnTab.Controls.Add(this.label6);
             this.bdnTab.Controls.Add(this.label17);
             this.bdnTab.Location = new System.Drawing.Point(4, 22);
             this.bdnTab.Name = "bdnTab";
             this.bdnTab.Padding = new System.Windows.Forms.Padding(3);
-            this.bdnTab.Size = new System.Drawing.Size(764, 427);
+            this.bdnTab.Size = new System.Drawing.Size(909, 427);
             this.bdnTab.TabIndex = 1;
-            this.bdnTab.Text = "BDN";
+            this.bdnTab.Text = "Down Time";
+            // 
+            // BDNReasonTextBox
+            // 
+            this.BDNReasonTextBox.Enabled = false;
+            this.BDNReasonTextBox.Location = new System.Drawing.Point(82, 63);
+            this.BDNReasonTextBox.Name = "BDNReasonTextBox";
+            this.BDNReasonTextBox.Size = new System.Drawing.Size(317, 20);
+            this.BDNReasonTextBox.TabIndex = 7;
+            // 
+            // bdnToDateTimePicker
+            // 
+            this.bdnToDateTimePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
+            this.bdnToDateTimePicker.Enabled = false;
+            this.bdnToDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.bdnToDateTimePicker.Location = new System.Drawing.Point(6, 37);
+            this.bdnToDateTimePicker.Name = "bdnToDateTimePicker";
+            this.bdnToDateTimePicker.Size = new System.Drawing.Size(152, 20);
+            this.bdnToDateTimePicker.TabIndex = 6;
+            // 
+            // bdnFromDateTimePicker
+            // 
+            this.bdnFromDateTimePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
+            this.bdnFromDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.bdnFromDateTimePicker.Location = new System.Drawing.Point(6, 6);
+            this.bdnFromDateTimePicker.Name = "bdnFromDateTimePicker";
+            this.bdnFromDateTimePicker.Size = new System.Drawing.Size(152, 20);
+            this.bdnFromDateTimePicker.TabIndex = 6;
+            // 
+            // endBDNbutton
+            // 
+            this.endBDNbutton.CausesValidation = false;
+            this.endBDNbutton.Enabled = false;
+            this.endBDNbutton.Location = new System.Drawing.Point(164, 35);
+            this.endBDNbutton.Name = "endBDNbutton";
+            this.endBDNbutton.Size = new System.Drawing.Size(75, 23);
+            this.endBDNbutton.TabIndex = 5;
+            this.endBDNbutton.Text = "End BDN";
+            this.endBDNbutton.UseVisualStyleBackColor = true;
+            this.endBDNbutton.Click += new System.EventHandler(this.endBDNbutton_Click);
+            // 
+            // startBDNButton
+            // 
+            this.startBDNButton.CausesValidation = false;
+            this.startBDNButton.Location = new System.Drawing.Point(164, 6);
+            this.startBDNButton.Name = "startBDNButton";
+            this.startBDNButton.Size = new System.Drawing.Size(75, 23);
+            this.startBDNButton.TabIndex = 5;
+            this.startBDNButton.Text = "Start BDN";
+            this.startBDNButton.UseVisualStyleBackColor = true;
+            this.startBDNButton.Click += new System.EventHandler(this.startBDNButton_Click);
             // 
             // bdnGridView
             // 
@@ -454,150 +615,98 @@ namespace ODP2.Views
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bdnGridView.AutoGenerateColumns = false;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Lucida Sans", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.bdnGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.bdnGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bdnGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.bdnReasonDataGridViewTextBoxColumn,
-            this.fromTimeDataGridViewTextBoxColumn,
-            this.toTimeDataGridViewTextBoxColumn,
-            this.workOrder1DataGridViewTextBoxColumn});
-            this.bdnGridView.DataSource = this.breakDownBindingSource;
-            this.bdnGridView.Location = new System.Drawing.Point(3, 30);
+            this.BREAKDOWNID,
+            this.BDNReason,
+            this.BDNFROMTIME,
+            this.BDNTOTIME,
+            this.BDNTime});
+            this.bdnGridView.DataSource = this.bREAKDOWNBindingSource;
+            this.bdnGridView.Location = new System.Drawing.Point(3, 90);
             this.bdnGridView.Name = "bdnGridView";
             this.bdnGridView.ReadOnly = true;
+            this.bdnGridView.RowHeadersVisible = false;
             this.bdnGridView.RowTemplate.Height = 25;
-            this.bdnGridView.Size = new System.Drawing.Size(753, 391);
+            this.bdnGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.bdnGridView.Size = new System.Drawing.Size(900, 331);
             this.bdnGridView.TabIndex = 4;
+            this.bdnGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.bdnGridView_CellFormatting);
+            this.bdnGridView.SelectionChanged += new System.EventHandler(this.bdnGridView_SelectionChanged);
             // 
-            // id
+            // BREAKDOWNID
             // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 43;
+            this.BREAKDOWNID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.BREAKDOWNID.DataPropertyName = "BREAKDOWNID";
+            this.BREAKDOWNID.HeaderText = "BDN #";
+            this.BREAKDOWNID.Name = "BREAKDOWNID";
+            this.BREAKDOWNID.ReadOnly = true;
+            this.BREAKDOWNID.Width = 54;
             // 
-            // bdnReasonDataGridViewTextBoxColumn
+            // BDNReason
             // 
-            this.bdnReasonDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.bdnReasonDataGridViewTextBoxColumn.DataPropertyName = "bdnReason";
-            this.bdnReasonDataGridViewTextBoxColumn.HeaderText = "BreakDown Reason";
-            this.bdnReasonDataGridViewTextBoxColumn.Name = "bdnReasonDataGridViewTextBoxColumn";
-            this.bdnReasonDataGridViewTextBoxColumn.ReadOnly = true;
+            this.BDNReason.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BDNReason.DataPropertyName = "BDNREASON";
+            this.BDNReason.HeaderText = "BDN Reason";
+            this.BDNReason.Name = "BDNReason";
+            this.BDNReason.ReadOnly = true;
             // 
-            // fromTimeDataGridViewTextBoxColumn
+            // BDNFROMTIME
             // 
-            this.fromTimeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fromTimeDataGridViewTextBoxColumn.DataPropertyName = "fromTime";
-            this.fromTimeDataGridViewTextBoxColumn.HeaderText = "From Time";
-            this.fromTimeDataGridViewTextBoxColumn.Name = "fromTimeDataGridViewTextBoxColumn";
-            this.fromTimeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fromTimeDataGridViewTextBoxColumn.Width = 81;
+            this.BDNFROMTIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.BDNFROMTIME.DataPropertyName = "FROMTIME";
+            this.BDNFROMTIME.HeaderText = "Start";
+            this.BDNFROMTIME.Name = "BDNFROMTIME";
+            this.BDNFROMTIME.ReadOnly = true;
+            this.BDNFROMTIME.Width = 61;
             // 
-            // toTimeDataGridViewTextBoxColumn
+            // BDNTOTIME
             // 
-            this.toTimeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.toTimeDataGridViewTextBoxColumn.DataPropertyName = "toTime";
-            this.toTimeDataGridViewTextBoxColumn.HeaderText = "To Time";
-            this.toTimeDataGridViewTextBoxColumn.Name = "toTimeDataGridViewTextBoxColumn";
-            this.toTimeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.toTimeDataGridViewTextBoxColumn.Width = 71;
+            this.BDNTOTIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.BDNTOTIME.DataPropertyName = "TOTIME";
+            this.BDNTOTIME.HeaderText = "End";
+            this.BDNTOTIME.Name = "BDNTOTIME";
+            this.BDNTOTIME.ReadOnly = true;
+            this.BDNTOTIME.Width = 52;
             // 
-            // workOrder1DataGridViewTextBoxColumn
+            // BDNTime
             // 
-            this.workOrder1DataGridViewTextBoxColumn.DataPropertyName = "workOrder1";
-            this.workOrder1DataGridViewTextBoxColumn.HeaderText = "workOrder1";
-            this.workOrder1DataGridViewTextBoxColumn.Name = "workOrder1DataGridViewTextBoxColumn";
-            this.workOrder1DataGridViewTextBoxColumn.ReadOnly = true;
+            this.BDNTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.BDNTime.DataPropertyName = "BDNTOTALTIME";
+            this.BDNTime.HeaderText = "BDN Duration";
+            this.BDNTime.Name = "BDNTime";
+            this.BDNTime.ReadOnly = true;
+            this.BDNTime.Width = 102;
             // 
-            // breakDownBindingSource
+            // bREAKDOWNBindingSource
             // 
-            this.breakDownBindingSource.DataSource = typeof(ODP2.Models.BREAKDOWN);
-            // 
-            // stepsAndNotesTab
-            // 
-            this.stepsAndNotesTab.BackColor = System.Drawing.Color.Transparent;
-            this.stepsAndNotesTab.Controls.Add(this.workOrderNotes);
-            this.stepsAndNotesTab.Controls.Add(this.workDoneType);
-            this.stepsAndNotesTab.Controls.Add(this.pmCheclistButton);
-            this.stepsAndNotesTab.Controls.Add(this.label6);
-            this.stepsAndNotesTab.Controls.Add(this.label3);
-            this.stepsAndNotesTab.Location = new System.Drawing.Point(4, 22);
-            this.stepsAndNotesTab.Name = "stepsAndNotesTab";
-            this.stepsAndNotesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.stepsAndNotesTab.Size = new System.Drawing.Size(764, 427);
-            this.stepsAndNotesTab.TabIndex = 2;
-            this.stepsAndNotesTab.Text = "Notes";
-            // 
-            // workOrderNotes
-            // 
-            this.workOrderNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.workOrderNotes.BulletIndent = 3;
-            this.workOrderNotes.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderNotes", true));
-            this.workOrderNotes.Location = new System.Drawing.Point(5, 38);
-            this.workOrderNotes.Name = "workOrderNotes";
-            this.workOrderNotes.Size = new System.Drawing.Size(751, 383);
-            this.workOrderNotes.TabIndex = 0;
-            this.workOrderNotes.Text = "Write Here all the Notes you need";
-            this.workOrderNotes.TextChanged += new System.EventHandler(this.workOrderNotes_TextChanged);
-            // 
-            // workDoneType
-            // 
-            this.workDoneType.DataSource = this.workDoneTypeBindingSource;
-            this.workDoneType.DisplayMember = "workDoneTypeID";
-            this.workDoneType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.workDoneType.FormattingEnabled = true;
-            this.workDoneType.Location = new System.Drawing.Point(73, 11);
-            this.workDoneType.Name = "workDoneType";
-            this.workDoneType.Size = new System.Drawing.Size(100, 21);
-            this.workDoneType.TabIndex = 5;
-            // 
-            // workDoneTypeBindingSource
-            // 
-            this.workDoneTypeBindingSource.DataSource = typeof(ODP2.Models.WORKDONETYPE);
-            // 
-            // pmCheclistButton
-            // 
-            this.pmCheclistButton.Image = ((System.Drawing.Image)(resources.GetObject("pmCheclistButton.Image")));
-            this.pmCheclistButton.Location = new System.Drawing.Point(634, 5);
-            this.pmCheclistButton.Name = "pmCheclistButton";
-            this.pmCheclistButton.Size = new System.Drawing.Size(122, 27);
-            this.pmCheclistButton.TabIndex = 2;
-            this.pmCheclistButton.Text = "Attachment";
-            this.pmCheclistButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.pmCheclistButton.UseVisualStyleBackColor = true;
-            this.pmCheclistButton.Click += new System.EventHandler(this.pmChecklist_Button);
+            this.bREAKDOWNBindingSource.DataSource = typeof(ODP2.Models.BREAKDOWN);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workDoneType1.workDoneTypeDirective", true));
-            this.label6.Location = new System.Drawing.Point(179, 14);
+            this.label6.Location = new System.Drawing.Point(6, 66);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "--\r\n";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Work Done";
+            this.label6.Text = "BDN Reason";
             // 
             // returnTab
             // 
+            this.returnTab.BackColor = System.Drawing.Color.Transparent;
             this.returnTab.Location = new System.Drawing.Point(4, 22);
             this.returnTab.Name = "returnTab";
-            this.returnTab.Size = new System.Drawing.Size(764, 427);
+            this.returnTab.Size = new System.Drawing.Size(909, 427);
             this.returnTab.TabIndex = 3;
             this.returnTab.Text = "Returns";
-            this.returnTab.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -631,16 +740,12 @@ namespace ODP2.Views
             this.panel1.Controls.Add(this.registerationDatePicker);
             this.panel1.Location = new System.Drawing.Point(10, 36);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(768, 150);
+            this.panel1.Size = new System.Drawing.Size(913, 150);
             this.panel1.TabIndex = 7;
-            // 
-            // workOrderStatuBindingSource
-            // 
-            this.workOrderStatuBindingSource.DataSource = typeof(ODP2.Models.WORKORDERSTATU);
             // 
             // equipmentDirectiveTextBox
             // 
-            this.equipmentDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "equipment.equipmentDirective", true));
+            this.equipmentDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "EQUIPMENT.EQUIPMENTDIRECTIVE", true));
             this.equipmentDirectiveTextBox.Location = new System.Drawing.Point(167, 13);
             this.equipmentDirectiveTextBox.Name = "equipmentDirectiveTextBox";
             this.equipmentDirectiveTextBox.ReadOnly = true;
@@ -649,23 +754,23 @@ namespace ODP2.Views
             // 
             // workOrderDirective
             // 
-            this.workOrderDirective.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderDirective", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
+            this.workOrderDirective.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERDIRECTIVE", true));
             this.workOrderDirective.Location = new System.Drawing.Point(68, 116);
             this.workOrderDirective.Name = "workOrderDirective";
             this.workOrderDirective.Size = new System.Drawing.Size(339, 20);
-            this.workOrderDirective.TabIndex = 20;
+            this.workOrderDirective.TabIndex = 10;
             this.workOrderDirective.TextChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // statusBox
             // 
+            this.statusBox.CausesValidation = false;
             this.statusBox.ContextMenuStrip = this.statusContextMenuStrip;
-            this.statusBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderStatusID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, "----"));
+            this.statusBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.statusBindingSource, "WORKORDERSTATUSID", true));
             this.statusBox.Location = new System.Drawing.Point(68, 89);
             this.statusBox.Name = "statusBox";
             this.statusBox.ReadOnly = true;
             this.statusBox.Size = new System.Drawing.Size(93, 20);
             this.statusBox.TabIndex = 19;
-            this.statusBox.TextChanged += new System.EventHandler(this.statusChanged);
             // 
             // statusContextMenuStrip
             // 
@@ -681,7 +786,6 @@ namespace ODP2.Views
             this.cancelled});
             this.statusContextMenuStrip.Name = "statusContextMenuStrip";
             this.statusContextMenuStrip.Size = new System.Drawing.Size(148, 138);
-            this.statusContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.statusContextMenuStrip_Opening);
             // 
             // workRequest
             // 
@@ -738,9 +842,13 @@ namespace ODP2.Views
             this.cancelled.Text = "Cancelled";
             this.cancelled.Click += new System.EventHandler(this.statusSelected);
             // 
+            // statusBindingSource
+            // 
+            this.statusBindingSource.DataSource = typeof(ODP2.Models.WORKORDERSTATU);
+            // 
             // creatorIDTextBox
             // 
-            this.creatorIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "user.userIDNumber", true));
+            this.creatorIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "ODP_USER.USERIDNUMBER", true));
             this.creatorIDTextBox.Location = new System.Drawing.Point(68, 63);
             this.creatorIDTextBox.Name = "creatorIDTextBox";
             this.creatorIDTextBox.ReadOnly = true;
@@ -749,7 +857,7 @@ namespace ODP2.Views
             // 
             // creatorNameTextBox
             // 
-            this.creatorNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "user.userName", true));
+            this.creatorNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "ODP_USER.USERNAME", true));
             this.creatorNameTextBox.Location = new System.Drawing.Point(167, 63);
             this.creatorNameTextBox.Name = "creatorNameTextBox";
             this.creatorNameTextBox.ReadOnly = true;
@@ -758,7 +866,7 @@ namespace ODP2.Views
             // 
             // workTypeDirectiveTextBox
             // 
-            this.workTypeDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderType.workOrderTypeDirective", true));
+            this.workTypeDirectiveTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERTYPE.WORKORDERTYPEDIRECTIVE", true));
             this.workTypeDirectiveTextBox.Location = new System.Drawing.Point(167, 38);
             this.workTypeDirectiveTextBox.Name = "workTypeDirectiveTextBox";
             this.workTypeDirectiveTextBox.ReadOnly = true;
@@ -767,7 +875,7 @@ namespace ODP2.Views
             // 
             // workTypeTextBox
             // 
-            this.workTypeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderTypeID", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
+            this.workTypeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERTYPE.WORKORDERTYPEID", true));
             this.workTypeTextBox.Location = new System.Drawing.Point(68, 39);
             this.workTypeTextBox.Name = "workTypeTextBox";
             this.workTypeTextBox.ReadOnly = true;
@@ -785,8 +893,8 @@ namespace ODP2.Views
             // 
             // workOrderFinishDate
             // 
-            this.workOrderFinishDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderFinishDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.workOrderFinishDate.Location = new System.Drawing.Point(609, 118);
+            this.workOrderFinishDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERFINISHDATE", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
+            this.workOrderFinishDate.Location = new System.Drawing.Point(747, 116);
             this.workOrderFinishDate.Name = "workOrderFinishDate";
             this.workOrderFinishDate.ReadOnly = true;
             this.workOrderFinishDate.Size = new System.Drawing.Size(122, 20);
@@ -794,8 +902,8 @@ namespace ODP2.Views
             // 
             // workDoneDate
             // 
-            this.workDoneDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workDoneDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.workDoneDate.Location = new System.Drawing.Point(609, 90);
+            this.workDoneDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKDONEDATE", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
+            this.workDoneDate.Location = new System.Drawing.Point(747, 88);
             this.workDoneDate.Name = "workDoneDate";
             this.workDoneDate.ReadOnly = true;
             this.workDoneDate.Size = new System.Drawing.Size(122, 20);
@@ -803,8 +911,8 @@ namespace ODP2.Views
             // 
             // workStartDate
             // 
-            this.workStartDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workStartDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.workStartDate.Location = new System.Drawing.Point(609, 64);
+            this.workStartDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKSTARTDATE", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
+            this.workStartDate.Location = new System.Drawing.Point(747, 62);
             this.workStartDate.Name = "workStartDate";
             this.workStartDate.ReadOnly = true;
             this.workStartDate.Size = new System.Drawing.Size(122, 20);
@@ -812,8 +920,8 @@ namespace ODP2.Views
             // 
             // registerationDate
             // 
-            this.registerationDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "workOrderRegisterationDate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "g"));
-            this.registerationDate.Location = new System.Drawing.Point(609, 38);
+            this.registerationDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "WORKORDERREGISTERATIONDATE", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "G"));
+            this.registerationDate.Location = new System.Drawing.Point(747, 36);
             this.registerationDate.Name = "registerationDate";
             this.registerationDate.ReadOnly = true;
             this.registerationDate.Size = new System.Drawing.Size(122, 20);
@@ -822,8 +930,8 @@ namespace ODP2.Views
             // 
             // equipmentHR
             // 
-            this.equipmentHR.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "equipmentRH", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----", "N2"));
-            this.equipmentHR.Location = new System.Drawing.Point(610, 12);
+            this.equipmentHR.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "EQUIPMENTRH", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "----"));
+            this.equipmentHR.Location = new System.Drawing.Point(748, 10);
             this.equipmentHR.Name = "equipmentHR";
             this.equipmentHR.ReadOnly = true;
             this.equipmentHR.Size = new System.Drawing.Size(122, 20);
@@ -831,7 +939,7 @@ namespace ODP2.Views
             // 
             // equipmentIDTextBox
             // 
-            this.equipmentIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderBindingSource, "equipment.equipmentID", true));
+            this.equipmentIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.wORKORDERBindingSource, "EQUIPMENT.EQUIPMENTID", true));
             this.equipmentIDTextBox.Location = new System.Drawing.Point(68, 13);
             this.equipmentIDTextBox.Name = "equipmentIDTextBox";
             this.equipmentIDTextBox.ReadOnly = true;
@@ -841,7 +949,7 @@ namespace ODP2.Views
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(508, 44);
+            this.label16.Location = new System.Drawing.Point(646, 42);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(95, 13);
             this.label16.TabIndex = 11;
@@ -850,7 +958,7 @@ namespace ODP2.Views
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(543, 121);
+            this.label11.Location = new System.Drawing.Point(681, 119);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(60, 13);
             this.label11.TabIndex = 10;
@@ -859,7 +967,7 @@ namespace ODP2.Views
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(515, 94);
+            this.label10.Location = new System.Drawing.Point(653, 92);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(88, 13);
             this.label10.TabIndex = 9;
@@ -868,7 +976,7 @@ namespace ODP2.Views
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(549, 70);
+            this.label8.Location = new System.Drawing.Point(687, 68);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 8;
@@ -895,7 +1003,7 @@ namespace ODP2.Views
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(527, 15);
+            this.label9.Location = new System.Drawing.Point(665, 13);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 13);
             this.label9.TabIndex = 5;
@@ -921,47 +1029,61 @@ namespace ODP2.Views
             // 
             // finishDatePicker
             // 
-            this.finishDatePicker.CustomFormat = "yyyy/MM/dd hh:mm tt";
+            this.finishDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
+            this.finishDatePicker.Enabled = false;
             this.finishDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.finishDatePicker.Location = new System.Drawing.Point(609, 118);
+            this.finishDatePicker.Location = new System.Drawing.Point(747, 116);
             this.finishDatePicker.Name = "finishDatePicker";
             this.finishDatePicker.Size = new System.Drawing.Size(150, 20);
             this.finishDatePicker.TabIndex = 26;
             this.finishDatePicker.Visible = false;
-            this.finishDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            this.finishDatePicker.EnabledChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // doneDatePicker
             // 
-            this.doneDatePicker.CustomFormat = "yyyy/MM/dd hh:mm tt";
+            this.doneDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
+            this.doneDatePicker.Enabled = false;
             this.doneDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.doneDatePicker.Location = new System.Drawing.Point(609, 90);
+            this.doneDatePicker.Location = new System.Drawing.Point(747, 88);
             this.doneDatePicker.Name = "doneDatePicker";
             this.doneDatePicker.Size = new System.Drawing.Size(150, 20);
             this.doneDatePicker.TabIndex = 26;
             this.doneDatePicker.Visible = false;
-            this.doneDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            this.doneDatePicker.EnabledChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            this.doneDatePicker.Validated += new System.EventHandler(this.doneDatePicker_Validated);
             // 
             // startDatePicker
             // 
-            this.startDatePicker.CustomFormat = "yyyy/MM/dd hh:mm tt";
+            this.startDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
+            this.startDatePicker.Enabled = false;
             this.startDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDatePicker.Location = new System.Drawing.Point(609, 64);
+            this.startDatePicker.Location = new System.Drawing.Point(747, 62);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(150, 20);
             this.startDatePicker.TabIndex = 26;
             this.startDatePicker.Visible = false;
-            this.startDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            this.startDatePicker.EnabledChanged += new System.EventHandler(this.workOrderAttributeChanged);
             // 
             // registerationDatePicker
             // 
-            this.registerationDatePicker.CustomFormat = "yyyy/MM/dd hh:mm tt";
+            this.registerationDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
+            this.registerationDatePicker.Enabled = false;
             this.registerationDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.registerationDatePicker.Location = new System.Drawing.Point(610, 38);
+            this.registerationDatePicker.Location = new System.Drawing.Point(748, 36);
             this.registerationDatePicker.Name = "registerationDatePicker";
             this.registerationDatePicker.Size = new System.Drawing.Size(149, 20);
             this.registerationDatePicker.TabIndex = 26;
             this.registerationDatePicker.Visible = false;
-            this.registerationDatePicker.ValueChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            this.registerationDatePicker.EnabledChanged += new System.EventHandler(this.workOrderAttributeChanged);
+            // 
+            // warrantyTab
+            // 
+            this.warrantyTab.BackColor = System.Drawing.Color.Transparent;
+            this.warrantyTab.Location = new System.Drawing.Point(4, 22);
+            this.warrantyTab.Name = "warrantyTab";
+            this.warrantyTab.Size = new System.Drawing.Size(909, 427);
+            this.warrantyTab.TabIndex = 4;
+            this.warrantyTab.Text = "Warranty Claim";
             // 
             // WorkOrder
             // 
@@ -971,7 +1093,7 @@ namespace ODP2.Views
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(793, 656);
+            this.ClientSize = new System.Drawing.Size(938, 656);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.workOrderTabs);
             this.Controls.Add(this.saveButton);
@@ -983,24 +1105,25 @@ namespace ODP2.Views
             this.Name = "WorkOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Work Order #";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorkOrder_FormClosing);
             this.Load += new System.EventHandler(this.WorkOrder_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iSSUEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wORKORDERBindingSource)).EndInit();
             this.workOrderTabs.ResumeLayout(false);
             this.materialsTab.ResumeLayout(false);
             this.materialsTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.materialsGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.issueBindingSource)).EndInit();
+            this.stepsAndNotesTab.ResumeLayout(false);
+            this.stepsAndNotesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.wORKDONETYPEBindingSource)).EndInit();
             this.bdnTab.ResumeLayout(false);
             this.bdnTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bdnGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breakDownBindingSource)).EndInit();
-            this.stepsAndNotesTab.ResumeLayout(false);
-            this.stepsAndNotesTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.workDoneTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bREAKDOWNBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.workOrderStatuBindingSource)).EndInit();
             this.statusContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1024,17 +1147,6 @@ namespace ODP2.Views
         private RichTextBox workOrderNotes;
         private ComboBox workDoneType;
         private Label label3;
-        private BindingSource workDoneTypeBindingSource;
-        private BindingSource workOrderBindingSource;
-        private DataGridView materialsGridView;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn bdnReasonDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn fromTimeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn toTimeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrder1DataGridViewTextBoxColumn;
-        private BindingSource breakDownBindingSource;
-       
-        private BindingSource issueBindingSource;
         private Panel panel1;
         private TextBox equipmentDirectiveTextBox;
         private TextBox workOrderDirective;
@@ -1062,7 +1174,6 @@ namespace ODP2.Views
         private DateTimePicker finishDatePicker;
         private DateTimePicker doneDatePicker;
         private DateTimePicker startDatePicker;
-        private BindingSource workOrderStatuBindingSource;
         private Button pmCheclistButton;
         private Button requestButton;
         private TextBox partDirectiveTextBox;
@@ -1071,7 +1182,7 @@ namespace ODP2.Views
         private Label label18;
         private Label label15;
         private TextBox totalCostTextbox;
-        private Label label6;
+        private Label workDoneTypeDirectiveLabel;
         private TabPage returnTab;
         private ContextMenuStrip statusContextMenuStrip;
         private ToolStripMenuItem workRequest;
@@ -1085,15 +1196,34 @@ namespace ODP2.Views
         private ToolStripMenuItem cancelled;
         private TextBox statusBox;
         private Button releaseButton;
+        private BindingSource iSSUEBindingSource;
+        private BindingSource wORKORDERBindingSource;
+        private BindingSource wORKDONETYPEBindingSource;
+        private DateTimePicker bdnFromDateTimePicker;
+        private Button endBDNbutton;
+        private Button startBDNButton;
+        private TextBox BDNReasonTextBox;
+        private BindingSource bREAKDOWNBindingSource;
+        private DateTimePicker bdnToDateTimePicker;
+        private Label label6;
+        private DataGridView materialsGridView;
+        private DataGridViewTextBoxColumn BREAKDOWNID;
+        private DataGridViewTextBoxColumn BDNReason;
+        private DataGridViewTextBoxColumn BDNFROMTIME;
+        private DataGridViewTextBoxColumn BDNTOTIME;
+        private DataGridViewTextBoxColumn BDNTime;
+        private BindingSource statusBindingSource;
         private DataGridViewTextBoxColumn issueID;
         private DataGridViewTextBoxColumn qty;
-        private DataGridViewTextBoxColumn uom;
-        private DataGridViewTextBoxColumn sparePartCodeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn sparePart;
-        private DataGridViewTextBoxColumn issueState;
+        private DataGridViewTextBoxColumn partCode;
         private DataGridViewTextBoxColumn requestDate;
-        private DataGridViewTextBoxColumn partPriceDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn totalPriceDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn issueDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn partPrice;
+        private DataGridViewTextBoxColumn totalPrice;
+        private DataGridViewTextBoxColumn ISSUESTATE;
+        private DataGridViewTextBoxColumn requesterID;
+        private DataGridViewTextBoxColumn issuerID;
+        private DataGridViewTextBoxColumn issueDate;
+        private DataGridViewTextBoxColumn UOM;
+        private TabPage warrantyTab;
     }
 }

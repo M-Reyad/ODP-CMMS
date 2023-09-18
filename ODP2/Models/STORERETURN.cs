@@ -14,11 +14,11 @@ namespace ODP2.Models
     
     public partial class STORERETURN
     {
-        public int RETURNID { get; set; }
         public int WORKORDER { get; set; }
         public int QTY { get; set; }
         public string COMPONENTSN { get; set; }
         public decimal RETURNPRICE { get; set; }
+        public decimal RETURNID { get; set; }
     
         public virtual COMPONENT COMPONENT { get; set; }
         public virtual WORKORDER WORKORDER1 { get; set; }

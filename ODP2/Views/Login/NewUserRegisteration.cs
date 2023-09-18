@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,17 +28,26 @@ namespace ODP2.Views.Login
                 {
                     MessageBox.Show("Only ODP E-mails can register for new accounts");
                     userEmailAddress.Focus();
-                } else
+                } 
+                else if (dbContext.ODP_USER.Where(user => user.USEREMAIL.Trim() == userEmailAddress.Text).Count() != 0)
                 {
+                    MessageBox.Show("This user is registered before, try using another Email");
+                    userEmailAddress.Focus();
+                } 
+                else
+                {
+                    proceedButton.Enabled = false;
+                    userEmailAddress.ReadOnly = true;
                     userIDTextBox.Enabled = true;
                     userCodeTextBox.Enabled = true;
                     userNameTextBox.Enabled = true;
                     passwordTextBox.Enabled = true;
                     rePasswordTextBox.Enabled = true;
                     sectionComboBox.Enabled = true;
-                    userSectionBindingSource.DataSource = dbContext.USERSECTIONS.ToList();
+                    titleComboBox.Enabled = true;
+                    userSectionBindingSource.DataSource = dbContext.USERSECTIONs.ToList();
                     levelComboBox.Enabled = true;
-                    userLevelBindingSource.DataSource = dbContext.USERLEVELS.ToList();
+                    userLevelBindingSource.DataSource = dbContext.USERLEVELs.ToList();
                     confirmButton.Enabled = true;
                 }
             } 
@@ -54,7 +64,7 @@ namespace ODP2.Views.Login
             {
                 if (userNameTextBox.Text != "")
                 {
-                    if (userCodeTextBox.Text != "" &&  !int.TryParse(userCodeTextBox.Text,out _))
+                    if (userCodeTextBox.Text != "" &&  int.TryParse(userCodeTextBox.Text,out _))
                     {
                         if (passwordTextBox.Text != "")
                         {
@@ -64,21 +74,27 @@ namespace ODP2.Views.Login
                                 newUser.USERID = userIDTextBox.Text;
                                 newUser.USEREMAIL = userEmailAddress.Text;
                                 newUser.USERIDNUMBER = int.Parse(userCodeTextBox.Text);
-                                newUser.USERLEVEL1 = (USERLEVEL) levelComboBox.SelectedItem;
-                                newUser.USERSECTION1 = (USERSECTION) sectionComboBox.SelectedItem;
+                                newUser.USERLEVEL = levelComboBox.GetItemText(levelComboBox.SelectedItem).Trim();
+                                newUser.USERSECTION = sectionComboBox.GetItemText(sectionComboBox.SelectedItem).Trim();
+                                newUser.USERTITLE = titleComboBox.GetItemText(titleComboBox.SelectedItem).Trim();
+                                newUser.USERNAME = userNameTextBox.Text;
+                                newUser.USERPASSWORD = passwordTextBox.Text;
                                 try
                                 {
-                                    dbContext.ODP_USERS.Add(newUser);
+                                    dbContext.ODP_USER.Add(newUser);
                                     dbContext.SaveChanges();
-                                } 
+                                    MessageBox.Show("Saved Successfully");
+                                    this.Close();
+                                }
                                 catch (Exception ex)
                                 {
-                                    MessageBox.Show("Error Adding new User" + ex);
+                                    
+                                    MessageBox.Show("Error Adding new User" + ex.Message);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Passwords Doen't Match, try typing Password Again");
+                                MessageBox.Show("Passwords don't match, try typing Password Again");
                                 rePasswordTextBox.Focus();
                             }
                            

@@ -1,7 +1,12 @@
-﻿using ODP2.Models;
+﻿using ODP2;
+using ODP2.Models;
+using ODP2.Views;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,78 +16,47 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
     public partial class IssueSparePart : UserControl
     {
         public Home home = new Home();
+        private int workOrderID;
+        private DateTime sinceDate;
+
         public IssueSparePart()
         {
             InitializeComponent();
 
 
         }
-
-
         private void IssueSparePart_Load(object sender, EventArgs e)
         {
             dateCheckBox.Checked = false;
             dateTimePicker.Enabled = false;
+            issueGridView.ClearSelection();
         }
 
+        #region Inputs
         private void workOrderTextBox_Validated(object sender, EventArgs e)
         {
-            int workOrder;
-            if (workOrderTextBox.Text != "" )
+            if (workOrderTextBox.Text != "")
             {
-                //int workOrderID = Convert.ToInt32(workOrderTextBox.Text);
-                if (int.TryParse(workOrderTextBox.Text, out workOrder) != false)
+                if (int.TryParse(workOrderTextBox.Text, out workOrderID) != false)
                 {
 
-                    if (home.dbContext.WORKORDERS.Where(wo => wo.WORKORDERID == workOrder).Count() != 1)
+                    if (home.dbContext.WORKORDERs.Where(wo => wo.WORKORDERID == workOrderID).Count() != 1)
                     {
-                        MessageBox.Show("Cannot Find WorkOrder #" + workOrder + " Please Enter a valid WO#", "Error");
+                        MessageBox.Show("Cannot Find WorkOrder #" + workOrderID + " Please Enter a valid WO#", "Error");
                         workOrderTextBox.Focus();
                     }
                     else
                     {
-                        if (home.dbContext.WORKORDERS.Where(wo => wo.WORKORDERID == workOrder).First().WORKORDERSTATUSID.Trim() == "Finished")
+                        if (home.dbContext.WORKORDERs.Where(wo => wo.WORKORDERID == workOrderID).First().WORKORDERSTATUSID.Trim() == "Finished")
                         {
-                            MessageBox.Show("WorkOrder #" + workOrder + " is Finished, Please enter an Active WO#", "Error");
+                            MessageBox.Show("WorkOrder #" + workOrderID + " is Finished, Please enter an Active WO#", "Error");
                             workOrderTextBox.Focus();
                         }
 
                         else
                         {
 
-                            issueBindingSource.DataSource = home.dbContext.ISSUES.Where(issue => issue.WORKORDER == workOrder)
-                    .Join(home.dbContext.SPAREPARTS,
-                    issue => issue.SPAREPARTCODE,
-                    sp => sp.PARTCODE,
-                    (issue, sp) => new
-                    {
-                        issue.ISSUEID,
-                        issue.WORKORDER,
-                        issue.QTY,
-                        sp.UOM,
-                        issue.SPAREPARTCODE,
-                        sp.PARTDIRECTIVE,
-                        sp.PARTPRICE,
-                        issue.TOTALPRICE,
-                        issue.ISSUEDATE,
-                        issue.ISSUESTATE,
-                        issue.REQUESTDATE
-
-                    }).ToList();
-                            foreach (DataGridViewRow issue in issueGridView.Rows)
-                            {
-                                if ((string)issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
-                                {
-                                    issue.DefaultCellStyle.BackColor = Color.Yellow;
-                                }
-                                else if ((int)issue.Cells["qty"].Value < 0)
-                                {
-                                    issue.DefaultCellStyle.BackColor = Color.Red;
-                                }
-                            }
-                            issueGridView.ReadOnly = false;
-                            issueGridView.Refresh();
-
+                            configSearch();
                         }
                     }
                 }
@@ -97,152 +71,236 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                 issueBindingSource.Clear();
             }
         }
-
         private void dateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (dateCheckBox.Checked == true)
             {
                 dateTimePicker.Enabled = true;
+                sinceDate = dateTimePicker.Value;
             }
             else if (dateCheckBox.Checked == false)
             {
                 dateTimePicker.Enabled = false;
-                issueBindingSource.Clear();
-                issueGridView.Refresh();
             }
         }
-
         private void dateTimePicker_Validated(object sender, EventArgs e)
         {
-            issueBindingSource.DataSource = home.dbContext.ISSUES.Where(issue => issue.ISSUEDATE == dateTimePicker.Value.Date)
-                .Join(home.dbContext.SPAREPARTS,
-                issue => issue.SPAREPARTCODE,
-                sp => sp.PARTCODE,
-                (issue, sp) => new
-                {
-                    issue.ISSUEID,
-                    issue.WORKORDER,
-                    issue.QTY,
-                    issue.SPAREPARTCODE,
-                    sp.PARTDIRECTIVE,
-                    sp.PARTPRICE,
-                    issue.TOTALPRICE,
-                    issue.ISSUEDATE,
-                    issue.ISSUESTATE,
-                    issue.REQUESTDATE
+            sinceDate = dateTimePicker.Value;
+            configSearch();
+        }
+        #endregion
 
-                }).ToList();
-            foreach (DataGridViewRow issue in issueGridView.Rows)
+        #region Selecting Lines to be Issued/Unissued
+        private void issueGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            label1.Focus();
+            if (e.ColumnIndex == issueGridView.Columns["selectColumn"].Index)
             {
-                if ((string)issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
+                if (checkForSelectedLinesToBeIssued() == true)
                 {
-                    issue.DefaultCellStyle.BackColor = Color.Yellow;
+                    issueButton.Enabled = true;
                 }
-                else if ((int)issue.Cells["qty"].Value < 0)
+                else
                 {
-                    issue.DefaultCellStyle.BackColor = Color.Red;
+                    issueButton.Enabled = false;
+                }
+                if (checkForSelectedLinesToBeUnissued() == true)
+                {
+                    unissueButton.Enabled = true;
+                }
+                else
+                {
+                    unissueButton.Enabled = false;
                 }
             }
-
-            issueGridView.Refresh();
         }
+        private bool checkForSelectedLinesToBeIssued()
+        {
+            if (issueGridView.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow issue in issueGridView.Rows)
+                {
+                    var rowCheckBox = (string)issue.Cells["selectColumn"].Value;
+                    if (rowCheckBox == "true" && issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
+                    {
+                        return true;
+                    }
+                }
 
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private bool checkForSelectedLinesToBeUnissued()
+        {
+            if (issueGridView.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow issue in issueGridView.Rows)
+                {
+                    var rowCheckBox = (string)issue.Cells["selectColumn"].Value;
+                    if (rowCheckBox == "true" && issue.Cells["issueState"].Value.ToString().Trim() == "Issued")
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
 
+        #region Issueing and Un-issuening 
         private void issueButton_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow issue in issueGridView.Rows)
             {
                 var rowCheckBox = (string)issue.Cells["selectColumn"].Value;
-                if (rowCheckBox == "true")
+                if (rowCheckBox == "true" && issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
                 {
-                    var issueID = (int)issue.Cells["issueID"].Value;
-                    ISSUE issueLineToBeIssued = home.dbContext.ISSUES.Where(iss => iss.ISSUEID == issueID).First();
+                    var issueID = (int)issue.Cells["issueIDColumn"].Value;
+                    ISSUE issueLineToBeIssued = home.dbContext.ISSUEs.Where(iss => iss.ISSUEID == issueID).First();
                     try
                     {
                         issueLineToBeIssued.ISSUEDATE = DateTime.Today;
+                        issueLineToBeIssued.ISSUERID = home.user.USERID;
                         issueLineToBeIssued.ISSUESTATE = "Issued";
-                        var sparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == issueLineToBeIssued.SPAREPARTCODE).First();
+                        var sparePart = home.dbContext.SPAREPARTs.Where(sp => sp.PARTCODE == issueLineToBeIssued.SPAREPARTCODE).First();
                         sparePart.RESERVEDSTOCK -= issueLineToBeIssued.QTY;
                         sparePart.PARTSTOCKQTY -= issueLineToBeIssued.QTY;
-                        home.dbContext.SPAREPARTS.AddOrUpdate(sparePart);
+                        home.dbContext.SPAREPARTs.AddOrUpdate(sparePart);
                         home.dbContext.SaveChanges();
                         MessageBox.Show("Successfully Issued Line #" + issueLineToBeIssued.ISSUEID);
 
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error Adding Issue" + ex, "Error");
+                        MessageBox.Show("Error Adding Issue" + ex.Message, "Error");
                     }
                 }
 
             }
-            issueBindingSource.ResetBindings(false);
-            issueGridView.Refresh();
+            configSearch();
         }
-
-
         private void unissueButton_Click(object sender, EventArgs e)
         {
-            
+
             foreach (DataGridViewRow issue in issueGridView.Rows)
             {
-                var rowCheckBox = (string) issue.Cells["selectColumn"].Value;
-                if (rowCheckBox == "true")
+                var rowCheckBox = (string)issue.Cells["selectColumn"].Value;
+                if (rowCheckBox == "true" && issue.Cells["issueState"].Value.ToString().Trim() == "Issued")
                 {
-                    try
-                    {
-
+                    MessageBox.Show(issue.Cells["issueState"].Value.ToString().Trim());
+                    /*try
+                    {*/
                         var newIssue = new ISSUE();
                         newIssue.ISSUEDATE = DateTime.Today;
-                        newIssue.SPAREPARTCODE = (string) issue.Cells["sparePartCode"].Value;
-                        newIssue.QTY = ((int) issue.Cells["qty"].Value)* -1;
-                        newIssue.WORKORDER = (int) issue.Cells["workOrder"].Value;
-                        newIssue.PARTPRICE = home.dbContext.SPAREPARTS.Where(part => part.PARTCODE.Trim() == newIssue.SPAREPARTCODE).First().PARTPRICE;
-                        newIssue.ISSUESTATE = "Unissued";
                         newIssue.REQUESTDATE = DateTime.Today;
-                        home.dbContext.ISSUES.Add(newIssue);
-                        var sparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE == newIssue.SPAREPARTCODE).First();
+                        newIssue.SPAREPARTCODE = issue.Cells["partCode"].Value.ToString().Trim();
+                        newIssue.QTY = ((int)issue.Cells["qty"].Value) * -1;
+                        newIssue.WORKORDER = (int)issue.Cells["workOrder"].Value;
+                        newIssue.PARTPRICE = home.dbContext.SPAREPARTs.Where(part => part.PARTCODE.Trim() == newIssue.SPAREPARTCODE).First().PARTPRICE;
+                        newIssue.ISSUESTATE = "Unissued";
+                    newIssue.ISSUERID = home.user.USERID;
+                        home.dbContext.ISSUEs.Add(newIssue);
+                        var sparePart = home.dbContext.SPAREPARTs.Where(sp => sp.PARTCODE.Trim() == newIssue.SPAREPARTCODE).First();
                         sparePart.PARTSTOCKQTY -= newIssue.QTY;
-                        home.dbContext.SPAREPARTS.AddOrUpdate(sparePart);
+                        home.dbContext.SPAREPARTs.AddOrUpdate(sparePart);
                         home.dbContext.SaveChanges();
                         MessageBox.Show("Successfully Un-Issued " + newIssue.QTY + " * " + newIssue.SPAREPARTCODE);
 
-                    }
-                    catch(Exception ex)
+                    /*}
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Error Un-issueing, " + ex);
-                    }
-                    
+                        MessageBox.Show("Error Un-issueing, " + ex.Message);
+                    }*/
+
                 }
             }
-            issueBindingSource.ResetBindings(false);
-            issueGridView.Refresh();
+            configSearch();
 
         }
 
-        private void issueGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        #endregion
+
+        #region Functions
+        private void configSearch()
         {
-            foreach (DataGridViewRow issue in issueGridView.Rows)
+            using (var dbContext = new ODPEntities_ORACLE())
             {
-                label1.Focus();
-                var rowCheckBox = (string) (issue.Cells["selectColumn"].Value);
-                if (rowCheckBox == "true" && issue.Cells["issueState"].Value.ToString().Trim() == "Issued")
+
+                List<ISSUE> issuesList = new List<ISSUE>();
+                if (workOrderTextBox.Text != "")
                 {
-                    unissueButton.Enabled = true;
-                    break;
+                    issuesList = dbContext.ISSUEs.Where(issue => issue.WORKORDER == workOrderID).ToList();
                 }
-                else if (rowCheckBox == "true" && issue.Cells["issueState"].Value.ToString().Trim() == "Requested")
+                if (dateCheckBox.Checked == true)
                 {
-                    issueButton.Enabled = true;
-                    break;
+                    issuesList = dbContext.ISSUEs.Where(issue => issue.REQUESTDATE == sinceDate || issue.ISSUEDATE == sinceDate).ToList();
                 }
-                if (issue == issueGridView.Rows[issueGridView.Rows.Count - 1])
+                if (issuesList.Count != 0)
                 {
-                    unissueButton.Enabled = false;
+                    issueBindingSource.DataSource = issuesList
+                        .Join(dbContext.SPAREPARTs,
+                                issue => issue.SPAREPARTCODE,
+                                sp => sp.PARTCODE,
+                                (issue, sp) => new
+                                {
+                                    issue.ISSUEID,
+                                    issue.WORKORDER,
+                                    issue.QTY,
+                                    issue.SPAREPARTCODE,
+                                    issue.TOTALPRICE,
+                                    issue.ISSUEDATE,
+                                    issue.ISSUESTATE,
+                                    issue.REQUESTDATE,
+                                    sp.UOM,
+                                    sp.PARTDIRECTIVE,
+                                    sp.PARTPRICE,
+                                    requesterName = issue.REQUESTERID,
+                                    issuerName = issue.ISSUERID
+                                });
+                    issueGridView.ClearSelection();
                     issueButton.Enabled = false;
+                    unissueButton.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No Issues found with these Criteria", "No Issues Found");
                 }
             }
         }
+        private void issueGridView_Leave(object sender, EventArgs e)
+        {
+            issueGridView.ClearSelection();
+        }
+        private void issueGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == issueGridView.Columns["issueState"].Index)
+            {
+                if (e.Value.ToString().Trim() == "Requested")
+                {
+                    issueGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else if (e.Value.ToString().Trim() == "Unissued")
+                {
+                    issueGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+                }
+                else
+                {
+                    issueGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = default;
+                }
+            }
 
+
+        }
+
+        #endregion
     }
+
 }

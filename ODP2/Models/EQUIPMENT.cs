@@ -18,6 +18,7 @@ namespace ODP2.Models
         public EQUIPMENT()
         {
             this.FUELINGWORKORDERs = new HashSet<FUELINGWORKORDER>();
+            this.BREAKDOWNs = new HashSet<BREAKDOWN>();
             this.WORKORDERs = new HashSet<WORKORDER>();
         }
     
@@ -27,21 +28,21 @@ namespace ODP2.Models
         public int EQUIPMENTHR { get; set; }
         public Nullable<System.DateTime> EQUIPMENTHRDATE { get; set; }
         public string EQUIPMENTSTATUSID { get; set; }
-        public string EQUIPMENTENGINESN { get; set; }
-        public string EQUIPMENTTRNSN { get; set; }
-        public string EQUIPMENTDAXSN { get; set; }
-        public string EQUIPMENTSAXSN { get; set; }
         public Nullable<System.DateTime> INSERVICEDATE { get; set; }
+        public string EQUIPMENTMANUFACTURER { get; set; }
+        public Nullable<decimal> EQUIPMENTCAPACITY { get; set; }
+        public string EQUIPMENTBATCH { get; set; }
         public string EQUIPMENTDIRECTIVE { get; set; }
+        public Nullable<decimal> REFUELED { get; set; }
+        public string EQUIPMENTMODEL { get; set; }
+        public Nullable<System.DateTime> WARRANTYENDDATE { get; set; }
     
-        public virtual COMPONENT COMPONENT { get; set; }
-        public virtual COMPONENT COMPONENT1 { get; set; }
-        public virtual COMPONENT COMPONENT2 { get; set; }
-        public virtual COMPONENT COMPONENT3 { get; set; }
         public virtual EQUIPMENTFAMILY EQUIPMENTFAMILY { get; set; }
         public virtual EQUIPMENTSTATU EQUIPMENTSTATU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FUELINGWORKORDER> FUELINGWORKORDERs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BREAKDOWN> BREAKDOWNs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WORKORDER> WORKORDERs { get; set; }
     }

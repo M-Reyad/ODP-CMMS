@@ -18,6 +18,8 @@ namespace ODP2.Models
         public ODP_USER()
         {
             this.WORKORDERs = new HashSet<WORKORDER>();
+            this.ISSUEs = new HashSet<ISSUE>();
+            this.ISSUEs1 = new HashSet<ISSUE>();
         }
     
         public string USERNAME { get; set; }
@@ -34,5 +36,9 @@ namespace ODP2.Models
         public virtual USERSECTION USERSECTION1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WORKORDER> WORKORDERs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ISSUE> ISSUEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ISSUE> ISSUEs1 { get; set; }
     }
 }

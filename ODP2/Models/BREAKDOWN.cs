@@ -14,13 +14,15 @@ namespace ODP2.Models
     
     public partial class BREAKDOWN
     {
-        public int ID { get; set; }
         public string EQUIPMENTID { get; set; }
-        public System.DateTime FROMTIME { get; set; }
-        public System.DateTime TOTIME { get; set; }
-        public Nullable<int> WORKORDER { get; set; }
+        public Nullable<System.DateTime> FROMTIME { get; set; }
+        public Nullable<System.DateTime> TOTIME { get; set; }
+        public int WORKORDER { get; set; }
         public string BDNREASON { get; set; }
+        public int BREAKDOWNID { get; set; }
+        public Nullable<decimal> BDNTOTALTIME { get; set; }
     
+        public virtual EQUIPMENT EQUIPMENT { get; set; }
         public virtual WORKORDER WORKORDER1 { get; set; }
     }
 }

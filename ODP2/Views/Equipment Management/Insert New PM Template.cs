@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ODP2.Views.Equipment_Management
 {
@@ -25,15 +26,14 @@ namespace ODP2.Views.Equipment_Management
 
         private void InsertNewPMTemp_Load(object sender, EventArgs e)
         {
-            equipmentFamilyBindingSource.DataSource = home.dbContext.EQUIPMENTFAMILIES.ToList();
+            equipmentFamilyBindingSource.DataSource = home.dbContext.EQUIPMENTFAMILies.ToList();
             equipmentFamiliesBox_SelectedIndexChanged(sender, e);
         }
         private void equipmentFamiliesBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFamily = equipmentFamiliesBox.GetItemText(equipmentFamiliesBox.SelectedItem).Trim();
-            equipmentFamilyDirective.Text = home.dbContext.EQUIPMENTFAMILIES.Where(eq => eq.EQUIPMENTFAMILYCODE.Trim() == selectedFamily).First().EQUIPMENTTYPEDIRECTIVE.Trim();
+            equipmentFamilyDirective.Text = home.dbContext.EQUIPMENTFAMILies.Where(eq => eq.EQUIPMENTFAMILYCODE.Trim() == selectedFamily).First().EQUIPMENTTYPEDIRECTIVE.Trim();
         }
-
         private void browseButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog pmAttachFileDialog = new OpenFileDialog();
@@ -51,99 +51,84 @@ namespace ODP2.Views.Equipment_Management
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error Attaching pdf file" + ex);
+                    MessageBox.Show("Error Attaching pdf file" + ex.Message);
                 }
 
             }
 
         }
-
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            Close();
+        }
         private void saveButton_Click(object sender, EventArgs e)
         {
-            PMTEMPLATE newPMTemplate = new PMTEMPLATE();
-
-
-            if (pmDirective.Text == "")
+            if (/*Empty Directive*/ pmDirective.Text == "")
             {
                 MessageBox.Show("Please Insert a Valid Directive");
                 pmDirective.Focus();
             }
-            else
+            else if (newPMAttachment == null)
             {
-                if (home.dbContext.PMTEMPLATES.Where(pm => pm.EQUIPMENTFAMILY == selectedFamily).Count() != 0)
+                DialogResult recordWithoutAttach = MessageBox.Show("Are you sure to save the Template withouth Attachment?", "Missing Attachment", MessageBoxButtons.YesNo);
+                if (recordWithoutAttach == DialogResult.Yes)
                 {
-                    foreach (PMTEMPLATE pm in home.dbContext.PMTEMPLATES.Where(pm => pm.EQUIPMENTFAMILY == selectedFamily))
-                    {
-                        if (pm.PMDIRECTIVE == pmDirective.Text)
-                        {
-                            MessageBox.Show("This PM is registered Before, Kindly insert a different PM Directive");
-                            pmDirective.Focus();
-                            break;
-                        }
-                        else
-                        {
-                            if (pm.Equals(home.dbContext.PMTEMPLATES.Where(pmTemp => pmTemp.EQUIPMENTFAMILY == selectedFamily).ToList().Last()))
-                            {
-                                newPMTemplate.EQUIPMENTFAMILY = selectedFamily;
-                                newPMTemplate.PMDIRECTIVE = pmDirective.Text;
-                                newPMTemplate.PMATTACHMENT = newPMAttachment;
-                            }
-
-                        }
-
-                    }
-                    if (newPMTemplate.PMDIRECTIVE != null)
-                    {
-                        try
-                        {
-
-
-                            home.dbContext.PMTEMPLATES.AddOrUpdate(newPMTemplate);
-                            home.dbContext.SaveChanges();
-                            MessageBox.Show("Saved Successfully!");
-                            this.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error Saving the new Template " + ex, "Error");
-                        }
-                    }
-
+                    recordNewTemplate();
                 }
                 else
                 {
-                    try
+                    browseButton_Click(sender, e);
+                }
+            }
+            else
+            {
+                if (home.dbContext.PMTEMPLATEs.Where(pm => pm.EQUIPMENTFAMILY.Trim() == selectedFamily).Count() != 0)
+                {
+                    if (isRegisteredPM(selectedFamily, pmDirective.Text.Trim()))
                     {
-
-
-                        newPMTemplate.EQUIPMENTFAMILY = selectedFamily;
-                        newPMTemplate.PMDIRECTIVE = pmDirective.Text;
-                        newPMTemplate.PMATTACHMENT = newPMAttachment;
-                        home.dbContext.PMTEMPLATES.AddOrUpdate(newPMTemplate);
-                        home.dbContext.SaveChanges();
-                        MessageBox.Show("Saved Successfully!");
-                        this.Close();
+                        MessageBox.Show("This PM is registered Before, Kindly insert a different PM Directive");
+                        pmDirective.Focus();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error Saving the new Template " + ex, "Error");
+                        recordNewTemplate();
                     }
+                }
+                else
+                {
+                    recordNewTemplate();
                 }
             }
         }
-
-    
-
-        private void cancelButton_Click(object sender, EventArgs e)
+        private bool isRegisteredPM(string selectedFamily, string pmDirective)
         {
-
-            Dispose();
-            Close();
+            foreach (PMTEMPLATE pm in home.dbContext.PMTEMPLATEs.Where(pm => pm.EQUIPMENTFAMILY.Trim() == selectedFamily))
+            {
+                if (pm.PMDIRECTIVE.Trim() == pmDirective)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-
-        private void InsertNewPMTemp_FormClosed(object sender, FormClosedEventArgs e)
+        private void recordNewTemplate()
         {
-            Application.OpenForms.OfType<Home>().First().Controls.OfType<Panel>().Where(panel => panel.Name == "homeMainPanel").First().Refresh();
+            try
+            {
+                PMTEMPLATE newPMTemplate = new PMTEMPLATE();
+                newPMTemplate.EQUIPMENTFAMILY = selectedFamily;
+                newPMTemplate.PMDIRECTIVE = pmDirective.Text.Trim();
+                newPMTemplate.PMATTACHMENT = newPMAttachment;
+                home.dbContext.PMTEMPLATEs.Add(newPMTemplate);
+                home.dbContext.SaveChanges();
+                MessageBox.Show("Saved Successfully!");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Saving the new Template " + ex.Message, "Error");
+            }
 
         }
     }

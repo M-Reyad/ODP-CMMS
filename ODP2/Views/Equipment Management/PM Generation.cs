@@ -22,8 +22,8 @@ namespace ODP2.Views.Equipment_Management
 
         private void PMGeneration_Load(object sender, EventArgs e)
         {
-            var equipmentList = home.dbContext.EQUIPMENTS.ToList();
-            var pmWorkOrderList = home.dbContext.WORKORDERS.Where(wo => wo.WORKORDERTYPEID == "PM");
+            var equipmentList = home.dbContext.EQUIPMENTs.ToList();
+            var pmWorkOrderList = home.dbContext.WORKORDERs.Where(wo => wo.WORKORDERTYPEID == "PM");
 
             //Create Last PM WOs
             var lastPMWorkOrderList = new List<WORKORDER>();
@@ -71,8 +71,8 @@ namespace ODP2.Views.Equipment_Management
                     row.ReadOnly = false;
                     var lastPMDirective = row.Cells["workOrderDirective"].Value;
                     string equip = row.Cells["equipmentID"].Value.ToString();
-                    var eqFamily = home.dbContext.EQUIPMENTS.Where(eq => eq.EQUIPMENTID.Trim() == equip).First().EQUIPMENTFAMILYID.Trim();
-                    var pmList = home.dbContext.PMTEMPLATES.Where(pm => pm.EQUIPMENTFAMILY == eqFamily).ToList();
+                    var eqFamily = home.dbContext.EQUIPMENTs.Where(eq => eq.EQUIPMENTID.Trim() == equip).First().EQUIPMENTFAMILYID.Trim();
+                    var pmList = home.dbContext.PMTEMPLATEs.Where(pm => pm.EQUIPMENTFAMILY == eqFamily).ToList();
                     if (pmList.Count == 0) //Empty PM Templates Table//
                     {
                         MessageBox.Show("Found Empty Table for " + eqFamily + "Please Insert PM Templates");
@@ -87,7 +87,7 @@ namespace ODP2.Views.Equipment_Management
                         }
                         else //Last PM is Located
                         {
-                            PMTEMPLATE lastPM = home.dbContext.PMTEMPLATES.Where(pm => pm.PMDIRECTIVE.Trim() == (string)lastPMDirective).First();
+                            PMTEMPLATE lastPM = home.dbContext.PMTEMPLATEs.Where(pm => pm.PMDIRECTIVE.Trim() == (string)lastPMDirective).First();
                             var pmNumber = pmList.IndexOf(pmList.Where(pm => pm.PMDIRECTIVE == lastPM.PMDIRECTIVE).First());
                             MessageBox.Show("Current PM Number is PM#" + pmNumber);
                             if (pmNumber < pmList.Count() - 1) //Not Last PM, get the next PM//

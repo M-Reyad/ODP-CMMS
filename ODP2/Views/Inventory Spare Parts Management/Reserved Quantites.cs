@@ -14,7 +14,6 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
     public partial class ReservedQuantites : Form
     {
         public string selectedSparePartCode;
-        private SPAREPART selectedSparePart;
         public Home home;
 
         public ReservedQuantites()
@@ -25,15 +24,14 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
         private void ReservedQuantites_Load(object sender, EventArgs e)
         {
             Text += " - " + selectedSparePartCode;
-            if (home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == selectedSparePartCode).Count() != 1)
+            if (home.dbContext.SPAREPARTs.Where(sp => sp.PARTCODE.Trim() == selectedSparePartCode).Count() != 1)
             {
                 MessageBox.Show("Error Finding Spare Part " + selectedSparePartCode, "Error");
             }
             else
             {
-                selectedSparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == selectedSparePartCode).First();
-                var reservedList = home.dbContext.ISSUES.Where(iss => iss.SPAREPARTCODE == selectedSparePartCode && iss.ISSUESTATE.Trim() == "Requested").ToList();
-                var reservedQtyWorkOrders = reservedList.Join(home.dbContext.WORKORDERS,
+                var reservedList = home.dbContext.ISSUEs.Where(iss => iss.SPAREPARTCODE.Trim() == selectedSparePartCode && iss.ISSUESTATE.Trim() == "Requested").ToList();
+                var reservedQtyWorkOrders = reservedList.Join(home.dbContext.WORKORDERs,
                     iss => iss.WORKORDER,
                     wo => wo.WORKORDERID, 
                     (iss,wo) => new
@@ -48,14 +46,14 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
                     }
                     );
 
-                issueBindingSource.DataSource = reservedQtyWorkOrders;
+                issueBindingSource.DataSource = reservedQtyWorkOrders.ToList();
 
             }
         }
 
         private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int selectedWorkOrder = (int)ReservedIssuesGridView.SelectedRows[0].Cells["workOrderID"].Value;
+            int selectedWorkOrder = (int)ReservedIssuesGridView.SelectedRows[0].Cells["workOrderIDNumber"].Value;
             DialogResult openWorkOrderQuesion = MessageBox.Show("Open WorkOrder #" + selectedWorkOrder, "Open Work Order", MessageBoxButtons.YesNo);
             if (openWorkOrderQuesion == DialogResult.Yes)
             {

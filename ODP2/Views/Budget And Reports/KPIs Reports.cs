@@ -44,7 +44,7 @@ namespace ODP2.Views
             {
                 var series = new System.Windows.Forms.DataVisualization.Charting.Series();
                 series.ChartType = SeriesChartType.Bar;
-                var pmWOs = home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKORDERTYPEID == "PM").ToList();
+                var pmWOs = home.dbContext.WORKORDERs.Where(workOrder => workOrder.WORKORDERTYPEID == "PM").ToList();
                 series.Name = "PM Adherence";
                 series.Points.AddXY("Q-1", 100 * 5 / pmWOs.Count());
                 series.Points.AddXY("Q-2", 100 * 3 / pmWOs.Count());
@@ -58,12 +58,12 @@ namespace ODP2.Views
                 var series = new System.Windows.Forms.DataVisualization.Charting.Series();
 
                 series.ChartType = SeriesChartType.Pie;
-                foreach (var type in home.dbContext.WORKORDERTYPES)
+                foreach (var type in home.dbContext.WORKORDERTYPEs)
                 {
 
-                    if (home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKORDERTYPEID == type.WORKORDERTYPEID).Count() != 0)
+                    if (home.dbContext.WORKORDERs.Where(workOrder => workOrder.WORKORDERTYPEID == type.WORKORDERTYPEID).Count() != 0)
                     {
-                        series.Points.AddXY(type.WORKORDERTYPEID, home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKORDERTYPEID == type.WORKORDERTYPEID).Count());
+                        series.Points.AddXY(type.WORKORDERTYPEID, home.dbContext.WORKORDERs.Where(workOrder => workOrder.WORKORDERTYPEID == type.WORKORDERTYPEID).Count());
                     }
                 }
 
@@ -75,9 +75,9 @@ namespace ODP2.Views
                 series.ChartType = SeriesChartType.Pie;
                 foreach (var doneType in home.dbContext.WORKDONETYPES)
                 {
-                    if (home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKDONETYPE == doneType.WORKDONETYPEID).Count() != 0)
+                    if (home.dbContext.WORKORDERs.Where(workOrder => workOrder.WORKDONETYPE == doneType.WORKDONETYPEID).Count() != 0)
                     {
-                        series.Points.AddXY(doneType.WORKDONETYPEID, home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKDONETYPE == doneType.WORKDONETYPEID).Count());
+                        series.Points.AddXY(doneType.WORKDONETYPEID, home.dbContext.WORKORDERs.Where(workOrder => workOrder.WORKDONETYPE == doneType.WORKDONETYPEID).Count());
                     }
 
                 }

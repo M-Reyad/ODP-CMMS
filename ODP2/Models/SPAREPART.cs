@@ -31,6 +31,9 @@ namespace ODP2.Models
         public Nullable<int> RESERVEDSTOCK { get; set; }
         public Nullable<decimal> AVAILABLESTOCK { get; set; }
         public string UOM { get; set; }
+        public string OEM_PN { get; set; }
+        public string OPM_PN { get; set; }
+        public string LOCATION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMPONENT> COMPONENTs { get; set; }

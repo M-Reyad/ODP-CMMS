@@ -21,13 +21,13 @@ namespace ODP2
         private void ClosedWorkOrders_Load(object sender, EventArgs e)
         {
 
-
+            closedWorkOrdersGrid.AutoGenerateColumns = false;
             fromDateCheckBox.Checked = false;
             fromDatePicker.Enabled = false;
             toDateCheckBox.Checked = false;
             toDatePicker.Enabled = false;
 
-            workOrderTypeBindingSource.DataSource = home.dbContext.WORKORDERTYPES.ToList();
+            workOrderTypeBindingSource.DataSource = home.dbContext.WORKORDERTYPEs.ToList();
             workTypeBox.Text = "";
             workTypeDirective.Text = "";
 
@@ -41,9 +41,9 @@ namespace ODP2
             var equipmentList = new List<EQUIPMENT>();
             if (equipmentBox.Text != "")
             {
-                if (home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentBox.Text).Count() != 0)
+                if (home.dbContext.EQUIPMENTs.Where(equipment => equipment.EQUIPMENTID.ToUpper() == equipmentBox.Text.ToUpper()).Count() != 0)
                 {
-                    equipmentList = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentBox.Text).ToList();
+                    equipmentList = home.dbContext.EQUIPMENTs.Where(equipment => equipment.EQUIPMENTID.ToUpper() == equipmentBox.Text.ToUpper()).ToList();
                     equipmentDirective.Text = equipmentList.First().EQUIPMENTDIRECTIVE.Trim();
                 }
                 else
@@ -82,84 +82,90 @@ namespace ODP2
         }
         private void searchButton_Click(object sender, EventArgs e)
         {
-            var workOrders = home.dbContext.WORKORDERS.Where(workOrder => workOrder.WORKORDERSTATUSID == "Finished" ||  workOrder.WORKORDERSTATUSID == "Cancelled");
-
-            if (workOrderBox.Text != "")
+            using (var dbContext = new ODPEntities_ORACLE())
             {
-                int workOrderNumber = Convert.ToInt32(workOrderBox.Text);
-                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERID == workOrderNumber);
-            }
 
-            if (equipmentBox.Text != "")
-            {
-                workOrders = workOrders.Where(workOrder => workOrder.WORKORDEREQUIPMENTID == equipmentBox.Text);
-            }
+                var workOrders = dbContext.WORKORDERs.Where(workOrder => workOrder.WORKORDERSTATUSID == "Finished" || workOrder.WORKORDERSTATUSID == "Cancelled");
 
-            if (directiveTextBox.Text != "")
-            {
-                if (directiveTextBox.Text.Contains("%"))
+                if (workOrderBox.Text != "")
                 {
-                    string directive = directiveTextBox.Text.Trim('%');
-                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERDIRECTIVE.Contains(directive));
+                    int workOrderNumber = Convert.ToInt32(workOrderBox.Text);
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERID == workOrderNumber);
+                }
+
+                if (equipmentBox.Text != "")
+                {
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDEREQUIPMENTID.Trim().ToUpper() == equipmentBox.Text.ToUpper());
+                }
+
+                if (directiveTextBox.Text != "")
+                {
+
+                    if (directiveTextBox.Text.Contains("%"))
+                    {
+                        string directive = directiveTextBox.Text.Trim('%');
+                        workOrders = workOrders.Where(workOrder => workOrder.WORKORDERDIRECTIVE.ToUpper().Contains(directive.ToUpper()));
+                    }
+                    else
+                    {
+                        workOrders = workOrders.Where(workOrder => workOrder.WORKORDERDIRECTIVE.ToUpper() == directiveTextBox.Text.ToUpper());
+                    }
+
+                }
+
+                if (fromDateCheckBox.Checked == true)
+                {
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERREGISTERATIONDATE >= fromDatePicker.Value.Date);
+                }
+
+                if (toDateCheckBox.Checked == true)
+                {
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERREGISTERATIONDATE <= toDatePicker.Value.Date);
+                }
+
+                if (workTypeBox.Text != "")
+                {
+                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERTYPEID == workTypeBox.Text);
+                }
+
+                if (workOrders.Count() > 0)
+                {
+                    workOrderBindingSource.DataSource = workOrders.OrderByDescending(wo => wo.WORKORDERID).ToList();
+                    closedWorkOrdersGrid.Refresh();
                 }
                 else
                 {
-                    workOrders = workOrders.Where(workOrder => workOrder.WORKORDERDIRECTIVE == directiveTextBox.Text);
+                    MessageBox.Show("No Work Orders Found with these Inputs", "Zero Results");
                 }
-
             }
-
-            if (fromDateCheckBox.Checked == true)
-            {
-                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERREGISTERATIONDATE >= fromDatePicker.Value.Date);
-            }
-
-            if (toDateCheckBox.Checked == true)
-            {
-                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERREGISTERATIONDATE <= toDatePicker.Value.Date);
-            }
-
-            if (workTypeBox.Text != "")
-            {
-                workOrders = workOrders.Where(workOrder => workOrder.WORKORDERTYPEID == workTypeBox.Text);
-            }
-
-            if (workOrders.Count() > 0)
-            {
-                workOrderBindingSource.DataSource = workOrders.OrderByDescending(wo => wo.WORKORDERID).ToList();
-                closedWorkOrdersGrid.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("No Work Orders Found with these Inputs", "Zero Results");
-            }
-
 
         }
 
         private void closedWorkOrdersGrid_MouseDoubleClick(object sender, EventArgs e)
         {
-            int selectedWorkOrder = (int)closedWorkOrdersGrid.SelectedRows[0].Cells[0].Value;
-            if (Application.OpenForms.OfType<WorkOrder>().Count() != 0)
-            {
-                foreach (WorkOrder openedWorkOrder in Application.OpenForms.OfType<WorkOrder>().ToList())
+                int selectedWorkOrder = (int)closedWorkOrdersGrid.SelectedRows[0].Cells[0].Value;
+                if (Application.OpenForms.OfType<WorkOrder>().Count() != 0)
                 {
-                    if (openedWorkOrder.workOrder.WORKORDERID == selectedWorkOrder)
+                    foreach (WorkOrder openedWorkOrder in Application.OpenForms.OfType<WorkOrder>().ToList())
                     {
-                        openedWorkOrder.Focus();
-                    }
-                    else
-                    {
-                        WorkOrder workOrder = new WorkOrder(selectedWorkOrder, home);
-                        workOrder.Show();
+                        if (openedWorkOrder.workOrder.WORKORDERID == selectedWorkOrder)
+                        {
+                            openedWorkOrder.Focus();
+                        }
+                        else
+                        {
+                            WorkOrder workOrder = new WorkOrder(selectedWorkOrder, home);
+                            workOrder.Show();
+                        }
                     }
                 }
-            }
-            else
-            {
-                WorkOrder workOrder = new WorkOrder(selectedWorkOrder, home);
-                workOrder.Show();
-            }
+                else
+                {
+                    WorkOrder workOrder = new WorkOrder(selectedWorkOrder, home);
+                    workOrder.Show();
+
+                }
+            
         }
 
         //Work Type Box Functions

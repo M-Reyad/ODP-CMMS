@@ -14,11 +14,11 @@ namespace ODP2.Models
     
     public partial class PMTEMPLATE
     {
-        public int PMSN { get; set; }
         public string EQUIPMENTFAMILY { get; set; }
         public string PMDIRECTIVE { get; set; }
         public byte[] PMATTACHMENT { get; set; }
         public Nullable<int> PMISSUES { get; set; }
+        public decimal PMSN { get; set; }
     
         public virtual EQUIPMENTFAMILY EQUIPMENTFAMILY1 { get; set; }
     }

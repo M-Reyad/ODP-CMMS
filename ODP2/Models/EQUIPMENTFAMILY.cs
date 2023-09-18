@@ -18,18 +18,16 @@ namespace ODP2.Models
         public EQUIPMENTFAMILY()
         {
             this.EQUIPMENTs = new HashSet<EQUIPMENT>();
-            this.PMTEMPLATES = new HashSet<PMTEMPLATE>();
+            this.PMTEMPLATEs = new HashSet<PMTEMPLATE>();
         }
     
         public string EQUIPMENTFAMILYCODE { get; set; }
         public string EQUIPMENTTYPEDIRECTIVE { get; set; }
-        public Nullable<decimal> CAPACITY { get; set; }
-        public Nullable<decimal> COUNT { get; set; }
-        public string MANUFACTURER { get; set; }
+        public string EQUIPMENTSCOPE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EQUIPMENT> EQUIPMENTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PMTEMPLATE> PMTEMPLATES { get; set; }
+        public virtual ICollection<PMTEMPLATE> PMTEMPLATEs { get; set; }
     }
 }

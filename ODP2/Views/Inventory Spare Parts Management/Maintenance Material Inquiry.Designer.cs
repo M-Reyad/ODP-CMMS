@@ -31,14 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sparePartGridView = new System.Windows.Forms.DataGridView();
-            this.workOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.equipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.issueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sparePart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WorkOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.workOrderDirective = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sparePartCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issuedPartDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.issueState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.partDirective = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.equipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyTextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RequestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.issueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.searchButton = new System.Windows.Forms.Button();
             this.equipmentDirective = new System.Windows.Forms.TextBox();
@@ -72,7 +73,7 @@
             this.sparePartGridView.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Lucida Sans", 8.5F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -80,87 +81,101 @@
             this.sparePartGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.sparePartGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sparePartGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.workOrder,
-            this.equipmentID,
+            this.issueID,
+            this.sparePart,
+            this.WorkOrderID,
             this.workOrderDirective,
-            this.sparePartCode,
-            this.issuedPartDescription,
-            this.qty,
-            this.issueDateDataGridViewTextBoxColumn,
-            this.issueState});
+            this.partDirective,
+            this.equipmentID,
+            this.QtyTextBox,
+            this.RequestDate,
+            this.State});
             this.sparePartGridView.DataSource = this.issueBindingSource;
             this.sparePartGridView.Location = new System.Drawing.Point(8, 133);
             this.sparePartGridView.Name = "sparePartGridView";
+            this.sparePartGridView.ReadOnly = true;
             this.sparePartGridView.RowHeadersVisible = false;
             this.sparePartGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.sparePartGridView.Size = new System.Drawing.Size(817, 354);
             this.sparePartGridView.TabIndex = 6;
             // 
-            // workOrder
+            // issueID
             // 
-            this.workOrder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workOrder.DataPropertyName = "workOrderID";
-            this.workOrder.HeaderText = "Work Order";
-            this.workOrder.Name = "workOrder";
-            this.workOrder.Width = 91;
+            this.issueID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.issueID.DataPropertyName = "ISSUEID";
+            this.issueID.HeaderText = "Issue #";
+            this.issueID.Name = "issueID";
+            this.issueID.ReadOnly = true;
+            this.issueID.Width = 72;
             // 
-            // equipmentID
+            // sparePart
             // 
-            this.equipmentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.equipmentID.DataPropertyName = "workOrderEquipmentID";
-            this.equipmentID.HeaderText = "Equipment ID";
-            this.equipmentID.Name = "equipmentID";
-            this.equipmentID.Width = 99;
+            this.sparePart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sparePart.DataPropertyName = "SPAREPARTCODE";
+            this.sparePart.HeaderText = "Part Code";
+            this.sparePart.Name = "sparePart";
+            this.sparePart.ReadOnly = true;
+            this.sparePart.Width = 88;
+            // 
+            // WorkOrderID
+            // 
+            this.WorkOrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WorkOrderID.DataPropertyName = "WORKORDERID";
+            this.WorkOrderID.HeaderText = "WO#";
+            this.WorkOrderID.Name = "WorkOrderID";
+            this.WorkOrderID.ReadOnly = true;
+            this.WorkOrderID.Width = 61;
             // 
             // workOrderDirective
             // 
             this.workOrderDirective.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.workOrderDirective.DataPropertyName = "workOrderDirective";
+            this.workOrderDirective.DataPropertyName = "WORKORDERDIRECTIVE";
             this.workOrderDirective.HeaderText = "Work Order Directive";
             this.workOrderDirective.Name = "workOrderDirective";
+            this.workOrderDirective.ReadOnly = true;
             // 
-            // sparePartCode
+            // partDirective
             // 
-            this.sparePartCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sparePartCode.DataPropertyName = "sparePartCode";
-            this.sparePartCode.HeaderText = "Part Code";
-            this.sparePartCode.Name = "sparePartCode";
-            this.sparePartCode.Width = 79;
+            this.partDirective.DataPropertyName = "PARTDIRECTIVE";
+            this.partDirective.HeaderText = "Part Description";
+            this.partDirective.Name = "partDirective";
+            this.partDirective.ReadOnly = true;
             // 
-            // issuedPartDescription
+            // equipmentID
             // 
-            this.issuedPartDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.issuedPartDescription.DataPropertyName = "partDirective";
-            this.issuedPartDescription.HeaderText = "Part Description";
-            this.issuedPartDescription.Name = "issuedPartDescription";
+            this.equipmentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.equipmentID.DataPropertyName = "WORKORDEREQUIPMENTID";
+            this.equipmentID.HeaderText = "Equipment";
+            this.equipmentID.Name = "equipmentID";
+            this.equipmentID.ReadOnly = true;
+            this.equipmentID.Width = 103;
             // 
-            // qty
+            // QtyTextBox
             // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.qty.DataPropertyName = "qty";
-            this.qty.HeaderText = "Qty";
-            this.qty.Name = "qty";
-            this.qty.Width = 52;
+            this.QtyTextBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.QtyTextBox.DataPropertyName = "QTY";
+            this.QtyTextBox.HeaderText = "QTY";
+            this.QtyTextBox.Name = "QtyTextBox";
+            this.QtyTextBox.ReadOnly = true;
+            this.QtyTextBox.Width = 59;
             // 
-            // issueDateDataGridViewTextBoxColumn
+            // RequestDate
             // 
-            this.issueDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.issueDateDataGridViewTextBoxColumn.DataPropertyName = "issueDate";
-            this.issueDateDataGridViewTextBoxColumn.HeaderText = "Issue Date";
-            this.issueDateDataGridViewTextBoxColumn.Name = "issueDateDataGridViewTextBoxColumn";
-            this.issueDateDataGridViewTextBoxColumn.Width = 83;
+            this.RequestDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.RequestDate.DataPropertyName = "ISSUEDATE";
+            this.RequestDate.HeaderText = "Issue Date";
+            this.RequestDate.Name = "RequestDate";
+            this.RequestDate.ReadOnly = true;
+            this.RequestDate.Width = 94;
             // 
-            // issueState
+            // State
             // 
-            this.issueState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.issueState.DataPropertyName = "issueState";
-            this.issueState.HeaderText = "Issue State";
-            this.issueState.Name = "issueState";
-            this.issueState.Width = 86;
-            // 
-            // issueBindingSource
-            // 
-            this.issueBindingSource.DataSource = typeof(ODP2.Models.ISSUE);
+            this.State.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.State.DataPropertyName = "ISSUESTATE";
+            this.State.HeaderText = "Issue State";
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            this.State.Width = 98;
             // 
             // searchButton
             // 
@@ -219,7 +234,7 @@
             // toDateCheckBox
             // 
             this.toDateCheckBox.AutoSize = true;
-            this.toDateCheckBox.Location = new System.Drawing.Point(223, 63);
+            this.toDateCheckBox.Location = new System.Drawing.Point(239, 63);
             this.toDateCheckBox.Name = "toDateCheckBox";
             this.toDateCheckBox.Size = new System.Drawing.Size(65, 17);
             this.toDateCheckBox.TabIndex = 20;
@@ -240,22 +255,22 @@
             // 
             // toDatePicker
             // 
-            this.toDatePicker.CustomFormat = "yyyy-MM-dd hh:mm";
+            this.toDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
             this.toDatePicker.Enabled = false;
             this.toDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.toDatePicker.Location = new System.Drawing.Point(294, 60);
+            this.toDatePicker.Location = new System.Drawing.Point(310, 60);
             this.toDatePicker.Name = "toDatePicker";
-            this.toDatePicker.Size = new System.Drawing.Size(125, 20);
+            this.toDatePicker.Size = new System.Drawing.Size(141, 20);
             this.toDatePicker.TabIndex = 18;
             // 
             // fromDatePicker
             // 
-            this.fromDatePicker.CustomFormat = "yyyy-MM-dd hh:mm";
+            this.fromDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
             this.fromDatePicker.Enabled = false;
             this.fromDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.fromDatePicker.Location = new System.Drawing.Point(89, 60);
             this.fromDatePicker.Name = "fromDatePicker";
-            this.fromDatePicker.Size = new System.Drawing.Size(128, 20);
+            this.fromDatePicker.Size = new System.Drawing.Size(144, 20);
             this.fromDatePicker.TabIndex = 19;
             // 
             // equipmentBox
@@ -336,13 +351,18 @@
         private System.Windows.Forms.TextBox partDescription;
         private System.Windows.Forms.BindingSource sparePartBindingSource;
         private System.Windows.Forms.BindingSource equipmentBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn workOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn equipmentID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn workOrderDirective;
         private System.Windows.Forms.DataGridViewTextBoxColumn sparePartCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn issuedPartDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn issueDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn issueState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn issueID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sparePart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WorkOrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn workOrderDirective;
+        private System.Windows.Forms.DataGridViewTextBoxColumn partDirective;
+        private System.Windows.Forms.DataGridViewTextBoxColumn equipmentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QtyTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RequestDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn State;
     }
 }

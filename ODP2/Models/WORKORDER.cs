@@ -22,7 +22,6 @@ namespace ODP2.Models
             this.STORERETURNs = new HashSet<STORERETURN>();
         }
     
-        public int WORKORDERID { get; set; }
         public string WORKORDERDIRECTIVE { get; set; }
         public string WORKORDERSTATUSID { get; set; }
         public string WORKORDERTYPEID { get; set; }
@@ -36,6 +35,7 @@ namespace ODP2.Models
         public Nullable<int> EQUIPMENTRH { get; set; }
         public string WORKDONETYPE { get; set; }
         public byte[] WORKORDERATTACH { get; set; }
+        public int WORKORDERID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BREAKDOWN> BREAKDOWNs { get; set; }

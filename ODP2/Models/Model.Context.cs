@@ -25,27 +25,25 @@ namespace ODP2.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BREAKDOWN> BREAKDOWNS { get; set; }
-        public virtual DbSet<COMPONENT> COMPONENTS { get; set; }
+        public virtual DbSet<COMPONENT> COMPONENTs { get; set; }
         public virtual DbSet<COMPONENTSTATU> COMPONENTSTATUS { get; set; }
-        public virtual DbSet<EQUIPMENT> EQUIPMENTS { get; set; }
-        public virtual DbSet<EQUIPMENTFAMILY> EQUIPMENTFAMILIES { get; set; }
+        public virtual DbSet<EQUIPMENT> EQUIPMENTs { get; set; }
+        public virtual DbSet<EQUIPMENTFAMILY> EQUIPMENTFAMILies { get; set; }
         public virtual DbSet<EQUIPMENTSTATU> EQUIPMENTSTATUS { get; set; }
-        public virtual DbSet<EQUIPMENTTYPE> EQUIPMENTTYPES { get; set; }
-        public virtual DbSet<FUELINGWORKORDER> FUELINGWORKORDERS { get; set; }
-        public virtual DbSet<ISSUE> ISSUES { get; set; }
+        public virtual DbSet<FUELINGWORKORDER> FUELINGWORKORDERs { get; set; }
         public virtual DbSet<ISSUESTATU> ISSUESTATUS { get; set; }
-        public virtual DbSet<ODP_USER> ODP_USERS { get; set; }
-        public virtual DbSet<PMTEMPLATE> PMTEMPLATES { get; set; }
-        public virtual DbSet<SPAREPART> SPAREPARTS { get; set; }
-        public virtual DbSet<STORERETURN> STORERETURNS { get; set; }
-        public virtual DbSet<UOM> UOMS { get; set; }
-        public virtual DbSet<USERLEVEL> USERLEVELS { get; set; }
-        public virtual DbSet<USERSECTION> USERSECTIONS { get; set; }
+        public virtual DbSet<ODP_USER> ODP_USER { get; set; }
+        public virtual DbSet<PMTEMPLATE> PMTEMPLATEs { get; set; }
+        public virtual DbSet<STORERETURN> STORERETURNs { get; set; }
+        public virtual DbSet<UOM> UOMs { get; set; }
+        public virtual DbSet<USERLEVEL> USERLEVELs { get; set; }
+        public virtual DbSet<USERSECTION> USERSECTIONs { get; set; }
         public virtual DbSet<WORKDONETYPE> WORKDONETYPES { get; set; }
-        public virtual DbSet<WORKORDER> WORKORDERS { get; set; }
         public virtual DbSet<WORKORDERSTATU> WORKORDERSTATUS { get; set; }
-        public virtual DbSet<WORKORDERTYPE> WORKORDERTYPES { get; set; }
-        public virtual DbSet<ODP_ONHAND_QTY> ODP_ONHAND_QTY { get; set; }
+        public virtual DbSet<WORKORDERTYPE> WORKORDERTYPEs { get; set; }
+        public virtual DbSet<BREAKDOWN> BREAKDOWNs { get; set; }
+        public virtual DbSet<ISSUE> ISSUEs { get; set; }
+        public virtual DbSet<SPAREPART> SPAREPARTs { get; set; }
+        public virtual DbSet<WORKORDER> WORKORDERs { get; set; }
     }
 }

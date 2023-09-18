@@ -12,13 +12,13 @@ namespace ODP2.Views
         {
             this.home = home;
             MessageBox.Show(sparePart);
-            if (home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == sparePart).Count() != 1)
+            if (home.dbContext.SPAREPARTs.Where(sp => sp.PARTCODE.Trim() == sparePart).Count() != 1)
             {
                 MessageBox.Show("Error Finding Spare Part " + sparePart, "Error");
             }
             else
             {
-                selectedSparePart = home.dbContext.SPAREPARTS.Where(sp => sp.PARTCODE.Trim() == sparePart).First();
+                selectedSparePart = home.dbContext.SPAREPARTs.Where(sp => sp.PARTCODE.Trim() == sparePart).First();
             }
             InitializeComponent();
         }

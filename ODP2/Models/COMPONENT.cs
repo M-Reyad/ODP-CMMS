@@ -17,10 +17,6 @@ namespace ODP2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public COMPONENT()
         {
-            this.EQUIPMENTs = new HashSet<EQUIPMENT>();
-            this.EQUIPMENTs1 = new HashSet<EQUIPMENT>();
-            this.EQUIPMENTs2 = new HashSet<EQUIPMENT>();
-            this.EQUIPMENTs3 = new HashSet<EQUIPMENT>();
             this.STORERETURNs = new HashSet<STORERETURN>();
         }
     
@@ -32,16 +28,8 @@ namespace ODP2.Models
         public string COMPONENTMODEL { get; set; }
     
         public virtual COMPONENTSTATU COMPONENTSTATU { get; set; }
-        public virtual SPAREPART SPAREPART { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EQUIPMENT> EQUIPMENTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EQUIPMENT> EQUIPMENTs1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EQUIPMENT> EQUIPMENTs2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EQUIPMENT> EQUIPMENTs3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STORERETURN> STORERETURNs { get; set; }
+        public virtual SPAREPART SPAREPART { get; set; }
     }
 }

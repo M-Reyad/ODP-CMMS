@@ -79,6 +79,7 @@ namespace ODP2
             this.logOutButton = new System.Windows.Forms.Button();
             this.userPicture = new System.Windows.Forms.PictureBox();
             this.homeMainPanel = new System.Windows.Forms.Panel();
+            this.windowLabel = new System.Windows.Forms.Label();
             this.homeToolBar.SuspendLayout();
             this.userPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
@@ -89,11 +90,11 @@ namespace ODP2
             // 
             this.WorkOrderManagementTab.AutoSize = false;
             this.WorkOrderManagementTab.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createWorkOrder,
+            this.toolStripSeparator2,
             this.activeWorkOrders,
             this.toolStripSeparator1,
-            this.closedWorkOrders,
-            this.toolStripSeparator2,
-            this.createWorkOrder});
+            this.closedWorkOrders});
             this.WorkOrderManagementTab.Image = global::ODP2.Properties.Resources.work_order_9_1_50x50;
             this.WorkOrderManagementTab.Name = "WorkOrderManagementTab";
             this.WorkOrderManagementTab.Size = new System.Drawing.Size(150, 50);
@@ -116,7 +117,7 @@ namespace ODP2
             // 
             this.closedWorkOrders.Name = "closedWorkOrders";
             this.closedWorkOrders.Size = new System.Drawing.Size(199, 22);
-            this.closedWorkOrders.Text = "Closed Work Orders";
+            this.closedWorkOrders.Text = "Historical Work Orders";
             this.closedWorkOrders.Click += new System.EventHandler(this.closedWorkOrders_Click);
             // 
             // toolStripSeparator2
@@ -127,8 +128,8 @@ namespace ODP2
             // createWorkOrder
             // 
             this.createWorkOrder.Name = "createWorkOrder";
-            this.createWorkOrder.Size = new System.Drawing.Size(199, 22);
-            this.createWorkOrder.Text = "Create New Work Order";
+            this.createWorkOrder.Size = new System.Drawing.Size(193, 22);
+            this.createWorkOrder.Text = "Create Work Order";
             this.createWorkOrder.Click += new System.EventHandler(this.createWorkOrder_Click);
             // 
             // SparePartsTab
@@ -406,7 +407,7 @@ namespace ODP2
             this.userPanel.Controls.Add(this.changePasswordButton);
             this.userPanel.Controls.Add(this.logOutButton);
             this.userPanel.Controls.Add(this.userPicture);
-            this.userPanel.Location = new System.Drawing.Point(308, 262);
+            this.userPanel.Location = new System.Drawing.Point(308, 258);
             this.userPanel.Name = "userPanel";
             this.userPanel.Size = new System.Drawing.Size(234, 135);
             this.userPanel.TabIndex = 5;
@@ -487,6 +488,7 @@ namespace ODP2
             this.userPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userPicture.TabIndex = 1;
             this.userPicture.TabStop = false;
+            this.userPicture.DoubleClick += new System.EventHandler(this.changeUserPicture);
             // 
             // homeMainPanel
             // 
@@ -497,12 +499,21 @@ namespace ODP2
             this.homeMainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("homeMainPanel.BackgroundImage")));
             this.homeMainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.homeMainPanel.Controls.Add(this.userPanel);
-            this.homeMainPanel.Location = new System.Drawing.Point(158, 12);
+            this.homeMainPanel.Location = new System.Drawing.Point(158, 16);
             this.homeMainPanel.Margin = new System.Windows.Forms.Padding(0);
             this.homeMainPanel.Name = "homeMainPanel";
             this.homeMainPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.homeMainPanel.Size = new System.Drawing.Size(542, 397);
+            this.homeMainPanel.Size = new System.Drawing.Size(542, 393);
             this.homeMainPanel.TabIndex = 3;
+            // 
+            // windowLabel
+            // 
+            this.windowLabel.AutoSize = true;
+            this.windowLabel.Font = new System.Drawing.Font("Lucida Sans", 8.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.windowLabel.Location = new System.Drawing.Point(161, 3);
+            this.windowLabel.Name = "windowLabel";
+            this.windowLabel.Size = new System.Drawing.Size(0, 13);
+            this.windowLabel.TabIndex = 6;
             // 
             // Home
             // 
@@ -512,6 +523,7 @@ namespace ODP2
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(712, 421);
+            this.Controls.Add(this.windowLabel);
             this.Controls.Add(this.homeMainPanel);
             this.Controls.Add(this.homeToolBar);
             this.DoubleBuffered = true;
@@ -530,6 +542,7 @@ namespace ODP2
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).EndInit();
             this.homeMainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -584,5 +597,6 @@ namespace ODP2
         private Button logOutButton;
         private PictureBox userPicture;
         private Panel homeMainPanel;
+        private Label windowLabel;
     }
 }

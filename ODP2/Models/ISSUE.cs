@@ -14,18 +14,22 @@ namespace ODP2.Models
     
     public partial class ISSUE
     {
-        public int ISSUEID { get; set; }
         public int WORKORDER { get; set; }
         public int QTY { get; set; }
         public string SPAREPARTCODE { get; set; }
         public Nullable<System.DateTime> ISSUEDATE { get; set; }
-        public Nullable<decimal> PARTPRICE { get; set; }
+        public decimal PARTPRICE { get; set; }
         public Nullable<decimal> TOTALPRICE { get; set; }
         public Nullable<System.DateTime> REQUESTDATE { get; set; }
         public string ISSUESTATE { get; set; }
+        public int ISSUEID { get; set; }
+        public string REQUESTERID { get; set; }
+        public string ISSUERID { get; set; }
     
         public virtual ISSUESTATU ISSUESTATU { get; set; }
         public virtual SPAREPART SPAREPART { get; set; }
         public virtual WORKORDER WORKORDER1 { get; set; }
+        public virtual ODP_USER ODP_USER { get; set; }
+        public virtual ODP_USER ODP_USER1 { get; set; }
     }
 }

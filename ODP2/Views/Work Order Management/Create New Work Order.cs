@@ -7,7 +7,7 @@ namespace ODP2.Views
 {
     public partial class CreateNewWorkOrder : Form
     {
-        private WORKORDER newWorkOrder = new WORKORDER();
+
         public Home home = new Home();
 
         public CreateNewWorkOrder()
@@ -17,25 +17,22 @@ namespace ODP2.Views
 
         private void CreateNewWorkOrder_Load(object sender, EventArgs e)
         {
-            userBindingSource.DataSource = home.dbContext.ODP_USERS.Where(user => user.USERID == home.user.USERID).First();
+            userBindingSource.DataSource = home.dbContext.ODP_USER.Where(user => user.USERID.Trim() == home.user.USERID.Trim()).First();
             if (home.user.USERLEVEL.Trim() == "Head")
             {
                 creatorIDTextBox.ReadOnly = false;
             }
-            var workOrderTypesList = home.dbContext.WORKORDERTYPES.ToList();            
+            var workOrderTypesList = home.dbContext.WORKORDERTYPEs.ToList();
             //workOrderTypesList.RemoveAll(type => type.workOrderTypeID.Trim() == "PM");
             workOrderTypeBindingSource.DataSource = workOrderTypesList.ToList();
 
         }
-
         private void newWorkOrderButton_Click(object sender, EventArgs e)
         {
             Close();
             new CreateNewWorkOrder() { home = this.home }.Show();
 
         }
-
-
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (equipmentBindingSource == null)
@@ -53,25 +50,32 @@ namespace ODP2.Views
                 MessageBox.Show("Please Enter a Valid Creator ID", "Invalid Data");
                 creatorIDTextBox.Focus();
             }
-            else if (equipmentWHR.Text == "")
+            else if (equipmentWHR.Text == "" && !home.dbContext.EQUIPMENTs.Where(eq => eq.EQUIPMENTFAMILYID.Trim() == "TR").ToList().Contains(equipmentBindingSource.DataSource))
             {
-                MessageBox.Show("Please Enter a Valid equipment Working HR.", "Invalid Data");
-                equipmentWHR.Focus();
+                    MessageBox.Show("Please Enter a Valid equipment Working HR.", "Invalid Data");
+                    equipmentWHR.Focus();
             }
             else
             {
+                //using (var dbContext = new ODPEntities_ORACLE())
+                //{
                 try
                 {
-                    newWorkOrder.ODP_USER = (ODP_USER) userBindingSource.DataSource;
+                    WORKORDER newWorkOrder = new WORKORDER();
+                    newWorkOrder.ODP_USER = (ODP_USER)userBindingSource.DataSource;
                     newWorkOrder.WORKORDERDIRECTIVE = workOrderDirective.Text;
-                    newWorkOrder.EQUIPMENT = (EQUIPMENT) equipmentBindingSource.DataSource;
-                    newWorkOrder.EQUIPMENTRH = Convert.ToInt32(equipmentWHR.Text);
+                    newWorkOrder.EQUIPMENT = (EQUIPMENT)equipmentBindingSource.DataSource;
+                    if (equipmentWHR.Text != "")
+                    {
+                        newWorkOrder.EQUIPMENTRH = Convert.ToInt32(equipmentWHR.Text);
+                    }
                     newWorkOrder.WORKORDERREGISTERATIONDATE = regsiterationDatePicker.Value;
                     newWorkOrder.WORKORDERTYPE = (WORKORDERTYPE)workTypeTextBox.SelectedItem;
                     newWorkOrder.WORKORDERSTATU = home.dbContext.WORKORDERSTATUS.Where(status => status.WORKORDERSTATUSID == "Work Request").First();
-                    home.dbContext.WORKORDERS.Add(newWorkOrder);
+                    home.dbContext.WORKORDERs.Add(newWorkOrder);
                     home.dbContext.SaveChanges();
                     workOrderBindingSource.DataSource = newWorkOrder;
+                    saveButton.Enabled = false;
                     DialogResult openWorkOrderQuesion = MessageBox.Show("Work Order " + newWorkOrder.WORKORDERID + " Created Successfully, " +
                         "Open the Work Order?", "Saved", MessageBoxButtons.YesNo);
 
@@ -82,25 +86,24 @@ namespace ODP2.Views
                         this.Close();
 
                     }
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error Adding the WorkOrder " + ex, "Error Saving");
                 }
+                //}
 
-    
             }
         }
-    
-
         private void textBox_Leave(object sender, EventArgs e)
         {
             if (sender == creatorIDTextBox)
             {
-                if (home.dbContext.ODP_USERS.Where(user => user.USERIDNUMBER == Convert.ToInt32(creatorIDTextBox.Text)).Count() != 1 && creatorIDTextBox.Text != "")
+                if (home.dbContext.ODP_USER.Where(user => user.USERIDNUMBER == Convert.ToInt32(creatorIDTextBox.Text)).Count() != 1 && creatorIDTextBox.Text != "")
                 {
                     MessageBox.Show("Error User ID, Please Enter a Valid ID", "Error Inputs");
-                    
+
                 }
                 else if (creatorIDTextBox.Text == "")
                 {
@@ -108,13 +111,13 @@ namespace ODP2.Views
                 }
                 else
                 {
-                    userBindingSource.DataSource = home.dbContext.ODP_USERS.Where(user => user.USERID == home.user.USERID).First();
+                    userBindingSource.DataSource = home.dbContext.ODP_USER.Where(user => user.USERID.Trim() == home.user.USERID.Trim()).First();
                 }
             }
 
             else if (sender == equipmentTextBox)
             {
-                if (home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentTextBox.Text).Count() != 1 && equipmentTextBox.Text != "")
+                if (home.dbContext.EQUIPMENTs.Where(equipment => equipment.EQUIPMENTID.Trim() == equipmentTextBox.Text).Count() != 1 && equipmentTextBox.Text != "")
                 {
                     MessageBox.Show("Error Equipment ID, Please Enter a Valid ID", "Error Inputs");
                     equipmentTextBox.Focus();
@@ -126,13 +129,27 @@ namespace ODP2.Views
                 }
                 else
                 {
-                    equipmentBindingSource.DataSource = home.dbContext.EQUIPMENTS.Where(equipment => equipment.EQUIPMENTID == equipmentTextBox.Text).First();
-
+                    equipmentBindingSource.DataSource = home.dbContext.EQUIPMENTs.Where(equipment => equipment.EQUIPMENTID.Trim() == equipmentTextBox.Text).First();
+                    configForTrailer();
                 }
             }
+        }
+        private void configForTrailer()
+        {
+            if (home.dbContext.EQUIPMENTs.Where(eq => eq.EQUIPMENTFAMILYID.Trim() == "TR").ToList().Contains(equipmentBindingSource.DataSource))
+            {
+                equipmentWHR.Text = "";
+                equipmentWHR.Enabled = false;
+            }
+            else
+            {
+                equipmentWHR.Text = "";
+                equipmentWHR.Enabled = true;
+
             }
         }
     }
+}
     
 
 

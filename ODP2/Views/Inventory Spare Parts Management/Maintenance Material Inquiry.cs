@@ -33,9 +33,9 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             if (partCode.Text != "")
             {
 
-                if (home.dbContext.SPAREPARTS.Where(part => part.PARTCODE.Trim() == partCode.Text).Count() != 0)
+                if (home.dbContext.SPAREPARTs.Where(part => part.PARTCODE.Trim() == partCode.Text).Count() != 0)
                 {
-                    partDescription.Text = home.dbContext.SPAREPARTS.Where(part => part.PARTCODE.Trim() == partCode.Text).First().PARTDIRECTIVE;
+                    partDescription.Text = home.dbContext.SPAREPARTs.Where(part => part.PARTCODE.Trim() == partCode.Text).First().PARTDIRECTIVE;
                 }
                 else
                 {
@@ -54,9 +54,9 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
         {
             if (equipmentBox.Text != "")
             {
-                if (home.dbContext.EQUIPMENTS.Where(equip => equip.EQUIPMENTID == equipmentBox.Text).Count() != 0)
+                if (home.dbContext.EQUIPMENTs.Where(equip => equip.EQUIPMENTID.Trim() == equipmentBox.Text).Count() != 0)
                 {
-                    equipmentDirective.Text = home.dbContext.EQUIPMENTS.Where(equip => equip.EQUIPMENTID == equipmentBox.Text).First().EQUIPMENTDIRECTIVE;
+                    equipmentDirective.Text = home.dbContext.EQUIPMENTs.Where(equip => equip.EQUIPMENTID.Trim() == equipmentBox.Text).First().EQUIPMENTDIRECTIVE.Trim();
                 }
                 else
                 {
@@ -103,11 +103,11 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             }
             else
             {
-                var issuedMaterials = home.dbContext.ISSUES.ToList();
+                var issuedMaterials = home.dbContext.ISSUEs.Where(iss => iss.ISSUESTATE.Trim() == "Issued" || iss.ISSUESTATE.Trim() == "Unissued").ToList();
 
                 if (partCode.Text != "")
                 {
-                    issuedMaterials = issuedMaterials.Where(iss => iss.SPAREPARTCODE == partCode.Text).ToList();
+                    issuedMaterials = issuedMaterials.Where(iss => iss.SPAREPARTCODE.Trim() == partCode.Text).ToList();
                 }
 
                 if (equipmentBox.Text != "")
@@ -127,7 +127,7 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
 
                 if (issuedMaterials.Count() != 0)
                 {
-                    issueBindingSource.DataSource = issuedMaterials.Join(home.dbContext.WORKORDERS,
+                    issueBindingSource.DataSource = issuedMaterials.Join(home.dbContext.WORKORDERs,
                         issue => issue.WORKORDER,
                         wo => wo.WORKORDERID,
                         (issue, wo) => new

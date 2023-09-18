@@ -12,10 +12,9 @@ namespace ODP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EQUIPMENTTYPE
+    public partial class system
     {
-        public string EQUIPMENTTYPEID { get; set; }
-        public int COUNT { get; set; }
-        public string EQUIPMENTTYPEDIRECTIVE { get; set; }
+        public string systemID { get; set; }
+        public string relatedCompID { get; set; }
     }
 }

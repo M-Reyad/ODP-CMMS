@@ -31,7 +31,7 @@ namespace ODP2.Views
         private void proceedButton_Click(object sender, EventArgs e)
         {
             userIDTextbox.ReadOnly = true;
-            if (dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userIDTextbox.Text).Count() != 1)
+            if (dbContext.ODP_USER.Where(user => user.USERID.Trim() == userIDTextbox.Text).Count() != 1)
             {
                 MessageBox.Show("No Such Recorded User Name, Re-enter your ID");
                 userIDTextbox.ReadOnly = false;
@@ -51,7 +51,7 @@ namespace ODP2.Views
         private void confirmEmailButton_Click(object sender, EventArgs e)
         {
 
-            if (dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userIDTextbox.Text).First().USEREMAIL.Trim() == emailTextbox.Text)
+            if (dbContext.ODP_USER.Where(user => user.USERID.Trim() == userIDTextbox.Text).First().USEREMAIL.Trim() == emailTextbox.Text)
 
             {
                 newPasswordLabel.Visible = true;
@@ -74,7 +74,7 @@ namespace ODP2.Views
             {
                 try
                 {
-                    dbContext.ODP_USERS.Where(user => user.USERID.Trim() == userIDTextbox.Text).First().USERPASSWORD = newpasswordTextbox.Text;
+                    dbContext.ODP_USER.Where(user => user.USERID.Trim() == userIDTextbox.Text).First().USERPASSWORD = newpasswordTextbox.Text;
                     dbContext.SaveChanges();
 
                     MessageBox.Show("Password Updated Successfully", "Successful Password Change");

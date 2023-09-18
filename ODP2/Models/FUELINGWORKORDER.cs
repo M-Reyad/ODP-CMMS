@@ -19,6 +19,8 @@ namespace ODP2.Models
         public int FUELQTY { get; set; }
         public Nullable<int> EQUIPMENTREADING { get; set; }
         public System.DateTime FUELINGDATE { get; set; }
+        public string COMMENTS { get; set; }
+        public string UOM { get; set; }
     
         public virtual EQUIPMENT EQUIPMENT { get; set; }
     }
