@@ -152,7 +152,7 @@ namespace ODP2.Views.Stores_Management
         {
             using (var dbContext = new ODPEntities_ORACLE())
             {
-                refuelingDataGrid.DataSource = dbContext.FUELINGWORKORDERs.OrderByDescending(fwo => fwo.FUELINGWORKORDER1).Take(100).ToList();
+                refuelingDataGrid.DataSource = dbContext.FUELINGWORKORDERs.OrderByDescending(fwo => fwo.FUELINGWORKORDER1).ToList();
                 foreach (DataGridViewRow row in refuelingDataGrid.Rows)
                 {
                     if (row.Cells["equipmentID"].Value.ToString().Trim() == "FS")

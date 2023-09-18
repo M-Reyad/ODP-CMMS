@@ -127,7 +127,7 @@
             this.equipmentRH.HeaderText = "Last PM HR";
             this.equipmentRH.Name = "equipmentRH";
             this.equipmentRH.ReadOnly = true;
-            this.equipmentRH.Width = 80;
+            this.equipmentRH.Width = 60;
             // 
             // workOrderDirective
             // 
@@ -145,7 +145,7 @@
             this.workOrderRegisterationDate.HeaderText = "Last PM Registeration Date";
             this.workOrderRegisterationDate.Name = "workOrderRegisterationDate";
             this.workOrderRegisterationDate.ReadOnly = true;
-            this.workOrderRegisterationDate.Width = 166;
+            this.workOrderRegisterationDate.Width = 145;
             // 
             // workOrderDoneDate
             // 
@@ -154,7 +154,7 @@
             this.workOrderDoneDate.HeaderText = "Last PM Done Date";
             this.workOrderDoneDate.Name = "workOrderDoneDate";
             this.workOrderDoneDate.ReadOnly = true;
-            this.workOrderDoneDate.Width = 115;
+            this.workOrderDoneDate.Width = 95;
             // 
             // newPMDirective
             // 
@@ -165,8 +165,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.dueHRTextbox);

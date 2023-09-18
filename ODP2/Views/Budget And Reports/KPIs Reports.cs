@@ -34,10 +34,8 @@ namespace ODP2.Views
 
         private void KPISelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach(System.Windows.Forms.DataVisualization.Charting.Series series in kpiChart.Series)
-            {
-                series.Dispose();
-            }
+
+            kpiChart.Series[0].Dispose();
             
 
             if (KPISelector.GetItemText(KPISelector.SelectedItem) == "Preventive Maintenance")
