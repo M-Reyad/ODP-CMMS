@@ -43,6 +43,5 @@ Let me explain the Core Modules for the implemented CMMS before for ODP;
         d. PM Work Orders Generation
         ![PM Generation System](https://github.com/M-Reyad/ODP-2/assets/93882864/53b3cf92-910b-4827-83ee-592cfd7e15d3)
         e. Templates Work Orders Registration.
-
     7- KPIs, OPEX and Budgeting to record the whole annual Budget and Operational Expenditures so that to have an accurate Financial KPIs calculation.
   ![Budget and OPEX](https://github.com/M-Reyad/ODP-2/assets/93882864/0539c12f-0347-437e-93be-918fd23ce891)
