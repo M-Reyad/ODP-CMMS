@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59641cc2ff804e3a959bfcd523d20818" Name="Diagram1">
+        <EntityTypeShape EntityType="ODPModel.breakDown" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.component" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.componentFamilyIDDirective" Width="1.5" PointX="3.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.componentStatu" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.equipment" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.equipmentFamily" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.equipmentStatu" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.fuelingWorkOrder" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.issue" Width="1.5" PointX="13.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.sparePart" Width="1.5" PointX="11.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.sysdiagram" Width="1.5" PointX="10.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.system" Width="1.5" PointX="8.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.systemIDDirective" Width="1.5" PointX="12.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.user" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.userLevel" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.userSection" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.workDoneType" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.workOrder" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.workOrderStatu" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.workOrderType" Width="1.5" PointX="6" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ODPModel.partCode" Width="1.5" PointX="13.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="ODPModel.FK_breakDown_workOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_component_componentFamilyIDDirective" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_component_componentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_component_equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_equipment_equipmentFamily" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_equipment_equipmentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_fuelingWorkOrder_equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_workOrder_equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_issue_sparePart" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_issue_workOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_user_userLevel" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_user_userSection" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_workOrder_user" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_workOrder_workDoneTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_workOrder_workOrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ODPModel.FK_workOrder_workOrderType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

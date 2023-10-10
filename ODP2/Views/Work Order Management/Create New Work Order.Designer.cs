@@ -86,7 +86,7 @@ namespace ODP2.Views
             // 
             // workOrderBindingSource
             // 
-            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.workOrder);
+            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.WORKORDER);
             // 
             // newWorkOrderButton
             // 
@@ -137,7 +137,7 @@ namespace ODP2.Views
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // label3
             // 
@@ -197,7 +197,7 @@ namespace ODP2.Views
             // 
             // userBindingSource
             // 
-            this.userBindingSource.DataSource = typeof(ODP2.Models.user);
+            this.userBindingSource.DataSource = typeof(ODP2.Models.ODP_USER);
             // 
             // workTypeTextBox
             // 
@@ -212,7 +212,7 @@ namespace ODP2.Views
             // 
             // workOrderTypeBindingSource
             // 
-            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.workOrderType);
+            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.WORKORDERTYPE);
             // 
             // label13
             // 
@@ -290,11 +290,11 @@ namespace ODP2.Views
             // 
             // regsiterationDatePicker
             // 
-            this.regsiterationDatePicker.CustomFormat = "yyyy/MM/dd hh:mm";
+            this.regsiterationDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
             this.regsiterationDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.regsiterationDatePicker.Location = new System.Drawing.Point(110, 142);
             this.regsiterationDatePicker.Name = "regsiterationDatePicker";
-            this.regsiterationDatePicker.Size = new System.Drawing.Size(127, 20);
+            this.regsiterationDatePicker.Size = new System.Drawing.Size(144, 20);
             this.regsiterationDatePicker.TabIndex = 11;
             // 
             // CreateNewWorkOrder
@@ -328,7 +328,7 @@ namespace ODP2.Views
             this.Name = "CreateNewWorkOrder";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Create New Work Order";
+            this.Text = "Create Work Order";
             this.Load += new System.EventHandler(this.CreateNewWorkOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).EndInit();

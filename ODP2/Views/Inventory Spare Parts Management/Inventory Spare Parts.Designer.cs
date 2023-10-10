@@ -31,8 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sparePartGridView = new System.Windows.Forms.DataGridView();
-            this.reservedStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availableStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sparePartcontextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.reservedWorkOrders = new System.Windows.Forms.ToolStripMenuItem();
+            this.sparePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.searchButton = new System.Windows.Forms.Button();
             this.partDescriptionTextBox = new System.Windows.Forms.TextBox();
@@ -41,16 +42,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.partCodeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.partCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.partDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.onHandStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.manufacturerPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.partPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compatableEquipmentFamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sparePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.partCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.partDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OEMPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OPMPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.onHandStockColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reservedStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availableStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compitableEquipmentFamilyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.sparePartGridView)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.sparePartcontextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sparePartGridView
@@ -64,7 +68,7 @@
             this.sparePartGridView.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Lucida Sans", 8.5F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -72,16 +76,19 @@
             this.sparePartGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.sparePartGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sparePartGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.partCode,
-            this.partDescription,
-            this.onHandStock,
+            this.partCodeColumn,
+            this.partDescriptionColumn,
+            this.OEMPN,
+            this.OPMPN,
+            this.onHandStockColumn,
             this.reservedStock,
             this.availableStock,
-            this.manufacturerPN,
-            this.partPrice,
-            this.compatableEquipmentFamilyID});
+            this.uonColumn,
+            this.compitableEquipmentFamilyColumn});
+            this.sparePartGridView.ContextMenuStrip = this.sparePartcontextMenuStrip;
             this.sparePartGridView.DataSource = this.sparePartBindingSource;
             this.sparePartGridView.Location = new System.Drawing.Point(8, 133);
+            this.sparePartGridView.MultiSelect = false;
             this.sparePartGridView.Name = "sparePartGridView";
             this.sparePartGridView.ReadOnly = true;
             this.sparePartGridView.RowHeadersVisible = false;
@@ -90,19 +97,20 @@
             this.sparePartGridView.TabIndex = 3;
             this.sparePartGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.sparePartGridView_MouseDoubleClick);
             // 
-            // reservedStock
+            // sparePartcontextMenuStrip
             // 
-            this.reservedStock.DataPropertyName = "reservedStock";
-            this.reservedStock.HeaderText = "Reserved";
-            this.reservedStock.Name = "reservedStock";
-            this.reservedStock.ReadOnly = true;
+            this.sparePartcontextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reservedWorkOrders});
+            this.sparePartcontextMenuStrip.Name = "sparePartcontextMenuStrip";
+            this.sparePartcontextMenuStrip.Size = new System.Drawing.Size(223, 26);
+            this.sparePartcontextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.sparePartcontextMenuStrip_Opening);
             // 
-            // availableStock
+            // reservedWorkOrders
             // 
-            this.availableStock.DataPropertyName = "availableStock";
-            this.availableStock.HeaderText = "Available Qty";
-            this.availableStock.Name = "availableStock";
-            this.availableStock.ReadOnly = true;
+            this.reservedWorkOrders.Name = "reservedWorkOrders";
+            this.reservedWorkOrders.Size = new System.Drawing.Size(222, 22);
+            this.reservedWorkOrders.Text = "Show Reserved Work Orders";
+            this.reservedWorkOrders.Click += new System.EventHandler(this.reservedWorkOrders_Click);
             // 
             // panel1
             // 
@@ -179,59 +187,85 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Part Code";
             // 
-            // partCode
+            // partCodeColumn
             // 
-            this.partCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.partCode.DataPropertyName = "partCode";
-            this.partCode.HeaderText = "Part Code";
-            this.partCode.Name = "partCode";
-            this.partCode.ReadOnly = true;
-            this.partCode.Width = 86;
+            this.partCodeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.partCodeColumn.DataPropertyName = "PARTCODE";
+            this.partCodeColumn.HeaderText = "Part Code";
+            this.partCodeColumn.Name = "partCodeColumn";
+            this.partCodeColumn.ReadOnly = true;
+            this.partCodeColumn.Width = 96;
             // 
-            // partDescription
+            // partDescriptionColumn
             // 
-            this.partDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.partDescription.DataPropertyName = "partDirective";
-            this.partDescription.HeaderText = "Part Description";
-            this.partDescription.Name = "partDescription";
-            this.partDescription.ReadOnly = true;
+            this.partDescriptionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.partDescriptionColumn.DataPropertyName = "PARTDIRECTIVE";
+            this.partDescriptionColumn.HeaderText = "Description";
+            this.partDescriptionColumn.Name = "partDescriptionColumn";
+            this.partDescriptionColumn.ReadOnly = true;
             // 
-            // onHandStock
+            // OEMPN
             // 
-            this.onHandStock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.onHandStock.DataPropertyName = "partStockQty";
-            this.onHandStock.HeaderText = "On-Hand Stock";
-            this.onHandStock.Name = "onHandStock";
-            this.onHandStock.ReadOnly = true;
-            this.onHandStock.Width = 107;
+            this.OEMPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.OEMPN.DataPropertyName = "OEM_PN";
+            this.OEMPN.HeaderText = "OEM P/N";
+            this.OEMPN.Name = "OEMPN";
+            this.OEMPN.ReadOnly = true;
+            this.OEMPN.Width = 88;
             // 
-            // manufacturerPN
+            // OPMPN
             // 
-            this.manufacturerPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.manufacturerPN.DataPropertyName = "manufacturerPN";
-            this.manufacturerPN.HeaderText = "Manufacturer PN";
-            this.manufacturerPN.Name = "manufacturerPN";
-            this.manufacturerPN.ReadOnly = true;
+            this.OPMPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.OPMPN.DataPropertyName = "OPM_PN";
+            this.OPMPN.HeaderText = "OPM P/N";
+            this.OPMPN.Name = "OPMPN";
+            this.OPMPN.ReadOnly = true;
+            this.OPMPN.Width = 87;
             // 
-            // partPrice
+            // onHandStockColumn
             // 
-            this.partPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.partPrice.DataPropertyName = "partPrice";
-            this.partPrice.HeaderText = "Part Price";
-            this.partPrice.Name = "partPrice";
-            this.partPrice.ReadOnly = true;
+            this.onHandStockColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.onHandStockColumn.DataPropertyName = "PARTSTOCKQTY";
+            this.onHandStockColumn.HeaderText = "On Hand Stock";
+            this.onHandStockColumn.Name = "onHandStockColumn";
+            this.onHandStockColumn.ReadOnly = true;
+            this.onHandStockColumn.Width = 118;
             // 
-            // compatableEquipmentFamilyID
+            // reservedStock
             // 
-            this.compatableEquipmentFamilyID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.compatableEquipmentFamilyID.DataPropertyName = "compatableEquipmentFamilyID";
-            this.compatableEquipmentFamilyID.HeaderText = "Equipment Family";
-            this.compatableEquipmentFamilyID.Name = "compatableEquipmentFamilyID";
-            this.compatableEquipmentFamilyID.ReadOnly = true;
+            this.reservedStock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.reservedStock.DataPropertyName = "RESERVEDSTOCK";
+            this.reservedStock.HeaderText = "Reserved";
+            this.reservedStock.Name = "reservedStock";
+            this.reservedStock.ReadOnly = true;
+            this.reservedStock.Width = 92;
             // 
-            // sparePartBindingSource
+            // availableStock
             // 
-            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.sparePart);
+            this.availableStock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.availableStock.DataPropertyName = "AVAILABLESTOCK";
+            this.availableStock.HeaderText = "Available Qty";
+            this.availableStock.Name = "availableStock";
+            this.availableStock.ReadOnly = true;
+            this.availableStock.Width = 108;
+            // 
+            // uonColumn
+            // 
+            this.uonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.uonColumn.DataPropertyName = "UOM";
+            this.uonColumn.HeaderText = "UoM";
+            this.uonColumn.Name = "uonColumn";
+            this.uonColumn.ReadOnly = true;
+            this.uonColumn.Width = 62;
+            // 
+            // compitableEquipmentFamilyColumn
+            // 
+            this.compitableEquipmentFamilyColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.compitableEquipmentFamilyColumn.DataPropertyName = "COMPATABLEEQUIPMENTFAMILYID";
+            this.compitableEquipmentFamilyColumn.HeaderText = "Equipment Type";
+            this.compitableEquipmentFamilyColumn.Name = "compitableEquipmentFamilyColumn";
+            this.compitableEquipmentFamilyColumn.ReadOnly = true;
+            this.compitableEquipmentFamilyColumn.Width = 126;
             // 
             // InventorySpareParts
             // 
@@ -243,9 +277,10 @@
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(800, 499);
             ((System.ComponentModel.ISupportInitialize)(this.sparePartGridView)).EndInit();
+            this.sparePartcontextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sparePartBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -264,10 +299,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn partCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn partDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn onHandStock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn reservedStock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn availableStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn manufacturerPN;
         private System.Windows.Forms.DataGridViewTextBoxColumn partPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn compatableEquipmentFamilyID;
+        private System.Windows.Forms.ContextMenuStrip sparePartcontextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem reservedWorkOrders;
+        private System.Windows.Forms.DataGridViewTextBoxColumn partCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn partDescriptionColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OEMPN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OPMPN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn onHandStockColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reservedStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn availableStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn uonColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn compitableEquipmentFamilyColumn;
     }
 }

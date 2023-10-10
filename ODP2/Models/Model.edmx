@@ -1,0 +1,1508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BREAKDOWN">
+          <Key>
+            <PropertyRef Name="BREAKDOWNID" />
+          </Key>
+          <Property Name="EQUIPMENTID" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="FROMTIME" Type="timestamp" Precision="6" />
+          <Property Name="TOTIME" Type="timestamp" Precision="6" />
+          <Property Name="WORKORDER" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="BDNREASON" Type="nchar" MaxLength="300" />
+          <Property Name="BREAKDOWNID" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BDNTOTALTIME" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="COMPONENT">
+          <Key>
+            <PropertyRef Name="COMPONENTSN" />
+          </Key>
+          <Property Name="COMPONENTSN" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="COMPONENTPARTCODE" Type="nchar" MaxLength="20" />
+          <Property Name="COMPONENTSTATUS" Type="nchar" MaxLength="15" />
+          <Property Name="COMPONENTEQUIPMENT" Type="nchar" MaxLength="8" />
+          <Property Name="COMPONENTMANFACTURER" Type="nchar" MaxLength="15" />
+          <Property Name="COMPONENTMODEL" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="COMPONENTSTATUS">
+          <Key>
+            <PropertyRef Name="COMPONENTSTATUS" />
+          </Key>
+          <Property Name="COMPONENTSTATUS" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EQUIPMENT">
+          <Key>
+            <PropertyRef Name="EQUIPMENTID" />
+          </Key>
+          <Property Name="EQUIPMENTID" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="EQUIPMENTFAMILYID" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="EQUIPMENTSN" Type="nchar" MaxLength="50" />
+          <Property Name="EQUIPMENTHR" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="EQUIPMENTHRDATE" Type="date" />
+          <Property Name="EQUIPMENTSTATUSID" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="INSERVICEDATE" Type="date" />
+          <Property Name="EQUIPMENTMANUFACTURER" Type="nchar" MaxLength="20" />
+          <Property Name="EQUIPMENTCAPACITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="EQUIPMENTBATCH" Type="nchar" MaxLength="1" />
+          <Property Name="REFUELED" Type="number" Precision="38" Scale="0" />
+          <Property Name="EQUIPMENTMODEL" Type="nchar" MaxLength="20" />
+          <Property Name="EQUIPMENTDIRECTIVE" Type="nchar" MaxLength="200" />
+          <Property Name="WARRANTYENDDATE" Type="date" />
+        </EntityType>
+        <EntityType Name="EQUIPMENTFAMILY">
+          <Key>
+            <PropertyRef Name="EQUIPMENTFAMILYCODE" />
+          </Key>
+          <Property Name="EQUIPMENTFAMILYCODE" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="EQUIPMENTTYPEDIRECTIVE" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="EQUIPMENTSCOPE" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EQUIPMENTSTATUS">
+          <Key>
+            <PropertyRef Name="EQUIPMENTSTATUSID" />
+          </Key>
+          <Property Name="EQUIPMENTSTATUSID" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="EQUIPMENTSTATUSDIRECTIVE" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUELINGWORKORDER">
+          <Key>
+            <PropertyRef Name="FUELINGWORKORDER" />
+          </Key>
+          <Property Name="FUELINGWORKORDER" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EQUIPMENTID" Type="nchar" MaxLength="8" />
+          <Property Name="FUELQTY" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="EQUIPMENTREADING" Type="number" Precision="10" Scale="0" />
+          <Property Name="FUELINGDATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="COMMENTS" Type="nchar" MaxLength="200" />
+          <Property Name="UOM" Type="nchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="ISSUE">
+          <Key>
+            <PropertyRef Name="ISSUEID" />
+          </Key>
+          <Property Name="WORKORDER" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="QTY" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="SPAREPARTCODE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="ISSUEDATE" Type="date" />
+          <Property Name="PARTPRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTALPRICE" Type="number" Precision="38" Scale="2" StoreGeneratedPattern="Computed" />
+          <Property Name="REQUESTDATE" Type="date" />
+          <Property Name="ISSUESTATE" Type="nchar" MaxLength="15" />
+          <Property Name="ISSUEID" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REQUESTERID" Type="nchar" MaxLength="10" />
+          <Property Name="ISSUERID" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ISSUESTATUS">
+          <Key>
+            <PropertyRef Name="ISSUESTATUS" />
+          </Key>
+          <Property Name="ISSUESTATUS" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ODP_USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERNAME" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="USERID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="USERTITLE" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="USERIMAGE" Type="blob" />
+          <Property Name="USEREMAIL" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="USERIDNUMBER" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="USERLEVEL" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="USERSECTION" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PMTEMPLATE">
+          <Key>
+            <PropertyRef Name="PMSN" />
+          </Key>
+          <Property Name="EQUIPMENTFAMILY" Type="nchar" MaxLength="5" />
+          <Property Name="PMDIRECTIVE" Type="nvarchar2" MaxLength="100" />
+          <Property Name="PMATTACHMENT" Type="blob" />
+          <Property Name="PMISSUES" Type="number" Precision="10" Scale="0" />
+          <Property Name="PMSN" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPAREPART">
+          <Key>
+            <PropertyRef Name="PARTCODE" />
+          </Key>
+          <Property Name="PARTCODE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MANUFACTURERPN" Type="nchar" MaxLength="20" />
+          <Property Name="PARTDIRECTIVE" Type="nvarchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PARTPRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PARTSTOCKQTY" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="COMPATABLEEQUIPMENTFAMILYID" Type="nchar" MaxLength="5" />
+          <Property Name="SUPPLIERID" Type="nchar" MaxLength="10" />
+          <Property Name="RESERVEDSTOCK" Type="number" Precision="10" Scale="0" />
+          <Property Name="AVAILABLESTOCK" Type="number" Precision="38" Scale="0" />
+          <Property Name="UOM" Type="nchar" MaxLength="4" />
+          <Property Name="OEM_PN" Type="nchar" MaxLength="50" />
+          <Property Name="OPM_PN" Type="nchar" MaxLength="50" />
+          <Property Name="LOCATION" Type="nchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="STORERETURN">
+          <Key>
+            <PropertyRef Name="RETURNID" />
+          </Key>
+          <Property Name="WORKORDER" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="QTY" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="COMPONENTSN" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="RETURNPRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RETURNID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="UOMID" />
+          </Key>
+          <Property Name="UOMID" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="UOMDESCRIPTION" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="USERLEVEL">
+          <Key>
+            <PropertyRef Name="USERLEVEL" />
+          </Key>
+          <Property Name="USERLEVEL" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERSECTION">
+          <Key>
+            <PropertyRef Name="USERSECTION" />
+          </Key>
+          <Property Name="USERSECTION" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKDONETYPES">
+          <Key>
+            <PropertyRef Name="WORKDONETYPEID" />
+          </Key>
+          <Property Name="WORKDONETYPEID" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="WORKDONETYPEDIRECTIVE" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKORDER">
+          <Key>
+            <PropertyRef Name="WORKORDERID" />
+          </Key>
+          <Property Name="WORKORDERDIRECTIVE" Type="nvarchar2" MaxLength="100" Nullable="false" />
+          <Property Name="WORKORDERSTATUSID" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="WORKORDERTYPEID" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="WORKSTARTDATE" Type="timestamp" Precision="6" />
+          <Property Name="WORKDONEDATE" Type="timestamp" Precision="6" />
+          <Property Name="WORKORDEREQUIPMENTID" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="WORKORDERCREATORID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="WORKORDERREGISTERATIONDATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="WORKORDERFINISHDATE" Type="timestamp" Precision="6" />
+          <Property Name="WORKORDERNOTES" Type="nclob" />
+          <Property Name="EQUIPMENTRH" Type="number" Precision="10" Scale="0" />
+          <Property Name="WORKDONETYPE" Type="nchar" MaxLength="3" />
+          <Property Name="WORKORDERATTACH" Type="blob" />
+          <Property Name="WORKORDERID" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKORDERSTATUS">
+          <Key>
+            <PropertyRef Name="WORKORDERSTATUSID" />
+          </Key>
+          <Property Name="WORKORDERSTATUSID" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WORKORDERTYPE">
+          <Key>
+            <PropertyRef Name="WORKORDERTYPEID" />
+          </Key>
+          <Property Name="WORKORDERTYPEDIRECTIVE" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="WORKORDERTYPEID" Type="nchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BREAKDOWN_EQUIPMENT">
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="1" />
+          <End Role="BREAKDOWN" Type="Self.BREAKDOWN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Principal>
+            <Dependent Role="BREAKDOWN">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BREAKDOWN_WORKORDER">
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="1" />
+          <End Role="BREAKDOWN" Type="Self.BREAKDOWN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDER">
+              <PropertyRef Name="WORKORDERID" />
+            </Principal>
+            <Dependent Role="BREAKDOWN">
+              <PropertyRef Name="WORKORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPONENT_COMPONENTSTATUS">
+          <End Role="COMPONENTSTATUS" Type="Self.COMPONENTSTATUS" Multiplicity="0..1" />
+          <End Role="COMPONENT" Type="Self.COMPONENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPONENTSTATUS">
+              <PropertyRef Name="COMPONENTSTATUS" />
+            </Principal>
+            <Dependent Role="COMPONENT">
+              <PropertyRef Name="COMPONENTSTATUS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPONENT_SPAREPART">
+          <End Role="SPAREPART" Type="Self.SPAREPART" Multiplicity="0..1" />
+          <End Role="COMPONENT" Type="Self.COMPONENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPAREPART">
+              <PropertyRef Name="PARTCODE" />
+            </Principal>
+            <Dependent Role="COMPONENT">
+              <PropertyRef Name="COMPONENTPARTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPMENT_EQUIPMENTFAMILY">
+          <End Role="EQUIPMENTFAMILY" Type="Self.EQUIPMENTFAMILY" Multiplicity="1" />
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENTFAMILY">
+              <PropertyRef Name="EQUIPMENTFAMILYCODE" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTFAMILYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPMENT_EQUIPMENTSTATUS">
+          <End Role="EQUIPMENTSTATUS" Type="Self.EQUIPMENTSTATUS" Multiplicity="1" />
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENTSTATUS">
+              <PropertyRef Name="EQUIPMENTSTATUSID" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTSTATUSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUELINGWORKORDER_EQUIPMENT">
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="0..1" />
+          <End Role="FUELINGWORKORDER" Type="Self.FUELINGWORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Principal>
+            <Dependent Role="FUELINGWORKORDER">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_ISSUERID">
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="0..1" />
+          <End Role="ISSUE" Type="Self.ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODP_USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="ISSUERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_ISSUESTATUS">
+          <End Role="ISSUESTATUS" Type="Self.ISSUESTATUS" Multiplicity="0..1" />
+          <End Role="ISSUE" Type="Self.ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ISSUESTATUS">
+              <PropertyRef Name="ISSUESTATUS" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="ISSUESTATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_REQUESTERID">
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="0..1" />
+          <End Role="ISSUE" Type="Self.ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODP_USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="REQUESTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_SPAREPART">
+          <End Role="SPAREPART" Type="Self.SPAREPART" Multiplicity="1" />
+          <End Role="ISSUE" Type="Self.ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPAREPART">
+              <PropertyRef Name="PARTCODE" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="SPAREPARTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_WORKORDER">
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="1" />
+          <End Role="ISSUE" Type="Self.ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDER">
+              <PropertyRef Name="WORKORDERID" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="WORKORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PMTEMPLATE_EQUIPMENTFAMILY">
+          <End Role="EQUIPMENTFAMILY" Type="Self.EQUIPMENTFAMILY" Multiplicity="0..1" />
+          <End Role="PMTEMPLATE" Type="Self.PMTEMPLATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENTFAMILY">
+              <PropertyRef Name="EQUIPMENTFAMILYCODE" />
+            </Principal>
+            <Dependent Role="PMTEMPLATE">
+              <PropertyRef Name="EQUIPMENTFAMILY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPAREPART_UOM">
+          <End Role="UOM" Type="Self.UOM" Multiplicity="0..1" />
+          <End Role="SPAREPART" Type="Self.SPAREPART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="UOMID" />
+            </Principal>
+            <Dependent Role="SPAREPART">
+              <PropertyRef Name="UOM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORERETURN_COMPONENT">
+          <End Role="COMPONENT" Type="Self.COMPONENT" Multiplicity="1" />
+          <End Role="STORERETURN" Type="Self.STORERETURN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPONENT">
+              <PropertyRef Name="COMPONENTSN" />
+            </Principal>
+            <Dependent Role="STORERETURN">
+              <PropertyRef Name="COMPONENTSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORERETURN_WORKORDER">
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="1" />
+          <End Role="STORERETURN" Type="Self.STORERETURN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDER">
+              <PropertyRef Name="WORKORDERID" />
+            </Principal>
+            <Dependent Role="STORERETURN">
+              <PropertyRef Name="WORKORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_USERLEVEL">
+          <End Role="USERLEVEL" Type="Self.USERLEVEL" Multiplicity="1" />
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERLEVEL">
+              <PropertyRef Name="USERLEVEL" />
+            </Principal>
+            <Dependent Role="ODP_USER">
+              <PropertyRef Name="USERLEVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_USERSECTION">
+          <End Role="USERSECTION" Type="Self.USERSECTION" Multiplicity="1" />
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERSECTION">
+              <PropertyRef Name="USERSECTION" />
+            </Principal>
+            <Dependent Role="ODP_USER">
+              <PropertyRef Name="USERSECTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_EQUIPMENT">
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="1" />
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDEREQUIPMENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_USER">
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="1" />
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODP_USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDERCREATORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_WORKDONETYPES">
+          <End Role="WORKDONETYPES" Type="Self.WORKDONETYPES" Multiplicity="0..1" />
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKDONETYPES">
+              <PropertyRef Name="WORKDONETYPEID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKDONETYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_WORKORDERSTATUS">
+          <End Role="WORKORDERSTATUS" Type="Self.WORKORDERSTATUS" Multiplicity="1" />
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDERSTATUS">
+              <PropertyRef Name="WORKORDERSTATUSID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDERSTATUSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_WORKORDERTYPE">
+          <End Role="WORKORDERTYPE" Type="Self.WORKORDERTYPE" Multiplicity="1" />
+          <End Role="WORKORDER" Type="Self.WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDERTYPE">
+              <PropertyRef Name="WORKORDERTYPEID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDERTYPEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BREAKDOWN" EntityType="Self.BREAKDOWN" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="COMPONENT" EntityType="Self.COMPONENT" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="COMPONENTSTATUS" EntityType="Self.COMPONENTSTATUS" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="EQUIPMENT" EntityType="Self.EQUIPMENT" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="EQUIPMENTFAMILY" EntityType="Self.EQUIPMENTFAMILY" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="EQUIPMENTSTATUS" EntityType="Self.EQUIPMENTSTATUS" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="FUELINGWORKORDER" EntityType="Self.FUELINGWORKORDER" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="ISSUE" EntityType="Self.ISSUE" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="ISSUESTATUS" EntityType="Self.ISSUESTATUS" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="ODP_USER" EntityType="Self.ODP_USER" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="PMTEMPLATE" EntityType="Self.PMTEMPLATE" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="SPAREPART" EntityType="Self.SPAREPART" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="STORERETURN" EntityType="Self.STORERETURN" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="UOM" EntityType="Self.UOM" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="USERLEVEL" EntityType="Self.USERLEVEL" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="USERSECTION" EntityType="Self.USERSECTION" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="WORKDONETYPES" EntityType="Self.WORKDONETYPES" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="WORKORDER" EntityType="Self.WORKORDER" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="WORKORDERSTATUS" EntityType="Self.WORKORDERSTATUS" Schema="APPS" store:Type="Tables" />
+          <EntitySet Name="WORKORDERTYPE" EntityType="Self.WORKORDERTYPE" Schema="APPS" store:Type="Tables" />
+          <AssociationSet Name="FK_BREAKDOWN_EQUIPMENT" Association="Self.FK_BREAKDOWN_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+            <End Role="BREAKDOWN" EntitySet="BREAKDOWN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BREAKDOWN_WORKORDER" Association="Self.FK_BREAKDOWN_WORKORDER">
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+            <End Role="BREAKDOWN" EntitySet="BREAKDOWN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPONENT_COMPONENTSTATUS" Association="Self.FK_COMPONENT_COMPONENTSTATUS">
+            <End Role="COMPONENTSTATUS" EntitySet="COMPONENTSTATUS" />
+            <End Role="COMPONENT" EntitySet="COMPONENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPONENT_SPAREPART" Association="Self.FK_COMPONENT_SPAREPART">
+            <End Role="SPAREPART" EntitySet="SPAREPART" />
+            <End Role="COMPONENT" EntitySet="COMPONENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPMENT_EQUIPMENTFAMILY" Association="Self.FK_EQUIPMENT_EQUIPMENTFAMILY">
+            <End Role="EQUIPMENTFAMILY" EntitySet="EQUIPMENTFAMILY" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPMENT_EQUIPMENTSTATUS" Association="Self.FK_EQUIPMENT_EQUIPMENTSTATUS">
+            <End Role="EQUIPMENTSTATUS" EntitySet="EQUIPMENTSTATUS" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUELINGWORKORDER_EQUIPMENT" Association="Self.FK_FUELINGWORKORDER_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+            <End Role="FUELINGWORKORDER" EntitySet="FUELINGWORKORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_ISSUERID" Association="Self.FK_ISSUE_ISSUERID">
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+            <End Role="ISSUE" EntitySet="ISSUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_ISSUESTATUS" Association="Self.FK_ISSUE_ISSUESTATUS">
+            <End Role="ISSUESTATUS" EntitySet="ISSUESTATUS" />
+            <End Role="ISSUE" EntitySet="ISSUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_REQUESTERID" Association="Self.FK_ISSUE_REQUESTERID">
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+            <End Role="ISSUE" EntitySet="ISSUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_SPAREPART" Association="Self.FK_ISSUE_SPAREPART">
+            <End Role="SPAREPART" EntitySet="SPAREPART" />
+            <End Role="ISSUE" EntitySet="ISSUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_WORKORDER" Association="Self.FK_ISSUE_WORKORDER">
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+            <End Role="ISSUE" EntitySet="ISSUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PMTEMPLATE_EQUIPMENTFAMILY" Association="Self.FK_PMTEMPLATE_EQUIPMENTFAMILY">
+            <End Role="EQUIPMENTFAMILY" EntitySet="EQUIPMENTFAMILY" />
+            <End Role="PMTEMPLATE" EntitySet="PMTEMPLATE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPAREPART_UOM" Association="Self.FK_SPAREPART_UOM">
+            <End Role="UOM" EntitySet="UOM" />
+            <End Role="SPAREPART" EntitySet="SPAREPART" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORERETURN_COMPONENT" Association="Self.FK_STORERETURN_COMPONENT">
+            <End Role="COMPONENT" EntitySet="COMPONENT" />
+            <End Role="STORERETURN" EntitySet="STORERETURN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORERETURN_WORKORDER" Association="Self.FK_STORERETURN_WORKORDER">
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+            <End Role="STORERETURN" EntitySet="STORERETURN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_USERLEVEL" Association="Self.FK_USER_USERLEVEL">
+            <End Role="USERLEVEL" EntitySet="USERLEVEL" />
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_USERSECTION" Association="Self.FK_USER_USERSECTION">
+            <End Role="USERSECTION" EntitySet="USERSECTION" />
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_EQUIPMENT" Association="Self.FK_WORKORDER_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_USER" Association="Self.FK_WORKORDER_USER">
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_WORKDONETYPES" Association="Self.FK_WORKORDER_WORKDONETYPES">
+            <End Role="WORKDONETYPES" EntitySet="WORKDONETYPES" />
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_WORKORDERSTATUS" Association="Self.FK_WORKORDER_WORKORDERSTATUS">
+            <End Role="WORKORDERSTATUS" EntitySet="WORKORDERSTATUS" />
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_WORKORDERTYPE" Association="Self.FK_WORKORDER_WORKORDERTYPE">
+            <End Role="WORKORDERTYPE" EntitySet="WORKORDERTYPE" />
+            <End Role="WORKORDER" EntitySet="WORKORDER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="COMPONENT">
+          <Key>
+            <PropertyRef Name="COMPONENTSN" />
+          </Key>
+          <Property Name="COMPONENTSN" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="COMPONENTPARTCODE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="COMPONENTSTATUS" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="COMPONENTEQUIPMENT" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="COMPONENTMANFACTURER" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="COMPONENTMODEL" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="COMPONENTSTATU" Relationship="Self.FK_COMPONENT_COMPONENTSTATUS" FromRole="COMPONENT" ToRole="COMPONENTSTATUS" />
+          <NavigationProperty Name="STORERETURNs" Relationship="Self.FK_STORERETURN_COMPONENT" FromRole="COMPONENT" ToRole="STORERETURN" />
+          <NavigationProperty Name="SPAREPART" Relationship="Model.FK_COMPONENT_SPAREPART" FromRole="COMPONENT" ToRole="SPAREPART" />
+        </EntityType>
+        <EntityType Name="COMPONENTSTATU">
+          <Key>
+            <PropertyRef Name="COMPONENTSTATUS" />
+          </Key>
+          <Property Name="COMPONENTSTATUS" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="COMPONENTs" Relationship="Self.FK_COMPONENT_COMPONENTSTATUS" FromRole="COMPONENTSTATUS" ToRole="COMPONENT" />
+        </EntityType>
+        <EntityType Name="EQUIPMENT">
+          <Key>
+            <PropertyRef Name="EQUIPMENTID" />
+          </Key>
+          <Property Name="EQUIPMENTID" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EQUIPMENTFAMILYID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EQUIPMENTSN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="EQUIPMENTHR" Type="Int32" Nullable="false" />
+          <Property Name="EQUIPMENTHRDATE" Type="DateTime" />
+          <Property Name="EQUIPMENTSTATUSID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="INSERVICEDATE" Type="DateTime" />
+          <Property Name="EQUIPMENTMANUFACTURER" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="EQUIPMENTCAPACITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EQUIPMENTBATCH" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EQUIPMENTDIRECTIVE" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="EQUIPMENTFAMILY" Relationship="Self.FK_EQUIPMENT_EQUIPMENTFAMILY" FromRole="EQUIPMENT" ToRole="EQUIPMENTFAMILY" />
+          <NavigationProperty Name="EQUIPMENTSTATU" Relationship="Self.FK_EQUIPMENT_EQUIPMENTSTATUS" FromRole="EQUIPMENT" ToRole="EQUIPMENTSTATUS" />
+          <NavigationProperty Name="FUELINGWORKORDERs" Relationship="Self.FK_FUELINGWORKORDER_EQUIPMENT" FromRole="EQUIPMENT" ToRole="FUELINGWORKORDER" />
+          <NavigationProperty Name="BREAKDOWNs" Relationship="Model.FK_BREAKDOWN_EQUIPMENT" FromRole="EQUIPMENT" ToRole="BREAKDOWN" />
+          <NavigationProperty Name="WORKORDERs" Relationship="Model.FK_WORKORDER_EQUIPMENT" FromRole="EQUIPMENT" ToRole="WORKORDER" />
+          <Property Name="REFUELED" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EQUIPMENTMODEL" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="WARRANTYENDDATE" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="EQUIPMENTFAMILY">
+          <Key>
+            <PropertyRef Name="EQUIPMENTFAMILYCODE" />
+          </Key>
+          <Property Name="EQUIPMENTFAMILYCODE" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EQUIPMENTTYPEDIRECTIVE" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EQUIPMENTs" Relationship="Self.FK_EQUIPMENT_EQUIPMENTFAMILY" FromRole="EQUIPMENTFAMILY" ToRole="EQUIPMENT" />
+          <NavigationProperty Name="PMTEMPLATEs" Relationship="Self.FK_PMTEMPLATE_EQUIPMENTFAMILY" FromRole="EQUIPMENTFAMILY" ToRole="PMTEMPLATE" />
+          <Property Name="EQUIPMENTSCOPE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EQUIPMENTSTATU">
+          <Key>
+            <PropertyRef Name="EQUIPMENTSTATUSID" />
+          </Key>
+          <Property Name="EQUIPMENTSTATUSID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EQUIPMENTSTATUSDIRECTIVE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EQUIPMENTs" Relationship="Self.FK_EQUIPMENT_EQUIPMENTSTATUS" FromRole="EQUIPMENTSTATUS" ToRole="EQUIPMENT" />
+        </EntityType>
+        <EntityType Name="FUELINGWORKORDER">
+          <Key>
+            <PropertyRef Name="FUELINGWORKORDER1" />
+          </Key>
+          <Property Name="FUELINGWORKORDER1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EQUIPMENTID" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="FUELQTY" Type="Int32" Nullable="false" />
+          <Property Name="EQUIPMENTREADING" Type="Int32" />
+          <Property Name="FUELINGDATE" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="EQUIPMENT" Relationship="Self.FK_FUELINGWORKORDER_EQUIPMENT" FromRole="FUELINGWORKORDER" ToRole="EQUIPMENT" />
+          <Property Name="COMMENTS" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ISSUESTATU">
+          <Key>
+            <PropertyRef Name="ISSUESTATUS" />
+          </Key>
+          <Property Name="ISSUESTATUS" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ISSUEs" Relationship="Model.FK_ISSUE_ISSUESTATUS" FromRole="ISSUESTATU" ToRole="ISSUE" />
+        </EntityType>
+        <EntityType Name="ODP_USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERTITLE" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERIMAGE" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="USEREMAIL" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERIDNUMBER" Type="Int32" Nullable="false" />
+          <Property Name="USERLEVEL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="USERSECTION" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="USERLEVEL1" Relationship="Self.FK_USER_USERLEVEL" FromRole="ODP_USER" ToRole="USERLEVEL" />
+          <NavigationProperty Name="USERSECTION1" Relationship="Self.FK_USER_USERSECTION" FromRole="ODP_USER" ToRole="USERSECTION" />
+          <NavigationProperty Name="WORKORDERs" Relationship="Model.FK_WORKORDER_USER" FromRole="ODP_USER" ToRole="WORKORDER" />
+          <NavigationProperty Name="ISSUEs" Relationship="Model.FK_ISSUE_ISSUERID" FromRole="ODP_USER" ToRole="ISSUE" />
+          <NavigationProperty Name="ISSUEs1" Relationship="Model.FK_ISSUE_REQUESTERID" FromRole="ODP_USER" ToRole="ISSUE" />
+        </EntityType>
+        <EntityType Name="PMTEMPLATE">
+          <Key>
+            <PropertyRef Name="PMSN" />
+          </Key>
+          <Property Name="EQUIPMENTFAMILY" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="PMDIRECTIVE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PMATTACHMENT" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PMISSUES" Type="Int32" />
+          <Property Name="PMSN" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EQUIPMENTFAMILY1" Relationship="Self.FK_PMTEMPLATE_EQUIPMENTFAMILY" FromRole="PMTEMPLATE" ToRole="EQUIPMENTFAMILY" />
+        </EntityType>
+        <EntityType Name="STORERETURN">
+          <Key>
+            <PropertyRef Name="RETURNID" />
+          </Key>
+          <Property Name="WORKORDER" Type="Int32" Nullable="false" />
+          <Property Name="QTY" Type="Int32" Nullable="false" />
+          <Property Name="COMPONENTSN" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="RETURNPRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RETURNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="COMPONENT" Relationship="Self.FK_STORERETURN_COMPONENT" FromRole="STORERETURN" ToRole="COMPONENT" />
+          <NavigationProperty Name="WORKORDER1" Relationship="Model.FK_STORERETURN_WORKORDER" FromRole="STORERETURN" ToRole="WORKORDER" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="UOMID" />
+          </Key>
+          <Property Name="UOMID" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="UOMDESCRIPTION" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SPAREPARTs" Relationship="Model.FK_SPAREPART_UOM" FromRole="UOM" ToRole="SPAREPART" />
+        </EntityType>
+        <EntityType Name="USERLEVEL">
+          <Key>
+            <PropertyRef Name="USERLEVEL1" />
+          </Key>
+          <Property Name="USERLEVEL1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ODP_USER" Relationship="Self.FK_USER_USERLEVEL" FromRole="USERLEVEL" ToRole="ODP_USER" />
+        </EntityType>
+        <EntityType Name="USERSECTION">
+          <Key>
+            <PropertyRef Name="USERSECTION1" />
+          </Key>
+          <Property Name="USERSECTION1" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ODP_USER" Relationship="Self.FK_USER_USERSECTION" FromRole="USERSECTION" ToRole="ODP_USER" />
+        </EntityType>
+        <EntityType Name="WORKDONETYPE">
+          <Key>
+            <PropertyRef Name="WORKDONETYPEID" />
+          </Key>
+          <Property Name="WORKDONETYPEID" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="WORKDONETYPEDIRECTIVE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WORKORDERs" Relationship="Model.FK_WORKORDER_WORKDONETYPES" FromRole="WORKDONETYPE" ToRole="WORKORDER" />
+        </EntityType>
+        <EntityType Name="WORKORDERSTATU">
+          <Key>
+            <PropertyRef Name="WORKORDERSTATUSID" />
+          </Key>
+          <Property Name="WORKORDERSTATUSID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WORKORDERs" Relationship="Model.FK_WORKORDER_WORKORDERSTATUS" FromRole="WORKORDERSTATU" ToRole="WORKORDER" />
+        </EntityType>
+        <EntityType Name="WORKORDERTYPE">
+          <Key>
+            <PropertyRef Name="WORKORDERTYPEID" />
+          </Key>
+          <Property Name="WORKORDERTYPEDIRECTIVE" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="WORKORDERTYPEID" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WORKORDERs" Relationship="Model.FK_WORKORDER_WORKORDERTYPE" FromRole="WORKORDERTYPE" ToRole="WORKORDER" />
+        </EntityType>
+        <Association Name="FK_COMPONENT_COMPONENTSTATUS">
+          <End Role="COMPONENTSTATUS" Type="Self.COMPONENTSTATU" Multiplicity="0..1" />
+          <End Role="COMPONENT" Type="Self.COMPONENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPONENTSTATUS">
+              <PropertyRef Name="COMPONENTSTATUS" />
+            </Principal>
+            <Dependent Role="COMPONENT">
+              <PropertyRef Name="COMPONENTSTATUS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORERETURN_COMPONENT">
+          <End Role="COMPONENT" Type="Self.COMPONENT" Multiplicity="1" />
+          <End Role="STORERETURN" Type="Self.STORERETURN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPONENT">
+              <PropertyRef Name="COMPONENTSN" />
+            </Principal>
+            <Dependent Role="STORERETURN">
+              <PropertyRef Name="COMPONENTSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPMENT_EQUIPMENTFAMILY">
+          <End Role="EQUIPMENTFAMILY" Type="Self.EQUIPMENTFAMILY" Multiplicity="1" />
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENTFAMILY">
+              <PropertyRef Name="EQUIPMENTFAMILYCODE" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTFAMILYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPMENT_EQUIPMENTSTATUS">
+          <End Role="EQUIPMENTSTATUS" Type="Self.EQUIPMENTSTATU" Multiplicity="1" />
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENTSTATUS">
+              <PropertyRef Name="EQUIPMENTSTATUSID" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTSTATUSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUELINGWORKORDER_EQUIPMENT">
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="0..1" />
+          <End Role="FUELINGWORKORDER" Type="Self.FUELINGWORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Principal>
+            <Dependent Role="FUELINGWORKORDER">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PMTEMPLATE_EQUIPMENTFAMILY">
+          <End Role="EQUIPMENTFAMILY" Type="Self.EQUIPMENTFAMILY" Multiplicity="0..1" />
+          <End Role="PMTEMPLATE" Type="Self.PMTEMPLATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENTFAMILY">
+              <PropertyRef Name="EQUIPMENTFAMILYCODE" />
+            </Principal>
+            <Dependent Role="PMTEMPLATE">
+              <PropertyRef Name="EQUIPMENTFAMILY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_USERLEVEL">
+          <End Role="USERLEVEL" Type="Self.USERLEVEL" Multiplicity="1" />
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERLEVEL">
+              <PropertyRef Name="USERLEVEL1" />
+            </Principal>
+            <Dependent Role="ODP_USER">
+              <PropertyRef Name="USERLEVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_USERSECTION">
+          <End Role="USERSECTION" Type="Self.USERSECTION" Multiplicity="1" />
+          <End Role="ODP_USER" Type="Self.ODP_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERSECTION">
+              <PropertyRef Name="USERSECTION1" />
+            </Principal>
+            <Dependent Role="ODP_USER">
+              <PropertyRef Name="USERSECTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ODPEntities_ORACLE" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COMPONENTs" EntityType="Self.COMPONENT" />
+          <EntitySet Name="COMPONENTSTATUS" EntityType="Self.COMPONENTSTATU" />
+          <EntitySet Name="EQUIPMENTs" EntityType="Self.EQUIPMENT" />
+          <EntitySet Name="EQUIPMENTFAMILies" EntityType="Self.EQUIPMENTFAMILY" />
+          <EntitySet Name="EQUIPMENTSTATUS" EntityType="Self.EQUIPMENTSTATU" />
+          <EntitySet Name="FUELINGWORKORDERs" EntityType="Self.FUELINGWORKORDER" />
+          <EntitySet Name="ISSUESTATUS" EntityType="Self.ISSUESTATU" />
+          <EntitySet Name="ODP_USER" EntityType="Self.ODP_USER" />
+          <EntitySet Name="PMTEMPLATEs" EntityType="Self.PMTEMPLATE" />
+          <EntitySet Name="STORERETURNs" EntityType="Self.STORERETURN" />
+          <EntitySet Name="UOMs" EntityType="Self.UOM" />
+          <EntitySet Name="USERLEVELs" EntityType="Self.USERLEVEL" />
+          <EntitySet Name="USERSECTIONs" EntityType="Self.USERSECTION" />
+          <EntitySet Name="WORKDONETYPES" EntityType="Self.WORKDONETYPE" />
+          <EntitySet Name="WORKORDERSTATUS" EntityType="Self.WORKORDERSTATU" />
+          <EntitySet Name="WORKORDERTYPEs" EntityType="Self.WORKORDERTYPE" />
+          <AssociationSet Name="FK_COMPONENT_COMPONENTSTATUS" Association="Self.FK_COMPONENT_COMPONENTSTATUS">
+            <End Role="COMPONENTSTATUS" EntitySet="COMPONENTSTATUS" />
+            <End Role="COMPONENT" EntitySet="COMPONENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORERETURN_COMPONENT" Association="Self.FK_STORERETURN_COMPONENT">
+            <End Role="COMPONENT" EntitySet="COMPONENTs" />
+            <End Role="STORERETURN" EntitySet="STORERETURNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPMENT_EQUIPMENTFAMILY" Association="Self.FK_EQUIPMENT_EQUIPMENTFAMILY">
+            <End Role="EQUIPMENTFAMILY" EntitySet="EQUIPMENTFAMILies" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPMENT_EQUIPMENTSTATUS" Association="Self.FK_EQUIPMENT_EQUIPMENTSTATUS">
+            <End Role="EQUIPMENTSTATUS" EntitySet="EQUIPMENTSTATUS" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUELINGWORKORDER_EQUIPMENT" Association="Self.FK_FUELINGWORKORDER_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+            <End Role="FUELINGWORKORDER" EntitySet="FUELINGWORKORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PMTEMPLATE_EQUIPMENTFAMILY" Association="Self.FK_PMTEMPLATE_EQUIPMENTFAMILY">
+            <End Role="EQUIPMENTFAMILY" EntitySet="EQUIPMENTFAMILies" />
+            <End Role="PMTEMPLATE" EntitySet="PMTEMPLATEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_USERLEVEL" Association="Self.FK_USER_USERLEVEL">
+            <End Role="USERLEVEL" EntitySet="USERLEVELs" />
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_USERSECTION" Association="Self.FK_USER_USERSECTION">
+            <End Role="USERSECTION" EntitySet="USERSECTIONs" />
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+          </AssociationSet>
+          <EntitySet Name="BREAKDOWNs" EntityType="Model.BREAKDOWN" />
+          <EntitySet Name="ISSUEs" EntityType="Model.ISSUE" />
+          <EntitySet Name="SPAREPARTs" EntityType="Model.SPAREPART" />
+          <EntitySet Name="WORKORDERs" EntityType="Model.WORKORDER" />
+          <AssociationSet Name="FK_BREAKDOWN_EQUIPMENT" Association="Model.FK_BREAKDOWN_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+            <End Role="BREAKDOWN" EntitySet="BREAKDOWNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BREAKDOWN_WORKORDER" Association="Model.FK_BREAKDOWN_WORKORDER">
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+            <End Role="BREAKDOWN" EntitySet="BREAKDOWNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPONENT_SPAREPART" Association="Model.FK_COMPONENT_SPAREPART">
+            <End Role="SPAREPART" EntitySet="SPAREPARTs" />
+            <End Role="COMPONENT" EntitySet="COMPONENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_EQUIPMENT" Association="Model.FK_WORKORDER_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_ISSUESTATUS" Association="Model.FK_ISSUE_ISSUESTATUS">
+            <End Role="ISSUESTATU" EntitySet="ISSUESTATUS" />
+            <End Role="ISSUE" EntitySet="ISSUEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_SPAREPART" Association="Model.FK_ISSUE_SPAREPART">
+            <End Role="SPAREPART" EntitySet="SPAREPARTs" />
+            <End Role="ISSUE" EntitySet="ISSUEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_WORKORDER" Association="Model.FK_ISSUE_WORKORDER">
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+            <End Role="ISSUE" EntitySet="ISSUEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_USER" Association="Model.FK_WORKORDER_USER">
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPAREPART_UOM" Association="Model.FK_SPAREPART_UOM">
+            <End Role="UOM" EntitySet="UOMs" />
+            <End Role="SPAREPART" EntitySet="SPAREPARTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORERETURN_WORKORDER" Association="Model.FK_STORERETURN_WORKORDER">
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+            <End Role="STORERETURN" EntitySet="STORERETURNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_WORKDONETYPES" Association="Model.FK_WORKORDER_WORKDONETYPES">
+            <End Role="WORKDONETYPE" EntitySet="WORKDONETYPES" />
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_WORKORDERSTATUS" Association="Model.FK_WORKORDER_WORKORDERSTATUS">
+            <End Role="WORKORDERSTATU" EntitySet="WORKORDERSTATUS" />
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WORKORDER_WORKORDERTYPE" Association="Model.FK_WORKORDER_WORKORDERTYPE">
+            <End Role="WORKORDERTYPE" EntitySet="WORKORDERTYPEs" />
+            <End Role="WORKORDER" EntitySet="WORKORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_ISSUERID" Association="Model.FK_ISSUE_ISSUERID">
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+            <End Role="ISSUE" EntitySet="ISSUEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ISSUE_REQUESTERID" Association="Model.FK_ISSUE_REQUESTERID">
+            <End Role="ODP_USER" EntitySet="ODP_USER" />
+            <End Role="ISSUE" EntitySet="ISSUEs" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="BREAKDOWN">
+          <Key>
+            <PropertyRef Name="BREAKDOWNID" />
+          </Key>
+          <Property Name="EQUIPMENTID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="FROMTIME" Type="DateTime" Precision="2" Nullable="true" />
+          <Property Name="TOTIME" Type="DateTime" Nullable="true" Precision="2" />
+          <Property Name="WORKORDER" Type="Int32" Nullable="false" />
+          <Property Name="BDNREASON" Type="String" MaxLength="300" FixedLength="true" Unicode="true" Nullable="true" />
+          <Property Name="BREAKDOWNID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EQUIPMENT" Relationship="Model.FK_BREAKDOWN_EQUIPMENT" FromRole="BREAKDOWN" ToRole="EQUIPMENT" />
+          <NavigationProperty Name="WORKORDER1" Relationship="Model.FK_BREAKDOWN_WORKORDER" FromRole="BREAKDOWN" ToRole="WORKORDER" />
+          <Property Name="BDNTOTALTIME" Type="Decimal" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="ISSUE">
+          <Key>
+            <PropertyRef Name="ISSUEID" />
+          </Key>
+          <Property Name="WORKORDER" Type="Int32" Nullable="false" />
+          <Property Name="QTY" Type="Int32" Nullable="false" />
+          <Property Name="SPAREPARTCODE" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ISSUEDATE" Type="DateTime" />
+          <Property Name="PARTPRICE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="TOTALPRICE" Type="Decimal" Precision="38" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="REQUESTDATE" Type="DateTime" />
+          <Property Name="ISSUESTATE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="ISSUEID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ISSUESTATU" Relationship="Model.FK_ISSUE_ISSUESTATUS" FromRole="ISSUE" ToRole="ISSUESTATU" />
+          <NavigationProperty Name="SPAREPART" Relationship="Model.FK_ISSUE_SPAREPART" FromRole="ISSUE" ToRole="SPAREPART" />
+          <NavigationProperty Name="WORKORDER1" Relationship="Model.FK_ISSUE_WORKORDER" FromRole="ISSUE" ToRole="WORKORDER" />
+          <Property Name="REQUESTERID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="true" />
+          <Property Name="ISSUERID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="true" />
+          <NavigationProperty Name="ODP_USER" Relationship="Model.FK_ISSUE_ISSUERID" FromRole="ISSUE" ToRole="ODP_USER" />
+          <NavigationProperty Name="ODP_USER1" Relationship="Model.FK_ISSUE_REQUESTERID" FromRole="ISSUE" ToRole="ODP_USER" />
+        </EntityType>
+        <EntityType Name="SPAREPART">
+          <Key>
+            <PropertyRef Name="PARTCODE" />
+          </Key>
+          <Property Name="PARTCODE" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MANUFACTURERPN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="PARTDIRECTIVE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARTPRICE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="PARTSTOCKQTY" Type="Int32" Nullable="false" />
+          <Property Name="COMPATABLEEQUIPMENTFAMILYID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SUPPLIERID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RESERVEDSTOCK" Type="Int32" />
+          <Property Name="AVAILABLESTOCK" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="UOM" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="COMPONENTs" Relationship="Model.FK_COMPONENT_SPAREPART" FromRole="SPAREPART" ToRole="COMPONENT" />
+          <NavigationProperty Name="ISSUEs" Relationship="Model.FK_ISSUE_SPAREPART" FromRole="SPAREPART" ToRole="ISSUE" />
+          <NavigationProperty Name="UOM1" Relationship="Model.FK_SPAREPART_UOM" FromRole="SPAREPART" ToRole="UOM" />
+          <Property Name="OEM_PN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="OPM_PN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="LOCATION" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WORKORDER">
+          <Key>
+            <PropertyRef Name="WORKORDERID" />
+          </Key>
+          <Property Name="WORKORDERDIRECTIVE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WORKORDERSTATUSID" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="WORKORDERTYPEID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="WORKSTARTDATE" Type="DateTime" Precision="6" />
+          <Property Name="WORKDONEDATE" Type="DateTime" Precision="6" />
+          <Property Name="WORKORDEREQUIPMENTID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="WORKORDERCREATORID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="WORKORDERREGISTERATIONDATE" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="WORKORDERFINISHDATE" Type="DateTime" Precision="6" />
+          <Property Name="WORKORDERNOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EQUIPMENTRH" Type="Int32" />
+          <Property Name="WORKDONETYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="WORKORDERATTACH" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="WORKORDERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BREAKDOWNs" Relationship="Model.FK_BREAKDOWN_WORKORDER" FromRole="WORKORDER" ToRole="BREAKDOWN" />
+          <NavigationProperty Name="EQUIPMENT" Relationship="Model.FK_WORKORDER_EQUIPMENT" FromRole="WORKORDER" ToRole="EQUIPMENT" />
+          <NavigationProperty Name="ISSUEs" Relationship="Model.FK_ISSUE_WORKORDER" FromRole="WORKORDER" ToRole="ISSUE" />
+          <NavigationProperty Name="ODP_USER" Relationship="Model.FK_WORKORDER_USER" FromRole="WORKORDER" ToRole="ODP_USER" />
+          <NavigationProperty Name="STORERETURNs" Relationship="Model.FK_STORERETURN_WORKORDER" FromRole="WORKORDER" ToRole="STORERETURN" />
+          <NavigationProperty Name="WORKDONETYPE1" Relationship="Model.FK_WORKORDER_WORKDONETYPES" FromRole="WORKORDER" ToRole="WORKDONETYPE" />
+          <NavigationProperty Name="WORKORDERSTATU" Relationship="Model.FK_WORKORDER_WORKORDERSTATUS" FromRole="WORKORDER" ToRole="WORKORDERSTATU" />
+          <NavigationProperty Name="WORKORDERTYPE" Relationship="Model.FK_WORKORDER_WORKORDERTYPE" FromRole="WORKORDER" ToRole="WORKORDERTYPE" />
+        </EntityType>
+        <Association Name="FK_BREAKDOWN_EQUIPMENT">
+          <End Type="Model.EQUIPMENT" Role="EQUIPMENT" Multiplicity="1" />
+          <End Type="Model.BREAKDOWN" Role="BREAKDOWN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Principal>
+            <Dependent Role="BREAKDOWN">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BREAKDOWN_WORKORDER">
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="1" />
+          <End Type="Model.BREAKDOWN" Role="BREAKDOWN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDER">
+              <PropertyRef Name="WORKORDERID" />
+            </Principal>
+            <Dependent Role="BREAKDOWN">
+              <PropertyRef Name="WORKORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPONENT_SPAREPART">
+          <End Type="Model.SPAREPART" Role="SPAREPART" Multiplicity="0..1" />
+          <End Type="Model.COMPONENT" Role="COMPONENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPAREPART">
+              <PropertyRef Name="PARTCODE" />
+            </Principal>
+            <Dependent Role="COMPONENT">
+              <PropertyRef Name="COMPONENTPARTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_EQUIPMENT">
+          <End Type="Model.EQUIPMENT" Role="EQUIPMENT" Multiplicity="1" />
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUIPMENTID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDEREQUIPMENTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_ISSUESTATUS">
+          <End Type="Model.ISSUESTATU" Role="ISSUESTATU" Multiplicity="0..1" />
+          <End Type="Model.ISSUE" Role="ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ISSUESTATU">
+              <PropertyRef Name="ISSUESTATUS" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="ISSUESTATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_SPAREPART">
+          <End Type="Model.SPAREPART" Role="SPAREPART" Multiplicity="1" />
+          <End Type="Model.ISSUE" Role="ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPAREPART">
+              <PropertyRef Name="PARTCODE" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="SPAREPARTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_WORKORDER">
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="1" />
+          <End Type="Model.ISSUE" Role="ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDER">
+              <PropertyRef Name="WORKORDERID" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="WORKORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_USER">
+          <End Type="Model.ODP_USER" Role="ODP_USER" Multiplicity="1" />
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODP_USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDERCREATORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPAREPART_UOM">
+          <End Type="Model.UOM" Role="UOM" Multiplicity="0..1" />
+          <End Type="Model.SPAREPART" Role="SPAREPART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM">
+              <PropertyRef Name="UOMID" />
+            </Principal>
+            <Dependent Role="SPAREPART">
+              <PropertyRef Name="UOM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORERETURN_WORKORDER">
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="1" />
+          <End Type="Model.STORERETURN" Role="STORERETURN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDER">
+              <PropertyRef Name="WORKORDERID" />
+            </Principal>
+            <Dependent Role="STORERETURN">
+              <PropertyRef Name="WORKORDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_WORKDONETYPES">
+          <End Type="Model.WORKDONETYPE" Role="WORKDONETYPE" Multiplicity="0..1" />
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKDONETYPE">
+              <PropertyRef Name="WORKDONETYPEID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKDONETYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_WORKORDERSTATUS">
+          <End Type="Model.WORKORDERSTATU" Role="WORKORDERSTATU" Multiplicity="1" />
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDERSTATU">
+              <PropertyRef Name="WORKORDERSTATUSID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDERSTATUSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WORKORDER_WORKORDERTYPE">
+          <End Type="Model.WORKORDERTYPE" Role="WORKORDERTYPE" Multiplicity="1" />
+          <End Type="Model.WORKORDER" Role="WORKORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WORKORDERTYPE">
+              <PropertyRef Name="WORKORDERTYPEID" />
+            </Principal>
+            <Dependent Role="WORKORDER">
+              <PropertyRef Name="WORKORDERTYPEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_ISSUERID">
+          <End Type="Model.ODP_USER" Role="ODP_USER" Multiplicity="0..1" />
+          <End Type="Model.ISSUE" Role="ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODP_USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="ISSUERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ISSUE_REQUESTERID">
+          <End Type="Model.ODP_USER" Role="ODP_USER" Multiplicity="0..1" />
+          <End Type="Model.ISSUE" Role="ISSUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODP_USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="ISSUE">
+              <PropertyRef Name="REQUESTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ODPEntities_ORACLE">
+          <EntitySetMapping Name="COMPONENTs">
+            <EntityTypeMapping TypeName="Model.COMPONENT">
+              <MappingFragment StoreEntitySet="COMPONENT">
+                <ScalarProperty Name="COMPONENTSN" ColumnName="COMPONENTSN" />
+                <ScalarProperty Name="COMPONENTPARTCODE" ColumnName="COMPONENTPARTCODE" />
+                <ScalarProperty Name="COMPONENTSTATUS" ColumnName="COMPONENTSTATUS" />
+                <ScalarProperty Name="COMPONENTEQUIPMENT" ColumnName="COMPONENTEQUIPMENT" />
+                <ScalarProperty Name="COMPONENTMANFACTURER" ColumnName="COMPONENTMANFACTURER" />
+                <ScalarProperty Name="COMPONENTMODEL" ColumnName="COMPONENTMODEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPONENTSTATUS">
+            <EntityTypeMapping TypeName="Model.COMPONENTSTATU">
+              <MappingFragment StoreEntitySet="COMPONENTSTATUS">
+                <ScalarProperty Name="COMPONENTSTATUS" ColumnName="COMPONENTSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPMENTs">
+            <EntityTypeMapping TypeName="Model.EQUIPMENT">
+              <MappingFragment StoreEntitySet="EQUIPMENT">
+                <ScalarProperty Name="WARRANTYENDDATE" ColumnName="WARRANTYENDDATE" />
+                <ScalarProperty Name="EQUIPMENTMODEL" ColumnName="EQUIPMENTMODEL" />
+                <ScalarProperty Name="REFUELED" ColumnName="REFUELED" />
+                <ScalarProperty Name="EQUIPMENTID" ColumnName="EQUIPMENTID" />
+                <ScalarProperty Name="EQUIPMENTFAMILYID" ColumnName="EQUIPMENTFAMILYID" />
+                <ScalarProperty Name="EQUIPMENTSN" ColumnName="EQUIPMENTSN" />
+                <ScalarProperty Name="EQUIPMENTHR" ColumnName="EQUIPMENTHR" />
+                <ScalarProperty Name="EQUIPMENTHRDATE" ColumnName="EQUIPMENTHRDATE" />
+                <ScalarProperty Name="EQUIPMENTSTATUSID" ColumnName="EQUIPMENTSTATUSID" />
+                <ScalarProperty Name="INSERVICEDATE" ColumnName="INSERVICEDATE" />
+                <ScalarProperty Name="EQUIPMENTMANUFACTURER" ColumnName="EQUIPMENTMANUFACTURER" />
+                <ScalarProperty Name="EQUIPMENTCAPACITY" ColumnName="EQUIPMENTCAPACITY" />
+                <ScalarProperty Name="EQUIPMENTBATCH" ColumnName="EQUIPMENTBATCH" />
+                <ScalarProperty Name="EQUIPMENTDIRECTIVE" ColumnName="EQUIPMENTDIRECTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPMENTFAMILies">
+            <EntityTypeMapping TypeName="Model.EQUIPMENTFAMILY">
+              <MappingFragment StoreEntitySet="EQUIPMENTFAMILY">
+                <ScalarProperty Name="EQUIPMENTSCOPE" ColumnName="EQUIPMENTSCOPE" />
+                <ScalarProperty Name="EQUIPMENTFAMILYCODE" ColumnName="EQUIPMENTFAMILYCODE" />
+                <ScalarProperty Name="EQUIPMENTTYPEDIRECTIVE" ColumnName="EQUIPMENTTYPEDIRECTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPMENTSTATUS">
+            <EntityTypeMapping TypeName="Model.EQUIPMENTSTATU">
+              <MappingFragment StoreEntitySet="EQUIPMENTSTATUS">
+                <ScalarProperty Name="EQUIPMENTSTATUSID" ColumnName="EQUIPMENTSTATUSID" />
+                <ScalarProperty Name="EQUIPMENTSTATUSDIRECTIVE" ColumnName="EQUIPMENTSTATUSDIRECTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUELINGWORKORDERs">
+            <EntityTypeMapping TypeName="Model.FUELINGWORKORDER">
+              <MappingFragment StoreEntitySet="FUELINGWORKORDER">
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+                <ScalarProperty Name="FUELINGWORKORDER1" ColumnName="FUELINGWORKORDER" />
+                <ScalarProperty Name="EQUIPMENTID" ColumnName="EQUIPMENTID" />
+                <ScalarProperty Name="FUELQTY" ColumnName="FUELQTY" />
+                <ScalarProperty Name="EQUIPMENTREADING" ColumnName="EQUIPMENTREADING" />
+                <ScalarProperty Name="FUELINGDATE" ColumnName="FUELINGDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ISSUESTATUS">
+            <EntityTypeMapping TypeName="Model.ISSUESTATU">
+              <MappingFragment StoreEntitySet="ISSUESTATUS">
+                <ScalarProperty Name="ISSUESTATUS" ColumnName="ISSUESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ODP_USER">
+            <EntityTypeMapping TypeName="Model.ODP_USER">
+              <MappingFragment StoreEntitySet="ODP_USER">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+                <ScalarProperty Name="USERTITLE" ColumnName="USERTITLE" />
+                <ScalarProperty Name="USERIMAGE" ColumnName="USERIMAGE" />
+                <ScalarProperty Name="USEREMAIL" ColumnName="USEREMAIL" />
+                <ScalarProperty Name="USERIDNUMBER" ColumnName="USERIDNUMBER" />
+                <ScalarProperty Name="USERLEVEL" ColumnName="USERLEVEL" />
+                <ScalarProperty Name="USERSECTION" ColumnName="USERSECTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PMTEMPLATEs">
+            <EntityTypeMapping TypeName="Model.PMTEMPLATE">
+              <MappingFragment StoreEntitySet="PMTEMPLATE">
+                <ScalarProperty Name="EQUIPMENTFAMILY" ColumnName="EQUIPMENTFAMILY" />
+                <ScalarProperty Name="PMDIRECTIVE" ColumnName="PMDIRECTIVE" />
+                <ScalarProperty Name="PMATTACHMENT" ColumnName="PMATTACHMENT" />
+                <ScalarProperty Name="PMISSUES" ColumnName="PMISSUES" />
+                <ScalarProperty Name="PMSN" ColumnName="PMSN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STORERETURNs">
+            <EntityTypeMapping TypeName="Model.STORERETURN">
+              <MappingFragment StoreEntitySet="STORERETURN">
+                <ScalarProperty Name="WORKORDER" ColumnName="WORKORDER" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="COMPONENTSN" ColumnName="COMPONENTSN" />
+                <ScalarProperty Name="RETURNPRICE" ColumnName="RETURNPRICE" />
+                <ScalarProperty Name="RETURNID" ColumnName="RETURNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="Model.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+                <ScalarProperty Name="UOMDESCRIPTION" ColumnName="UOMDESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERLEVELs">
+            <EntityTypeMapping TypeName="Model.USERLEVEL">
+              <MappingFragment StoreEntitySet="USERLEVEL">
+                <ScalarProperty Name="USERLEVEL1" ColumnName="USERLEVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERSECTIONs">
+            <EntityTypeMapping TypeName="Model.USERSECTION">
+              <MappingFragment StoreEntitySet="USERSECTION">
+                <ScalarProperty Name="USERSECTION1" ColumnName="USERSECTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKDONETYPES">
+            <EntityTypeMapping TypeName="Model.WORKDONETYPE">
+              <MappingFragment StoreEntitySet="WORKDONETYPES">
+                <ScalarProperty Name="WORKDONETYPEID" ColumnName="WORKDONETYPEID" />
+                <ScalarProperty Name="WORKDONETYPEDIRECTIVE" ColumnName="WORKDONETYPEDIRECTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKORDERSTATUS">
+            <EntityTypeMapping TypeName="Model.WORKORDERSTATU">
+              <MappingFragment StoreEntitySet="WORKORDERSTATUS">
+                <ScalarProperty Name="WORKORDERSTATUSID" ColumnName="WORKORDERSTATUSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKORDERTYPEs">
+            <EntityTypeMapping TypeName="Model.WORKORDERTYPE">
+              <MappingFragment StoreEntitySet="WORKORDERTYPE">
+                <ScalarProperty Name="WORKORDERTYPEDIRECTIVE" ColumnName="WORKORDERTYPEDIRECTIVE" />
+                <ScalarProperty Name="WORKORDERTYPEID" ColumnName="WORKORDERTYPEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BREAKDOWNs">
+            <EntityTypeMapping TypeName="Model.BREAKDOWN">
+              <MappingFragment StoreEntitySet="BREAKDOWN">
+                <ScalarProperty Name="BDNTOTALTIME" ColumnName="BDNTOTALTIME" />
+                <ScalarProperty Name="BREAKDOWNID" ColumnName="BREAKDOWNID" />
+                <ScalarProperty Name="BDNREASON" ColumnName="BDNREASON" />
+                <ScalarProperty Name="WORKORDER" ColumnName="WORKORDER" />
+                <ScalarProperty Name="TOTIME" ColumnName="TOTIME" />
+                <ScalarProperty Name="FROMTIME" ColumnName="FROMTIME" />
+                <ScalarProperty Name="EQUIPMENTID" ColumnName="EQUIPMENTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ISSUEs">
+            <EntityTypeMapping TypeName="Model.ISSUE">
+              <MappingFragment StoreEntitySet="ISSUE">
+                <ScalarProperty Name="ISSUERID" ColumnName="ISSUERID" />
+                <ScalarProperty Name="REQUESTERID" ColumnName="REQUESTERID" />
+                <ScalarProperty Name="ISSUEID" ColumnName="ISSUEID" />
+                <ScalarProperty Name="ISSUESTATE" ColumnName="ISSUESTATE" />
+                <ScalarProperty Name="REQUESTDATE" ColumnName="REQUESTDATE" />
+                <ScalarProperty Name="TOTALPRICE" ColumnName="TOTALPRICE" />
+                <ScalarProperty Name="PARTPRICE" ColumnName="PARTPRICE" />
+                <ScalarProperty Name="ISSUEDATE" ColumnName="ISSUEDATE" />
+                <ScalarProperty Name="SPAREPARTCODE" ColumnName="SPAREPARTCODE" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="WORKORDER" ColumnName="WORKORDER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPAREPARTs">
+            <EntityTypeMapping TypeName="Model.SPAREPART">
+              <MappingFragment StoreEntitySet="SPAREPART">
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="OPM_PN" ColumnName="OPM_PN" />
+                <ScalarProperty Name="OEM_PN" ColumnName="OEM_PN" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="AVAILABLESTOCK" ColumnName="AVAILABLESTOCK" />
+                <ScalarProperty Name="RESERVEDSTOCK" ColumnName="RESERVEDSTOCK" />
+                <ScalarProperty Name="SUPPLIERID" ColumnName="SUPPLIERID" />
+                <ScalarProperty Name="COMPATABLEEQUIPMENTFAMILYID" ColumnName="COMPATABLEEQUIPMENTFAMILYID" />
+                <ScalarProperty Name="PARTSTOCKQTY" ColumnName="PARTSTOCKQTY" />
+                <ScalarProperty Name="PARTPRICE" ColumnName="PARTPRICE" />
+                <ScalarProperty Name="PARTDIRECTIVE" ColumnName="PARTDIRECTIVE" />
+                <ScalarProperty Name="MANUFACTURERPN" ColumnName="MANUFACTURERPN" />
+                <ScalarProperty Name="PARTCODE" ColumnName="PARTCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WORKORDERs">
+            <EntityTypeMapping TypeName="Model.WORKORDER">
+              <MappingFragment StoreEntitySet="WORKORDER">
+                <ScalarProperty Name="WORKORDERID" ColumnName="WORKORDERID" />
+                <ScalarProperty Name="WORKORDERATTACH" ColumnName="WORKORDERATTACH" />
+                <ScalarProperty Name="WORKDONETYPE" ColumnName="WORKDONETYPE" />
+                <ScalarProperty Name="EQUIPMENTRH" ColumnName="EQUIPMENTRH" />
+                <ScalarProperty Name="WORKORDERNOTES" ColumnName="WORKORDERNOTES" />
+                <ScalarProperty Name="WORKORDERFINISHDATE" ColumnName="WORKORDERFINISHDATE" />
+                <ScalarProperty Name="WORKORDERREGISTERATIONDATE" ColumnName="WORKORDERREGISTERATIONDATE" />
+                <ScalarProperty Name="WORKORDERCREATORID" ColumnName="WORKORDERCREATORID" />
+                <ScalarProperty Name="WORKORDEREQUIPMENTID" ColumnName="WORKORDEREQUIPMENTID" />
+                <ScalarProperty Name="WORKDONEDATE" ColumnName="WORKDONEDATE" />
+                <ScalarProperty Name="WORKSTARTDATE" ColumnName="WORKSTARTDATE" />
+                <ScalarProperty Name="WORKORDERTYPEID" ColumnName="WORKORDERTYPEID" />
+                <ScalarProperty Name="WORKORDERSTATUSID" ColumnName="WORKORDERSTATUSID" />
+                <ScalarProperty Name="WORKORDERDIRECTIVE" ColumnName="WORKORDERDIRECTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

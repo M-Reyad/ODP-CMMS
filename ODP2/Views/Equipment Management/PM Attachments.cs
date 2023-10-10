@@ -19,21 +19,15 @@ namespace ODP2.Views
 
         private void PMAttachments_Load(object sender, System.EventArgs e)
         {
-            var equipmentFamilyList = home.dbContext.equipmentFamilies.ToList();
+            var equipmentFamilyList = home.dbContext.EQUIPMENTFAMILies.ToList();
             equipmentFamilyBindingSource.DataSource = equipmentFamilyList;
             equipmentFamilyDirective.Text = "";
             equipmentFamilyBox_SelectedIndexChanged(sender, e);
         }
-
-        private void equipmentFamilyBox_SelectedIndexChanged(object sender, System.EventArgs e)
+        public void equipmentFamilyBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            string selectedFamilyEquipment = equipmentFamilyBox.GetItemText(equipmentFamilyBox.SelectedItem);
-            equipmentFamilyDirective.Text = home.dbContext.equipmentFamilies.Where(eq => eq.equipmentFamilyCode.Trim() == selectedFamilyEquipment).First().equipmentTypeDirective.Trim();
-            pmTemplateBindingSource.DataSource = home.dbContext.pmTemplates.Where(pmTemp => pmTemp.equipmentFamily.Trim() == selectedFamilyEquipment).ToList();
-            //attachmentsDataGrid.Refresh();
-            
+            configAttachmentsGrid();
         }
-
         private void saveButton_Click(object sender, System.EventArgs e)
         {
             try
@@ -44,11 +38,10 @@ namespace ODP2.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Saving Templates " + ex);
+                MessageBox.Show("Error Saving Templates " + ex.Message);
             }
 
         }
-
         private void browseButton_Click(object sender, System.EventArgs e)
         {
             OpenFileDialog insertAttach = new OpenFileDialog();
@@ -60,7 +53,6 @@ namespace ODP2.Views
                 MessageBox.Show("Attach Inserted Successfully", "Saved");
             }
         }
-
         private void newPMTemplate_Click(object sender, EventArgs e)
         {
 
@@ -75,10 +67,17 @@ namespace ODP2.Views
                 newPMInsert.Show();
             }
         }
-
         private void attachmentsDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             saveButton.Enabled = true;
         }
+        private void configAttachmentsGrid()
+        {
+            string selectedFamilyEquipment = equipmentFamilyBox.GetItemText(equipmentFamilyBox.SelectedItem).Trim();
+            equipmentFamilyDirective.Text = home.dbContext.EQUIPMENTFAMILies.Where(eq => eq.EQUIPMENTFAMILYCODE.Trim() == selectedFamilyEquipment).First().EQUIPMENTTYPEDIRECTIVE.Trim();
+            pmTemplateBindingSource.DataSource = home.dbContext.PMTEMPLATEs.Where(pmTemp => pmTemp.EQUIPMENTFAMILY.Trim() == selectedFamilyEquipment).ToList();
+            materialGridView.DataSource = home.dbContext.ISSUEs.ToList();
+        }
     }
+
 }

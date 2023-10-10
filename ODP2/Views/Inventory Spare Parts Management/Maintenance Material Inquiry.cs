@@ -33,9 +33,9 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             if (partCode.Text != "")
             {
 
-                if (home.dbContext.spareParts.Where(part => part.partCode.Trim() == partCode.Text).Count() != 0)
+                if (home.dbContext.SPAREPARTs.Where(part => part.PARTCODE.Trim() == partCode.Text).Count() != 0)
                 {
-                    partDescription.Text = home.dbContext.spareParts.Where(part => part.partCode.Trim() == partCode.Text).First().partDirective;
+                    partDescription.Text = home.dbContext.SPAREPARTs.Where(part => part.PARTCODE.Trim() == partCode.Text).First().PARTDIRECTIVE;
                 }
                 else
                 {
@@ -54,9 +54,9 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
         {
             if (equipmentBox.Text != "")
             {
-                if (home.dbContext.equipments.Where(equip => equip.equipmentID == equipmentBox.Text).Count() != 0)
+                if (home.dbContext.EQUIPMENTs.Where(equip => equip.EQUIPMENTID.Trim() == equipmentBox.Text).Count() != 0)
                 {
-                    equipmentDirective.Text = home.dbContext.equipments.Where(equip => equip.equipmentID == equipmentBox.Text).First().equipmentDirective;
+                    equipmentDirective.Text = home.dbContext.EQUIPMENTs.Where(equip => equip.EQUIPMENTID.Trim() == equipmentBox.Text).First().EQUIPMENTDIRECTIVE.Trim();
                 }
                 else
                 {
@@ -103,43 +103,43 @@ namespace ODP2.Views.Inventory_Spare_Parts_Management
             }
             else
             {
-                var issuedMaterials = home.dbContext.issues.ToList();
+                var issuedMaterials = home.dbContext.ISSUEs.Where(iss => iss.ISSUESTATE.Trim() == "Issued" || iss.ISSUESTATE.Trim() == "Unissued").ToList();
 
                 if (partCode.Text != "")
                 {
-                    issuedMaterials = issuedMaterials.Where(iss => iss.sparePartCode == partCode.Text).ToList();
+                    issuedMaterials = issuedMaterials.Where(iss => iss.SPAREPARTCODE.Trim() == partCode.Text).ToList();
                 }
 
                 if (equipmentBox.Text != "")
                 {
-                    issuedMaterials = issuedMaterials.Where(iss => iss.workOrder1.workOrderEquipmentID.Trim() == equipmentBox.Text).ToList();
+                    issuedMaterials = issuedMaterials.Where(iss => iss.WORKORDER1.WORKORDEREQUIPMENTID.Trim() == equipmentBox.Text).ToList();
                 }
 
                 if (fromDateCheckBox.Checked == true)
                 {
-                    issuedMaterials = issuedMaterials.Where(iss => iss.issueDate >= fromDatePicker.Value.Date).ToList();
+                    issuedMaterials = issuedMaterials.Where(iss => iss.ISSUEDATE >= fromDatePicker.Value.Date).ToList();
                 }
 
                 if (toDateCheckBox.Checked == true)
                 {
-                    issuedMaterials = issuedMaterials.Where(iss => iss.issueDate <= toDatePicker.Value.Date).ToList();
+                    issuedMaterials = issuedMaterials.Where(iss => iss.ISSUEDATE <= toDatePicker.Value.Date).ToList();
                 }
 
                 if (issuedMaterials.Count() != 0)
                 {
-                    issueBindingSource.DataSource = issuedMaterials.Join(home.dbContext.workOrders,
-                        issue => issue.workOrder,
-                        wo => wo.workOrderID,
+                    issueBindingSource.DataSource = issuedMaterials.Join(home.dbContext.WORKORDERs,
+                        issue => issue.WORKORDER,
+                        wo => wo.WORKORDERID,
                         (issue, wo) => new
                         {
-                            wo.workOrderID,
-                            wo.workOrderEquipmentID,
-                            wo.workOrderDirective,
-                            issue.sparePartCode,
-                            issue.sparePart.partDirective,
-                            issue.qty,
-                            issue.issueDate,
-                            issue.issueState
+                            wo.WORKORDERID,
+                            wo.WORKORDEREQUIPMENTID,
+                            wo.WORKORDERDIRECTIVE,
+                            issue.SPAREPARTCODE,
+                            issue.SPAREPART.PARTDIRECTIVE,
+                            issue.QTY,
+                            issue.ISSUEDATE,
+                            issue.ISSUESTATE
                         }).ToList();
 
                 }

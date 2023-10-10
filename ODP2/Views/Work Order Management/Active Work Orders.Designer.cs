@@ -32,24 +32,22 @@ namespace ODP2
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.activeWorkOrdersGrid = new System.Windows.Forms.DataGridView();
+            this.WORKORDERID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKORDEREQUIPMENTID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKORDERDIRECTIVE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKORDERSTATUSID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKORDERTYPEID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKORDERREGISTERATIONDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKSTARTDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORKDONEDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.workOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.equipmentBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.workOrderBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.activeWorkOrdersGrid = new System.Windows.Forms.DataGridView();
-            this.workOrderIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderDirectiveDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderStatusIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderTypeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderCreatorIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workStartDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workDoneDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workDoneType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fromDatePicker = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dateCheckBox = new System.Windows.Forms.CheckBox();
@@ -63,9 +61,6 @@ namespace ODP2
             this.directiveTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.openWorkOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.workOrderTypeIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workOrderTypeIDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.activeWorkOrdersGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrderBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -74,11 +69,135 @@ namespace ODP2
             ((System.ComponentModel.ISupportInitialize)(this.equipmentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
+            // activeWorkOrdersGrid
+            // 
+            this.activeWorkOrdersGrid.AllowDrop = true;
+            this.activeWorkOrdersGrid.AllowUserToAddRows = false;
+            this.activeWorkOrdersGrid.AllowUserToDeleteRows = false;
+            this.activeWorkOrdersGrid.AllowUserToOrderColumns = true;
+            this.activeWorkOrdersGrid.AllowUserToResizeRows = false;
+            this.activeWorkOrdersGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.activeWorkOrdersGrid.AutoGenerateColumns = false;
+            this.activeWorkOrdersGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.activeWorkOrdersGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.activeWorkOrdersGrid.CausesValidation = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Lucida Sans", 8F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.activeWorkOrdersGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.activeWorkOrdersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.activeWorkOrdersGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.WORKORDERID,
+            this.WORKORDEREQUIPMENTID,
+            this.WORKORDERDIRECTIVE,
+            this.WORKORDERSTATUSID,
+            this.WORKORDERTYPEID,
+            this.WORKORDERREGISTERATIONDATE,
+            this.WORKSTARTDATE,
+            this.WORKDONEDATE});
+            this.activeWorkOrdersGrid.DataSource = this.workOrderBindingSource;
+            this.activeWorkOrdersGrid.Location = new System.Drawing.Point(8, 210);
+            this.activeWorkOrdersGrid.Name = "activeWorkOrdersGrid";
+            this.activeWorkOrdersGrid.ReadOnly = true;
+            this.activeWorkOrdersGrid.RowHeadersVisible = false;
+            this.activeWorkOrdersGrid.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.activeWorkOrdersGrid.RowTemplate.DefaultCellStyle.NullValue = "----";
+            this.activeWorkOrdersGrid.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(1);
+            this.activeWorkOrdersGrid.RowTemplate.Height = 25;
+            this.activeWorkOrdersGrid.RowTemplate.ReadOnly = true;
+            this.activeWorkOrdersGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.activeWorkOrdersGrid.Size = new System.Drawing.Size(952, 302);
+            this.activeWorkOrdersGrid.TabIndex = 3;
+            this.activeWorkOrdersGrid.Tag = "";
+            this.activeWorkOrdersGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.activeWorkOrdersGrid_MouseDoubleClick);
+            // 
+            // WORKORDERID
+            // 
+            this.WORKORDERID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKORDERID.DataPropertyName = "WORKORDERID";
+            this.WORKORDERID.HeaderText = "WO#";
+            this.WORKORDERID.Name = "WORKORDERID";
+            this.WORKORDERID.ReadOnly = true;
+            this.WORKORDERID.Width = 55;
+            // 
+            // WORKORDEREQUIPMENTID
+            // 
+            this.WORKORDEREQUIPMENTID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKORDEREQUIPMENTID.DataPropertyName = "WORKORDEREQUIPMENTID";
+            this.WORKORDEREQUIPMENTID.HeaderText = "Equipment";
+            this.WORKORDEREQUIPMENTID.Name = "WORKORDEREQUIPMENTID";
+            this.WORKORDEREQUIPMENTID.ReadOnly = true;
+            this.WORKORDEREQUIPMENTID.Width = 94;
+            // 
+            // WORKORDERDIRECTIVE
+            // 
+            this.WORKORDERDIRECTIVE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.WORKORDERDIRECTIVE.DataPropertyName = "WORKORDERDIRECTIVE";
+            this.WORKORDERDIRECTIVE.HeaderText = "Directive";
+            this.WORKORDERDIRECTIVE.Name = "WORKORDERDIRECTIVE";
+            this.WORKORDERDIRECTIVE.ReadOnly = true;
+            // 
+            // WORKORDERSTATUSID
+            // 
+            this.WORKORDERSTATUSID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKORDERSTATUSID.DataPropertyName = "WORKORDERSTATUSID";
+            this.WORKORDERSTATUSID.HeaderText = "Status";
+            this.WORKORDERSTATUSID.Name = "WORKORDERSTATUSID";
+            this.WORKORDERSTATUSID.ReadOnly = true;
+            this.WORKORDERSTATUSID.Width = 69;
+            // 
+            // WORKORDERTYPEID
+            // 
+            this.WORKORDERTYPEID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKORDERTYPEID.DataPropertyName = "WORKORDERTYPEID";
+            this.WORKORDERTYPEID.HeaderText = "Type";
+            this.WORKORDERTYPEID.Name = "WORKORDERTYPEID";
+            this.WORKORDERTYPEID.ReadOnly = true;
+            this.WORKORDERTYPEID.Width = 60;
+            // 
+            // WORKORDERREGISTERATIONDATE
+            // 
+            this.WORKORDERREGISTERATIONDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKORDERREGISTERATIONDATE.DataPropertyName = "WORKORDERREGISTERATIONDATE";
+            this.WORKORDERREGISTERATIONDATE.HeaderText = "Registeration Date";
+            this.WORKORDERREGISTERATIONDATE.Name = "WORKORDERREGISTERATIONDATE";
+            this.WORKORDERREGISTERATIONDATE.ReadOnly = true;
+            this.WORKORDERREGISTERATIONDATE.Width = 133;
+            // 
+            // WORKSTARTDATE
+            // 
+            this.WORKSTARTDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKSTARTDATE.DataPropertyName = "WORKSTARTDATE";
+            this.WORKSTARTDATE.HeaderText = "Work Start Date";
+            this.WORKSTARTDATE.Name = "WORKSTARTDATE";
+            this.WORKSTARTDATE.ReadOnly = true;
+            this.WORKSTARTDATE.Width = 116;
+            // 
+            // WORKDONEDATE
+            // 
+            this.WORKDONEDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WORKDONEDATE.DataPropertyName = "WORKDONEDATE";
+            this.WORKDONEDATE.HeaderText = "Work Done Date";
+            this.WORKDONEDATE.Name = "WORKDONEDATE";
+            this.WORKDONEDATE.ReadOnly = true;
+            this.WORKDONEDATE.Width = 116;
+            // 
+            // workOrderBindingSource
+            // 
+            this.workOrderBindingSource.AllowNew = true;
+            this.workOrderBindingSource.Sort = "workOrderID DESC";
+            // 
             // equipmentBox
             // 
             this.equipmentBox.Location = new System.Drawing.Point(76, 37);
             this.equipmentBox.Name = "equipmentBox";
-            this.equipmentBox.Size = new System.Drawing.Size(86, 20);
+            this.equipmentBox.Size = new System.Drawing.Size(103, 20);
             this.equipmentBox.TabIndex = 0;
             this.equipmentBox.LostFocus += new System.EventHandler(this.equipmentBox_LostFocus);
             // 
@@ -105,7 +224,7 @@ namespace ODP2
             // 
             this.workOrderBox.Location = new System.Drawing.Point(76, 12);
             this.workOrderBox.Name = "workOrderBox";
-            this.workOrderBox.Size = new System.Drawing.Size(86, 20);
+            this.workOrderBox.Size = new System.Drawing.Size(103, 20);
             this.workOrderBox.TabIndex = 0;
             // 
             // label2
@@ -126,146 +245,13 @@ namespace ODP2
             this.label4.TabIndex = 1;
             this.label4.Text = "Work Type";
             // 
-            // activeWorkOrdersGrid
-            // 
-            this.activeWorkOrdersGrid.AllowDrop = true;
-            this.activeWorkOrdersGrid.AllowUserToAddRows = false;
-            this.activeWorkOrdersGrid.AllowUserToDeleteRows = false;
-            this.activeWorkOrdersGrid.AllowUserToOrderColumns = true;
-            this.activeWorkOrdersGrid.AllowUserToResizeRows = false;
-            this.activeWorkOrdersGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.activeWorkOrdersGrid.AutoGenerateColumns = false;
-            this.activeWorkOrdersGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.activeWorkOrdersGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.activeWorkOrdersGrid.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.activeWorkOrdersGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.activeWorkOrdersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.activeWorkOrdersGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.workOrderIDDataGridViewTextBoxColumn,
-            this.workOrderDirectiveDataGridViewTextBoxColumn,
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn,
-            this.workOrderStatusIDDataGridViewTextBoxColumn,
-            this.workOrderTypeIDDataGridViewTextBoxColumn,
-            this.workOrderCreatorIDDataGridViewTextBoxColumn,
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn,
-            this.workStartDateDataGridViewTextBoxColumn,
-            this.workDoneDate,
-            this.workDoneType});
-            this.activeWorkOrdersGrid.DataSource = this.workOrderBindingSource;
-            this.activeWorkOrdersGrid.Location = new System.Drawing.Point(15, 217);
-            this.activeWorkOrdersGrid.Name = "activeWorkOrdersGrid";
-            this.activeWorkOrdersGrid.RowHeadersVisible = false;
-            this.activeWorkOrdersGrid.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.activeWorkOrdersGrid.RowTemplate.DefaultCellStyle.NullValue = "----";
-            this.activeWorkOrdersGrid.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(1);
-            this.activeWorkOrdersGrid.RowTemplate.Height = 25;
-            this.activeWorkOrdersGrid.RowTemplate.ReadOnly = true;
-            this.activeWorkOrdersGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.activeWorkOrdersGrid.Size = new System.Drawing.Size(938, 287);
-            this.activeWorkOrdersGrid.TabIndex = 3;
-            this.activeWorkOrdersGrid.Tag = "";
-            this.activeWorkOrdersGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.activeWorkOrdersGrid_MouseDoubleClick);
-            // 
-            // workOrderIDDataGridViewTextBoxColumn
-            // 
-            this.workOrderIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workOrderIDDataGridViewTextBoxColumn.DataPropertyName = "workOrderID";
-            this.workOrderIDDataGridViewTextBoxColumn.HeaderText = "Work Order";
-            this.workOrderIDDataGridViewTextBoxColumn.Name = "workOrderIDDataGridViewTextBoxColumn";
-            this.workOrderIDDataGridViewTextBoxColumn.Width = 91;
-            // 
-            // workOrderDirectiveDataGridViewTextBoxColumn
-            // 
-            this.workOrderDirectiveDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.workOrderDirectiveDataGridViewTextBoxColumn.DataPropertyName = "workOrderDirective";
-            this.workOrderDirectiveDataGridViewTextBoxColumn.HeaderText = "Directive";
-            this.workOrderDirectiveDataGridViewTextBoxColumn.Name = "workOrderDirectiveDataGridViewTextBoxColumn";
-            // 
-            // workOrderEquipmentIDDataGridViewTextBoxColumn
-            // 
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn.DataPropertyName = "workOrderEquipmentID";
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn.HeaderText = "Equipment";
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn.Name = "workOrderEquipmentIDDataGridViewTextBoxColumn";
-            this.workOrderEquipmentIDDataGridViewTextBoxColumn.Width = 92;
-            // 
-            // workOrderStatusIDDataGridViewTextBoxColumn
-            // 
-            this.workOrderStatusIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workOrderStatusIDDataGridViewTextBoxColumn.DataPropertyName = "workOrderStatusID";
-            this.workOrderStatusIDDataGridViewTextBoxColumn.HeaderText = "Status";
-            this.workOrderStatusIDDataGridViewTextBoxColumn.Name = "workOrderStatusIDDataGridViewTextBoxColumn";
-            this.workOrderStatusIDDataGridViewTextBoxColumn.Width = 67;
-            // 
-            // workOrderTypeIDDataGridViewTextBoxColumn
-            // 
-            this.workOrderTypeIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.workOrderTypeIDDataGridViewTextBoxColumn.DataPropertyName = "workOrderTypeID";
-            this.workOrderTypeIDDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.workOrderTypeIDDataGridViewTextBoxColumn.Name = "workOrderTypeIDDataGridViewTextBoxColumn";
-            this.workOrderTypeIDDataGridViewTextBoxColumn.Width = 58;
-            // 
-            // workOrderCreatorIDDataGridViewTextBoxColumn
-            // 
-            this.workOrderCreatorIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workOrderCreatorIDDataGridViewTextBoxColumn.DataPropertyName = "workOrderCreatorID";
-            this.workOrderCreatorIDDataGridViewTextBoxColumn.HeaderText = "Creator";
-            this.workOrderCreatorIDDataGridViewTextBoxColumn.Name = "workOrderCreatorIDDataGridViewTextBoxColumn";
-            this.workOrderCreatorIDDataGridViewTextBoxColumn.Width = 74;
-            // 
-            // workOrderRegisterationDateDataGridViewTextBoxColumn
-            // 
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn.DataPropertyName = "workOrderRegisterationDate";
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn.HeaderText = "Registeration Date";
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn.Name = "workOrderRegisterationDateDataGridViewTextBoxColumn";
-            this.workOrderRegisterationDateDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // workStartDateDataGridViewTextBoxColumn
-            // 
-            this.workStartDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workStartDateDataGridViewTextBoxColumn.DataPropertyName = "workStartDate";
-            this.workStartDateDataGridViewTextBoxColumn.HeaderText = "Work Start Date";
-            this.workStartDateDataGridViewTextBoxColumn.Name = "workStartDateDataGridViewTextBoxColumn";
-            this.workStartDateDataGridViewTextBoxColumn.Width = 114;
-            // 
-            // workDoneDate
-            // 
-            this.workDoneDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workDoneDate.DataPropertyName = "workDoneDate";
-            this.workDoneDate.HeaderText = "Work Done Date";
-            this.workDoneDate.Name = "workDoneDate";
-            this.workDoneDate.Width = 115;
-            // 
-            // workDoneType
-            // 
-            this.workDoneType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.workDoneType.DataPropertyName = "workDoneType";
-            this.workDoneType.HeaderText = "Work Done Type";
-            this.workDoneType.Name = "workDoneType";
-            this.workDoneType.Width = 91;
-            // 
-            // workOrderBindingSource
-            // 
-            this.workOrderBindingSource.DataSource = typeof(ODP2.Models.workOrder);
-            this.workOrderBindingSource.Sort = "workOrderID DESC";
-            // 
             // fromDatePicker
             // 
-            this.fromDatePicker.CustomFormat = "yyyy-MM-dd hh:mm";
+            this.fromDatePicker.CustomFormat = "dd-MMM-yy hh:mm tt";
             this.fromDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.fromDatePicker.Location = new System.Drawing.Point(76, 141);
             this.fromDatePicker.Name = "fromDatePicker";
-            this.fromDatePicker.Size = new System.Drawing.Size(130, 20);
+            this.fromDatePicker.Size = new System.Drawing.Size(142, 20);
             this.fromDatePicker.TabIndex = 4;
             // 
             // panel1
@@ -288,9 +274,9 @@ namespace ODP2
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(15, 15);
+            this.panel1.Location = new System.Drawing.Point(8, 8);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(938, 196);
+            this.panel1.Size = new System.Drawing.Size(952, 196);
             this.panel1.TabIndex = 5;
             // 
             // dateCheckBox
@@ -308,10 +294,11 @@ namespace ODP2
             // 
             this.workStatusBox.DataSource = this.workOrderStatuBindingSource;
             this.workStatusBox.DisplayMember = "workOrderStatusID";
+            this.workStatusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.workStatusBox.FormattingEnabled = true;
             this.workStatusBox.Location = new System.Drawing.Point(76, 114);
             this.workStatusBox.Name = "workStatusBox";
-            this.workStatusBox.Size = new System.Drawing.Size(86, 21);
+            this.workStatusBox.Size = new System.Drawing.Size(103, 21);
             this.workStatusBox.TabIndex = 6;
             this.workStatusBox.ValueMember = "workOrderTypeDirective";
             this.workStatusBox.SelectionChangeCommitted += new System.EventHandler(this.workTypeBox_SelectedIndexChanged);
@@ -319,7 +306,7 @@ namespace ODP2
             // 
             // workOrderStatuBindingSource
             // 
-            this.workOrderStatuBindingSource.DataSource = typeof(ODP2.Models.workOrderStatu);
+            this.workOrderStatuBindingSource.DataSource = typeof(ODP2.Models.WORKORDERSTATU);
             // 
             // workTypeBox
             // 
@@ -328,20 +315,14 @@ namespace ODP2
             this.workTypeBox.FormattingEnabled = true;
             this.workTypeBox.Location = new System.Drawing.Point(76, 63);
             this.workTypeBox.Name = "workTypeBox";
-            this.workTypeBox.Size = new System.Drawing.Size(86, 21);
+            this.workTypeBox.Size = new System.Drawing.Size(103, 21);
             this.workTypeBox.TabIndex = 6;
-            this.workTypeBox.ValueMember = "workOrderTypeDirective";
             this.workTypeBox.SelectionChangeCommitted += new System.EventHandler(this.workTypeBox_SelectedIndexChanged);
             this.workTypeBox.TextUpdate += new System.EventHandler(this.workTypeBox_TextUpdate);
             // 
-            // workOrderTypeBindingSource
-            // 
-            this.workOrderTypeBindingSource.DataSource = typeof(ODP2.Models.workOrderType);
-            // 
             // workTypeDirective
             // 
-            this.workTypeDirective.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.workOrderTypeBindingSource, "workOrderTypeDirective", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.workTypeDirective.Location = new System.Drawing.Point(175, 63);
+            this.workTypeDirective.Location = new System.Drawing.Point(185, 63);
             this.workTypeDirective.Name = "workTypeDirective";
             this.workTypeDirective.ReadOnly = true;
             this.workTypeDirective.Size = new System.Drawing.Size(247, 20);
@@ -350,7 +331,7 @@ namespace ODP2
             // equipmentDirective
             // 
             this.equipmentDirective.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.equipmentBindingSource, "equipmentDirective", true));
-            this.equipmentDirective.Location = new System.Drawing.Point(175, 37);
+            this.equipmentDirective.Location = new System.Drawing.Point(185, 37);
             this.equipmentDirective.Name = "equipmentDirective";
             this.equipmentDirective.ReadOnly = true;
             this.equipmentDirective.Size = new System.Drawing.Size(247, 20);
@@ -358,13 +339,13 @@ namespace ODP2
             // 
             // equipmentBindingSource
             // 
-            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.equipment);
+            this.equipmentBindingSource.DataSource = typeof(ODP2.Models.EQUIPMENT);
             // 
             // directiveTextBox
             // 
             this.directiveTextBox.Location = new System.Drawing.Point(76, 88);
             this.directiveTextBox.Name = "directiveTextBox";
-            this.directiveTextBox.Size = new System.Drawing.Size(347, 20);
+            this.directiveTextBox.Size = new System.Drawing.Size(356, 20);
             this.directiveTextBox.TabIndex = 0;
             // 
             // label3
@@ -385,33 +366,13 @@ namespace ODP2
             this.label5.TabIndex = 1;
             this.label5.Text = "Directive";
             // 
-            // openWorkOrderToolStripMenuItem
-            // 
-            this.openWorkOrderToolStripMenuItem.Name = "openWorkOrderToolStripMenuItem";
-            this.openWorkOrderToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.openWorkOrderToolStripMenuItem.Text = "Open Work Order";
-            // 
-            // workOrderTypeIDDataGridViewTextBoxColumn1
-            // 
-            this.workOrderTypeIDDataGridViewTextBoxColumn1.DataPropertyName = "workOrderTypeID";
-            this.workOrderTypeIDDataGridViewTextBoxColumn1.HeaderText = "workOrderTypeID";
-            this.workOrderTypeIDDataGridViewTextBoxColumn1.Name = "workOrderTypeIDDataGridViewTextBoxColumn1";
-            this.workOrderTypeIDDataGridViewTextBoxColumn1.Width = 895;
-            // 
-            // workOrderTypeIDDataGridViewTextBoxColumn2
-            // 
-            this.workOrderTypeIDDataGridViewTextBoxColumn2.DataPropertyName = "workOrderTypeID";
-            this.workOrderTypeIDDataGridViewTextBoxColumn2.HeaderText = "workOrderTypeID";
-            this.workOrderTypeIDDataGridViewTextBoxColumn2.Name = "workOrderTypeIDDataGridViewTextBoxColumn2";
-            this.workOrderTypeIDDataGridViewTextBoxColumn2.Width = 895;
-            // 
             // ActiveWorkOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.activeWorkOrdersGrid);
-            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ActiveWorkOrders";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(968, 520);
@@ -435,7 +396,6 @@ namespace ODP2
         private TextBox workOrderBox;
         private Label label2;
         private Label label4;
-        private DataGridView activeWorkOrdersGrid;
         private DateTimePicker fromDatePicker;
         private Panel panel1;
         private ComboBox workTypeBox;
@@ -444,25 +404,20 @@ namespace ODP2
         private TextBox directiveTextBox;
         private Label label5;
         private CheckBox dateCheckBox;
-        private ToolStripMenuItem openWorkOrderToolStripMenuItem;
-       // private DataGridViewTextBoxColumn WorkOrder;
-        private DataGridViewTextBoxColumn workOrderTypeIDDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn workOrderTypeIDDataGridViewTextBoxColumn2;
         private BindingSource workOrderTypeBindingSource;
         private BindingSource workOrderBindingSource;
         private BindingSource equipmentBindingSource;
-        private DataGridViewTextBoxColumn workOrderIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrderDirectiveDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrderEquipmentIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrderStatusIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrderTypeIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrderCreatorIDDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workOrderRegisterationDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workStartDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn workDoneDate;
-        private DataGridViewTextBoxColumn workDoneType;
         private ComboBox workStatusBox;
         private Label label3;
         private BindingSource workOrderStatuBindingSource;
+        private DataGridView activeWorkOrdersGrid;
+        private DataGridViewTextBoxColumn WORKORDERID;
+        private DataGridViewTextBoxColumn WORKORDEREQUIPMENTID;
+        private DataGridViewTextBoxColumn WORKORDERDIRECTIVE;
+        private DataGridViewTextBoxColumn WORKORDERSTATUSID;
+        private DataGridViewTextBoxColumn WORKORDERTYPEID;
+        private DataGridViewTextBoxColumn WORKORDERREGISTERATIONDATE;
+        private DataGridViewTextBoxColumn WORKSTARTDATE;
+        private DataGridViewTextBoxColumn WORKDONEDATE;
     }
 }

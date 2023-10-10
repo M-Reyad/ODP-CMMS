@@ -73,7 +73,7 @@
             // 
             // sparePartBindingSource
             // 
-            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.sparePart);
+            this.sparePartBindingSource.DataSource = typeof(ODP2.Models.SPAREPART);
             // 
             // label1
             // 

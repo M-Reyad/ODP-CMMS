@@ -83,6 +83,16 @@ namespace ODP2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _29 {
+            get {
+                object obj = ResourceManager.GetObject("29", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _462023_200 {
             get {
                 object obj = ResourceManager.GetObject("462023-200", resourceCulture);
@@ -96,6 +106,26 @@ namespace ODP2.Properties {
         internal static System.Drawing.Bitmap _462023_200_50x50 {
             get {
                 object obj = ResourceManager.GetObject("462023-200_50x50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _60 {
+            get {
+                object obj = ResourceManager.GetObject("60", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _937556_200 {
+            get {
+                object obj = ResourceManager.GetObject("937556-200", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -138,6 +168,16 @@ namespace ODP2.Properties {
             get {
                 object obj = ResourceManager.GetObject("png-transparent-forklift-truck-computer-icons-transport-logistics-truck-truck-car" +
                         "go-forklift", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_reload_repeat_sync_update_icon_1320196809538243811 {
+            get {
+                object obj = ResourceManager.GetObject("refresh+reload+repeat+sync+update+icon-1320196809538243811", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -22,16 +22,16 @@ namespace ODP2.Views.Equipment_Management
 
         private void PMGeneration_Load(object sender, EventArgs e)
         {
-            var equipmentList = home.dbContext.equipments.ToList();
-            var pmWorkOrderList = home.dbContext.workOrders.Where(wo => wo.workOrderTypeID == "PM");
+            var equipmentList = home.dbContext.EQUIPMENTs.ToList();
+            var pmWorkOrderList = home.dbContext.WORKORDERs.Where(wo => wo.WORKORDERTYPEID == "PM");
 
             //Create Last PM WOs
-            var lastPMWorkOrderList = new List<workOrder>();
-            foreach (equipment equip in equipmentList.ToList())
+            var lastPMWorkOrderList = new List<WORKORDER>();
+            foreach (EQUIPMENT equip in equipmentList.ToList())
             {
-                if (pmWorkOrderList.Where(wo => wo.workOrderEquipmentID == equip.equipmentID).OrderByDescending(wo => wo.workOrderRegisterationDate).Count() != 0)
+                if (pmWorkOrderList.Where(wo => wo.WORKORDEREQUIPMENTID == equip.EQUIPMENTID).OrderByDescending(wo => wo.WORKORDERREGISTERATIONDATE).Count() != 0)
                 {
-                    var lastEquipmentPM = pmWorkOrderList.Where(wo => wo.workOrderEquipmentID == equip.equipmentID).OrderByDescending(wo => wo.workOrderRegisterationDate).First();
+                    var lastEquipmentPM = pmWorkOrderList.Where(wo => wo.WORKORDEREQUIPMENTID == equip.EQUIPMENTID).OrderByDescending(wo => wo.WORKORDERREGISTERATIONDATE).First();
                     lastPMWorkOrderList.Add(lastEquipmentPM);
                 }
 
@@ -39,16 +39,16 @@ namespace ODP2.Views.Equipment_Management
 
             //Customizing Generation Table
             var lastPMWorkOrders = lastPMWorkOrderList.Join(equipmentList,
-                wo => wo.workOrderEquipmentID,
-                equip => equip.equipmentID,
+                wo => wo.WORKORDEREQUIPMENTID,
+                equip => equip.EQUIPMENTID,
                 (wo, equip) => new
                 {
-                    equip.equipmentID,
-                    equip.equipmentHR,
-                    wo.equipmentRH,
-                    wo.workOrderFinishDate,
-                    wo.workOrderRegisterationDate,
-                    wo.workOrderDirective
+                    equip.EQUIPMENTID,
+                    equip.EQUIPMENTHR,
+                    wo.EQUIPMENTRH,
+                    wo.WORKORDERFINISHDATE,
+                    wo.WORKORDERREGISTERATIONDATE,
+                    wo.WORKORDERDIRECTIVE
                 });
             equipmentBindingSource.DataSource = lastPMWorkOrders;
 
@@ -71,8 +71,8 @@ namespace ODP2.Views.Equipment_Management
                     row.ReadOnly = false;
                     var lastPMDirective = row.Cells["workOrderDirective"].Value;
                     string equip = row.Cells["equipmentID"].Value.ToString();
-                    var eqFamily = home.dbContext.equipments.Where(eq => eq.equipmentID.Trim() == equip).First().equipmentFamilyID.Trim();
-                    var pmList = home.dbContext.pmTemplates.Where(pm => pm.equipmentFamily == eqFamily).ToList();
+                    var eqFamily = home.dbContext.EQUIPMENTs.Where(eq => eq.EQUIPMENTID.Trim() == equip).First().EQUIPMENTFAMILYID.Trim();
+                    var pmList = home.dbContext.PMTEMPLATEs.Where(pm => pm.EQUIPMENTFAMILY == eqFamily).ToList();
                     if (pmList.Count == 0) //Empty PM Templates Table//
                     {
                         MessageBox.Show("Found Empty Table for " + eqFamily + "Please Insert PM Templates");
@@ -80,26 +80,26 @@ namespace ODP2.Views.Equipment_Management
                     else //Not Empty Table//
                     {
                         
-                        if (pmList.Where(pm => pm.pmDirective.Trim() == (string)lastPMDirective).Count() != 1) //Can't Locate last PM, will start Over from PM#01
+                        if (pmList.Where(pm => pm.PMDIRECTIVE.Trim() == (string)lastPMDirective).Count() != 1) //Can't Locate last PM, will start Over from PM#01
                         {
                             MessageBox.Show("Can't Locate last PM, will start Over from PM#01");
 
                         }
                         else //Last PM is Located
                         {
-                            pmTemplate lastPM = home.dbContext.pmTemplates.Where(pm => pm.pmDirective.Trim() == (string)lastPMDirective).First();
-                            var pmNumber = pmList.IndexOf(pmList.Where(pm => pm.pmDirective == lastPM.pmDirective).First());
+                            PMTEMPLATE lastPM = home.dbContext.PMTEMPLATEs.Where(pm => pm.PMDIRECTIVE.Trim() == (string)lastPMDirective).First();
+                            var pmNumber = pmList.IndexOf(pmList.Where(pm => pm.PMDIRECTIVE == lastPM.PMDIRECTIVE).First());
                             MessageBox.Show("Current PM Number is PM#" + pmNumber);
                             if (pmNumber < pmList.Count() - 1) //Not Last PM, get the next PM//
                             {
-                                pmTemplate nextPM = pmList[pmNumber + 1];
-                                row.Cells["newPMDirective"].Value = nextPM.pmDirective;
+                                PMTEMPLATE nextPM = pmList[pmNumber + 1];
+                                row.Cells["newPMDirective"].Value = nextPM.PMDIRECTIVE;
                                 MessageBox.Show("Found next PM" + pmList.IndexOf(nextPM));
                             }
                             else if (pmNumber == pmList.Count() - 1) //Last PM, Start Over from PM#01//
                             {
-                                pmTemplate nextPM = pmList[0];
-                                row.Cells["newPMDirective"].Value = nextPM.pmDirective;
+                                PMTEMPLATE nextPM = pmList[0];
+                                row.Cells["newPMDirective"].Value = nextPM.PMDIRECTIVE;
                                 MessageBox.Show("PM is reset for " + eqFamily + "Will start over from PM#01");
                             }
                         }

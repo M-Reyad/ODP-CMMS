@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="75a247342d934462b87d917b1e2f8530" Name="Diagram1" ZoomLevel="86" ShowGrid="false">
+        <EntityTypeShape EntityType="Model.COMPONENT" Width="1.5" PointX="14" PointY="4.375" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.COMPONENTSTATU" Width="1.5" PointX="14" PointY="2.125" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.EQUIPMENT" Width="1.5" PointX="7.375" PointY="7.5" IsExpanded="true" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.EQUIPMENTFAMILY" Width="1.5" PointX="5.125" PointY="8.625" IsExpanded="true" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.EQUIPMENTSTATU" Width="1.5" PointX="5.125" PointY="5.75" IsExpanded="true" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.FUELINGWORKORDER" Width="1.5" PointX="6.125" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ISSUESTATU" Width="1.5" PointX="11.875" PointY="2" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.ODP_USER" Width="1.5" PointX="7.375" PointY="1.375" IsExpanded="true" FillColor="Cyan" />
+        <EntityTypeShape EntityType="Model.PMTEMPLATE" Width="1.5" PointX="4.875" PointY="11.75" IsExpanded="true" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.STORERETURN" Width="1.5" PointX="14.875" PointY="8.375" IsExpanded="true" FillColor="Silver" />
+        <EntityTypeShape EntityType="Model.UOM" Width="1.5" PointX="11.875" PointY="13" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.USERLEVEL" Width="1.5" PointX="5.125" PointY="1.25" IsExpanded="true" FillColor="Cyan" />
+        <EntityTypeShape EntityType="Model.USERSECTION" Width="1.5" PointX="5.125" PointY="3.5" IsExpanded="true" FillColor="Cyan" />
+        <EntityTypeShape EntityType="Model.WORKDONETYPE" Width="2.125" PointX="8.375" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.WORKORDERSTATU" Width="1.875" PointX="8.375" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.WORKORDERTYPE" Width="2.625" PointX="8.375" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_COMPONENT_COMPONENTSTATUS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_STORERETURN_COMPONENT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EQUIPMENT_EQUIPMENTFAMILY" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EQUIPMENT_EQUIPMENTSTATUS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_FUELINGWORKORDER_EQUIPMENT" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_PMTEMPLATE_EQUIPMENTFAMILY" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_USER_USERLEVEL" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_USER_USERSECTION" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.BREAKDOWN" Width="1.5" PointX="11.875" PointY="8.125" FillColor="Red" />
+        <EntityTypeShape EntityType="Model.ISSUE" Width="1.5" PointX="11.875" PointY="3.875" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.SPAREPART" Width="1.5" PointX="14.125" PointY="12.125" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.WORKORDER" Width="1.875" PointX="9.375" PointY="6.875" />
+        <AssociationConnector Association="Model.FK_BREAKDOWN_EQUIPMENT" />
+        <AssociationConnector Association="Model.FK_BREAKDOWN_WORKORDER" />
+        <AssociationConnector Association="Model.FK_COMPONENT_SPAREPART" />
+        <AssociationConnector Association="Model.FK_WORKORDER_EQUIPMENT" />
+        <AssociationConnector Association="Model.FK_ISSUE_ISSUESTATUS" />
+        <AssociationConnector Association="Model.FK_ISSUE_SPAREPART" />
+        <AssociationConnector Association="Model.FK_ISSUE_WORKORDER" />
+        <AssociationConnector Association="Model.FK_WORKORDER_USER" />
+        <AssociationConnector Association="Model.FK_SPAREPART_UOM" />
+        <AssociationConnector Association="Model.FK_STORERETURN_WORKORDER" />
+        <AssociationConnector Association="Model.FK_WORKORDER_WORKDONETYPES" />
+        <AssociationConnector Association="Model.FK_WORKORDER_WORKORDERSTATUS" />
+        <AssociationConnector Association="Model.FK_WORKORDER_WORKORDERTYPE" />
+        <AssociationConnector Association="Model.FK_ISSUE_ISSUERID" />
+        <AssociationConnector Association="Model.FK_ISSUE_REQUESTERID" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
